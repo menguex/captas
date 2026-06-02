@@ -159,7 +159,7 @@
     line-height: 1.55;
   }
 
-  /* Precarga instantánea — logo antes de hidratar React */
+  /* Precarga instantánea — icono + wordmark antes de hidratar React */
   #captas-preload {
     position: fixed;
     inset: 0;
@@ -169,21 +169,62 @@
     justify-content: center;
     background-color: var(--c-ink);
     pointer-events: none;
-    transition: opacity 0.4s var(--ease-out), visibility 0.4s;
+    transition:
+      opacity 0.55s var(--ease-out),
+      visibility 0.55s,
+      transform 0.65s var(--ease-out);
+  }
+
+  #captas-preload::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 70% 55% at 50% 38%, rgba(0, 122, 255, 0.14), transparent 62%),
+      radial-gradient(ellipse 50% 40% at 80% 80%, rgba(91, 97, 255, 0.08), transparent 55%);
+    pointer-events: none;
   }
 
   body.captas-ready #captas-preload {
     opacity: 0;
     visibility: hidden;
+    transform: scale(1.02);
     pointer-events: none;
+  }
+
+  .captas-preload-inner {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.75rem;
+  }
+
+  .captas-preload-icon {
+    display: block;
+    width: 4.5rem;
+    height: 4.5rem;
+    border-radius: 9999px;
+    box-shadow:
+      0 0 40px rgba(0, 122, 255, 0.32),
+      0 0 0 1px rgba(255, 255, 255, 0.12);
   }
 
   .captas-preload-logo {
     font-family: var(--f-sans), system-ui, sans-serif;
-    font-size: clamp(2.5rem, 8vw, 5rem);
+    font-size: clamp(2.35rem, 9vw, 3.75rem);
     font-weight: 600;
     letter-spacing: -0.04em;
+    line-height: 1;
     color: var(--c-bone);
+  }
+
+  .captas-preload-dot {
+    background: linear-gradient(120deg, #5b61ff 0%, #007aff 50%, #0ea5e9 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
   }
 
   ::selection {
@@ -737,6 +778,16 @@
 
 .ecosystem-progress-bar.is-paused {
   animation-play-state: paused;
+}
+
+.intro-loader__ambient {
+  background:
+    radial-gradient(ellipse 75% 60% at 50% 35%, rgba(0, 122, 255, 0.16), transparent 62%),
+    radial-gradient(ellipse 45% 35% at 85% 75%, rgba(91, 97, 255, 0.1), transparent 55%);
+}
+
+.intro-loader__ring-glow {
+  filter: drop-shadow(0 0 6px rgba(0, 122, 255, 0.55));
 }
 
 /* — Listas y enumeraciones editoriales — */

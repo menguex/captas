@@ -121,7 +121,6 @@ export const planesRetainerAddons = [
   "Sesión extra de fotos $80.000",
   "E-mail marketing desde $120.000",
   "Fotografía de producto $150.000",
-  "Páginas web adicionales desde $120.000",
 ] as const;
 
 export function formatPrecioCLP(n: number) {

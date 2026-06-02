@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import Image from "next/image";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { PageTransition } from "@/components/layout/PageTransition";
@@ -89,9 +90,19 @@ export default function RootLayout({
           }}
         />
         <div id="captas-preload" aria-hidden>
-          <span className="captas-preload-logo">
-            CAPTAS<span className="text-accent">.</span>
-          </span>
+          <div className="captas-preload-inner">
+            <Image
+              src="/brand/captas-icon.png"
+              alt=""
+              width={72}
+              height={72}
+              className="captas-preload-icon"
+              priority
+            />
+            <span className="captas-preload-logo">
+              CAPTAS<span className="captas-preload-dot">.</span>
+            </span>
+          </div>
         </div>
         <JsonLd />
         <AppProviders>
