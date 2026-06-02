@@ -5,6 +5,8 @@ type PillarIconBadgeProps = {
   serviceId: Service["id"];
   size?: "sm" | "md" | "lg";
   featured?: boolean;
+  /** Sobre foto de fondo oscura */
+  onDark?: boolean;
   className?: string;
 };
 
@@ -18,6 +20,7 @@ export function PillarIconBadge({
   serviceId,
   size = "md",
   featured = false,
+  onDark = false,
   className = "",
 }: PillarIconBadgeProps) {
   const Icon = getPillarIcon(serviceId);
@@ -27,9 +30,11 @@ export function PillarIconBadge({
 
   return (
     <span
-      className={`inline-flex shrink-0 items-center justify-center rounded-2xl border border-line-dark bg-bone text-accent ${
-        featured ? "shadow-[0_8px_24px_rgba(15,18,24,0.08)]" : ""
-      } ${box} ${className}`}
+      className={`inline-flex shrink-0 items-center justify-center rounded-2xl border backdrop-blur-sm ${
+        onDark
+          ? "border-bone/25 bg-bone/10 text-bone"
+          : "border-line-dark bg-bone text-accent"
+      } ${featured ? "shadow-[0_8px_24px_rgba(15,18,24,0.2)]" : ""} ${box} ${className}`}
       aria-hidden
     >
       <Icon size={icon} />

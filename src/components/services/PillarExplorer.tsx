@@ -1,8 +1,8 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
+import { ServicePhotoBackdrop } from "@/components/services/ServicePhotoBackdrop";
 import { motion, AnimatePresence } from "framer-motion";
 import { services, type Service } from "@/content/services";
 import { getPillarIcon } from "@/components/icons";
@@ -232,29 +232,16 @@ function PillarPanel({
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -10 }}
       transition={{ duration: 0.38, ease }}
-      className="scroll-mt-28 overflow-hidden rounded-box-lg border border-line-dark bg-white shadow-[0_20px_60px_rgba(15,18,24,0.1)]"
+      className="scroll-mt-28 overflow-hidden rounded-box-lg border border-line-dark/80 shadow-[0_24px_72px_rgba(15,18,24,0.22)]"
     >
-      <div className="grid lg:grid-cols-[1fr_minmax(0,42%)]">
-        <div className="relative min-h-[220px] lg:col-start-2 lg:row-start-1 lg:min-h-[420px]">
-          <Image
-            src={service.image}
-            alt={service.imageAlt}
-            fill
-            sizes="(max-width: 1024px) 100vw, 42vw"
-            className="object-cover"
-          />
+      <ServicePhotoBackdrop
+        service={service}
+        minHeightClass="min-h-[min(560px,82vh)]"
+        sizes="(max-width: 1024px) 100vw, 70vw"
+      >
+        <div className="flex h-full flex-col justify-end p-6 md:p-8 lg:p-10">
           <div
-            className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/70 via-ink/20 to-transparent lg:bg-gradient-to-l lg:from-transparent lg:via-ink/25 lg:to-ink/55"
-            aria-hidden
-          />
-          <span className="absolute bottom-4 left-4 font-mono text-[0.62rem] uppercase tracking-[0.2em] text-bone/90 lg:hidden">
-            {service.pillar}
-          </span>
-        </div>
-
-        <div className="relative p-6 md:p-8 lg:col-start-1 lg:row-start-1 lg:p-10">
-          <div
-            className="pointer-events-none absolute -right-4 -top-6 font-heading text-[clamp(5rem,14vw,9rem)] leading-none text-accent/[0.06]"
+            className="pointer-events-none absolute right-4 top-4 font-heading text-[clamp(5rem,16vw,10rem)] leading-none text-bone/[0.07]"
             aria-hidden
           >
             {service.number}
@@ -262,62 +249,66 @@ function PillarPanel({
 
           <div className="relative flex flex-wrap items-center gap-3">
             {Icon ? (
-              <span className="flex h-12 w-12 items-center justify-center rounded-2xl border border-line-dark bg-bone text-accent">
+              <span className="flex h-12 w-12 items-center justify-center rounded-2xl border border-bone/25 bg-bone/10 text-bone backdrop-blur-sm">
                 <Icon size={24} />
               </span>
             ) : null}
-            <span className="rounded-full border border-line-dark bg-bone px-3 py-1 font-mono text-kicker uppercase tracking-[0.22em] text-accent">
+            <span className="rounded-full border border-bone/25 bg-ink/35 px-3 py-1 font-mono text-kicker uppercase tracking-[0.22em] text-bone backdrop-blur-md">
               Pilar {service.number} · {service.pillar}
             </span>
           </div>
 
-          <h3 className="relative mt-6 font-heading text-h1 leading-[1.06] tracking-tight text-balance text-ink">
-            {service.title}
-          </h3>
-          <p className="relative mt-5 max-w-xl text-lead font-medium leading-relaxed text-ink">
-            {service.short}
-          </p>
-          <p className="relative mt-4 max-w-2xl text-body leading-relaxed text-clay">
-            {service.description}
-          </p>
+          <div className="relative mt-8 grid gap-8 lg:grid-cols-[1fr_auto] lg:items-end lg:gap-12">
+            <div>
+              <h3 className="font-heading text-h1 leading-[1.06] tracking-tight text-balance text-bone">
+                {service.title}
+              </h3>
+              <p className="mt-5 max-w-xl text-lead font-medium leading-relaxed text-bone/90">
+                {service.short}
+              </p>
+              <p className="mt-4 max-w-2xl text-body leading-relaxed text-bone/75">
+                {service.description}
+              </p>
 
-          <ul className="relative mt-8 grid gap-2 sm:grid-cols-2">
-            {service.deliverables.map((d) => (
-              <li
-                key={d}
-                className="flex items-start gap-2.5 rounded-xl border border-line-dark bg-bone/50 px-3.5 py-2.5 text-small leading-relaxed text-clay"
+              <ul className="mt-8 grid gap-2 sm:grid-cols-2">
+                {service.deliverables.map((d) => (
+                  <li
+                    key={d}
+                    className="flex items-start gap-2.5 rounded-xl border border-bone/15 bg-ink/35 px-3.5 py-2.5 text-small leading-relaxed text-bone/85 backdrop-blur-sm"
+                  >
+                    <span
+                      className="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-bone/90 text-[0.6rem] text-accent"
+                      aria-hidden
+                    >
+                      ✓
+                    </span>
+                    {d}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="flex flex-col gap-3 lg:min-w-[220px]">
+              <Link
+                href={`/contacto?servicio=${service.id}`}
+                className="gloss-button inline-flex items-center justify-center px-6 py-3.5 text-center"
               >
-                <span
-                  className="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-accent text-[0.6rem] text-bone"
-                  aria-hidden
-                >
-                  ✓
-                </span>
-                {d}
-              </li>
-            ))}
-          </ul>
-
-          <div className="relative mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap lg:flex-col lg:max-w-xs">
-            <Link
-              href={`/contacto?servicio=${service.id}`}
-              className="gloss-button inline-flex items-center justify-center px-6 py-3.5 text-center"
-            >
-              Solicitar propuesta
-            </Link>
-            <Link
-              href={onPage ? "/trabajo" : "/servicios"}
-              className="inline-flex items-center justify-center gap-2 rounded-full border border-line-dark bg-white px-6 py-3 font-sans text-body font-medium text-clay transition-colors duration-base hover:border-accent/35 hover:text-accent"
-            >
-              {onPage ? "Ver casos de estudio" : "Todos los servicios"}
-              <span aria-hidden>→</span>
-            </Link>
-            <p className="font-mono text-[0.62rem] uppercase tracking-[0.22em] text-clay">
-              Integrable con otros pilares
-            </p>
+                Solicitar propuesta
+              </Link>
+              <Link
+                href={onPage ? "/trabajo" : "/servicios"}
+                className="inline-flex items-center justify-center gap-2 rounded-full border border-bone/25 bg-bone/10 px-6 py-3 font-sans text-body font-medium text-bone backdrop-blur-sm transition-colors duration-base hover:border-bone/40 hover:bg-bone/20"
+              >
+                {onPage ? "Ver casos de estudio" : "Todos los servicios"}
+                <span aria-hidden>→</span>
+              </Link>
+              <p className="font-mono text-[0.62rem] uppercase tracking-[0.22em] text-bone/60">
+                Integrable con otros pilares
+              </p>
+            </div>
           </div>
         </div>
-      </div>
+      </ServicePhotoBackdrop>
     </motion.article>
   );
 }
