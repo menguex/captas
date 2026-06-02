@@ -94,7 +94,7 @@ export function IntroLoader() {
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
             className="text-bone"
           >
-            <CaptasLogo as="p" size="md" />
+            <CaptasLogo as="p" size="md" withMark />
           </motion.div>
 
           <motion.div

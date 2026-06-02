@@ -1,7 +1,6 @@
 "use client";
 
 import { ServicesEcosystemIntro } from "@/components/home/ServicesEcosystemIntro";
-import { ServicesIntegralCta } from "@/components/home/ServicesIntegralCta";
 
 export function Services() {
   return (
@@ -22,7 +21,6 @@ export function Services() {
 
       <div className="site-container relative">
         <ServicesEcosystemIntro />
-        <ServicesIntegralCta />
       </div>
     </section>
   );

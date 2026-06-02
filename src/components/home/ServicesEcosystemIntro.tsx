@@ -4,6 +4,8 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence, useInView } from "framer-motion";
+import { CaptasLockup } from "@/components/brand/CaptasLogo";
+import { ServicesIntegralCta } from "@/components/home/ServicesIntegralCta";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { getPillarIcon } from "@/components/icons";
 import { services } from "@/content/services";
@@ -232,7 +234,7 @@ export function ServicesEcosystemIntro({ showHeader = true }: ServicesEcosystemI
         viewport={viewportOnce}
         transition={{ duration: 0.85, ease: easeOut }}
       >
-        <div className="hidden lg:block">
+        <div className="hidden lg:flex lg:flex-col">
           <p className="mb-3 font-mono text-[0.62rem] uppercase tracking-[0.18em] text-on-light-muted">
             Explora el ecosistema
           </p>
@@ -243,6 +245,9 @@ export function ServicesEcosystemIntro({ showHeader = true }: ServicesEcosystemI
             reduced={reduced}
             onSelect={goTo}
           />
+          <p className="mt-4 font-mono text-[0.58rem] leading-relaxed text-on-light-subtle">
+            {paused ? "Pausado" : "Auto"} · selecciona un pilar o deja avanzar el recorrido.
+          </p>
         </div>
 
         <div className="relative overflow-hidden rounded-box-lg border border-line-dark/70 shadow-[0_20px_64px_rgba(15,18,24,0.12)]">
@@ -290,11 +295,9 @@ export function ServicesEcosystemIntro({ showHeader = true }: ServicesEcosystemI
               aria-hidden
             />
 
-            <div className="absolute left-4 top-4 z-10 flex flex-wrap gap-2 md:left-6 md:top-6">
-              <span className="rounded-full border border-bone/25 bg-ink/55 px-3 py-1 font-mono text-[0.58rem] uppercase tracking-[0.16em] text-bone backdrop-blur-md">
-                Ecosistema Captas
-              </span>
-              <span className="rounded-full border border-bone/20 bg-gradient-to-r from-[#5b61ff]/80 to-[#0ea5e9]/80 px-3 py-1 font-mono text-[0.58rem] uppercase tracking-[0.14em] text-bone">
+            <div className="absolute left-4 top-4 z-10 flex flex-wrap items-center gap-2 md:left-6 md:top-6">
+              <CaptasLockup tone="on-dark" />
+              <span className="rounded-full border border-bone/20 bg-gradient-to-r from-[#5b61ff] to-[#0ea5e9] px-3 py-1 font-mono text-[0.58rem] font-medium uppercase tracking-[0.14em] text-white shadow-[0_4px_16px_rgba(var(--c-accent-rgb),0.35)]">
                 Pilar {current.number}
               </span>
             </div>
@@ -396,15 +399,14 @@ export function ServicesEcosystemIntro({ showHeader = true }: ServicesEcosystemI
               reduced={reduced}
               onSelect={goTo}
             />
+            <p className="mt-2 text-center font-mono text-[0.58rem] uppercase tracking-[0.14em] text-on-light-muted">
+              {paused ? "Pausado" : "Auto"} · toca un pilar
+            </p>
           </div>
+
+          <ServicesIntegralCta />
         </div>
       </motion.div>
-
-      <p className="mx-auto mt-5 max-w-md text-center font-mono text-[0.62rem] uppercase tracking-[0.18em] text-on-light-muted">
-        {paused ? "Exploración pausada" : "Recorrido automático"} ·{" "}
-        <span className="hidden sm:inline">Elige un pilar o deja que el ecosistema avance solo</span>
-        <span className="sm:hidden">Toca un pilar</span>
-      </p>
     </div>
   );
 }

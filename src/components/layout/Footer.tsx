@@ -37,7 +37,7 @@ export function Footer() {
               href="/"
               className="group inline-block text-bone/95 transition-colors hover:text-sky"
             >
-              <CaptasLogo size="xl" shimmer />
+              <CaptasLogo size="xl" shimmer withMark />
             </Link>
             <p className="mt-6 max-w-lg font-heading text-h2 leading-[1.14] tracking-tight text-balance text-bone/92">
               {site.tagline}

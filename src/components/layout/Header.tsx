@@ -115,8 +115,8 @@ export function Header() {
           overHero && !scrolled ? "site-header--hero-light" : ""
         } ${
           scrolled
-            ? "site-header--scrolled border-b border-accent/20 shadow-[0_8px_32px_rgba(61,85,108,0.12)] backdrop-blur-2xl"
-            : "border-b border-transparent shadow-[0_4px_24px_rgba(61,85,108,0.05)] backdrop-blur-md"
+            ? "site-header--scrolled border-b border-accent/20 shadow-[0_8px_32px_rgba(var(--c-accent-rgb),0.12)] backdrop-blur-2xl"
+            : "border-b border-transparent shadow-[0_4px_24px_rgba(var(--c-accent-rgb),0.06)] backdrop-blur-md"
         }`}
       >
         <div className="site-container flex h-[4.5rem] items-center justify-between md:h-20">
@@ -125,7 +125,7 @@ export function Header() {
             className="site-header-logo"
             onClick={() => setMenuOpen(false)}
           >
-            <CaptasLogo />
+            <CaptasLogo withMark />
           </Link>
 
           <nav className="hidden items-center gap-6 md:flex lg:gap-8" aria-label="Principal">
