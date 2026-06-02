@@ -1,14 +1,22 @@
 import type { Metadata } from "next";
 import { PlanesRetainer } from "@/components/sections/PlanesRetainer";
 import { ServicesBelowEcosystem } from "@/components/services/ServicesBelowEcosystem";
+import { ServicesPillarGrid } from "@/components/services/ServicesPillarGrid";
 import { ServicesEcosystemIntro } from "@/components/home/ServicesEcosystemIntro";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { ecosystemIntro } from "@/content/ecosystem";
+import { pageOpenGraph } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Servicios — Captas",
   description:
     "UX/UI, fotografía, diseño web, video cinematográfico e imagen de marca. Planes retainer desde $350.000/mes — contrato mínimo 6 meses.",
+  ...pageOpenGraph({
+    title: "Servicios — Captas",
+    description:
+      "Ecosistema creativo: UX, foto, cine, web y marca. Planes retainer desde $350.000/mes.",
+    path: "/servicios",
+  }),
 };
 
 export default function ServiciosPage() {
@@ -41,6 +49,7 @@ export default function ServiciosPage() {
           />
 
           <ServicesEcosystemIntro showHeader={false} />
+          <ServicesPillarGrid />
           <ServicesBelowEcosystem />
         </div>
       </div>

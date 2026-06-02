@@ -2,11 +2,18 @@ import type { Metadata } from "next";
 import { Suspense } from "react";
 import { TrabajoGrid } from "@/components/trabajo/TrabajoGrid";
 import { SectionHeader } from "@/components/ui/SectionHeader";
+import { pageOpenGraph } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Trabajo — Captas",
   description:
     "Portafolio Captas: UX/UI, branding, fotografía, video cinematográfico y diseño web para marcas del Limarí y Chile.",
+  alternates: { canonical: "https://captas.cl/trabajo" },
+  ...pageOpenGraph({
+    title: "Trabajo — Captas",
+    description: "Casos de estudio con craft cinematográfico y resultados medibles.",
+    path: "/trabajo",
+  }),
 };
 
 export default function TrabajoPage() {

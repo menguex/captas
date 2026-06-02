@@ -10,6 +10,8 @@ type SectionHeaderProps = {
   theme?: "dark" | "light";
   className?: string;
   as?: "h1" | "h2";
+  /** id del título para aria-labelledby en secciones */
+  titleId?: string;
   compact?: boolean;
   children?: React.ReactNode;
 };
@@ -21,6 +23,7 @@ export function SectionHeader({
   theme = "dark",
   className = "",
   as: Tag = "h2",
+  titleId,
   compact = false,
   children,
 }: SectionHeaderProps) {
@@ -54,6 +57,7 @@ export function SectionHeader({
       </div>
 
       <Tag
+        id={titleId}
         className={`font-heading text-balance leading-[1.08] ${
           compact ? "mt-4 text-h3 md:text-h2" : "mt-6 text-h2"
         } ${isDark ? "text-bone" : "text-ink"}`}

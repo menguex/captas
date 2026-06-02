@@ -56,9 +56,9 @@ export function FloatingCta() {
       {visible && !nearFooter && (
         <motion.div
           className="fixed bottom-6 right-6 z-[100] flex items-end gap-3 md:bottom-8 md:right-8"
-          initial={{ opacity: 0, y: 20, scale: 0.85 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          exit={{ opacity: 0, y: 20, scale: 0.85 }}
+          initial={reduced ? false : { opacity: 0, y: 20, scale: 0.85 }}
+          animate={reduced ? undefined : { opacity: 1, y: 0, scale: 1 }}
+          exit={reduced ? undefined : { opacity: 0, y: 20, scale: 0.85 }}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
           onMouseEnter={() => setHovered(true)}
           onMouseLeave={() => setHovered(false)}
@@ -87,7 +87,7 @@ export function FloatingCta() {
                       className="inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-400"
                       aria-hidden
                     />
-                    En linea · &lt; 1h
+                    Respuesta en 24–48 h hábiles
                   </p>
                 </div>
               </motion.div>
@@ -97,8 +97,9 @@ export function FloatingCta() {
           {/* WhatsApp button — refined gradient with two rings */}
           <a
             href={site.whatsapp}
-            target="_blank"
-            rel="noopener noreferrer"
+            {...(site.whatsappIsExternal
+              ? { target: "_blank" as const, rel: "noopener noreferrer" }
+              : {})}
             aria-label="Enviar mensaje por WhatsApp"
             className="group relative flex h-14 w-14 items-center justify-center rounded-full shadow-[0_8px_32px_rgba(40,61,79,0.35)] transition-all duration-base hover:scale-105 hover:shadow-[0_16px_48px_rgba(40,61,79,0.45)]"
             style={{

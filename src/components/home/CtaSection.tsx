@@ -184,7 +184,11 @@ export function CtaSection() {
               <MagneticButton href="/contacto" className="w-full justify-center sm:w-auto">
                 Iniciar proyecto
               </MagneticButton>
-              <MagneticButton href={site.whatsapp} external className="w-full justify-center sm:w-auto">
+              <MagneticButton
+                href={site.whatsapp}
+                external={site.whatsappIsExternal}
+                className="w-full justify-center sm:w-auto"
+              >
                 WhatsApp directo
               </MagneticButton>
               <Link

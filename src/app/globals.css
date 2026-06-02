@@ -475,8 +475,12 @@
 }
 
 .field-input:focus {
-  outline: none;
   border-color: var(--c-accent);
+}
+
+.field-input:focus-visible {
+  outline: 2px solid var(--c-accent);
+  outline-offset: 2px;
 }
 
 /* — Gloss & glass (Finder-style) — */

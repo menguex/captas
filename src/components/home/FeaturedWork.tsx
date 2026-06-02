@@ -25,7 +25,7 @@ export function FeaturedWork() {
   }, []);
 
   return (
-    <section id="trabajo" className="relative overflow-hidden bg-ink py-section">
+    <section id="trabajo-destacado" className="relative overflow-hidden bg-ink py-section">
       <div className="pointer-events-none absolute inset-0 mesh-grid opacity-[0.18]" aria-hidden />
       <div
         className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-sky/30 to-transparent"
@@ -35,7 +35,7 @@ export function FeaturedWork() {
       <div className="site-container relative">
         <SectionHeader
           theme="dark"
-          kicker="Trabajo · Selected"
+          kicker="Trabajo · Destacados"
           title={
             <>
               Proyectos que transformaron marcas en{" "}

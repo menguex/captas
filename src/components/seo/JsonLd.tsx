@@ -1,4 +1,5 @@
 import { site } from "@/content/site";
+import { SITE_OG_IMAGE } from "@/lib/seo";
 
 export function JsonLd() {
   const schema = {
@@ -23,9 +24,9 @@ export function JsonLd() {
         "@type": "LocalBusiness",
         "@id": "https://captas.cl/#localbusiness",
         name: site.name,
-        image: "https://captas.cl/og.jpg",
+        image: SITE_OG_IMAGE,
         url: "https://captas.cl",
-        telephone: site.phone,
+        ...(site.phone ? { telephone: site.phone } : {}),
         priceRange: "$$",
         address: {
           "@type": "PostalAddress",

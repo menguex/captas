@@ -145,20 +145,31 @@ export function ContactForm() {
           </Field>
 
           <div>
-            <span className="font-mono text-kicker uppercase tracking-[0.14em] text-fog">
+            <span
+              id="service-picker-label"
+              className="font-mono text-kicker uppercase tracking-[0.14em] text-fog"
+            >
               Servicio de interés *
             </span>
             <Controller
               name="service"
               control={control}
               render={({ field }) => (
-                <div className="mt-3 grid gap-2 sm:grid-cols-2">
+                <div
+                  role="radiogroup"
+                  aria-labelledby="service-picker-label"
+                  aria-invalid={Boolean(errors.service)}
+                  aria-describedby={errors.service ? "service-picker-error" : undefined}
+                  className="mt-3 grid gap-2 sm:grid-cols-2"
+                >
                   {serviceOptions.map((option) => {
                     const selected = field.value === option.value;
                     return (
                       <button
                         key={option.value}
                         type="button"
+                        role="radio"
+                        aria-checked={selected}
                         onClick={() => field.onChange(option.value)}
                         className={`rounded-box border px-4 py-3.5 text-left transition-all duration-base ${
                           selected
@@ -183,7 +194,7 @@ export function ContactForm() {
               )}
             />
             {errors.service?.message ? (
-              <p className="mt-2 font-mono text-[0.7rem] text-terra">
+              <p id="service-picker-error" className="mt-2 font-mono text-[0.7rem] text-terra">
                 {errors.service.message}
               </p>
             ) : null}

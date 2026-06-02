@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence, useInView } from "framer-motion";
@@ -171,14 +172,21 @@ export function ServicesEcosystemIntro({ showHeader = true }: ServicesEcosystemI
     return () => clearInterval(id);
   }, [reduced, paused, active]);
 
+  const pathname = usePathname();
   const goTo = useCallback((index: number) => setActive(index), []);
 
-  useEffect(() => {
+  const syncHashToPillar = useCallback(() => {
     const hash = window.location.hash.replace("#", "");
     if (!hash) return;
     const idx = services.findIndex((s) => s.id === hash);
     if (idx >= 0) setActive(idx);
   }, []);
+
+  useEffect(() => {
+    syncHashToPillar();
+    window.addEventListener("hashchange", syncHashToPillar);
+    return () => window.removeEventListener("hashchange", syncHashToPillar);
+  }, [pathname, syncHashToPillar]);
 
   const pauseProps = {
     onMouseEnter: () => setPaused(true),
@@ -192,6 +200,7 @@ export function ServicesEcosystemIntro({ showHeader = true }: ServicesEcosystemI
       {showHeader ? (
         <SectionHeader
           theme="light"
+          titleId="servicios-heading"
           kicker={ecosystemIntro.kicker}
           title={
             <>

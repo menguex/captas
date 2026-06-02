@@ -29,8 +29,8 @@ function HeroLine({
   return (
     <div className="overflow-hidden py-0.5 md:py-1">
       <motion.div
-        initial={{ y: "108%", opacity: 0 }}
-        animate={active ? { y: 0, opacity: 1 } : {}}
+        initial={active ? { y: "108%", opacity: 0 } : false}
+        animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.9, delay, ease }}
       >
         {children}
@@ -133,8 +133,8 @@ export function Hero() {
       <div className="relative z-10 site-container flex w-full max-w-5xl flex-col items-center">
         <motion.div
           className="flex items-center gap-3"
-          initial={{ opacity: 0, y: 12 }}
-          animate={active ? { opacity: 1, y: 0 } : {}}
+          initial={active ? { opacity: 0, y: 12 } : false}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease }}
         >
           <motion.span
@@ -174,9 +174,9 @@ export function Hero() {
 
         <motion.p
           className="hero-text-muted mt-8 max-w-2xl text-lead font-semibold leading-relaxed text-pretty"
-          initial={{ opacity: 0, y: 16 }}
-          animate={active ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.55, duration: 0.85, ease }}
+          initial={active ? { opacity: 0, y: 16 } : false}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: active ? 0.55 : 0, duration: 0.85, ease }}
         >
           UX/UI, motion, fotografía, video cinematográfico y branding — integrados
           para que tu marca se sienta premium y convierta.
@@ -184,9 +184,9 @@ export function Hero() {
 
         <motion.div
           className="mt-10 flex flex-wrap items-center justify-center gap-5"
-          initial={{ opacity: 0, y: 16 }}
-          animate={active ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.68, duration: 0.8, ease }}
+          initial={active ? { opacity: 0, y: 16 } : false}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: active ? 0.68 : 0, duration: 0.8, ease }}
         >
           <MagneticButton href="/contacto">Iniciar proyecto</MagneticButton>
           <Link

@@ -1,12 +1,18 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { MagneticButton } from "@/components/motion/MagneticButton";
+
+export const metadata: Metadata = {
+  title: "Página no encontrada — Captas",
+  description: "El enlace no existe o fue movido. Vuelve al inicio o explora el portafolio Captas.",
+  robots: { index: false, follow: true },
+};
 
 export default function NotFound() {
   return (
     <div className="relative flex min-h-[90vh] flex-col items-center justify-center overflow-hidden bg-ink px-gutter pb-section pt-32 text-center">
       <div className="pointer-events-none absolute inset-0 mesh-grid opacity-[0.18]" aria-hidden />
 
-      {/* Glowing orbs */}
       <div
         className="pointer-events-none absolute left-1/3 top-1/4 h-[min(280px,50vw)] w-[min(280px,50vw)] rounded-full blur-3xl"
         style={{ backgroundColor: "rgba(61,85,108,0.12)" }}
@@ -18,11 +24,11 @@ export default function NotFound() {
         aria-hidden
       />
 
-      {/* Giant 404 behind */}
       <p
         className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 select-none font-heading text-[clamp(10rem,30vw,22rem)] leading-none tracking-tighter"
         style={{
-          backgroundImage: "linear-gradient(135deg, rgba(61,85,108,0.12) 0%, rgba(125,146,168,0.06) 100%)",
+          backgroundImage:
+            "linear-gradient(135deg, rgba(61,85,108,0.12) 0%, rgba(125,146,168,0.06) 100%)",
           WebkitBackgroundClip: "text",
           WebkitTextFillColor: "transparent",
           backgroundClip: "text",
@@ -36,12 +42,12 @@ export default function NotFound() {
         Error 404
       </p>
       <h1 className="relative mt-6 max-w-xl font-heading text-h1 text-bone">
-        Esta pagina no existe — pero tu proximo proyecto{" "}
-        <span className="text-sky">si puede.</span>
+        Esta página no existe — pero tu próximo proyecto{" "}
+        <span className="text-sky">sí puede.</span>
       </h1>
       <p className="relative mt-6 max-w-md text-lead text-bone/60">
-        El enlace puede estar roto o la pagina fue movida. Vuelve al inicio o
-        explora nuestro trabajo.
+        El enlace puede estar roto o la página fue movida. Vuelve al inicio o explora nuestro
+        trabajo.
       </p>
 
       <div className="relative mt-10 flex flex-wrap items-center justify-center gap-4">

@@ -1,15 +1,17 @@
 import type { Metadata } from "next";
 import { ContactPageContent } from "@/components/contact/ContactPageContent";
+import { pageOpenGraph } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Conversemos — Captas",
   description:
     "Cuéntanos tu proyecto. UX/UI, fotografía, web, video y branding con craft premium desde el Limarí.",
-  openGraph: {
+  alternates: { canonical: "https://captas.cl/contacto" },
+  ...pageOpenGraph({
     title: "Conversemos — Captas",
-    description:
-      "Inicia tu proyecto con Captas. Respuesta en 24–48 horas hábiles.",
-  },
+    description: "Inicia tu proyecto con Captas. Respuesta en 24–48 horas hábiles.",
+    path: "/contacto",
+  }),
 };
 
 export default function ContactoPage() {

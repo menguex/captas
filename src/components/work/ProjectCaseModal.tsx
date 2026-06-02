@@ -7,6 +7,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import type { Project } from "@/content/projects";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
+import { createFocusTrap } from "@/lib/focus-trap";
 
 type ProjectCaseModalProps = {
   project: Project | null;
@@ -17,6 +18,7 @@ type ProjectCaseModalProps = {
 export function ProjectCaseModal({ project, index, onClose }: ProjectCaseModalProps) {
   const reduced = useReducedMotion();
   const closeRef = useRef<HTMLButtonElement>(null);
+  const dialogRef = useRef<HTMLDivElement>(null);
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -29,19 +31,19 @@ export function ProjectCaseModal({ project, index, onClose }: ProjectCaseModalPr
     const prevOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
 
+    let release: (() => void) | undefined;
+
     const frame = requestAnimationFrame(() => {
       closeRef.current?.focus();
+      if (dialogRef.current) {
+        release = createFocusTrap(dialogRef.current, { onEscape: onClose });
+      }
     });
-
-    const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
-    };
-    window.addEventListener("keydown", onKeyDown);
 
     return () => {
       cancelAnimationFrame(frame);
       document.body.style.overflow = prevOverflow;
-      window.removeEventListener("keydown", onKeyDown);
+      release?.();
     };
   }, [project, onClose]);
 
@@ -65,6 +67,7 @@ export function ProjectCaseModal({ project, index, onClose }: ProjectCaseModalPr
       />
 
       <motion.div
+        ref={dialogRef}
         role="dialog"
         aria-modal="true"
         aria-labelledby="case-modal-title"

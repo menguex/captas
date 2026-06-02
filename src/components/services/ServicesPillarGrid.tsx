@@ -13,6 +13,7 @@ export function ServicesPillarGrid() {
       <SectionHeader
         theme="light"
         compact
+        titleId="pilares-detalle-heading"
         kicker="Profundidad"
         title={
           <>

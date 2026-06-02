@@ -52,6 +52,7 @@ export function TrabajoGrid() {
             key={f.id}
             type="button"
             onClick={() => updateFilter(f.id)}
+            aria-pressed={filter === f.id}
             className={`rounded-full border px-4 py-2 font-mono text-kicker uppercase tracking-[0.12em] transition-all duration-base ${
               filter === f.id
                 ? "border-accent bg-accent text-bone shadow-[0_0_20px_var(--c-accent-glow)]"

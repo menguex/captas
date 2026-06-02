@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { CaptasLogo } from "@/components/brand/CaptasLogo";
 import { useScrollPosition } from "@/hooks/useScrollPosition";
+import { createFocusTrap } from "@/lib/focus-trap";
 
 const navLinks = [
   { href: "/trabajo", label: "Trabajo" },
@@ -15,13 +16,21 @@ const navLinks = [
 
 const easeOut = [0.16, 1, 0.3, 1] as const;
 
+const menuVariants = {
+  closed: { opacity: 0 },
+  open: {
+    opacity: 1,
+    transition: { staggerChildren: 0.07, delayChildren: 0.04 },
+  },
+};
+
 const itemVariants = {
   closed: { opacity: 0, y: 24 },
-  open: (i: number) => ({
+  open: {
     opacity: 1,
     y: 0,
-    transition: { delay: 0.08 + i * 0.07, duration: 0.6, ease: easeOut },
-  }),
+    transition: { duration: 0.55, ease: easeOut },
+  },
 };
 
 function NavLink({
@@ -82,6 +91,7 @@ export function Header() {
   const overHero = pathname === "/" && scrollY < 520;
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     setMenuOpen(false);
@@ -95,17 +105,17 @@ export function Header() {
   }, [menuOpen]);
 
   useEffect(() => {
-    if (!menuOpen) return;
+    if (!menuOpen || !menuRef.current) return;
 
-    const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setMenuOpen(false);
-    };
+    const release = createFocusTrap(menuRef.current, {
+      onEscape: () => setMenuOpen(false),
+      returnFocus: menuButtonRef.current,
+    });
 
-    window.addEventListener("keydown", onKeyDown);
-    const firstLink = menuRef.current?.querySelector("a");
+    const firstLink = menuRef.current.querySelector("a");
     firstLink?.focus();
 
-    return () => window.removeEventListener("keydown", onKeyDown);
+    return release;
   }, [menuOpen]);
 
   return (
@@ -139,6 +149,7 @@ export function Header() {
 
           <div className="flex items-center gap-2 md:hidden">
             <button
+              ref={menuButtonRef}
               type="button"
               className="relative z-[60] flex h-10 w-10 flex-col items-center justify-center gap-1.5"
               aria-expanded={menuOpen}
@@ -171,18 +182,22 @@ export function Header() {
           <motion.div
             ref={menuRef}
             id="mobile-menu"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Menú móvil"
             className="fixed inset-0 z-40 flex flex-col bg-ink gloss-ambient md:hidden"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+            initial="closed"
+            animate="open"
+            exit="closed"
+            variants={menuVariants}
             transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
           >
             <nav
               className="flex flex-1 flex-col justify-center gap-6 px-gutter pt-24"
-              aria-label="Menú móvil"
+              aria-label="Enlaces principales"
             >
-              {navLinks.map((link, index) => (
-                <motion.div key={link.href} custom={index} variants={itemVariants}>
+              {navLinks.map((link) => (
+                <motion.div key={link.href} variants={itemVariants}>
                   <NavLink
                     href={link.href}
                     label={link.label}
@@ -191,7 +206,7 @@ export function Header() {
                   />
                 </motion.div>
               ))}
-              <motion.div custom={navLinks.length} variants={itemVariants}>
+              <motion.div variants={itemVariants}>
                 <Link
                   href="/contacto"
                   className="gloss-button inline-flex"

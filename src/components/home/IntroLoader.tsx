@@ -7,7 +7,7 @@ import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { dispatchIntroComplete } from "@/hooks/useIntroReady";
 
 const VISITED_KEY = "captas-visited";
-const LOAD_MS = 2400;
+const LOAD_MS = 1600;
 const RING_R = 52;
 const RING_C = 2 * Math.PI * RING_R;
 
@@ -104,6 +104,13 @@ export function IntroLoader() {
           aria-label="Cargando Captas"
           role="status"
         >
+          <button
+            type="button"
+            onClick={finish}
+            className="absolute right-5 top-5 z-20 rounded-full border border-bone/20 px-3 py-1.5 font-mono text-[0.58rem] uppercase tracking-[0.14em] text-on-ink-muted transition-colors hover:border-sky/40 hover:text-sky"
+          >
+            Saltar
+          </button>
           <div className="pointer-events-none absolute inset-0 intro-loader__ambient" aria-hidden />
           <div className="pointer-events-none absolute inset-0 mesh-grid opacity-[0.07]" aria-hidden />
 

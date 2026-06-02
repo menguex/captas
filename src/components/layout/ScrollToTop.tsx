@@ -10,9 +10,19 @@ export function ScrollToTop() {
 
   useEffect(() => {
     let cancelled = false;
+    const hash = typeof window !== "undefined" ? window.location.hash : "";
 
     const scrollTop = async () => {
-      if (lenis) {
+      if (hash.length > 1) {
+        const target = document.getElementById(hash.slice(1));
+        if (target) {
+          if (lenis) {
+            lenis.scrollTo(target, { offset: -96, immediate: false });
+          } else {
+            target.scrollIntoView({ behavior: "smooth", block: "start" });
+          }
+        }
+      } else if (lenis) {
         lenis.scrollTo(0, { immediate: true });
       } else {
         window.scrollTo({ top: 0, left: 0, behavior: "auto" });

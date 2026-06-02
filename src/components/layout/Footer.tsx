@@ -12,7 +12,7 @@ const navLinks = [
   { href: "/trabajo", label: "Trabajo" },
   { href: "/estudio", label: "Estudio" },
   { href: "/servicios", label: "Servicios" },
-  { href: "/contacto", label: "Contacto" },
+  { href: "/contacto", label: "Conversemos" },
 ];
 
 const craftTags = ["UX/UI", "Branding", "Foto", "Cine", "Web", "Motion"];
@@ -68,11 +68,12 @@ export function Footer() {
             </MagneticButton>
             <a
               href={site.whatsapp}
-              target="_blank"
-              rel="noopener noreferrer"
+              {...(site.whatsappIsExternal
+                ? { target: "_blank" as const, rel: "noopener noreferrer" }
+                : {})}
               className="font-mono text-kicker uppercase tracking-[0.22em] text-on-ink-muted transition-colors hover:text-sky"
             >
-              WhatsApp directo →
+              {site.whatsappIsExternal ? "WhatsApp directo →" : "Conversemos →"}
             </a>
           </div>
         </div>
@@ -134,11 +135,12 @@ export function Footer() {
               <li>
                 <a
                   href={site.whatsapp}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  {...(site.whatsappIsExternal
+                    ? { target: "_blank" as const, rel: "noopener noreferrer" }
+                    : {})}
                   className="footer-link transition-colors hover:text-sky"
                 >
-                  WhatsApp
+                  {site.whatsappIsExternal ? "WhatsApp" : "Conversemos"}
                 </a>
               </li>
               <li className="text-on-ink-muted">{site.location}</li>

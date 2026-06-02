@@ -70,6 +70,7 @@ export function FooterAssistant() {
                       ? "bg-accent text-white"
                       : "border border-line/70 text-fog"
                   }`}
+                  aria-current={step === n ? "step" : undefined}
                 >
                   {n}
                 </span>

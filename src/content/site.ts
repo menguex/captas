@@ -1,14 +1,18 @@
+/** Número WhatsApp sin + (ej. 569XXXXXXXX). Vacío → enlaces van a /contacto */
+const whatsappDigits = process.env.NEXT_PUBLIC_WHATSAPP?.replace(/\D/g, "") ?? "";
+
 export const site = {
   name: "Captas",
   tagline: "Experiencias que elevan marcas. Motion que las hace inolvidables.",
   description:
     "Agencia UX/UI y creativa en el Limarí. Diseñamos experiencias, motion y contenido visual que promueven y dan valor real a tu marca.",
   email: "hola@captas.cl",
-  phone: "+56900000000",
+  phone: whatsappDigits ? `+${whatsappDigits}` : undefined,
   location: "Ovalle, Región de Coquimbo",
   region: "Limarí, Chile",
   instagram: "https://instagram.com/captas.cl",
-  whatsapp: "https://wa.me/56900000000",
+  whatsapp: whatsappDigits ? `https://wa.me/${whatsappDigits}` : "/contacto",
+  whatsappIsExternal: Boolean(whatsappDigits),
   contacto: "/contacto",
 } as const;
 
