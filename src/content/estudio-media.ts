@@ -14,9 +14,7 @@
  *   Alternativa stock: chef-preparing-a-dish-with-fire (cine). Ideal: BTS FX30 en set.
  *
  * Paso 3 · Entrega
- *   Antes: mismo aéreo que paso 1, poco contraste narrativo.
- *   Ahora: plaza Ovalle fija + aéreo valle en scrub = territorio y lanzamiento.
- *   Ideal Captas: pieza final exportada + drone Limarí propio.
+ *   Imagen propia: /images/estudio/azul.jpg + video aéreo en scrub.
  */
 
 const unsplash = (id: string, w = 1600) =>
@@ -58,11 +56,11 @@ export const estudioJourneyMedia: readonly EstudioJourneyMedia[] = [
   },
   {
     id: "entrega",
-    image: "/images/territory/alameda-plaza-hero.jpg",
-    imageAlt: "Alameda y plaza de Ovalle — entrega con raíz territorial",
+    image: "/images/estudio/azul.jpg",
+    imageAlt: "Captas — entrega con identidad y territorio Limarí",
     video: mixkit("aerial-view-of-a-sunny-landscape-4246"),
-    objectPosition: "52% 38%",
-    credit: "Reportaje · Alameda y Plaza Ovalle",
+    objectPosition: "50% 45%",
+    credit: "Entrega · craft desde el valle",
     trim: { start: 0 },
   },
 ] as const;
