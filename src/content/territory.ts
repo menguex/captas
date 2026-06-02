@@ -1,10 +1,13 @@
-/** Territorio — home (fotografía real Ovalle / Muni 2026) */
+/** Territorio — Alameda · Plaza Ovalle (fotografía aérea Captas) */
 
 export const territoryContent = {
-  image: "/images/territory/ovalle-limari-hero.jpg",
-  imageAlt: "Ovalle y el Limarí — fotografía territorial Captas",
+  image: "/images/territory/alameda-plaza-hero.jpg",
+  imageAlt:
+    "Vista aérea de la Alameda y plaza de Ovalle — espejo de agua, palmeras y centro urbano del Limarí",
+  imagePosition: "52% 42%",
   kicker: "Territorio",
   subkicker: "Procedencia como ventaja — no como excusa",
+  location: "Alameda · Plaza Ovalle",
   title: "Desde el Limarí para el mundo.",
   titleAccent: "El lugar es nuestra ventaja.",
   body: "Filmamos y diseñamos desde Ovalle con sensibilidad territorial y estándar global — marcas reales, memorables y listas para exportar.",

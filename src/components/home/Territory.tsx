@@ -8,9 +8,6 @@ import { territoryContent } from "@/content/territory";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const textShadow =
-  "0 1px 2px rgba(0,0,0,0.45), 0 8px 32px rgba(0,0,0,0.55)";
-
 export function Territory() {
   const sectionRef = useRef<HTMLElement>(null);
   const bgRef = useRef<HTMLDivElement>(null);
@@ -21,9 +18,9 @@ export function Territory() {
     const ctx = gsap.context(() => {
       gsap.fromTo(
         bgRef.current,
-        { scale: 1.05 },
+        { scale: 1.04 },
         {
-          scale: 1.14,
+          scale: 1.12,
           ease: "none",
           scrollTrigger: {
             trigger: sectionRef.current,
@@ -41,99 +38,97 @@ export function Territory() {
   return (
     <section
       ref={sectionRef}
-      className="relative min-h-[min(100vh,52rem)] overflow-hidden bg-ink py-section"
+      className="relative min-h-[min(100vh,54rem)] overflow-hidden bg-ink py-section"
       aria-labelledby="territory-heading"
     >
+      <div className="pointer-events-none absolute inset-0 gloss-ambient opacity-50" aria-hidden />
+
       <div ref={bgRef} className="absolute inset-0 will-change-transform">
         <Image
           src={territoryContent.image}
           alt={territoryContent.imageAlt}
           fill
-          className="object-cover object-[center_42%]"
+          className="object-cover"
+          style={{ objectPosition: territoryContent.imagePosition }}
           sizes="100vw"
           priority={false}
         />
-        <div className="absolute inset-0 bg-ink/20" aria-hidden />
+        <div className="absolute inset-0 bg-ink/15" aria-hidden />
         <div
-          className="absolute inset-0 bg-gradient-to-b from-ink/75 via-ink/50 to-ink/90"
+          className="absolute inset-0 bg-gradient-to-b from-ink/55 via-ink/25 to-ink/80"
           aria-hidden
         />
         <div
-          className="absolute inset-0 bg-gradient-to-r from-ink/85 via-ink/35 to-ink/55"
-          aria-hidden
-        />
-        <div
-          className="absolute inset-0 bg-[radial-gradient(ellipse_90%_70%_at_50%_38%,rgba(10,10,10,0.72),transparent_68%)]"
-          aria-hidden
-        />
-        <div
-          className="absolute inset-0 bg-[radial-gradient(ellipse_at_80%_20%,rgba(91,97,255,0.12),transparent_45%)]"
+          className="absolute inset-0 bg-[radial-gradient(ellipse_100%_80%_at_50%_100%,rgba(10,10,10,0.65),transparent_55%)]"
           aria-hidden
         />
       </div>
 
       <div className="relative z-10 px-gutter">
-        <div className="mx-auto flex min-h-[min(100vh,52rem)] w-full max-w-content flex-col justify-center py-4">
-          <div className="mx-auto max-w-3xl text-center">
-            <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1">
-              <p
-                className="font-mono text-[0.62rem] uppercase tracking-[0.2em] text-sky"
-                style={{ textShadow }}
-              >
-                {territoryContent.kicker}
+        <div className="mx-auto flex min-h-[min(100vh,54rem)] w-full max-w-content flex-col justify-center py-4">
+          <div className="gloss-card glass-panel relative mx-auto max-w-3xl overflow-hidden px-6 py-8 text-center md:px-10 md:py-11">
+            <div
+              className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#5b61ff]/80 to-transparent"
+              aria-hidden
+            />
+            <div
+              className="pointer-events-none absolute -left-1/4 top-0 h-full w-1/2 -skew-x-12 bg-gradient-to-r from-transparent via-white/[0.07] to-transparent animate-shimmer opacity-60"
+              aria-hidden
+            />
+
+            <div className="relative">
+              <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-2">
+                <p className="font-mono text-[0.62rem] uppercase tracking-[0.2em] text-sky">
+                  {territoryContent.kicker}
+                </p>
+                <span className="hidden h-3 w-px bg-bone/35 sm:block" aria-hidden />
+                <p className="font-mono text-[0.62rem] uppercase tracking-[0.14em] text-bone/90">
+                  {territoryContent.subkicker}
+                </p>
+              </div>
+
+              <p className="mt-4 inline-flex items-center gap-2 rounded-full border border-bone/20 bg-white/[0.08] px-3.5 py-1 font-mono text-[0.58rem] uppercase tracking-[0.16em] text-bone backdrop-blur-sm">
+                <span
+                  className="h-1.5 w-1.5 shrink-0 rounded-full bg-sky shadow-[0_0_8px_rgba(var(--c-accent-rgb),0.8)]"
+                  aria-hidden
+                />
+                {territoryContent.location}
               </p>
-              <span className="hidden h-3 w-px bg-bone/40 sm:block" aria-hidden />
-              <p
-                className="font-mono text-[0.62rem] uppercase tracking-[0.14em] text-bone/90"
-                style={{ textShadow }}
+
+              <h2
+                id="territory-heading"
+                className="mt-6 font-heading text-h2 leading-[1.1] tracking-tight text-bone md:text-h1 md:leading-[1.06]"
               >
-                {territoryContent.subkicker}
+                {territoryContent.title}{" "}
+                <span className="text-shimmer-dark">{territoryContent.titleAccent}</span>
+              </h2>
+
+              <p className="mx-auto mt-5 max-w-2xl text-body leading-relaxed text-bone md:text-lead">
+                {territoryContent.body}
               </p>
+
+              <dl className="mx-auto mt-9 inline-grid max-w-xl grid-cols-3 gap-px overflow-hidden rounded-box border border-bone/15 bg-bone/10">
+                {territoryContent.facts.map((fact) => (
+                  <div
+                    key={fact.label}
+                    className="min-w-[5rem] bg-ink/40 px-4 py-3.5 text-center backdrop-blur-md sm:px-5"
+                  >
+                    <dt className="font-mono text-[0.58rem] uppercase tracking-[0.14em] text-sky">
+                      {fact.label}
+                    </dt>
+                    <dd className="mt-1.5 font-heading text-h3 leading-none tabular-nums tracking-tight text-bone">
+                      {fact.value}
+                    </dd>
+                  </div>
+                ))}
+              </dl>
             </div>
-
-            <h2
-              id="territory-heading"
-              className="mt-6 font-heading text-h2 leading-[1.1] tracking-tight text-bone md:text-h1 md:leading-[1.06]"
-              style={{ textShadow }}
-            >
-              {territoryContent.title}{" "}
-              <span className="text-shimmer-dark">{territoryContent.titleAccent}</span>
-            </h2>
-
-            <p
-              className="mx-auto mt-5 max-w-2xl text-body leading-relaxed text-bone/95 md:text-lead"
-              style={{ textShadow }}
-            >
-              {territoryContent.body}
-            </p>
-
-            <dl className="mx-auto mt-10 inline-grid max-w-xl grid-cols-3 gap-px overflow-hidden rounded-box-lg border border-bone/20 bg-bone/10 shadow-[0_12px_40px_rgba(0,0,0,0.45)] backdrop-blur-md">
-              {territoryContent.facts.map((fact) => (
-                <div
-                  key={fact.label}
-                  className="min-w-[5rem] bg-ink/55 px-4 py-4 text-center backdrop-blur-sm sm:px-5"
-                >
-                  <dt
-                    className="font-mono text-[0.58rem] uppercase tracking-[0.14em] text-sky"
-                    style={{ textShadow }}
-                  >
-                    {fact.label}
-                  </dt>
-                  <dd
-                    className="mt-1.5 font-heading text-h3 leading-none tabular-nums tracking-tight text-bone"
-                    style={{ textShadow }}
-                  >
-                    {fact.value}
-                  </dd>
-                </div>
-              ))}
-            </dl>
           </div>
         </div>
       </div>
 
       <div
-        className="pointer-events-none absolute inset-x-0 bottom-0 z-20 h-px bg-gradient-to-r from-transparent via-sky/50 to-transparent"
+        className="pointer-events-none absolute inset-x-0 bottom-0 z-20 h-px bg-gradient-to-r from-transparent via-sky/55 to-transparent"
         aria-hidden
       />
     </section>
