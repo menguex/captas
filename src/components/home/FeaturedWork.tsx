@@ -5,13 +5,13 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import type { Project } from "@/content/projects";
 import { getFeaturedProjects } from "@/content/projects";
-import { PortfolioCard } from "@/components/work/PortfolioCard";
+import { FeaturedWorkShowcase } from "@/components/home/FeaturedWorkShowcase";
 import { ProjectCaseModal } from "@/components/work/ProjectCaseModal";
 import { SectionHeader } from "@/components/ui/SectionHeader";
+import { easeOut, viewportOnce } from "@/lib/motion";
 
 export function FeaturedWork() {
   const projects = getFeaturedProjects();
-  const [featured, ...rest] = projects;
   const [activeProject, setActiveProject] = useState<Project | null>(null);
   const [activeIndex, setActiveIndex] = useState(0);
 
@@ -25,8 +25,12 @@ export function FeaturedWork() {
   }, []);
 
   return (
-    <section className="relative overflow-hidden bg-ink py-section">
+    <section id="trabajo" className="relative overflow-hidden bg-ink py-section">
       <div className="pointer-events-none absolute inset-0 mesh-grid opacity-[0.18]" aria-hidden />
+      <div
+        className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-sky/30 to-transparent"
+        aria-hidden
+      />
 
       <div className="site-container relative">
         <SectionHeader
@@ -35,51 +39,36 @@ export function FeaturedWork() {
           title={
             <>
               Proyectos que transformaron marcas en{" "}
-              <span className="text-sky">experiencias memorables.</span>
+              <span className="bg-gradient-to-r from-sky-soft via-sky to-bone/90 bg-clip-text text-transparent">
+                experiencias memorables.
+              </span>
             </>
           }
-          description="Cada caso es una pieza de diseño con estrategia, craft y resultado medible."
+          description="Casos reales con estrategia, craft visual y resultados medibles — explora el detalle o abre el caso completo."
         />
 
-        <div className="mt-14 space-y-6 md:mt-16">
-          {featured ? (
-            <PortfolioCard
-              project={featured}
-              index={0}
-              variant="featured"
-              onOpen={(project) => openProject(project, 0)}
-            />
-          ) : null}
-
-          {rest.length > 0 ? (
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {rest.map((project, i) => (
-                <PortfolioCard
-                  key={project.slug}
-                  project={project}
-                  index={i + 1}
-                  onOpen={(p) => openProject(p, i + 1)}
-                />
-              ))}
-            </div>
-          ) : null}
-        </div>
+        <FeaturedWorkShowcase projects={projects} onOpenCase={openProject} />
 
         <motion.div
-          className="mt-14 text-center md:mt-16"
-          initial={{ opacity: 0, y: 18 }}
+          className="mt-12 flex flex-col items-center gap-4 sm:flex-row sm:justify-center md:mt-14"
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-10% 0px" }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          viewport={viewportOnce}
+          transition={{ duration: 0.75, ease: easeOut }}
         >
           <Link
             href="/trabajo"
             className="gloss-button gloss-button-prose inline-flex items-center gap-2.5"
           >
             Ver portafolio completo
-            <span className="text-sky" aria-hidden>
-              →
-            </span>
+            <span aria-hidden>→</span>
+          </Link>
+          <Link
+            href="/contacto"
+            className="inline-flex items-center gap-2 font-mono text-kicker uppercase tracking-[0.18em] text-on-ink-muted transition-colors hover:text-sky"
+          >
+            ¿Tu marca es el próximo caso?
+            <span aria-hidden>→</span>
           </Link>
         </motion.div>
       </div>
