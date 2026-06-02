@@ -86,14 +86,6 @@ export function PillarCard({
             />
           )}
 
-          <span
-            className="pointer-events-none absolute -bottom-4 -right-2 select-none font-heading text-[clamp(5rem,12vw,8rem)] leading-none transition-colors duration-base"
-            style={{ color: `${theme.accent}12` }}
-            aria-hidden
-          >
-            {service.number}
-          </span>
-
           <div
             className="absolute inset-x-0 top-0 h-px opacity-80"
             style={{ background: theme.border }}
@@ -107,10 +99,10 @@ export function PillarCard({
               featured={isFeatured}
             />
             <span
-              className="rounded-full border bg-white/80 px-2.5 py-1 font-mono text-kicker tabular-nums text-on-light-muted"
+              className="rounded-full border bg-white/80 px-2.5 py-1 font-mono text-[0.62rem] uppercase tracking-[0.14em] text-on-light-muted"
               style={{ borderColor: `${theme.accent}33` }}
             >
-              {service.number}
+              {service.pillar}
             </span>
           </div>
 

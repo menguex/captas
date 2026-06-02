@@ -201,7 +201,7 @@ export function FooterAssistant() {
                 <div className="rounded-box-lg bg-bone/5 p-5 md:p-6">
                   <div className="rounded-box-lg bg-ink/75 p-5">
                     <p className="font-mono text-kicker uppercase tracking-[0.14em] text-sky">
-                      {selected.pillar} · Pilar {selected.number}
+                      {selected.pillar}
                     </p>
                     <p className="mt-2 font-heading text-h3 text-bone">{selected.title}</p>
                     <p className="mt-2 text-body text-on-ink-muted">{selected.short}</p>

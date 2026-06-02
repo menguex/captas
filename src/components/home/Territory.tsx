@@ -9,8 +9,8 @@ gsap.registerPlugin(ScrollTrigger);
 
 const territoryFacts = [
   { value: "30°36'S", label: "Latitud" },
-  { value: "300+", label: "Días de sol al año" },
-  { value: "Limarí", label: "Valle de origen" },
+  { value: "300+", label: "Días de sol" },
+  { value: "Limarí", label: "Origen" },
 ] as const;
 
 export function Territory() {
@@ -43,7 +43,7 @@ export function Territory() {
   return (
     <section
       ref={sectionRef}
-      className="relative bg-ink py-section"
+      className="relative bg-ink py-16 md:py-20"
       aria-labelledby="territory-heading"
     >
       <div ref={bgRef} className="absolute inset-0 overflow-hidden">
@@ -55,67 +55,46 @@ export function Territory() {
           sizes="100vw"
           priority={false}
         />
-        <div className="absolute inset-0 bg-ink/78" />
-        <div className="absolute inset-0 bg-gradient-to-r from-ink/95 via-ink/72 to-ink/55" />
-        <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/55 to-ink/25" />
+        <div className="absolute inset-0 bg-ink/82" />
+        <div className="absolute inset-0 bg-gradient-to-r from-ink/95 via-ink/75 to-ink/60" />
       </div>
 
       <div className="relative z-10 px-gutter">
-        <div className="mx-auto w-full max-w-content text-center">
+        <div className="mx-auto w-full max-w-content">
           <div
-            className="mx-auto max-w-3xl rounded-box-lg border border-white/10 bg-ink/72 px-6 py-10 shadow-[0_24px_80px_rgba(0,0,0,0.45)] backdrop-blur-md md:px-12 md:py-14"
-            style={{ textShadow: "0 1px 24px rgba(0,0,0,0.35)" }}
+            className="mx-auto max-w-3xl rounded-box-lg border border-white/10 bg-ink/75 px-5 py-7 shadow-[0_16px_48px_rgba(0,0,0,0.4)] backdrop-blur-md md:px-8 md:py-9"
+            style={{ textShadow: "0 1px 20px rgba(0,0,0,0.3)" }}
           >
-            <div className="flex items-center justify-center gap-3">
-              <span
-                className="h-px w-12 bg-gradient-to-r from-transparent to-sky"
-                aria-hidden
-              />
-              <p className="font-mono text-kicker uppercase tracking-[0.22em] text-sky">
-                Territorio · 003
+            <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-center">
+              <p className="font-mono text-[0.62rem] uppercase tracking-[0.2em] text-sky">
+                Territorio
               </p>
-              <span
-                className="h-px w-12 bg-gradient-to-l from-transparent to-sky"
-                aria-hidden
-              />
-            </div>
-
-            <p className="mx-auto mt-6 max-w-md font-mono text-small uppercase tracking-[0.16em] text-bone">
-              Procedencia como ventaja — no como excusa
-            </p>
-
-            <div className="mx-auto mt-10 max-w-4xl space-y-3 md:mt-12 md:space-y-4">
-              <p
-                id="territory-heading"
-                className="font-heading text-h1 text-bone"
-              >
-                Desde el Limarí para el mundo.
-              </p>
-
-              <p className="font-heading text-h2 font-medium italic leading-[1.14] text-sky">
-                El lugar no es un límite —
-              </p>
-
-              <p className="font-heading text-h1 text-bone">
-                es nuestra{" "}
-                <span className="text-sky">ventaja.</span>
+              <span className="hidden h-3 w-px bg-white/25 sm:block" aria-hidden />
+              <p className="font-mono text-[0.62rem] uppercase tracking-[0.14em] text-on-ink-muted">
+                Procedencia como ventaja — no como excusa
               </p>
             </div>
 
-            <p className="mx-auto mt-10 max-w-2xl text-lead leading-relaxed text-bone">
-              Filmamos, diseñamos y movemos marcas desde Ovalle. La sensibilidad
-              territorial sumada al enfoque UX global es lo que hace única a
-              Captas — un estudio que conoce su lugar y opera a estándar
-              internacional.
+            <h2
+              id="territory-heading"
+              className="mt-5 text-center font-heading text-h2 leading-[1.12] tracking-tight text-bone md:text-h1 md:leading-[1.08]"
+            >
+              Desde el Limarí para el mundo.{" "}
+              <span className="text-sky">El lugar es nuestra ventaja.</span>
+            </h2>
+
+            <p className="mx-auto mt-4 max-w-2xl text-center text-body leading-relaxed text-on-ink-muted md:text-lead">
+              Filmamos y diseñamos desde Ovalle con sensibilidad territorial y estándar global — marcas
+              reales, memorables y listas para exportar.
             </p>
 
-            <dl className="mx-auto mt-12 grid max-w-2xl grid-cols-3 gap-x-8 gap-y-4 border-t border-white/20 pt-8">
+            <dl className="mx-auto mt-6 flex max-w-xl flex-wrap items-center justify-center gap-x-8 gap-y-3 border-t border-white/15 pt-5 sm:gap-x-10">
               {territoryFacts.map((fact) => (
-                <div key={fact.label} className="min-w-0">
-                  <dt className="font-mono text-kicker uppercase tracking-[0.16em] text-sky/90">
+                <div key={fact.label} className="min-w-[4.5rem] text-center">
+                  <dt className="font-mono text-[0.58rem] uppercase tracking-[0.14em] text-sky">
                     {fact.label}
                   </dt>
-                  <dd className="mt-2 font-heading text-h3 leading-tight tracking-tight text-bone">
+                  <dd className="mt-1 font-heading text-h3 leading-none tabular-nums tracking-tight text-bone">
                     {fact.value}
                   </dd>
                 </div>

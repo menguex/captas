@@ -59,14 +59,6 @@ export function ServiceOverlayContent({
         isPanel ? "rounded-b-box-lg p-6 md:p-8 lg:p-10" : featured ? "rounded-b-box-lg p-7 md:p-9 lg:p-10" : "rounded-b-box-lg p-6 md:p-7"
       }`}
     >
-      <span
-        className="pointer-events-none absolute right-4 top-3 font-heading leading-none text-bone/[0.07] md:right-6"
-        style={{ fontSize: isPanel ? "clamp(5rem, 16vw, 10rem)" : "clamp(3.5rem, 11vw, 6.5rem)" }}
-        aria-hidden
-      >
-        {service.number}
-      </span>
-
       <motion.div variants={reduced ? undefined : serviceOverlayItem} className="relative flex flex-wrap items-center gap-3">
         {isPanel && Icon ? (
           <span className="flex h-12 w-12 items-center justify-center rounded-2xl border border-bone/30 bg-bone/15 text-bone shadow-[inset_0_1px_0_rgba(255,255,255,0.12)] backdrop-blur-sm">
@@ -81,7 +73,7 @@ export function ServiceOverlayContent({
           />
         )}
         <span className="rounded-full border border-bone/25 bg-ink/50 px-3 py-1 font-mono text-kicker uppercase tracking-[0.2em] text-bone backdrop-blur-md">
-          {isPanel ? `Pilar ${service.number} · ${service.pillar}` : service.pillar}
+          {service.pillar}
         </span>
       </motion.div>
 
@@ -90,15 +82,9 @@ export function ServiceOverlayContent({
         className={isPanel ? "relative mt-8 grid gap-8 lg:grid-cols-[1fr_auto] lg:items-end lg:gap-12" : "relative mt-5"}
       >
         <div>
-          {!isPanel ? (
-            <span className="font-mono text-kicker tabular-nums uppercase tracking-[0.22em] text-sky">
-              / {service.number}
-            </span>
-          ) : null}
-
           <h3
             className={`font-heading leading-tight tracking-tight text-bone ${
-              isPanel ? "text-h1 text-balance" : featured ? "mt-2 text-h2 md:text-h1" : "mt-2 text-h3"
+              isPanel ? "text-h1 text-balance" : featured ? "text-h2 md:text-h1" : "text-h3"
             }`}
           >
             {service.title}

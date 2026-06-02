@@ -204,13 +204,8 @@ function PillarTab({
           </span>
         ) : null}
         <span className="min-w-0 flex-1">
-          <span className="flex items-baseline gap-2">
-            <span className="font-mono text-[0.62rem] tabular-nums uppercase tracking-[0.2em] text-accent">
-              {service.number}
-            </span>
-            <span className={`truncate font-heading text-body tracking-tight ${active ? "text-ink" : "text-on-light-muted"}`}>
-              {service.pillar}
-            </span>
+          <span className={`truncate font-heading text-body tracking-tight ${active ? "text-ink" : "text-on-light-muted"}`}>
+            {service.pillar}
           </span>
           <span className="mt-0.5 block truncate text-small leading-snug text-on-light-muted">{service.short}</span>
         </span>

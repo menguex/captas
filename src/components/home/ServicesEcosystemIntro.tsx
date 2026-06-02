@@ -93,7 +93,7 @@ function EcosystemPillarNav({ active, paused, reduced, onSelect, variant }: Pill
                 ) : null}
                 <span className="min-w-0 flex-1">
                   <span className="font-mono text-[0.58rem] uppercase tracking-[0.16em] text-on-light-subtle">
-                    {s.number} · {s.pillar}
+                    {s.pillar}
                   </span>
                   <span
                     className={`mt-0.5 block font-heading text-small leading-snug ${
@@ -143,10 +143,7 @@ function EcosystemPillarNav({ active, paused, reduced, onSelect, variant }: Pill
               ) : null}
             </span>
             <span className="block bg-white px-2 py-2 text-center">
-              <span className="font-mono text-[0.52rem] uppercase tracking-[0.12em] text-on-light-muted">
-                {s.number}
-              </span>
-              <span className="mt-0.5 block truncate font-heading text-[0.65rem] text-ink">
+              <span className="block truncate font-heading text-[0.65rem] text-ink">
                 {s.pillar}
               </span>
             </span>
@@ -281,7 +278,7 @@ export function ServicesEcosystemIntro({ showHeader = true }: ServicesEcosystemI
             <div className="absolute left-4 top-4 z-10 flex flex-wrap items-center gap-2 md:left-6 md:top-6">
               <CaptasLockup tone="on-dark" />
               <span className="rounded-full border border-bone/20 bg-gradient-to-r from-[#5b61ff] to-[#0ea5e9] px-3 py-1 font-mono text-[0.58rem] font-medium uppercase tracking-[0.14em] text-white shadow-[0_4px_16px_rgba(var(--c-accent-rgb),0.35)]">
-                Pilar {current.number}
+                {current.pillar}
               </span>
             </div>
 
@@ -295,13 +292,6 @@ export function ServicesEcosystemIntro({ showHeader = true }: ServicesEcosystemI
               >
                 <div className="border-t border-bone/15 bg-ink/90 p-5 backdrop-blur-2xl supports-[backdrop-filter]:bg-ink/82 md:p-7 lg:grid lg:grid-cols-[1fr_auto] lg:items-end lg:gap-8 lg:p-9">
                   <div className="relative">
-                    <span
-                      className="pointer-events-none absolute -top-1 right-0 font-heading text-[clamp(3.5rem,11vw,6.5rem)] leading-none text-bone/[0.06]"
-                      aria-hidden
-                    >
-                      {current.number}
-                    </span>
-
                     <motion.div
                       variants={reduced ? undefined : serviceOverlayItem}
                       className="flex flex-wrap items-center gap-3"
