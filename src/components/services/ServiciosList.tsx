@@ -2,9 +2,10 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { processSteps, testimonials } from "@/content/process";
+import { testimonials } from "@/content/process";
 import { stats } from "@/content/site";
 import { PillarExplorer } from "./PillarExplorer";
+import { ProcessJourney } from "./ProcessJourney";
 import { fadeUp, staggerContainer, viewportOnce } from "@/lib/motion";
 
 export function ServiciosList() {
@@ -38,28 +39,7 @@ export function ServiciosList() {
         ))}
       </motion.div>
 
-      <motion.div
-        className="mt-16 overflow-hidden rounded-box-lg border border-line-dark bg-white/60"
-        variants={fadeUp}
-        initial="hidden"
-        whileInView="visible"
-        viewport={viewportOnce}
-      >
-        <p className="border-b border-line-dark bg-white/80 px-6 py-4 font-mono text-kicker uppercase tracking-[0.16em] text-clay">
-          Cómo trabajamos contigo
-        </p>
-        <div className="grid gap-px bg-line-dark md:grid-cols-4">
-          {processSteps.map((step) => (
-            <div key={step.number} className="bg-bone px-5 py-6 md:px-6 md:py-7">
-              <span className="font-mono text-kicker tabular-nums text-accent">
-                {step.number}
-              </span>
-              <p className="mt-3 font-heading text-body text-ink">{step.title}</p>
-              <p className="mt-2 text-small leading-relaxed text-clay">{step.text}</p>
-            </div>
-          ))}
-        </div>
-      </motion.div>
+      <ProcessJourney />
 
       <motion.blockquote
         className="mt-16 rounded-box-lg border border-line-dark bg-gradient-to-br from-white via-white to-accent/[0.06] p-8 md:p-10"

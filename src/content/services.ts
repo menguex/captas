@@ -52,8 +52,8 @@ export const services: Service[] = [
       "Banco de imágenes para campañas",
     ],
     pillar: "Fotografía",
-    image: img("photo-1542038784456-1daac0d7a901"),
-    imageAlt: "Cámara y equipo de fotografía en estudio",
+    image: img("photo-1492691527719-9d1e07e534b4"),
+    imageAlt: "Fotografía editorial de paisaje y luz dorada en territorio",
     theme: serviceUiTheme,
   },
   {
