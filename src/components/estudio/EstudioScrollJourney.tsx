@@ -1,12 +1,11 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import Image from "next/image";
+import { useRef, useState } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from "framer-motion";
 import { MagneticButton } from "@/components/motion/MagneticButton";
+import { JourneyBackdrop, JourneyStepMedia } from "@/components/estudio/JourneyBackdrop";
 import { estudioFinale, estudioJourney } from "@/content/estudio";
-import { footerTerritoryImage } from "@/content/territory";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { easeOut } from "@/lib/motion";
 
@@ -53,53 +52,6 @@ function StepIndicator({
   );
 }
 
-function JourneyBackground({ active }: { active: number }) {
-  return (
-    <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
-      {/* Paso 1 — azul profundo */}
-      <motion.div
-        className="absolute inset-0 bg-[radial-gradient(ellipse_90%_80%_at_50%_20%,rgba(91,97,255,0.22),transparent_65%)]"
-        animate={{ opacity: active === 0 ? 1 : 0 }}
-        transition={{ duration: 0.8, ease }}
-      />
-      <motion.div
-        className="absolute inset-0 mesh-grid opacity-[0.12]"
-        animate={{ opacity: active === 0 ? 0.12 : 0 }}
-        transition={{ duration: 0.6 }}
-      />
-
-      {/* Paso 2 — acento cian */}
-      <motion.div
-        className="absolute inset-0 bg-[radial-gradient(ellipse_70%_60%_at_80%_50%,rgba(14,165,233,0.18),transparent_60%)]"
-        animate={{ opacity: active === 1 ? 1 : 0 }}
-        transition={{ duration: 0.8, ease }}
-      />
-      <motion.div
-        className="absolute inset-0 bg-[radial-gradient(ellipse_50%_40%_at_10%_80%,rgba(0,122,255,0.12),transparent_55%)]"
-        animate={{ opacity: active === 1 ? 1 : 0 }}
-        transition={{ duration: 0.8, ease }}
-      />
-
-      {/* Paso 3 — territorio */}
-      <motion.div className="absolute inset-0" animate={{ opacity: active === 2 ? 1 : 0 }} transition={{ duration: 1, ease }}>
-        <Image
-          src={footerTerritoryImage.src}
-          alt=""
-          fill
-          className="object-cover"
-          style={{ objectPosition: footerTerritoryImage.position }}
-          sizes="100vw"
-          priority={false}
-        />
-        <div className="absolute inset-0 bg-ink/82" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_30%,rgba(15,18,24,0.2),rgba(15,18,24,0.92)_75%)]" />
-      </motion.div>
-
-      <div className="absolute inset-0 bg-gradient-to-b from-ink/40 via-transparent to-ink/90" />
-    </div>
-  );
-}
-
 function StepPanel({ index }: { index: number }) {
   const step = estudioJourney[index];
 
@@ -107,18 +59,20 @@ function StepPanel({ index }: { index: number }) {
     <motion.div
       key={step.id}
       role="tabpanel"
-      className="site-container relative flex min-h-0 flex-col justify-center px-gutter py-16 md:py-20"
+      className="site-container relative flex min-h-0 flex-col justify-center px-gutter py-12 md:py-16"
       initial={{ opacity: 0, y: 28, filter: "blur(8px)" }}
       animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
       exit={{ opacity: 0, y: -20, filter: "blur(6px)" }}
       transition={{ duration: 0.55, ease }}
     >
       <p className="font-mono text-kicker uppercase tracking-[0.22em] text-sky">{step.kicker}</p>
-      <h2 className="mt-4 max-w-2xl font-heading text-[clamp(2rem,5.5vw,3.75rem)] font-semibold leading-[1.02] tracking-[-0.04em] text-bone">
+      <h2 className="mt-4 max-w-2xl font-heading text-[clamp(2rem,5.5vw,3.75rem)] font-semibold leading-[1.02] tracking-[-0.04em] text-bone drop-shadow-[0_2px_24px_rgba(0,0,0,0.45)]">
         {step.title}{" "}
         <span className="text-shimmer-dark">{step.titleAccent}</span>
       </h2>
-      <p className="mt-6 max-w-lg text-lead leading-relaxed text-on-ink-muted">{step.body}</p>
+      <p className="mt-6 max-w-lg text-lead leading-relaxed text-on-ink-muted drop-shadow-[0_1px_12px_rgba(0,0,0,0.35)]">
+        {step.body}
+      </p>
 
       {step.chips ? (
         <motion.ul
@@ -138,7 +92,7 @@ function StepPanel({ index }: { index: number }) {
                 visible: { opacity: 1, scale: 1, transition: { duration: 0.4, ease } },
               }}
             >
-              <span className="inline-flex rounded-full border border-bone/15 bg-white/[0.06] px-4 py-2 font-mono text-[0.62rem] uppercase tracking-[0.14em] text-bone backdrop-blur-sm">
+              <span className="inline-flex rounded-full border border-bone/20 bg-ink/40 px-4 py-2 font-mono text-[0.62rem] uppercase tracking-[0.14em] text-bone backdrop-blur-md">
                 {chip}
               </span>
             </motion.li>
@@ -191,23 +145,6 @@ export function EstudioScrollJourney() {
     setActive(i);
   };
 
-  useEffect(() => {
-    if (!reduced) return;
-    const observers: IntersectionObserver[] = [];
-    const markers = trackRef.current?.querySelectorAll("[data-step-marker]");
-    markers?.forEach((node, i) => {
-      const obs = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) setActive(i);
-        },
-        { threshold: 0.45 }
-      );
-      obs.observe(node);
-      observers.push(obs);
-    });
-    return () => observers.forEach((o) => o.disconnect());
-  }, [reduced]);
-
   if (reduced) {
     return (
       <section id="recorrido" className="scroll-mt-28">
@@ -218,6 +155,7 @@ export function EstudioScrollJourney() {
             className="relative border-t border-line/60 py-14 md:py-20"
           >
             <div className="site-container px-gutter">
+              <JourneyStepMedia stepIndex={i} />
               <p className="font-mono text-kicker uppercase tracking-[0.22em] text-sky">{step.kicker}</p>
               <h2 className="mt-4 max-w-2xl font-heading text-h2 font-semibold tracking-tight text-bone">
                 {step.title} <span className="text-shimmer-dark">{step.titleAccent}</span>
@@ -237,7 +175,10 @@ export function EstudioScrollJourney() {
               {i === STEP_COUNT - 1 ? (
                 <div className="mt-8 flex flex-wrap gap-4">
                   <MagneticButton href="/contacto">{estudioFinale.cta}</MagneticButton>
-                  <Link href="/servicios" className="font-mono text-kicker uppercase tracking-[0.16em] text-on-ink-muted hover:text-sky">
+                  <Link
+                    href="/servicios"
+                    className="font-mono text-kicker uppercase tracking-[0.16em] text-on-ink-muted hover:text-sky"
+                  >
                     {estudioFinale.secondary} →
                   </Link>
                 </div>
@@ -257,10 +198,10 @@ export function EstudioScrollJourney() {
         style={{ height: `${STEP_COUNT * 100}vh` }}
       >
         <div className="sticky top-0 z-10 h-[100dvh] overflow-hidden">
-          <JourneyBackground active={active} />
+          <JourneyBackdrop scrollProgress={scrollYProgress} active={active} />
 
           <div className="relative z-20 flex h-full flex-col">
-            <div className="site-container flex shrink-0 items-center justify-between gap-4 border-b border-bone/10 px-gutter py-4 backdrop-blur-md">
+            <div className="site-container flex shrink-0 items-center justify-between gap-4 border-b border-bone/10 bg-ink/30 px-gutter py-4 backdrop-blur-md">
               <p className="font-mono text-[0.58rem] uppercase tracking-[0.18em] text-on-ink-subtle">
                 {estudioJourney[active].kicker} · {estudioJourney[active].step}
               </p>
