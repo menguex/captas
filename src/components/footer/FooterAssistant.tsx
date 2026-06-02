@@ -48,7 +48,7 @@ export function FooterAssistant() {
       className="relative overflow-hidden rounded-box-lg border border-accent/20 bg-white/[0.03] backdrop-blur-xl"
       aria-label="Guía de servicios Captas"
     >
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_0%_0%,rgba(0,122,255,0.1),transparent_50%)]" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_0%_0%,rgba(61,85,108,0.1),transparent_50%)]" />
 
       <div className="relative border-b border-line/60 px-5 py-4 md:px-6">
         <div className="flex flex-wrap items-center justify-between gap-3">

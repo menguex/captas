@@ -38,11 +38,11 @@ const principles: Principle[] = [
       "Design system y patrones de UI",
     ],
     theme: {
-      accent: "#0052cc",
-      accentInk: "#003a99",
-      border: "linear-gradient(135deg, #4d9fff 0%, #0052cc 50%, #002d73 100%)",
-      soft: "rgba(0,82,204,0.10)",
-      glow: "rgba(0,82,204,0.28)",
+      accent: "#3d556c",
+      accentInk: "#283d4f",
+      border: "linear-gradient(135deg, #8fa3b8 0%, #3d556c 50%, #283d4f 100%)",
+      soft: "rgba(61,85,108,0.10)",
+      glow: "rgba(61,85,108,0.24)",
     },
     icon: (
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
@@ -65,11 +65,11 @@ const principles: Principle[] = [
       "Reveals y storytelling animado",
     ],
     theme: {
-      accent: "#c2410c",
-      accentInk: "#7c2d12",
-      border: "linear-gradient(135deg, #fb923c 0%, #c2410c 50%, #7c2d12 100%)",
-      soft: "rgba(194,65,12,0.10)",
-      glow: "rgba(194,65,12,0.26)",
+      accent: "#6b4444",
+      accentInk: "#452c2c",
+      border: "linear-gradient(135deg, #a67a7a 0%, #6b4444 50%, #452c2c 100%)",
+      soft: "rgba(107,68,68,0.10)",
+      glow: "rgba(107,68,68,0.24)",
     },
     icon: (
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
@@ -92,11 +92,11 @@ const principles: Principle[] = [
       "Fotografía y video cinematográfico",
     ],
     theme: {
-      accent: "#4338ca",
-      accentInk: "#312e81",
-      border: "linear-gradient(135deg, #818cf8 0%, #4338ca 52%, #312e81 100%)",
-      soft: "rgba(67,56,202,0.10)",
-      glow: "rgba(67,56,202,0.26)",
+      accent: "#5c5478",
+      accentInk: "#3f3a52",
+      border: "linear-gradient(135deg, #8b85a6 0%, #5c5478 52%, #3f3a52 100%)",
+      soft: "rgba(92,84,120,0.10)",
+      glow: "rgba(92,84,120,0.24)",
     },
     icon: (
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
@@ -129,7 +129,7 @@ export function BrandValue() {
       className="relative overflow-hidden border-y border-line-dark bg-bone py-section text-ink"
     >
       <div
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_70%_50%_at_50%_0%,rgba(0,122,255,0.06),transparent_60%)]"
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_70%_50%_at_50%_0%,rgba(61,85,108,0.07),transparent_60%)]"
         aria-hidden
       />
       <div
@@ -174,7 +174,7 @@ export function BrandValue() {
           >
             <div className="relative h-full w-px overflow-hidden bg-ink/10">
               <motion.div
-                className="absolute inset-x-0 top-0 origin-top bg-gradient-to-b from-accent via-[#c2410c] to-[#4338ca]"
+                className="absolute inset-x-0 top-0 origin-top bg-gradient-to-b from-accent via-terra to-[#5c5478]"
                 style={{ height: reduced ? "100%" : lineHeight }}
               />
             </div>
@@ -187,7 +187,7 @@ export function BrandValue() {
                   background:
                     "radial-gradient(circle, #ffffff 0%, #ffffff 35%, rgba(255,255,255,0) 65%)",
                   boxShadow:
-                    "0 0 0 1px rgba(0,82,204,0.4), 0 0 18px rgba(0,82,204,0.5)",
+                    "0 0 0 1px rgba(61,85,108,0.4), 0 0 18px rgba(61,85,108,0.45)",
                 }}
                 aria-hidden
               />

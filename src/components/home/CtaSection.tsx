@@ -14,7 +14,7 @@ export function CtaSection() {
       <div
         aria-hidden
         className="pointer-events-none absolute -left-20 top-1/2 h-96 w-96 -translate-y-1/2 rounded-full blur-[120px]"
-        style={{ backgroundColor: "rgba(0,122,255,0.15)" }}
+        style={{ backgroundColor: "rgba(61,85,108,0.14)" }}
       />
       <div
         aria-hidden

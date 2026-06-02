@@ -13,9 +13,9 @@ export default function Icon() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          background: "linear-gradient(145deg, #0c1220 0%, #070b12 100%)",
+          background: "linear-gradient(145deg, #171c24 0%, #0f1218 100%)",
           borderRadius: 8,
-          border: "1px solid rgba(0, 122, 255, 0.35)",
+          border: "1px solid rgba(61, 85, 108, 0.4)",
           boxShadow: "inset 0 1px 0 rgba(255,255,255,0.15)",
         }}
       >
@@ -23,12 +23,12 @@ export default function Icon() {
           style={{
             fontSize: 20,
             fontWeight: 700,
-            color: "#eef4fc",
+            color: "#eae8e4",
             letterSpacing: "-0.04em",
           }}
         >
           C
-          <span style={{ color: "#007aff" }}>.</span>
+          <span style={{ color: "#3d556c" }}>.</span>
         </span>
       </div>
     ),

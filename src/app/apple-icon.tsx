@@ -14,9 +14,9 @@ export default function AppleIcon() {
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          background: "linear-gradient(160deg, #0c1220 0%, #070b12 55%, #001a40 100%)",
+          background: "linear-gradient(160deg, #171c24 0%, #0f1218 55%, #283d4f 100%)",
           borderRadius: 36,
-          border: "2px solid rgba(0, 122, 255, 0.4)",
+          border: "2px solid rgba(61, 85, 108, 0.45)",
           boxShadow: "inset 0 2px 0 rgba(255,255,255,0.18)",
         }}
       >
@@ -24,13 +24,13 @@ export default function AppleIcon() {
           style={{
             fontSize: 52,
             fontWeight: 700,
-            color: "#eef4fc",
+            color: "#eae8e4",
             letterSpacing: "-0.04em",
             lineHeight: 1,
           }}
         >
           C
-          <span style={{ color: "#007aff" }}>.</span>
+          <span style={{ color: "#3d556c" }}>.</span>
         </span>
         <span
           style={{

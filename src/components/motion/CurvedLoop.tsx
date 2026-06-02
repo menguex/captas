@@ -46,7 +46,7 @@ export function CurvedLoop({
   marqueeText = "",
   segments,
   segmentColor,
-  separatorColor = "rgba(100,210,255,0.38)",
+  separatorColor = "rgba(61,85,108,0.28)",
   speed = 2,
   className = "",
   containerClassName = "",

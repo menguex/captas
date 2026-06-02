@@ -115,8 +115,8 @@ export function Header() {
           overHero && !scrolled ? "site-header--hero-light" : ""
         } ${
           scrolled
-            ? "site-header--scrolled border-b border-accent/20 shadow-[0_8px_32px_rgba(0,122,255,0.1)] backdrop-blur-2xl"
-            : "border-b border-transparent shadow-[0_4px_24px_rgba(0,122,255,0.04)] backdrop-blur-md"
+            ? "site-header--scrolled border-b border-accent/20 shadow-[0_8px_32px_rgba(61,85,108,0.12)] backdrop-blur-2xl"
+            : "border-b border-transparent shadow-[0_4px_24px_rgba(61,85,108,0.05)] backdrop-blur-md"
         }`}
       >
         <div className="site-container flex h-[4.5rem] items-center justify-between md:h-20">

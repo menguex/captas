@@ -6,10 +6,10 @@ import { recognition } from "@/content/recognition";
 import { viewportOnce, easeOut } from "@/lib/motion";
 
 const categoryAccent: Record<string, string> = {
-  Award: "#b8860b",
-  Press: "#64D2FF",
-  Selection: "#0d9488",
-  Talk: "#818cf8",
+  Award: "#9a7b52",
+  Press: "#7d92a8",
+  Selection: "#4d7264",
+  Talk: "#5c5478",
 };
 
 export function Recognition() {

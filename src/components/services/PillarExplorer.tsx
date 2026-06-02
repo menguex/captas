@@ -269,7 +269,7 @@ function PillarPanel({
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -10 }}
       transition={{ duration: 0.38, ease }}
-      className="scroll-mt-28 rounded-box-lg p-px shadow-[0_20px_60px_rgba(0,122,255,0.12)]"
+      className="scroll-mt-28 rounded-box-lg p-px shadow-[0_20px_60px_rgba(61,85,108,0.14)]"
       style={{ background: theme.border }}
     >
       <div

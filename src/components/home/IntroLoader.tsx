@@ -86,7 +86,7 @@ export function IntroLoader() {
           aria-label="Cargando Captas"
         >
           <div className="pointer-events-none absolute inset-0 gloss-ambient opacity-90" />
-          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_40%,rgba(0,122,255,0.28),transparent_65%)]" />
+          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_40%,rgba(61,85,108,0.26),transparent_65%)]" />
 
           <motion.div
             initial={{ opacity: 0, y: 20, filter: "blur(8px)" }}

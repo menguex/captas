@@ -4,14 +4,15 @@ import { useCallback, useMemo } from "react";
 import { motion } from "framer-motion";
 import { CurvedLoop } from "@/components/motion/CurvedLoop";
 import { heroMarqueeSegments } from "@/content/hero-marquee";
+import { captasBrand } from "@/lib/brand-palette";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
-/** Marquee tones locked to light hero — independent of global theme toggle */
+/** Marquee tones locked to light hero */
 const HERO_MARQUEE_TONES = {
-  primary: "#0056d6",
-  secondary: "rgba(74, 88, 105, 0.72)",
-  separator: "rgba(0, 86, 214, 0.32)",
+  primary: captasBrand.accentDeep,
+  secondary: "rgba(69, 64, 56, 0.72)",
+  separator: "rgba(61, 85, 108, 0.28)",
 } as const;
 
 type HeroOpticMarqueeProps = {

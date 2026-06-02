@@ -24,8 +24,8 @@ export function PillarIconBadge({
 }: PillarIconBadgeProps) {
   const Icon = getPillarIcon(serviceId);
   const { box, icon } = sizeMap[size];
-  const accent = theme?.accent ?? "#007aff";
-  const soft = theme?.soft ?? "rgba(0,122,255,0.1)";
+  const accent = theme?.accent ?? "#3d556c";
+  const soft = theme?.soft ?? "rgba(61,85,108,0.1)";
 
   if (!Icon) return null;
 
@@ -36,7 +36,7 @@ export function PillarIconBadge({
         borderColor: `${accent}44`,
         background: theme?.border ?? `linear-gradient(135deg, ${soft}, rgba(255,255,255,0.9))`,
         boxShadow: featured
-          ? `0 8px 24px ${theme?.glow ?? "rgba(0,122,255,0.12)"}, inset 0 1px 0 rgba(255,255,255,0.65)`
+          ? `0 8px 24px ${theme?.glow ?? "rgba(61,85,108,0.12)"}, inset 0 1px 0 rgba(255,255,255,0.65)`
           : undefined,
         color: accent,
       }}

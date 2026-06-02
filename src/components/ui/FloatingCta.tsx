@@ -67,7 +67,7 @@ export function FloatingCta() {
           <AnimatePresence>
             {showTooltip && (
               <motion.div
-                className="hidden overflow-hidden rounded-2xl border border-accent/15 bg-ink/85 shadow-[0_12px_40px_rgba(0,122,255,0.18)] backdrop-blur-xl sm:block"
+                className="hidden overflow-hidden rounded-2xl border border-accent/15 bg-ink/85 shadow-[0_12px_40px_rgba(61,85,108,0.2)] backdrop-blur-xl sm:block"
                 initial={{ opacity: 0, x: 12, scale: 0.95 }}
                 animate={{ opacity: 1, x: 0, scale: 1 }}
                 exit={{ opacity: 0, x: 12, scale: 0.95 }}
@@ -100,9 +100,9 @@ export function FloatingCta() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Enviar mensaje por WhatsApp"
-            className="group relative flex h-14 w-14 items-center justify-center rounded-full shadow-[0_8px_32px_rgba(0,122,255,0.3)] transition-all duration-base hover:scale-105 hover:shadow-[0_16px_48px_rgba(0,122,255,0.4)]"
+            className="group relative flex h-14 w-14 items-center justify-center rounded-full shadow-[0_8px_32px_rgba(40,61,79,0.35)] transition-all duration-base hover:scale-105 hover:shadow-[0_16px_48px_rgba(40,61,79,0.45)]"
             style={{
-              background: "linear-gradient(135deg, #007AFF 0%, #0056D6 100%)",
+              background: "linear-gradient(135deg, #4a6278 0%, #283d4f 100%)",
             }}
           >
             {/* Outer subtle ring */}

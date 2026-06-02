@@ -93,7 +93,7 @@ export function Manifesto() {
                 <SplitText
                   as="span"
                   text="se mueve"
-                  className="bg-gradient-to-r from-sky via-accent to-[#4338ca] bg-clip-text text-transparent"
+                  className="bg-gradient-to-r from-sky-soft via-accent to-[#5c5478] bg-clip-text text-transparent"
                   delay={0.5}
                 />{" "}
                 <SplitText

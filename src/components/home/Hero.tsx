@@ -12,8 +12,8 @@ import { scrollToId } from "@/lib/scroll";
 const ease = [0.16, 1, 0.3, 1] as const;
 
 const headline = [
-  { lead: "Marcas que se ", accent: "elevan.", hue: "from-sky via-accent to-[#0052cc]" },
-  { lead: "Experiencias que ", accent: "perduran.", hue: "from-[#4338ca] via-accent to-sky" },
+  { lead: "Marcas que se ", accent: "elevan.", hue: "from-sky-soft via-accent to-accent-deep" },
+  { lead: "Experiencias que ", accent: "perduran.", hue: "from-[#8b85a6] via-terra to-accent-deep" },
 ] as const;
 
 function HeroLine({
@@ -98,26 +98,26 @@ export function Hero() {
           className="absolute left-1/2 top-[8%] h-[min(420px,55vw)] w-[min(420px,55vw)] -translate-x-1/2 rounded-full"
           style={{
             background:
-              "radial-gradient(circle, rgba(0,82,204,0.12) 0%, rgba(0,122,255,0.05) 40%, transparent 70%)",
+              "radial-gradient(circle, rgba(61,85,108,0.14) 0%, rgba(125,146,168,0.06) 40%, transparent 70%)",
           }}
           animate={active ? { scale: [1, 1.06, 1] } : {}}
           transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
         />
         <motion.div
           className="absolute -left-[12%] top-[32%] h-[min(240px,32vw)] w-[min(240px,32vw)] rounded-full blur-3xl"
-          style={{ backgroundColor: "rgba(184,134,11,0.08)" }}
+          style={{ backgroundColor: "rgba(154,123,82,0.1)" }}
           animate={active ? { x: [0, 28, 0], y: [0, -18, 0] } : {}}
           transition={{ duration: 13, repeat: Infinity, ease: "easeInOut" }}
         />
         <motion.div
           className="absolute -right-[10%] bottom-[18%] h-[min(200px,28vw)] w-[min(200px,28vw)] rounded-full blur-3xl"
-          style={{ backgroundColor: "rgba(13,148,136,0.08)" }}
+          style={{ backgroundColor: "rgba(77,114,100,0.1)" }}
           animate={active ? { x: [0, -24, 0], y: [0, 14, 0] } : {}}
           transition={{ duration: 11, repeat: Infinity, ease: "easeInOut", delay: 1 }}
         />
         <motion.div
           className="absolute right-[15%] top-[22%] h-[min(160px,22vw)] w-[min(160px,22vw)] rounded-full blur-3xl"
-          style={{ backgroundColor: "rgba(153,27,27,0.06)" }}
+          style={{ backgroundColor: "rgba(107,68,68,0.08)" }}
           animate={active ? { scale: [1, 1.12, 1] } : {}}
           transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
         />

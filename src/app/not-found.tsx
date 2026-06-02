@@ -9,7 +9,7 @@ export default function NotFound() {
       {/* Glowing orbs */}
       <div
         className="pointer-events-none absolute left-1/3 top-1/4 h-[min(280px,50vw)] w-[min(280px,50vw)] rounded-full blur-3xl"
-        style={{ backgroundColor: "rgba(0,122,255,0.12)" }}
+        style={{ backgroundColor: "rgba(61,85,108,0.12)" }}
         aria-hidden
       />
       <div
@@ -22,7 +22,7 @@ export default function NotFound() {
       <p
         className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 select-none font-heading text-[clamp(10rem,30vw,22rem)] leading-none tracking-tighter"
         style={{
-          backgroundImage: "linear-gradient(135deg, rgba(0,122,255,0.12) 0%, rgba(100,210,255,0.06) 100%)",
+          backgroundImage: "linear-gradient(135deg, rgba(61,85,108,0.12) 0%, rgba(125,146,168,0.06) 100%)",
           WebkitBackgroundClip: "text",
           WebkitTextFillColor: "transparent",
           backgroundClip: "text",

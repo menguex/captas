@@ -162,7 +162,7 @@ export function ContactForm() {
                         onClick={() => field.onChange(option.value)}
                         className={`rounded-box border px-4 py-3.5 text-left transition-all duration-base ${
                           selected
-                            ? "border-accent bg-accent/15 shadow-[0_0_0_1px_rgba(0,122,255,0.25)]"
+                            ? "border-accent bg-accent/15 shadow-[0_0_0_1px_rgba(61,85,108,0.28)]"
                             : "border-line bg-ink/50 hover:border-accent/30 hover:bg-ink/70"
                         }`}
                       >

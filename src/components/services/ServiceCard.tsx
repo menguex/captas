@@ -22,7 +22,7 @@ export function ServiceCard({ service, featured = false, index = 0 }: ServiceCar
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-8%" }}
       transition={{ duration: 0.75, delay: index * 0.06, ease: easeOut }}
-      className={`group relative overflow-hidden rounded-box-lg p-px transition-shadow duration-base hover:shadow-[0_24px_60px_rgba(0,82,204,0.14)] ${
+      className={`group relative overflow-hidden rounded-box-lg p-px transition-shadow duration-base hover:shadow-[0_24px_60px_rgba(61,85,108,0.16)] ${
         featured ? "lg:col-span-2" : ""
       }`}
       style={{ background: theme.border }}

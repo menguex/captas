@@ -14,40 +14,33 @@ type StatStyle = {
 
 const statStyles: StatStyle[] = [
   {
-    gradient: "linear-gradient(135deg, #4d9fff 0%, #0052cc 100%)",
-    accent: "#4d9fff",
-    glow: "rgba(0,82,204,0.18)",
+    gradient: "linear-gradient(135deg, #8fa3b8 0%, #3d556c 100%)",
+    accent: "#8fa3b8",
+    glow: "rgba(61,85,108,0.16)",
   },
   {
-    gradient: "linear-gradient(135deg, #fbbf24 0%, #b8860b 100%)",
-    accent: "#fbbf24",
-    glow: "rgba(184,134,11,0.18)",
+    gradient: "linear-gradient(135deg, #c4a574 0%, #9a7b52 100%)",
+    accent: "#c4a574",
+    glow: "rgba(154,123,82,0.16)",
   },
   {
-    gradient: "linear-gradient(135deg, #2dd4bf 0%, #0d9488 100%)",
-    accent: "#2dd4bf",
-    glow: "rgba(13,148,136,0.18)",
+    gradient: "linear-gradient(135deg, #7a9e8e 0%, #4d7264 100%)",
+    accent: "#7a9e8e",
+    glow: "rgba(77,114,100,0.16)",
   },
   {
-    gradient: "linear-gradient(135deg, #818cf8 0%, #4338ca 100%)",
-    accent: "#818cf8",
-    glow: "rgba(67,56,202,0.18)",
+    gradient: "linear-gradient(135deg, #8b85a6 0%, #5c5478 100%)",
+    accent: "#8b85a6",
+    glow: "rgba(92,84,120,0.16)",
   },
 ];
 
 export function Stats() {
   return (
-    <section
-      className="relative overflow-hidden border-y py-section"
-      style={{
-        backgroundColor: "#0c1220",
-        borderColor: "rgba(255,255,255,0.08)",
-        color: "#eef4fc",
-      }}
-    >
+    <section className="relative overflow-hidden border-y border-line bg-ink-soft py-section text-bone">
       <div className="pointer-events-none absolute inset-0 mesh-grid opacity-[0.1]" aria-hidden />
       <div
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_60%_40%_at_50%_50%,rgba(0,122,255,0.06),transparent_55%)]"
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_60%_40%_at_50%_50%,rgba(61,85,108,0.08),transparent_55%)]"
         aria-hidden
       />
 
