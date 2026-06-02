@@ -4,7 +4,7 @@ import { EstudioContent } from "@/components/estudio/EstudioContent";
 export const metadata: Metadata = {
   title: "Estudio — Captas",
   description:
-    "Captas no es un local: es una red creativa online que une UX, motion, foto, cine, web y marca bajo un solo director de proyecto.",
+    "Red creativa online: un director, squad a medida y UX, foto, cine, web y marca con una sola voz. Fácil de entender, craft de nivel global.",
 };
 
 export default function EstudioPage() {

@@ -2,11 +2,66 @@
 
 export const estudioHero = {
   kicker: "Estudio",
-  titleLead: "No es un lugar.",
-  titleAccent: "Es el squad que arma tu proyecto.",
-  body: "Conectamos directores, UX, motion, foto, cine, web y marca en un solo hilo. Cada entrega avanza al mismo objetivo — sin proveedores sueltos ni briefs perdidos.",
+  titleLead: "No es un local.",
+  titleAccent: "Es tu squad creativo online.",
+  body: "Un director de proyecto, los especialistas que hagan falta y una sola voz en cada entrega. Tú hablas con Captas; nosotros coordinamos UX, foto, cine, web y marca.",
+  hubHint: "Gira el anillo o toca un craft para ver qué aporta cada uno.",
   onlineTag: "100% remoto · Chile → mundo",
 } as const;
+
+/** Tres ideas — entender Captas en segundos */
+export const estudioQuickGuide = [
+  {
+    id: "brief",
+    step: "01",
+    title: "Un solo brief",
+    text: "Cuéntanos el reto. Definimos objetivo, plazos y qué crafts activar — sin repetir la historia cinco veces.",
+  },
+  {
+    id: "squad",
+    step: "02",
+    title: "Armamos el squad",
+    text: "Entran solo UX, motion, foto, cine, web o marca si tu proyecto lo necesita. Un director lleva el hilo.",
+  },
+  {
+    id: "entrega",
+    step: "03",
+    title: "Entregas alineadas",
+    text: "Todo sale con el mismo estándar visual y narrativo. Listo para lanzar, medir y escalar.",
+  },
+] as const;
+
+export const estudioCompare = {
+  kicker: "Por qué un squad",
+  title: "Menos fricción.",
+  titleAccent: "Más claridad.",
+  without: {
+    label: "Proveedores sueltos",
+    items: [
+      "Briefs repetidos en cada agencia",
+      "Estilos que no calzan entre piezas",
+      "Tú haces de project manager",
+      "Plazos que se pisan",
+    ],
+  },
+  with: {
+    label: "Captas · un squad",
+    items: [
+      "Un contacto · un director de proyecto",
+      "Misma voz en web, foto y motion",
+      "Coordinamos producción por ti",
+      "Roadmap claro etapa por etapa",
+    ],
+  },
+} as const;
+
+export const estudioSections = [
+  { id: "squad", label: "Squad interactivo" },
+  { id: "guia", label: "En 3 pasos" },
+  { id: "por-que", label: "Por qué Captas" },
+  { id: "como", label: "Cómo trabajamos" },
+  { id: "quien", label: "Quién entra" },
+] as const;
 
 export const estudioUnion = {
   headline: "Varios profesionales.",
@@ -54,6 +109,7 @@ export const estudioModel = [
     title: "Escuchamos el reto",
     hook: "Brief claro, sin humo",
     text: "Negocio, audiencia, plazos y éxito medible. Definimos qué debe resolver el proyecto antes de diseñar una sola pantalla.",
+    emoji: "◎",
   },
   {
     id: "equipo",
@@ -61,6 +117,7 @@ export const estudioModel = [
     title: "Armamos el squad",
     hook: "Las piezas justas",
     text: "Sumamos solo los profesionales que el alcance exige. Un director orquesta; especialistas ejecutan en paralelo.",
+    emoji: "◆",
   },
   {
     id: "craft",
@@ -68,6 +125,7 @@ export const estudioModel = [
     title: "Producimos con craft",
     hook: "Un solo estándar",
     text: "UX, rodaje, motion y desarrollo avanzan juntos. Revisiones cortas, decisiones alineadas, cero silos.",
+    emoji: "✦",
   },
   {
     id: "lanzamiento",
@@ -75,6 +133,7 @@ export const estudioModel = [
     title: "Lanzamos contigo",
     hook: "Listo para el mundo",
     text: "Entregamos, medimos y afinamos. Tu marca sale coherente en cada canal — digital primero.",
+    emoji: "→",
   },
 ] as const;
 

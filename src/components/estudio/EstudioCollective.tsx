@@ -20,7 +20,7 @@ export function EstudioCollective() {
   const reduced = useReducedMotion();
 
   return (
-    <section className="mt-14 md:mt-20" aria-labelledby="collective-heading">
+    <section id="quien" className="scroll-mt-28 mt-14 md:mt-20" aria-labelledby="collective-heading">
       <motion.div
         initial={reduced ? false : { opacity: 0, y: 14 }}
         whileInView={reduced ? undefined : { opacity: 1, y: 0 }}
@@ -29,14 +29,17 @@ export function EstudioCollective() {
         className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between"
       >
         <div>
-          <p className="font-mono text-[0.62rem] uppercase tracking-[0.2em] text-sky">La unión</p>
+          <p className="font-mono text-kicker uppercase tracking-[0.22em] text-sky">Quién entra</p>
           <h2
             id="collective-heading"
-            className="mt-1 max-w-lg font-heading text-h3 tracking-tight text-bone md:text-h2"
+            className="mt-2 max-w-lg font-heading text-h3 tracking-tight text-bone md:text-h2"
           >
-            Profesionales que entran al{" "}
-            <span className="text-shimmer-dark">mismo proyecto.</span>
+            Tres capas,{" "}
+            <span className="text-shimmer-dark">un solo proyecto.</span>
           </h2>
+          <p className="mt-2 max-w-md text-small text-on-ink-muted">
+            Dirección, producción y red senior — activamos solo lo que tu reto necesita.
+          </p>
         </div>
         <motion.span
           className="inline-flex w-fit rounded-full border border-accent/35 bg-accent/10 px-3 py-1 font-mono text-[0.58rem] uppercase tracking-[0.14em] text-sky"

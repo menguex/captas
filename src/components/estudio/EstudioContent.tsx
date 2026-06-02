@@ -5,6 +5,9 @@ import { motion } from "framer-motion";
 import { SplitText } from "@/components/motion/SplitText";
 import { MagneticButton } from "@/components/motion/MagneticButton";
 import { EstudioSquadHub } from "@/components/estudio/EstudioSquadHub";
+import { EstudioSectionNav } from "@/components/estudio/EstudioSectionNav";
+import { EstudioQuickGuide } from "@/components/estudio/EstudioQuickGuide";
+import { EstudioCompare } from "@/components/estudio/EstudioCompare";
 import { EstudioPipeline } from "@/components/estudio/EstudioPipeline";
 import { EstudioCollective } from "@/components/estudio/EstudioCollective";
 import { estudioHero, estudioTerritory, estudioUnion } from "@/content/estudio";
@@ -14,7 +17,10 @@ export function EstudioContent() {
   return (
     <>
       <div className="site-container relative">
-        <div className="grid items-start gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.95fr)] lg:gap-10 xl:items-center">
+        <section
+          id="squad"
+          className="scroll-mt-28 grid items-start gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.95fr)] lg:gap-12 xl:items-center"
+        >
           <div className="mx-auto max-w-xl text-center lg:mx-0 lg:text-left">
             <motion.div
               className="flex items-center justify-center gap-4 lg:justify-start"
@@ -57,7 +63,7 @@ export function EstudioContent() {
             </motion.p>
 
             <motion.div
-              className="mt-4 flex flex-wrap items-center justify-center gap-2 lg:justify-start"
+              className="mt-5 flex flex-wrap items-center justify-center gap-2 lg:justify-start"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={viewportOnce}
@@ -70,13 +76,37 @@ export function EstudioContent() {
                 {estudioUnion.result}
               </span>
             </motion.div>
+
+            <motion.p
+              className="mx-auto mt-6 hidden max-w-sm font-mono text-[0.58rem] uppercase tracking-[0.14em] text-on-ink-subtle lg:block"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={viewportOnce}
+              transition={{ delay: 0.55 }}
+            >
+              ↓ {estudioHero.hubHint}
+            </motion.p>
           </div>
 
-          <EstudioSquadHub />
-        </div>
+          <div>
+            <motion.p
+              className="mb-3 text-center font-mono text-[0.58rem] uppercase tracking-[0.14em] text-on-ink-muted lg:hidden"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={viewportOnce}
+            >
+              {estudioHero.hubHint}
+            </motion.p>
+            <EstudioSquadHub />
+          </div>
+        </section>
       </div>
 
-      <div className="site-container relative">
+      <EstudioSectionNav />
+
+      <div className="site-container relative space-y-0">
+        <EstudioQuickGuide />
+        <EstudioCompare />
         <EstudioPipeline />
         <EstudioCollective />
 
