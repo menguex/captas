@@ -22,7 +22,6 @@ export function ServicePillarNav() {
                 <Icon size={14} />
               </span>
             ) : null}
-            <span className="tabular-nums text-ink/40">{s.number}</span>
             <span>{s.pillar}</span>
           </a>
         );

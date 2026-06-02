@@ -80,9 +80,6 @@ export function BrandValuePrinciple({ principle: p, index, isEven }: BrandValueP
               className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/60 via-ink/15 to-transparent"
               aria-hidden
             />
-            <span className="absolute left-4 top-4 font-heading text-[clamp(3rem,8vw,5rem)] leading-none text-bone/20">
-              {p.step}
-            </span>
             {!reduced && p.video ? (
               <span className="absolute bottom-4 right-4 rounded-full border border-bone/25 bg-ink/50 px-2.5 py-1 font-mono text-[0.55rem] uppercase tracking-[0.14em] text-bone backdrop-blur-md">
                 {videoOn ? "Reproduciendo" : "Hover · video"}

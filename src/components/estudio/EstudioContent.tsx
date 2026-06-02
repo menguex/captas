@@ -74,17 +74,12 @@ export function EstudioContent() {
         >
           {positioningTechniques.map((technique) => (
             <motion.article
-              key={technique.number}
+              key={technique.id}
               variants={fadeUp}
               className="rounded-box-lg border border-line bg-ink-soft p-7 transition-colors hover:border-accent/30 md:p-8"
             >
-              <span className="font-mono text-kicker tabular-nums text-accent">
-                {technique.number}
-              </span>
-              <h3 className="mt-4 font-heading text-h3 text-bone">
-                {technique.title}
-              </h3>
-              <p className="mt-3 text-body leading-relaxed text-bone/65">
+              <h3 className="font-heading text-h3 text-bone">{technique.title}</h3>
+              <p className="mt-3 text-body leading-relaxed text-on-ink-muted">
                 {technique.text}
               </p>
             </motion.article>
@@ -108,7 +103,7 @@ export function EstudioContent() {
         >
           {processSteps.map((step, index) => (
             <motion.li
-              key={step.number}
+              key={step.id}
               variants={fadeUp}
               className="relative border-t border-line py-8 md:border-t-0 md:border-l md:px-6 md:py-0 md:first:border-l-0 md:first:pl-0"
             >
@@ -118,13 +113,10 @@ export function EstudioContent() {
                   aria-hidden
                 />
               ) : null}
-              <span className="font-mono text-kicker tabular-nums text-terra">
-                {step.number}
-              </span>
-              <h3 className="mt-4 font-heading text-h3 text-bone">{step.title}</h3>
-              <p className="mt-2 font-mono text-[0.65rem] uppercase tracking-[0.14em] text-on-ink-muted">
+              <p className="font-mono text-kicker uppercase tracking-[0.18em] text-terra">
                 {step.subtitle}
               </p>
+              <h3 className="mt-3 font-heading text-h3 text-bone">{step.title}</h3>
               <p className="mt-4 text-body leading-relaxed text-on-ink-muted">
                 {step.text}
               </p>

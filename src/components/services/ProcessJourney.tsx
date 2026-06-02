@@ -102,7 +102,7 @@ export function ProcessJourney({ className = "", embedded = false }: ProcessJour
       >
         {processSteps.map((s, i) => (
           <ProcessStepTab
-            key={s.number}
+            key={s.id}
             step={s}
             active={active === i}
             onSelect={() => goTo(i)}
@@ -119,7 +119,7 @@ export function ProcessJourney({ className = "", embedded = false }: ProcessJour
       >
         {processSteps.map((s, i) => (
           <ProcessStepTab
-            key={s.number}
+            key={s.id}
             step={s}
             active={active === i}
             compact
@@ -138,56 +138,44 @@ export function ProcessJourney({ className = "", embedded = false }: ProcessJour
 
         <AnimatePresence mode="wait">
           <motion.div
-            key={step.number}
+            key={step.id}
             role="tabpanel"
             initial={reduced ? false : { opacity: 0, y: 20, filter: "blur(6px)" }}
             animate={reduced ? undefined : { opacity: 1, y: 0, filter: "blur(0px)" }}
             exit={reduced ? undefined : { opacity: 0, y: -14, filter: "blur(4px)" }}
             transition={{ duration: 0.45, ease }}
-            className="relative grid gap-8 lg:grid-cols-[auto_1fr] lg:items-center lg:gap-12"
+            className="relative max-w-3xl"
           >
-            <motion.div
-              className="flex flex-col items-start"
-              initial={reduced ? false : { scale: 0.92 }}
-              animate={reduced ? undefined : { scale: 1 }}
-              transition={{ duration: 0.5, ease, delay: 0.05 }}
-            >
-              <span className="font-mono text-[clamp(3.5rem,10vw,5.5rem)] font-medium tabular-nums leading-none text-accent/25">
-                {step.number}
-              </span>
-              <motion.span
-                className="mt-2 h-1 rounded-full bg-terra"
-                initial={reduced ? false : { width: 0 }}
-                animate={reduced ? undefined : { width: 48 }}
-                transition={{ duration: 0.6, ease, delay: 0.15 }}
-              />
-            </motion.div>
+            <motion.span
+              className="mb-5 block h-1 w-12 rounded-full bg-terra"
+              initial={reduced ? false : { width: 0 }}
+              animate={reduced ? undefined : { width: 48 }}
+              transition={{ duration: 0.6, ease, delay: 0.1 }}
+              aria-hidden
+            />
+            <p className="font-mono text-kicker uppercase tracking-[0.22em] text-terra">
+              {step.subtitle}
+            </p>
+            <h3 className="mt-3 font-heading text-h1 leading-[1.05] tracking-tight text-ink">
+              {step.title}
+            </h3>
+            <p className="mt-5 max-w-2xl text-lead leading-relaxed text-on-light-muted">
+              {step.text}
+            </p>
 
-            <div>
-              <p className="font-mono text-kicker uppercase tracking-[0.22em] text-terra">
-                {step.subtitle}
-              </p>
-              <h3 className="mt-3 font-heading text-h1 leading-[1.05] tracking-tight text-ink">
-                {step.title}
-              </h3>
-              <p className="mt-5 max-w-2xl text-lead leading-relaxed text-on-light-muted">
-                {step.text}
-              </p>
-
-              <div className="mt-8 flex flex-wrap items-center gap-3">
-                {processSteps.map((s, i) => (
-                  <button
-                    key={s.number}
-                    type="button"
-                    onClick={() => goTo(i)}
-                    aria-label={`Ir a etapa ${s.number}: ${s.title}`}
-                    aria-current={active === i ? "step" : undefined}
-                    className={`h-2 rounded-full transition-all duration-base focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent ${
-                      active === i ? "w-8 bg-accent" : "w-2 bg-accent/25 hover:bg-accent/45"
-                    }`}
-                  />
+            <div className="mt-8 flex flex-wrap items-center gap-3">
+              {processSteps.map((s, i) => (
+                <button
+                  key={s.id}
+                  type="button"
+                  onClick={() => goTo(i)}
+                  aria-label={`Ir a etapa: ${s.title}`}
+                  aria-current={active === i ? "step" : undefined}
+                  className={`h-2 rounded-full transition-all duration-base focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent ${
+                    active === i ? "w-8 bg-accent" : "w-2 bg-accent/25 hover:bg-accent/45"
+                  }`}
+                />
                 ))}
-              </div>
             </div>
           </motion.div>
         </AnimatePresence>
@@ -232,21 +220,12 @@ function ProcessStepTab({
           transition={{ type: "spring", stiffness: 380, damping: 32 }}
         />
       ) : null}
-      <span className="relative flex items-baseline gap-2">
-        <span
-          className={`font-mono text-kicker tabular-nums uppercase tracking-[0.2em] ${
-            active ? "text-accent-deep" : "text-on-light-muted"
-          }`}
-        >
-          {step.number}
-        </span>
-        <span
-          className={`font-heading tracking-tight ${compact ? "text-body" : "text-h3"} ${
-            active ? "text-ink" : "text-on-light-muted"
-          }`}
-        >
-          {step.title}
-        </span>
+      <span
+        className={`relative block font-heading tracking-tight ${compact ? "text-body" : "text-h3"} ${
+          active ? "text-ink" : "text-on-light-muted"
+        }`}
+      >
+        {step.title}
       </span>
       {!compact ? (
         <span className="relative mt-1.5 block font-mono text-[0.62rem] uppercase tracking-[0.14em] text-on-light-subtle">

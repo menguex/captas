@@ -2,25 +2,25 @@ import { clientBrandThemes } from "@/lib/brand-palette";
 
 export const processSteps = [
   {
-    number: "01",
+    id: "descubrir",
     title: "Descubrir",
     subtitle: "Research & estrategia",
     text: "Escuchamos tu marca, mapeamos audiencia y definimos qué experiencia necesitas para destacar y convertir.",
   },
   {
-    number: "02",
+    id: "disenar",
     title: "Diseñar",
     subtitle: "UX · Identidad · Motion",
     text: "Prototipos, sistemas visuales y dirección de arte. Cada decisión responde a un objetivo de negocio claro.",
   },
   {
-    number: "03",
+    id: "producir",
     title: "Producir",
     subtitle: "Foto · Video · Web",
     text: "Ejecución con craft de estudio: rodaje cinematográfico, sesiones fotográficas y desarrollo web de alto rendimiento.",
   },
   {
-    number: "04",
+    id: "lanzar",
     title: "Lanzar",
     subtitle: "Deploy & optimización",
     text: "Publicamos, medimos y afinamos. Tu marca sale al mundo lista para generar valor desde el día uno.",
