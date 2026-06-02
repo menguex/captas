@@ -173,6 +173,13 @@ export function ServicesEcosystemIntro({ showHeader = true }: ServicesEcosystemI
 
   const goTo = useCallback((index: number) => setActive(index), []);
 
+  useEffect(() => {
+    const hash = window.location.hash.replace("#", "");
+    if (!hash) return;
+    const idx = services.findIndex((s) => s.id === hash);
+    if (idx >= 0) setActive(idx);
+  }, []);
+
   const pauseProps = {
     onMouseEnter: () => setPaused(true),
     onMouseLeave: () => setPaused(false),
