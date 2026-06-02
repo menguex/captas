@@ -9,7 +9,6 @@ type ButtonLinkProps = {
   children: React.ReactNode;
   className?: string;
   external?: boolean;
-  "data-cursor"?: string;
 };
 
 export function MagneticButton({
@@ -17,7 +16,6 @@ export function MagneticButton({
   children,
   className = "",
   external = false,
-  "data-cursor": dataCursor,
 }: ButtonLinkProps) {
   const reduced = useReducedMotion();
   const ref = useRef<HTMLAnchorElement>(null);
@@ -53,7 +51,6 @@ export function MagneticButton({
         ref={ref}
         href={href}
         className={classes}
-        data-cursor={dataCursor}
         target={href.startsWith("http") ? "_blank" : undefined}
         rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
         {...handlers}
@@ -64,7 +61,7 @@ export function MagneticButton({
   }
 
   return (
-    <Link ref={ref} href={href} className={classes} data-cursor={dataCursor} {...handlers}>
+    <Link ref={ref} href={href} className={classes} {...handlers}>
       {inner}
     </Link>
   );

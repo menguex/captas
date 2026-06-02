@@ -5,7 +5,6 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { CaptasLogo } from "@/components/brand/CaptasLogo";
-import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { useScrollPosition } from "@/hooks/useScrollPosition";
 
 const navLinks = [
@@ -133,14 +132,12 @@ export function Header() {
             {navLinks.map((link) => (
               <NavLink key={link.href} href={link.href} label={link.label} />
             ))}
-            <ThemeToggle />
             <Link href="/contacto" className="gloss-button py-2.5">
               Conversemos
             </Link>
           </nav>
 
           <div className="flex items-center gap-2 md:hidden">
-            <ThemeToggle />
             <button
               type="button"
               className="relative z-[60] flex h-10 w-10 flex-col items-center justify-center gap-1.5"

@@ -7,7 +7,6 @@ import { ScrollProgress } from "@/components/ui/ScrollProgress";
 import { ScrollToTop } from "@/components/layout/ScrollToTop";
 import { IntroLoader } from "@/components/home/IntroLoader";
 import { FloatingCta } from "@/components/ui/FloatingCta";
-import { CustomCursor } from "@/components/ui/CustomCursor";
 
 export function AppProviders({ children }: { children: React.ReactNode }) {
   useEffect(() => {
@@ -23,7 +22,6 @@ export function AppProviders({ children }: { children: React.ReactNode }) {
         <ScrollToTop />
         <IntroLoader />
         <ScrollProgress />
-        <CustomCursor />
         <FloatingCta />
         {children}
       </LenisProvider>

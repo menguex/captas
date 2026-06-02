@@ -216,21 +216,6 @@
     transform: translateY(0);
   }
 
-  @media (min-width: 768px) {
-    .captas-custom-cursor,
-    .captas-custom-cursor a,
-    .captas-custom-cursor button,
-    .captas-custom-cursor [role="button"] {
-      cursor: none;
-    }
-
-    .captas-custom-cursor input,
-    .captas-custom-cursor textarea,
-    .captas-custom-cursor select {
-      cursor: text;
-    }
-  }
-
   a {
     color: inherit;
     text-decoration: none;

@@ -185,12 +185,9 @@ export function Hero() {
           animate={active ? { opacity: 1, y: 0 } : {}}
           transition={{ delay: 0.68, duration: 0.8, ease }}
         >
-          <MagneticButton href="/contacto" data-cursor="Iniciar">
-            Iniciar proyecto
-          </MagneticButton>
+          <MagneticButton href="/contacto">Iniciar proyecto</MagneticButton>
           <Link
             href="/trabajo"
-            data-cursor="Ver"
             className="hero-text-subtle inline-flex items-center gap-2 font-mono text-kicker uppercase tracking-[0.22em] transition-colors hover:text-accent"
           >
             Ver trabajo
