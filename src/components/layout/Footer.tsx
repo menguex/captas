@@ -1,8 +1,10 @@
+import Image from "next/image";
 import Link from "next/link";
 import { LocalTime } from "@/components/ui/LocalTime";
 import { CaptasLogo } from "@/components/brand/CaptasLogo";
 import { MagneticButton } from "@/components/motion/MagneticButton";
 import { FooterAssistant } from "@/components/footer/FooterAssistant";
+import { footerTerritoryImage } from "@/content/territory";
 import { site, socialLinks } from "@/content/site";
 import { services } from "@/content/services";
 
@@ -20,18 +22,28 @@ export function Footer() {
 
   return (
     <footer className="relative overflow-hidden bg-ink text-bone">
-      <div
-        className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent/50 to-transparent"
-        aria-hidden
-      />
-      <div
-        className="pointer-events-none absolute inset-0 mesh-grid opacity-[0.1]"
-        aria-hidden
-      />
-      <div className="pointer-events-none absolute inset-0 gloss-ambient opacity-30" aria-hidden />
+      <div className="pointer-events-none absolute inset-0" aria-hidden>
+        <Image
+          src={footerTerritoryImage.src}
+          alt=""
+          fill
+          sizes="100vw"
+          className="object-cover"
+          style={{ objectPosition: footerTerritoryImage.position }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-ink/94 via-ink/88 to-ink/78" />
+        <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/82 to-ink/55" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_90%_70%_at_18%_85%,rgba(199,91,57,0.1),transparent_50%)]" />
+      </div>
 
-      <div className="site-container relative pt-section">
-        <div className="flex flex-col gap-10 border-b border-line pb-14 lg:flex-row lg:items-end lg:justify-between lg:gap-16">
+      <div
+        className="pointer-events-none absolute inset-x-0 top-0 z-[1] h-px bg-gradient-to-r from-transparent via-terra/40 to-transparent"
+        aria-hidden
+      />
+      <div className="pointer-events-none absolute inset-0 z-[1] mesh-grid opacity-[0.06]" aria-hidden />
+
+      <div className="site-container relative z-10 pt-section">
+        <div className="flex flex-col gap-10 border-b border-bone/15 pb-14 lg:flex-row lg:items-end lg:justify-between lg:gap-16">
           <div className="max-w-2xl">
             <Link
               href="/"
@@ -44,6 +56,9 @@ export function Footer() {
             </p>
             <p className="mt-5 text-lead leading-relaxed text-on-ink-muted">
               {site.location} · {site.region}
+            </p>
+            <p className="mt-3 font-mono text-[0.58rem] uppercase tracking-[0.14em] text-on-ink-subtle">
+              {footerTerritoryImage.credit}
             </p>
           </div>
 
@@ -62,7 +77,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="border-b border-line py-8 md:py-10">
+        <div className="border-b border-bone/15 py-8 md:py-10">
           <FooterAssistant />
         </div>
 
@@ -167,18 +182,18 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="flex flex-wrap gap-2 border-t border-line py-8">
+        <div className="flex flex-wrap gap-2 border-t border-bone/15 py-8">
           {craftTags.map((tag) => (
             <span
               key={tag}
-              className="rounded-full border border-line/80 bg-white/[0.03] px-3 py-1.5 font-mono text-small uppercase tracking-[0.2em] text-on-ink-muted"
+              className="rounded-full border border-bone/15 bg-ink/45 px-3 py-1.5 font-mono text-small uppercase tracking-[0.2em] text-on-ink-muted backdrop-blur-sm"
             >
               {tag}
             </span>
           ))}
         </div>
 
-        <div className="flex flex-col gap-4 border-t border-line/80 py-6 font-mono text-small tracking-[0.04em] text-on-ink-muted md:flex-row md:items-center md:justify-between">
+        <div className="flex flex-col gap-4 border-t border-bone/15 py-6 font-mono text-small tracking-[0.04em] text-on-ink-muted md:flex-row md:items-center md:justify-between">
           <p>© {year} Captas. Todos los derechos reservados.</p>
           <p className="text-on-ink-muted">
             <LocalTime />
