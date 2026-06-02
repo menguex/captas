@@ -224,10 +224,6 @@ export function Hero() {
         </span>
       </motion.button>
 
-      <div
-        className="pointer-events-none absolute inset-x-0 bottom-0 z-[2] h-px bg-gradient-to-r from-transparent via-accent/25 to-transparent"
-        aria-hidden
-      />
     </section>
   );
 }

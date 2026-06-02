@@ -33,7 +33,15 @@ export type CurvedLoopProps = {
   scrollMultiplier?: number;
   scrollScrubRef?: RefObject<HTMLElement | null>;
   scrubLoops?: number;
+  /** Arco decorativo paralelo al textPath (p. ej. bajo Foto · Cine) */
+  curveStroke?: boolean;
+  /** Desplazamiento Y en viewBox (120) hacia abajo respecto al texto */
+  curveStrokeOffset?: number;
 };
+
+function buildCurvePath(curveAmount: number, baseY = 40) {
+  return `M-100,${baseY} Q500,${baseY + curveAmount} 1540,${baseY}`;
+}
 
 function wrapOffset(value: number, spacing: number) {
   let o = value;
@@ -58,6 +66,8 @@ export function CurvedLoop({
   scrollMultiplier = 2.5,
   scrollScrubRef,
   scrubLoops = 3,
+  curveStroke = false,
+  curveStrokeOffset = 12,
 }: CurvedLoopProps) {
   const reduced = useReducedMotion();
   const lenis = useLenis();
@@ -81,7 +91,9 @@ export function CurvedLoop({
 
   const uid = useId().replace(/:/g, "");
   const pathId = `curve-${uid}`;
-  const pathD = `M-100,40 Q500,${40 + curveAmount} 1540,40`;
+  const strokeId = `curve-stroke-${uid}`;
+  const pathD = buildCurvePath(curveAmount);
+  const strokePathD = buildCurvePath(curveAmount, 40 + curveStrokeOffset);
 
   const dragRef = useRef(false);
   const lastXRef = useRef(0);
@@ -294,7 +306,32 @@ export function CurvedLoop({
         </text>
         <defs>
           <path ref={pathRef} id={pathId} d={pathD} fill="none" stroke="transparent" />
+          <linearGradient
+            id={strokeId}
+            gradientUnits="userSpaceOnUse"
+            x1="0"
+            y1="0"
+            x2="1440"
+            y2="0"
+          >
+            <stop offset="0%" stopColor="rgba(0, 122, 255, 0)" />
+            <stop offset="18%" stopColor="rgba(0, 122, 255, 0.22)" />
+            <stop offset="50%" stopColor="rgba(0, 122, 255, 0.5)" />
+            <stop offset="82%" stopColor="rgba(0, 122, 255, 0.22)" />
+            <stop offset="100%" stopColor="rgba(0, 122, 255, 0)" />
+          </linearGradient>
         </defs>
+        {ready && curveStroke ? (
+          <path
+            d={strokePathD}
+            fill="none"
+            stroke={`url(#${strokeId})`}
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            vectorEffect="non-scaling-stroke"
+            aria-hidden
+          />
+        ) : null}
         {ready && (
           <text xmlSpace="preserve" className={className}>
             <textPath

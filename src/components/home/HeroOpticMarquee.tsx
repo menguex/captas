@@ -42,6 +42,8 @@ export function HeroOpticMarquee({ active }: HeroOpticMarqueeProps) {
         separatorColor={tones.separator}
         speed={3.1}
         curveAmount={400}
+        curveStroke
+        curveStrokeOffset={14}
         direction="left"
         interactive
         containerClassName="min-h-[clamp(7.5rem,18vw,12rem)]"

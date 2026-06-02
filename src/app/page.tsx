@@ -5,7 +5,6 @@ import { FeaturedWork } from "@/components/home/FeaturedWork";
 import { Process } from "@/components/home/Process";
 import { Services } from "@/components/home/Services";
 import { PlanesRetainer } from "@/components/sections/PlanesRetainer";
-import { Stats } from "@/components/home/Stats";
 import { Territory } from "@/components/home/Territory";
 import { CtaSection } from "@/components/home/CtaSection";
 
@@ -19,7 +18,6 @@ export default function Home() {
       <PlanesRetainer />
       <FeaturedWork />
       <Process />
-      <Stats />
       <Territory />
       <CtaSection />
     </>
