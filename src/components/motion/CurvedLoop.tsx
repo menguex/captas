@@ -45,6 +45,8 @@ export type CurvedLoopProps = {
   curveTextOnCut?: boolean;
   /** Altura del viewBox cuando hay shelf (default 168) */
   viewBoxHeight?: number;
+  /** Y del textPath cuando no está alineado al corte (default 40) */
+  curveTextBaseY?: number;
 };
 
 function buildCurvePath(curveAmount: number, baseY = 40) {
@@ -84,6 +86,7 @@ export function CurvedLoop({
   curveStrokeColor = "rgba(20, 24, 30, 0.11)",
   curveTextOnCut = false,
   viewBoxHeight = 168,
+  curveTextBaseY = 40,
 }: CurvedLoopProps) {
   const reduced = useReducedMotion();
   const lenis = useLenis();
@@ -107,8 +110,8 @@ export function CurvedLoop({
 
   const uid = useId().replace(/:/g, "");
   const pathId = `curve-${uid}`;
-  const strokeBaseY = 40 + curveStrokeOffset;
-  const cutY = curveTextOnCut && curveShelfFill ? strokeBaseY : 40;
+  const strokeBaseY = curveTextBaseY + curveStrokeOffset;
+  const cutY = curveTextOnCut && curveShelfFill ? strokeBaseY : curveTextBaseY;
   const pathD = buildCurvePath(curveAmount, cutY);
   const strokePathD = buildCurvePath(curveAmount, strokeBaseY);
   const shelfPathD = curveShelfFill
@@ -314,7 +317,7 @@ export function CurvedLoop({
     >
       <svg
         className={`block w-full select-none overflow-visible font-bold uppercase leading-none ${
-          hasShelf ? "aspect-[100/17]" : "aspect-[100/12]"
+          hasShelf ? "aspect-[100/22]" : "aspect-[100/12]"
         } ${svgClassName}`}
         viewBox={`0 0 1440 ${hasShelf ? viewBoxHeight : 120}`}
         aria-hidden={!plainText}
@@ -338,7 +341,7 @@ export function CurvedLoop({
             d={strokePathD}
             fill="none"
             stroke={curveStrokeColor}
-            strokeWidth="1"
+            strokeWidth="1.25"
             strokeLinecap="round"
             vectorEffect="non-scaling-stroke"
             aria-hidden

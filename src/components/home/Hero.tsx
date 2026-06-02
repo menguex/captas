@@ -202,10 +202,10 @@ export function Hero() {
         </motion.div>
       </div>
 
-      <div className="hero-shelf relative z-20 mt-auto w-full">
+      <div className="hero-shelf relative z-20 mt-auto w-full overflow-hidden">
         <HeroOpticMarquee active={active} />
 
-        <div className="hero-shelf-dock relative bg-ink">
+        <div className="hero-shelf-dock relative -mt-px bg-ink">
           <motion.button
             type="button"
             className="relative z-10 mx-auto flex flex-col items-center gap-2 pb-10 pt-4 md:pb-12 md:pt-5"

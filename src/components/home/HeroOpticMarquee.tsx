@@ -3,6 +3,7 @@
 import { useCallback, useMemo } from "react";
 import { motion } from "framer-motion";
 import { CurvedLoop } from "@/components/motion/CurvedLoop";
+import { heroCurveCut } from "@/content/hero-curve";
 import { heroMarqueeSegments } from "@/content/hero-marquee";
 import { captasBrand } from "@/lib/brand-palette";
 
@@ -21,6 +22,7 @@ type HeroOpticMarqueeProps = {
 
 export function HeroOpticMarquee({ active }: HeroOpticMarqueeProps) {
   const tones = useMemo(() => HERO_MARQUEE_TONES, []);
+  const cut = heroCurveCut;
 
   const segmentColor = useCallback(
     (seg: (typeof heroMarqueeSegments)[number]) =>
@@ -30,7 +32,7 @@ export function HeroOpticMarquee({ active }: HeroOpticMarqueeProps) {
 
   return (
     <motion.div
-      className="relative z-20 w-full"
+      className="hero-optic-marquee relative z-20 w-full"
       initial={{ opacity: 0, y: 20 }}
       animate={active ? { opacity: 1, y: 0 } : {}}
       transition={{ delay: 0.82, duration: 0.8, ease }}
@@ -41,16 +43,17 @@ export function HeroOpticMarquee({ active }: HeroOpticMarqueeProps) {
         segmentColor={segmentColor}
         separatorColor={tones.separator}
         speed={3.1}
-        curveAmount={400}
+        curveAmount={cut.curveAmount}
+        curveTextBaseY={cut.textBaseY}
         curveStroke
-        curveStrokeOffset={8}
+        curveStrokeOffset={cut.strokeOffset}
         curveTextOnCut
-        curveShelfFill="var(--c-ink)"
-        curveStrokeColor="var(--c-hero-cut-edge)"
-        viewBoxHeight={172}
+        curveShelfFill={cut.fill}
+        curveStrokeColor={cut.edge}
+        viewBoxHeight={cut.viewBoxHeight}
         direction="left"
         interactive
-        containerClassName="min-h-[clamp(8.5rem,20vw,13.5rem)]"
+        containerClassName="min-h-[clamp(11rem,26vw,17rem)]"
         svgClassName="text-[clamp(2.75rem,7.5vw,6rem)] font-heading tracking-[0.04em]"
         className="font-heading"
       />

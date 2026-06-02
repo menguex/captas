@@ -36,7 +36,7 @@ export function Manifesto() {
   return (
     <section
       id="manifiesto"
-      className="relative -mt-px overflow-hidden bg-ink py-section text-bone"
+      className="relative overflow-hidden bg-ink py-section text-bone"
       aria-labelledby="manifesto-heading"
     >
       <div className="pointer-events-none absolute inset-0" aria-hidden>
