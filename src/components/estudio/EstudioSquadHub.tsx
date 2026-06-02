@@ -1,5 +1,6 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import { useCallback, useEffect, useRef, useState } from "react";
 import {
   motion,
@@ -21,6 +22,19 @@ import {
   springSmooth,
 } from "@/lib/estudio-motion";
 import { easeOut, viewportOnce } from "@/lib/motion";
+
+const EstudioSquadHub3D = dynamic(
+  () => import("@/components/estudio/EstudioSquadHub3D").then((m) => m.EstudioSquadHub3D),
+  {
+    ssr: false,
+    loading: () => (
+      <div
+        className="absolute inset-0 rounded-full bg-[radial-gradient(circle_at_50%_45%,rgba(0,122,255,0.12),transparent_62%)]"
+        aria-hidden
+      />
+    ),
+  }
+);
 
 const SIZE = 340;
 const CENTER = SIZE / 2;
@@ -88,6 +102,7 @@ export function EstudioSquadHub() {
   const ringRef = useRef<SVGCircleElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const [paused, setPaused] = useState(false);
+  const [ringProgress, setRingProgress] = useState(0);
   const progress = useMotionValue(0);
 
   const activeNode = estudioOrbitNodes[activeIndex];
@@ -102,6 +117,7 @@ export function EstudioSquadHub() {
   );
 
   useMotionValueEvent(progress, "change", (v) => {
+    setRingProgress(v);
     if (ringRef.current) {
       ringRef.current.style.strokeDashoffset = String(CIRC * (1 - v));
     }
@@ -165,9 +181,17 @@ export function EstudioSquadHub() {
           />
 
           <div className="relative mx-auto aspect-square w-full max-w-[280px]">
+            {!reduced ? (
+              <EstudioSquadHub3D
+                activeIndex={activeIndex}
+                progress={ringProgress}
+                paused={paused}
+              />
+            ) : null}
+
             <svg
               viewBox={`0 0 ${SIZE} ${SIZE}`}
-              className="absolute inset-0 h-full w-full"
+              className={`absolute inset-0 h-full w-full ${reduced ? "" : "opacity-0"}`}
               aria-hidden
             >
               <defs>
@@ -238,7 +262,7 @@ export function EstudioSquadHub() {
                 );
               })}
 
-              {!reduced && !paused ? (
+              {reduced && !paused ? (
                 <circle r="4" fill="#0ea5e9" filter="url(#squad-glow)">
                   <animateMotion
                     key={activeNode.id}
@@ -250,7 +274,7 @@ export function EstudioSquadHub() {
               ) : null}
             </svg>
 
-            {!reduced ? (
+            {reduced ? (
               <motion.div
                 className="pointer-events-none absolute inset-0"
                 animate={{ rotate: activeNode.angle }}
@@ -347,6 +371,7 @@ export function EstudioSquadHub() {
 
         <p className="mt-2 text-center font-mono text-[0.55rem] uppercase tracking-[0.14em] text-on-ink-muted">
           {paused ? "Pausa" : "Auto"} · {estudioOrbitNodes.length} crafts · un director
+          {!reduced ? " · vista 3D" : ""}
         </p>
       </motion.div>
     </LayoutGroup>
