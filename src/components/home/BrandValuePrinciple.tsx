@@ -99,7 +99,7 @@ export function BrandValuePrinciple({ principle: p, index, isEven }: BrandValueP
               {p.title}
             </h3>
             <p className="mt-3 text-body leading-relaxed text-clay">{p.body}</p>
-            <p className="mt-3 text-small leading-relaxed text-clay/95">{p.detail}</p>
+            <p className="mt-3 text-small leading-relaxed text-on-light-muted">{p.detail}</p>
 
             <div className="mt-5 inline-flex items-baseline gap-2.5 rounded-full border border-line-dark bg-bone/60 px-4 py-2">
               <span className="font-heading text-h3 tabular-nums text-accent">{p.outcome.value}</span>

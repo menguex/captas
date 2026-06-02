@@ -55,7 +55,7 @@ export function Manifesto() {
 
           <blockquote className="relative text-center">
             <motion.p
-              className="mx-auto max-w-2xl font-heading text-[clamp(1.05rem,1.6vw,1.35rem)] font-medium uppercase tracking-[0.18em] text-on-ink-subtle"
+              className="mx-auto max-w-2xl font-heading text-[clamp(1.05rem,1.6vw,1.35rem)] font-medium uppercase tracking-[0.18em] text-on-ink-muted"
               initial={{ opacity: 0, y: 12 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={viewportOnce}
@@ -122,7 +122,7 @@ export function Manifesto() {
         </div>
 
         <motion.p
-          className="mx-auto mt-12 max-w-xl text-center font-mono text-small uppercase tracking-[0.22em] text-on-ink-subtle md:mt-14"
+          className="mx-auto mt-12 max-w-xl text-center font-mono text-small uppercase tracking-[0.22em] text-on-ink-muted md:mt-14"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={viewportOnce}

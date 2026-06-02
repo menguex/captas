@@ -42,7 +42,7 @@ export function Footer() {
             <p className="mt-6 max-w-lg font-heading text-h2 leading-[1.14] tracking-tight text-balance text-bone/92">
               {site.tagline}
             </p>
-            <p className="mt-5 text-lead leading-relaxed text-bone/65">
+            <p className="mt-5 text-lead leading-relaxed text-on-ink-muted">
               {site.location} · {site.region}
             </p>
           </div>
@@ -55,7 +55,7 @@ export function Footer() {
               href={site.whatsapp}
               target="_blank"
               rel="noopener noreferrer"
-              className="font-mono text-kicker uppercase tracking-[0.22em] text-bone/65 transition-colors hover:text-sky"
+              className="font-mono text-kicker uppercase tracking-[0.22em] text-on-ink-muted transition-colors hover:text-sky"
             >
               WhatsApp directo →
             </a>
@@ -126,8 +126,8 @@ export function Footer() {
                   WhatsApp
                 </a>
               </li>
-              <li className="text-bone/72">{site.location}</li>
-              <li className="text-bone/72">{site.region}</li>
+              <li className="text-on-ink-muted">{site.location}</li>
+              <li className="text-on-ink-muted">{site.region}</li>
             </ul>
           </div>
 
@@ -171,7 +171,7 @@ export function Footer() {
           {craftTags.map((tag) => (
             <span
               key={tag}
-              className="rounded-full border border-line/80 bg-white/[0.03] px-3 py-1.5 font-mono text-small uppercase tracking-[0.2em] text-on-ink-subtle"
+              className="rounded-full border border-line/80 bg-white/[0.03] px-3 py-1.5 font-mono text-small uppercase tracking-[0.2em] text-on-ink-muted"
             >
               {tag}
             </span>
@@ -180,10 +180,10 @@ export function Footer() {
 
         <div className="flex flex-col gap-4 border-t border-line/80 py-6 font-mono text-small tracking-[0.04em] text-fog md:flex-row md:items-center md:justify-between">
           <p>© {year} Captas. Todos los derechos reservados.</p>
-          <p className="text-on-ink-subtle">
+          <p className="text-on-ink-muted">
             <LocalTime />
           </p>
-          <p className="text-on-ink-subtle">Craft desde el valle · Chile</p>
+          <p className="text-on-ink-muted">Craft desde el valle · Chile</p>
         </div>
       </div>
     </footer>

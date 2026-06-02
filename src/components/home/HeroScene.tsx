@@ -25,8 +25,8 @@ function WaveField() {
     const s = new Float32Array(COUNT);
     const c = new Float32Array(COUNT * 3);
 
-    const blue = new THREE.Color("#3d556c");
-    const sky = new THREE.Color("#7d92a8");
+    const blue = new THREE.Color("#007AFF");
+    const sky = new THREE.Color("#0EA5E9");
     const indigo = new THREE.Color("#5856D6");
 
     for (let i = 0; i < COUNT; i++) {
@@ -154,8 +154,8 @@ export function HeroScene() {
         <fog attach="fog" args={["#0f1218", 5, 20]} />
         <ambientLight intensity={0.2} color="#A8D8FF" />
         <directionalLight position={[3, 4, 2]} intensity={0.4} color="#EEF4FC" />
-        <pointLight position={[-2, 1, -3]} intensity={0.3} color="#3d556c" />
-        <pointLight position={[3, 2, 1]} intensity={0.2} color="#7d92a8" />
+        <pointLight position={[-2, 1, -3]} intensity={0.3} color="#007AFF" />
+        <pointLight position={[3, 2, 1]} intensity={0.2} color="#0EA5E9" />
         <WaveField />
         <Dust />
       </Canvas>

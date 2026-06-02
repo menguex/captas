@@ -65,7 +65,7 @@ export function CtaSection() {
         </motion.h2>
 
         <motion.p
-          className="mx-auto mt-8 max-w-xl text-center text-lead leading-relaxed text-pretty text-bone/78"
+          className="mx-auto mt-8 max-w-xl text-center text-lead leading-relaxed text-pretty text-on-ink-muted"
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={viewportOnce}
@@ -111,7 +111,7 @@ export function CtaSection() {
             href={site.instagram}
             target="_blank"
             rel="noopener noreferrer"
-            className="font-mono text-kicker uppercase tracking-[0.22em] text-bone/65 transition-colors hover:text-sky"
+            className="font-mono text-kicker uppercase tracking-[0.22em] text-on-ink-muted transition-colors hover:text-sky"
           >
             @captas.cl →
           </a>
@@ -119,7 +119,7 @@ export function CtaSection() {
 
         {/* Editorial meta line at the bottom */}
         <motion.div
-          className="mt-20 grid grid-cols-1 gap-y-3 border-t border-line pt-8 text-center font-mono text-small uppercase tracking-[0.22em] text-on-ink-subtle sm:grid-cols-3"
+          className="mt-20 grid grid-cols-1 gap-y-3 border-t border-line pt-8 text-center font-mono text-small uppercase tracking-[0.22em] text-on-ink-muted sm:grid-cols-3"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={viewportOnce}

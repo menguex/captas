@@ -30,7 +30,7 @@ export default function ServiciosPage() {
           title={
             <>
               Un ecosistema creativo para{" "}
-              <span className="bg-gradient-to-r from-accent-deep via-accent to-sky bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-[#5b61ff] via-accent to-[#0ea5e9] bg-clip-text text-transparent">
                 elevar tu marca.
               </span>
             </>

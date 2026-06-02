@@ -14,7 +14,7 @@ type StatStyle = {
 
 const statStyles: StatStyle[] = [
   {
-    gradient: "linear-gradient(135deg, #8fa3b8 0%, #3d556c 100%)",
+    gradient: "linear-gradient(135deg, #64d2ff 0%, #007aff 100%)",
     accent: "#8fa3b8",
     glow: "rgba(61,85,108,0.16)",
   },

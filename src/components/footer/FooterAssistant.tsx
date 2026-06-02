@@ -111,7 +111,7 @@ export function FooterAssistant() {
                     <p className="font-heading text-body text-bone group-hover:text-sky">
                       {item.label}
                     </p>
-                    <p className="mt-1 text-small text-on-ink-subtle">{item.hint}</p>
+                    <p className="mt-1 text-small text-on-ink-muted">{item.hint}</p>
                   </button>
                 ))}
               </div>
@@ -129,7 +129,7 @@ export function FooterAssistant() {
               <p className="font-mono text-small uppercase tracking-[0.14em] text-fog">
                 Paso 2 · Elige un pilar
               </p>
-              <p className="mt-2 text-small text-bone/60">
+              <p className="mt-2 text-small text-on-ink-muted">
                 Para <span className="text-sky">{goal.label.toLowerCase()}</span>, estos
                 servicios encajan mejor:
               </p>
@@ -158,7 +158,7 @@ export function FooterAssistant() {
                         <span className="mt-3 font-heading text-body text-bone">
                           {service.title}
                         </span>
-                        <span className="mt-1 line-clamp-2 text-small text-on-ink-subtle">
+                        <span className="mt-1 line-clamp-2 text-small text-on-ink-muted">
                           {service.short}
                         </span>
                       </span>
@@ -204,8 +204,8 @@ export function FooterAssistant() {
                       {selected.pillar} · Pilar {selected.number}
                     </p>
                     <p className="mt-2 font-heading text-h3 text-bone">{selected.title}</p>
-                    <p className="mt-2 text-body text-bone/70">{selected.short}</p>
-                    <p className="mt-4 text-small text-on-ink-subtle">
+                    <p className="mt-2 text-body text-on-ink-muted">{selected.short}</p>
+                    <p className="mt-4 text-small text-on-ink-muted">
                       Siguiente paso: cuéntanos tu proyecto y armamos una propuesta a medida.
                     </p>
                   </div>

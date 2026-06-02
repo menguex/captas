@@ -27,11 +27,11 @@ export function ServicesIntegralCta() {
           className="object-cover opacity-40"
           aria-hidden
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-ink/92 via-ink/88 to-ink/75" aria-hidden />
+        <div className="absolute inset-0 bg-gradient-to-r from-ink/94 via-ink/90 to-ink/82" aria-hidden />
       </div>
 
       <div className="relative px-6 py-8 text-center md:absolute md:inset-0 md:flex md:flex-col md:items-center md:justify-center md:px-10 md:py-10">
-        <p className="font-mono text-kicker uppercase tracking-[0.2em] text-sky-soft">
+        <p className="font-mono text-kicker uppercase tracking-[0.2em] text-sky">
           Proyecto integral
         </p>
         <p className="mx-auto mt-3 max-w-lg font-heading text-h3 leading-snug text-bone md:text-h2">

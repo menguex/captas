@@ -25,7 +25,10 @@ export function CaptasLogo({
       aria-label="Captas"
     >
       CAPTAS
-      <span className="text-accent" aria-hidden>
+      <span
+        className="bg-gradient-to-r from-[#5b61ff] via-accent to-[#0ea5e9] bg-clip-text text-transparent"
+        aria-hidden
+      >
         .
       </span>
     </Tag>

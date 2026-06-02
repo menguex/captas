@@ -13,24 +13,10 @@ export default function Icon() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          background: "linear-gradient(145deg, #171c24 0%, #0f1218 100%)",
-          borderRadius: 8,
-          border: "1px solid rgba(61, 85, 108, 0.4)",
-          boxShadow: "inset 0 1px 0 rgba(255,255,255,0.15)",
+          background: "linear-gradient(135deg, #5b61ff 0%, #0ea5e9 100%)",
+          borderRadius: 9999,
         }}
-      >
-        <span
-          style={{
-            fontSize: 20,
-            fontWeight: 700,
-            color: "#eae8e4",
-            letterSpacing: "-0.04em",
-          }}
-        >
-          C
-          <span style={{ color: "#3d556c" }}>.</span>
-        </span>
-      </div>
+      />
     ),
     { ...size }
   );

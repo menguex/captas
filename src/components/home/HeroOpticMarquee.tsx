@@ -12,7 +12,7 @@ const ease = [0.16, 1, 0.3, 1] as const;
 const HERO_MARQUEE_TONES = {
   primary: captasBrand.accentDeep,
   secondary: "rgba(69, 64, 56, 0.72)",
-  separator: "rgba(61, 85, 108, 0.28)",
+  separator: "rgba(0, 122, 255, 0.32)",
 } as const;
 
 type HeroOpticMarqueeProps = {

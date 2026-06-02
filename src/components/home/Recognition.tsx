@@ -7,7 +7,7 @@ import { viewportOnce, easeOut } from "@/lib/motion";
 
 const categoryAccent: Record<string, string> = {
   Award: "#9a7b52",
-  Press: "#7d92a8",
+  Press: "#0ea5e9",
   Selection: "#4d7264",
   Talk: "#5c5478",
 };

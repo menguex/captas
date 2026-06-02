@@ -102,7 +102,7 @@ export function FloatingCta() {
             aria-label="Enviar mensaje por WhatsApp"
             className="group relative flex h-14 w-14 items-center justify-center rounded-full shadow-[0_8px_32px_rgba(40,61,79,0.35)] transition-all duration-base hover:scale-105 hover:shadow-[0_16px_48px_rgba(40,61,79,0.45)]"
             style={{
-              background: "linear-gradient(135deg, #4a6278 0%, #283d4f 100%)",
+              background: "linear-gradient(135deg, #4d9fff 0%, #0056d6 100%)",
             }}
           >
             {/* Outer subtle ring */}

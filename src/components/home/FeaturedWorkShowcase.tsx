@@ -119,7 +119,7 @@ export function FeaturedWorkShowcase({ projects, onOpenCase }: FeaturedWorkShowc
                     <span className="rounded-full border border-bone/20 bg-ink/50 px-3 py-1 font-mono text-kicker uppercase tracking-[0.18em] text-sky-soft">
                       {current.category}
                     </span>
-                    <span className="font-mono text-kicker uppercase tracking-[0.18em] text-on-ink-subtle">
+                    <span className="font-mono text-kicker uppercase tracking-[0.18em] text-on-ink-muted">
                       {current.year} · {current.client}
                     </span>
                   </motion.div>
@@ -133,7 +133,7 @@ export function FeaturedWorkShowcase({ projects, onOpenCase }: FeaturedWorkShowc
 
                   <motion.p
                     variants={reduced ? undefined : serviceOverlayItem}
-                    className="mt-3 max-w-2xl text-lead font-medium leading-relaxed text-bone/95"
+                    className="mt-3 max-w-2xl text-lead font-medium leading-relaxed text-bone"
                   >
                     {current.excerpt}
                   </motion.p>
@@ -206,7 +206,7 @@ export function FeaturedWorkShowcase({ projects, onOpenCase }: FeaturedWorkShowc
                 aria-selected={isActive}
                 onClick={() => goTo(i)}
                 className={`group relative aspect-[16/10] overflow-hidden text-left outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-sky ${
-                  isActive ? "opacity-100" : "opacity-60 hover:opacity-90"
+                  isActive ? "opacity-100" : "opacity-72 hover:opacity-92"
                 }`}
               >
                 <Image
@@ -222,7 +222,7 @@ export function FeaturedWorkShowcase({ projects, onOpenCase }: FeaturedWorkShowc
                   }`}
                 />
                 <span className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink/95 to-transparent p-3">
-                  <span className="font-mono text-[0.55rem] uppercase tracking-[0.14em] text-bone/70">
+                  <span className="font-mono text-[0.55rem] uppercase tracking-[0.14em] text-on-ink-muted">
                     {String(i + 1).padStart(2, "0")}
                   </span>
                   <span className="mt-0.5 block truncate font-heading text-small text-bone">
@@ -235,7 +235,7 @@ export function FeaturedWorkShowcase({ projects, onOpenCase }: FeaturedWorkShowc
         </div>
       </motion.div>
 
-      <p className="mx-auto mt-5 max-w-md text-center font-mono text-[0.62rem] uppercase tracking-[0.18em] text-on-ink-subtle">
+      <p className="mx-auto mt-5 max-w-md text-center font-mono text-[0.62rem] uppercase tracking-[0.18em] text-on-ink-muted">
         {paused ? "Pausado" : "Auto"} · Selecciona un caso o abre el detalle completo
       </p>
     </div>

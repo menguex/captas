@@ -96,7 +96,7 @@ export function ContactForm() {
             </span>
           </div>
           <p className="mt-6 font-heading text-h3 text-bone">Listo para enviar</p>
-          <p className="mx-auto mt-3 max-w-sm text-body text-bone/65">
+          <p className="mx-auto mt-3 max-w-sm text-body text-on-ink-muted">
             Se abrió tu correo con el mensaje preparado. Si no aparece, escríbenos a{" "}
             <a href={`mailto:${site.email}`} className="text-sky hover:underline">
               {site.email}
@@ -173,7 +173,7 @@ export function ContactForm() {
                         >
                           {option.label}
                         </span>
-                        <span className="mt-1 block text-small leading-snug text-bone/70">
+                        <span className="mt-1 block text-small leading-snug text-on-ink-muted">
                           {option.short}
                         </span>
                       </button>
@@ -199,7 +199,7 @@ export function ContactForm() {
           </Field>
 
           <div className="flex flex-col gap-4 border-t border-line pt-6 sm:flex-row sm:items-center sm:justify-between">
-            <p className="text-small text-on-ink-subtle">
+            <p className="text-small text-on-ink-muted">
               Al enviar, se abrirá tu cliente de correo con el mensaje listo.
             </p>
             <button

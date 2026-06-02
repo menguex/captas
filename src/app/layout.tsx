@@ -54,10 +54,14 @@ export const metadata: Metadata = {
       "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&q=85",
     ],
   },
+  icons: {
+    icon: [{ url: "/brand/captas-icon.png", type: "image/png" }],
+    apple: [{ url: "/brand/captas-icon.png", type: "image/png" }],
+  },
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0f1218",
+  themeColor: "#007aff",
 };
 
 export default function RootLayout({
@@ -74,7 +78,7 @@ export default function RootLayout({
       <head>
         <script
           dangerouslySetInnerHTML={{
-            __html: `(function(){try{document.documentElement.setAttribute("data-theme","dark");var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute("content","#0f1218");}catch(e){document.documentElement.setAttribute("data-theme","dark");}})();`,
+            __html: `(function(){try{document.documentElement.setAttribute("data-theme","dark");var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute("content","#007aff");}catch(e){document.documentElement.setAttribute("data-theme","dark");}})();`,
           }}
         />
       </head>

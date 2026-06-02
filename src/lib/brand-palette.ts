@@ -16,39 +16,42 @@ export type ClientBrandTheme = {
   accent: string;
 };
 
-/** Paleta core Captas — editorial, cine, calidez territorial */
+/** Paleta core Captas — azul marca (icono índigo → cian) */
 export const captasBrand = {
-  accent: "#3d556c",
-  accentDeep: "#283d4f",
-  accentMuted: "#4a6278",
-  sky: "#7d92a8",
-  skySoft: "#a8b8c9",
+  brandIndigo: "#5b61ff",
+  brandCyan: "#0ea5e9",
+  gradient: "linear-gradient(135deg, #5b61ff 0%, #0ea5e9 100%)",
+  accent: "#007aff",
+  accentDeep: "#0056d6",
+  accentMuted: "#4d9fff",
+  sky: "#0ea5e9",
+  skySoft: "#64d2ff",
   ink: "#0f1218",
   bone: "#eae8e4",
   terra: "#9a7b52",
   terraDeep: "#6f5538",
-  indigo: "#5c5478",
+  violet: "#5c5478",
 } as const;
 
 /** UI de servicios — un solo acento, sin arcoíris por pilar */
 export const serviceUiTheme: PillarTheme = {
-  border: "linear-gradient(135deg, #8fa3b8 0%, #3d556c 52%, #283d4f 100%)",
+  border: "linear-gradient(135deg, #64d2ff 0%, #007aff 52%, #0056d6 100%)",
   fill: "#ffffff",
-  glow: "rgba(61, 85, 108, 0.14)",
-  accent: "#3d556c",
-  accentInk: "#283d4f",
-  soft: "rgba(61, 85, 108, 0.08)",
+  glow: "rgba(0, 122, 255, 0.18)",
+  accent: "#007aff",
+  accentInk: "#0056d6",
+  soft: "rgba(0, 122, 255, 0.1)",
 };
 
 /** 5 pilares — matices distintos (portfolio / casos) */
 export const pillarThemes: Record<string, PillarTheme> = {
   "ux-ui": {
-    border: "linear-gradient(135deg, #8fa3b8 0%, #3d556c 52%, #283d4f 100%)",
-    fill: "linear-gradient(145deg, rgba(61,85,108,0.12), rgba(40,61,79,0.06), rgba(255,255,255,0.96))",
-    glow: "rgba(61, 85, 108, 0.22)",
-    accent: "#3d556c",
-    accentInk: "#283d4f",
-    soft: "rgba(61, 85, 108, 0.11)",
+    border: "linear-gradient(135deg, #64d2ff 0%, #007aff 52%, #0056d6 100%)",
+    fill: "linear-gradient(145deg, rgba(0,122,255,0.1), rgba(0,86,214,0.05), rgba(255,255,255,0.96))",
+    glow: "rgba(0, 122, 255, 0.22)",
+    accent: "#007aff",
+    accentInk: "#0056d6",
+    soft: "rgba(0, 122, 255, 0.1)",
   },
   fotografia: {
     border: "linear-gradient(135deg, #c4a574 0%, #9a7b52 50%, #6f5538 100%)",
@@ -99,9 +102,9 @@ export const clientBrandThemes = {
     accent: "#9a7b52",
   },
   institucional: {
-    border: "linear-gradient(135deg, #8fa3b8 0%, #3d556c 55%, #283d4f 100%)",
-    fill: "linear-gradient(145deg, rgba(61,85,108,0.16), rgba(40,61,79,0.12), transparent)",
-    glow: "rgba(61, 85, 108, 0.22)",
-    accent: "#3d556c",
+    border: "linear-gradient(135deg, #64d2ff 0%, #007aff 55%, #0056d6 100%)",
+    fill: "linear-gradient(145deg, rgba(0,122,255,0.14), rgba(0,86,214,0.1), transparent)",
+    glow: "rgba(0, 122, 255, 0.22)",
+    accent: "#007aff",
   },
 } as const satisfies Record<string, ClientBrandTheme>;

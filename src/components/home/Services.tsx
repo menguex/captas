@@ -12,7 +12,7 @@ export function Services() {
     >
       <div className="pointer-events-none absolute inset-0 mesh-grid opacity-40" aria-hidden />
       <div
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,rgba(61,85,108,0.08),transparent_55%)]"
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,rgba(var(--c-accent-rgb),0.1),transparent_55%)]"
         aria-hidden
       />
       <div
