@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { ServiciosList } from "@/components/services/ServiciosList";
 import { ServicePillarNav } from "@/components/services/ServicePillarNav";
+import { ServicesEcosystemIntro } from "@/components/home/ServicesEcosystemIntro";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 
 export const metadata: Metadata = {
@@ -26,10 +27,18 @@ export default function ServiciosPage() {
           as="h1"
           theme="light"
           kicker="Servicios"
-          title="Todo lo que tu marca necesita, con un solo estándar de craft"
+          title={
+            <>
+              Un ecosistema creativo para{" "}
+              <span className="bg-gradient-to-r from-accent-deep via-accent to-sky bg-clip-text text-transparent">
+                elevar tu marca.
+              </span>
+            </>
+          }
           description="Desde la primera conversación estratégica hasta el último frame editado — un solo equipo, un solo estándar de craft en cada pilar."
         />
 
+        <ServicesEcosystemIntro showHeader={false} />
         <ServicePillarNav />
         <ServiciosList />
       </div>
