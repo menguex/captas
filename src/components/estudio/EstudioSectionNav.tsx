@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { estudioSections } from "@/content/estudio";
 
 export function EstudioSectionNav() {
-  const [active, setActive] = useState(estudioSections[0].id);
+  const [active, setActive] = useState<string>(estudioSections[0].id);
 
   useEffect(() => {
     const ids = estudioSections.map((s) => s.id);

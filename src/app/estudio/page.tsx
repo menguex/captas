@@ -9,18 +9,14 @@ export const metadata: Metadata = {
 
 export default function EstudioPage() {
   return (
-    <div className="relative overflow-hidden bg-ink pb-section pt-32 text-bone">
-      <div className="pointer-events-none absolute inset-0 gloss-ambient opacity-60" aria-hidden />
+    <div className="relative overflow-hidden bg-ink pb-section pt-28 text-bone md:pt-32">
+      <div className="pointer-events-none absolute inset-0 gloss-ambient opacity-50" aria-hidden />
       <div
-        className="pointer-events-none absolute inset-0 mesh-grid opacity-[0.14]"
+        className="pointer-events-none absolute inset-0 mesh-grid opacity-[0.1]"
         aria-hidden
       />
       <div
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_30%_0%,rgba(91,97,255,0.16),transparent_55%)]"
-        aria-hidden
-      />
-      <div
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_90%_40%,rgba(14,165,233,0.1),transparent_45%)]"
+        className="pointer-events-none absolute inset-x-0 top-0 h-[min(55vh,520px)] bg-[radial-gradient(ellipse_80%_70%_at_50%_-10%,rgba(91,97,255,0.14),transparent_70%)]"
         aria-hidden
       />
       <EstudioContent />

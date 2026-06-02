@@ -44,14 +44,18 @@ export function EstudioQuickGuide() {
             initial="hidden"
             whileInView="visible"
             viewport={viewportOnce}
-            className="gloss-card relative overflow-hidden rounded-box-lg border border-line bg-ink-soft/90 p-5 md:p-6"
+            className="gloss-card group relative overflow-hidden rounded-box-lg border border-line bg-ink-soft/90 p-5 transition-colors duration-300 hover:border-accent/25 md:p-6"
           >
             <span
-              className="pointer-events-none absolute -right-2 -top-4 font-heading text-[5rem] font-semibold leading-none text-white/[0.04]"
+              className="pointer-events-none absolute -right-2 -top-4 font-heading text-[5rem] font-semibold leading-none text-white/[0.04] transition-colors group-hover:text-accent/[0.07]"
               aria-hidden
             >
               {item.step}
             </span>
+            <div
+              className="pointer-events-none absolute inset-x-0 top-0 h-px scale-x-0 bg-gradient-to-r from-transparent via-sky/50 to-transparent transition-transform duration-500 group-hover:scale-x-100"
+              aria-hidden
+            />
             <span className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-accent/35 bg-accent/12 font-mono text-[0.65rem] tabular-nums text-sky">
               {item.step}
             </span>

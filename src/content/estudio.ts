@@ -5,8 +5,27 @@ export const estudioHero = {
   titleLead: "No es un local.",
   titleAccent: "Es tu squad creativo online.",
   body: "Un director de proyecto, los especialistas que hagan falta y una sola voz en cada entrega. Tú hablas con Captas; nosotros coordinamos UX, foto, cine, web y marca.",
-  hubHint: "Gira el anillo o toca un craft para ver qué aporta cada uno.",
+  hubHint: "Toca un craft para ver qué aporta al proyecto.",
   onlineTag: "100% remoto · Chile → mundo",
+} as const;
+
+/** Ficha técnica del estudio — lenguaje editorial / diseño gráfico */
+export const estudioSpec = {
+  index: "002",
+  label: "Red creativa",
+  status: "Disponible para proyectos",
+  rows: [
+    { k: "Modelo", v: "Squad a medida" },
+    { k: "Dirección", v: "Un hilo · una voz" },
+    { k: "Cobertura", v: "Chile → mundo" },
+    { k: "Entrega", v: "Un solo estándar" },
+  ],
+  metrics: [
+    { value: "06", label: "Crafts" },
+    { value: "01", label: "Director" },
+    { value: "100%", label: "Remoto" },
+  ],
+  figCaption: "Fig. 01 — Squad a medida",
 } as const;
 
 /** Tres ideas — entender Captas en segundos */
@@ -56,7 +75,7 @@ export const estudioCompare = {
 } as const;
 
 export const estudioSections = [
-  { id: "squad", label: "Squad interactivo" },
+  { id: "squad", label: "El squad" },
   { id: "guia", label: "En 3 pasos" },
   { id: "por-que", label: "Por qué Captas" },
   { id: "como", label: "Cómo trabajamos" },
