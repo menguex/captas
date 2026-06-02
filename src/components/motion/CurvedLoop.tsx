@@ -33,14 +33,26 @@ export type CurvedLoopProps = {
   scrollMultiplier?: number;
   scrollScrubRef?: RefObject<HTMLElement | null>;
   scrubLoops?: number;
-  /** Arco decorativo paralelo al textPath (p. ej. bajo Foto · Cine) */
+  /** Borde del shelf curvo (tono más oscuro bajo el marquee) */
   curveStroke?: boolean;
-  /** Desplazamiento Y en viewBox (120) hacia abajo respecto al texto */
+  /** Desplazamiento Y en viewBox hacia abajo respecto al texto */
   curveStrokeOffset?: number;
+  /** Relleno bajo el arco (p. ej. var(--c-ink) hacia el manifiesto) */
+  curveShelfFill?: string;
+  /** Borde del corte curvo entre superficie clara y relleno */
+  curveStrokeColor?: string;
+  /** Texto sobre la línea de corte (no flotando arriba del arco) */
+  curveTextOnCut?: boolean;
+  /** Altura del viewBox cuando hay shelf (default 168) */
+  viewBoxHeight?: number;
 };
 
 function buildCurvePath(curveAmount: number, baseY = 40) {
   return `M-100,${baseY} Q500,${baseY + curveAmount} 1540,${baseY}`;
+}
+
+function buildShelfPath(curveAmount: number, baseY: number, viewBottom: number) {
+  return `${buildCurvePath(curveAmount, baseY)} L 1540,${viewBottom} L -100,${viewBottom} Z`;
 }
 
 function wrapOffset(value: number, spacing: number) {
@@ -68,6 +80,10 @@ export function CurvedLoop({
   scrubLoops = 3,
   curveStroke = false,
   curveStrokeOffset = 12,
+  curveShelfFill,
+  curveStrokeColor = "rgba(20, 24, 30, 0.11)",
+  curveTextOnCut = false,
+  viewBoxHeight = 168,
 }: CurvedLoopProps) {
   const reduced = useReducedMotion();
   const lenis = useLenis();
@@ -91,9 +107,14 @@ export function CurvedLoop({
 
   const uid = useId().replace(/:/g, "");
   const pathId = `curve-${uid}`;
-  const strokeId = `curve-stroke-${uid}`;
-  const pathD = buildCurvePath(curveAmount);
-  const strokePathD = buildCurvePath(curveAmount, 40 + curveStrokeOffset);
+  const strokeBaseY = 40 + curveStrokeOffset;
+  const cutY = curveTextOnCut && curveShelfFill ? strokeBaseY : 40;
+  const pathD = buildCurvePath(curveAmount, cutY);
+  const strokePathD = buildCurvePath(curveAmount, strokeBaseY);
+  const shelfPathD = curveShelfFill
+    ? buildShelfPath(curveAmount, strokeBaseY, viewBoxHeight)
+    : null;
+  const hasShelf = Boolean(curveShelfFill && shelfPathD);
 
   const dragRef = useRef(false);
   const lastXRef = useRef(0);
@@ -292,8 +313,10 @@ export function CurvedLoop({
       }}
     >
       <svg
-        className={`block aspect-[100/12] w-full select-none overflow-visible font-bold uppercase leading-none ${svgClassName}`}
-        viewBox="0 0 1440 120"
+        className={`block w-full select-none overflow-visible font-bold uppercase leading-none ${
+          hasShelf ? "aspect-[100/17]" : "aspect-[100/12]"
+        } ${svgClassName}`}
+        viewBox={`0 0 1440 ${hasShelf ? viewBoxHeight : 120}`}
         aria-hidden={!plainText}
       >
         <text
@@ -306,27 +329,16 @@ export function CurvedLoop({
         </text>
         <defs>
           <path ref={pathRef} id={pathId} d={pathD} fill="none" stroke="transparent" />
-          <linearGradient
-            id={strokeId}
-            gradientUnits="userSpaceOnUse"
-            x1="0"
-            y1="0"
-            x2="1440"
-            y2="0"
-          >
-            <stop offset="0%" stopColor="rgba(0, 122, 255, 0)" />
-            <stop offset="18%" stopColor="rgba(0, 122, 255, 0.22)" />
-            <stop offset="50%" stopColor="rgba(0, 122, 255, 0.5)" />
-            <stop offset="82%" stopColor="rgba(0, 122, 255, 0.22)" />
-            <stop offset="100%" stopColor="rgba(0, 122, 255, 0)" />
-          </linearGradient>
         </defs>
+        {ready && hasShelf ? (
+          <path d={shelfPathD!} fill={curveShelfFill} aria-hidden />
+        ) : null}
         {ready && curveStroke ? (
           <path
             d={strokePathD}
             fill="none"
-            stroke={`url(#${strokeId})`}
-            strokeWidth="1.5"
+            stroke={curveStrokeColor}
+            strokeWidth="1"
             strokeLinecap="round"
             vectorEffect="non-scaling-stroke"
             aria-hidden

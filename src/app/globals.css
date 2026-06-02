@@ -543,6 +543,7 @@
 [data-hero] {
   --c-hero-bg: #f0eeea;
   --c-hero-bg-soft: #e8e5e0;
+  --c-hero-cut-edge: rgba(234, 232, 228, 0.2);
   --c-hero-text: #14181e;
   --c-hero-text-muted: #38342c;
   --c-hero-kicker: #0056d6;
@@ -569,6 +570,13 @@
 
 [data-hero] .mesh-grid {
   --c-mesh: var(--c-hero-mesh);
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 58%, transparent 78%);
+  mask-image: linear-gradient(to bottom, #000 0%, #000 58%, transparent 78%);
+}
+
+/* Corte curvo hero → manifiesto: relleno ink continuo bajo el marquee */
+[data-hero] .hero-shelf-dock {
+  margin-top: -1px;
 }
 
 /* Header over light hero — dark links on translucent bone */

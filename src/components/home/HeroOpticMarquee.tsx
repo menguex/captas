@@ -43,10 +43,14 @@ export function HeroOpticMarquee({ active }: HeroOpticMarqueeProps) {
         speed={3.1}
         curveAmount={400}
         curveStroke
-        curveStrokeOffset={14}
+        curveStrokeOffset={8}
+        curveTextOnCut
+        curveShelfFill="var(--c-ink)"
+        curveStrokeColor="var(--c-hero-cut-edge)"
+        viewBoxHeight={172}
         direction="left"
         interactive
-        containerClassName="min-h-[clamp(7.5rem,18vw,12rem)]"
+        containerClassName="min-h-[clamp(8.5rem,20vw,13.5rem)]"
         svgClassName="text-[clamp(2.75rem,7.5vw,6rem)] font-heading tracking-[0.04em]"
         className="font-heading"
       />

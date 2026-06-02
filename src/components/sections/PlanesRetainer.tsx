@@ -210,13 +210,20 @@ function PlanCard({ plan }: { plan: PlanRetainer }) {
   );
 }
 
-export function PlanesRetainer() {
+type PlanesRetainerProps = {
+  /** En /servicios: separador superior sin repetir padding del bloque anterior */
+  afterEcosystem?: boolean;
+};
+
+export function PlanesRetainer({ afterEcosystem = false }: PlanesRetainerProps) {
   const reduced = useReducedMotion();
 
   return (
     <section
       id="planes"
-      className="relative overflow-hidden bg-bone py-section text-ink"
+      className={`relative overflow-hidden bg-bone py-section text-ink scroll-mt-24 ${
+        afterEcosystem ? "border-t border-line-dark/45" : ""
+      }`}
       aria-labelledby="planes-heading"
     >
       <div
