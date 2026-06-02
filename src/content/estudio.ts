@@ -1,43 +1,77 @@
-/** Estudio — red creativa online, no espacio físico */
+/** Estudio — red creativa: unión de profesionales por proyecto */
 
 export const estudioHero = {
   kicker: "Estudio",
   titleLead: "No es un lugar.",
-  titleAccent: "Es la unión correcta de talento.",
-  body: "Armamos equipos a medida — UX, motion, foto, cine, web y marca — con un solo director de proyecto y un estándar de craft. Online, sin fricción entre proveedores.",
+  titleAccent: "Es el squad que arma tu proyecto.",
+  body: "Conectamos directores, UX, motion, foto, cine, web y marca en un solo hilo. Cada entrega avanza al mismo objetivo — sin proveedores sueltos ni briefs perdidos.",
   onlineTag: "100% remoto · Chile → mundo",
 } as const;
 
-export const estudioOrbitNodes = [
-  { id: "ux", label: "UX/UI", angle: 0 },
-  { id: "motion", label: "Motion", angle: 60 },
-  { id: "foto", label: "Foto", angle: 120 },
-  { id: "cine", label: "Cine", angle: 180 },
-  { id: "web", label: "Web", angle: 240 },
-  { id: "marca", label: "Marca", angle: 300 },
-] as const;
+export const estudioUnion = {
+  headline: "Varios profesionales.",
+  headlineAccent: "Un proyecto armado.",
+  subline: "Solo activamos el craft que tu reto necesita — nada de relleno.",
+  crafts: [
+    "Director",
+    "UX/UI",
+    "Motion",
+    "Foto",
+    "Cine",
+    "Web",
+    "Marca",
+    "Estrategia",
+  ],
+  result: "1 proyecto · 1 voz",
+} as const;
+
+export type EstudioOrbitNode = {
+  id: string;
+  label: string;
+  angle: number;
+  pillarId?:
+    | "ux-ui"
+    | "fotografia"
+    | "diseno-web"
+    | "video-cinematografico"
+    | "branding";
+  tagline: string;
+};
+
+export const estudioOrbitNodes: EstudioOrbitNode[] = [
+  { id: "ux", label: "UX/UI", angle: 0, pillarId: "ux-ui", tagline: "Experiencia, flujos y pantallas" },
+  { id: "motion", label: "Motion", angle: 60, pillarId: "video-cinematografico", tagline: "Animación con intención" },
+  { id: "foto", label: "Foto", angle: 120, pillarId: "fotografia", tagline: "Imagen editorial y producto" },
+  { id: "cine", label: "Cine", angle: 180, pillarId: "video-cinematografico", tagline: "Piezas con lenguaje cinematográfico" },
+  { id: "web", label: "Web", angle: 240, pillarId: "diseno-web", tagline: "Sitios rápidos y conversión" },
+  { id: "marca", label: "Marca", angle: 300, pillarId: "branding", tagline: "Sistema visual y narrativa" },
+];
 
 export const estudioModel = [
   {
     id: "escucha",
+    step: "01",
     title: "Escuchamos el reto",
     hook: "Brief claro, sin humo",
-    text: "Entendemos negocio, audiencia y plazos. Definimos qué tiene que resolver la experiencia — no solo cómo se ve.",
+    text: "Negocio, audiencia, plazos y éxito medible. Definimos qué debe resolver el proyecto antes de diseñar una sola pantalla.",
   },
   {
     id: "equipo",
-    title: "Armamos el equipo",
+    step: "02",
+    title: "Armamos el squad",
     hook: "Las piezas justas",
-    text: "Activamos solo los craft que tu proyecto necesita. Un hilo director, varios especialistas, cero silos.",
+    text: "Sumamos solo los profesionales que el alcance exige. Un director orquesta; especialistas ejecutan en paralelo.",
   },
   {
     id: "craft",
+    step: "03",
     title: "Producimos con craft",
     hook: "Un solo estándar",
-    text: "Diseño, rodaje, motion y desarrollo avanzan en paralelo con revisiones cortas y decisiones alineadas.",
+    text: "UX, rodaje, motion y desarrollo avanzan juntos. Revisiones cortas, decisiones alineadas, cero silos.",
   },
   {
     id: "lanzamiento",
+    step: "04",
     title: "Lanzamos contigo",
     hook: "Listo para el mundo",
     text: "Entregamos, medimos y afinamos. Tu marca sale coherente en cada canal — digital primero.",
@@ -50,18 +84,21 @@ export const estudioCollective = [
     name: "Dirección Captas",
     role: "UX · Motion · Estrategia",
     bio: "Orquesta el proyecto, define la experiencia y cuida que cada entrega empuje el mismo objetivo.",
+    adds: "Hilo director único",
   },
   {
     id: "produccion",
     name: "Producción",
     role: "Foto · Video · Post",
     bio: "Rodaje, luz y post con look cinematográfico — en terreno cuando hace falta, siempre con visión de marca.",
+    adds: "Craft en imagen y cine",
   },
   {
     id: "red",
     name: "Red senior",
     role: "Branding · Dev · Estrategia",
-    bio: "Colaboradores de confianza que se suman al squad según el alcance. Misma voz, mismo nivel.",
+    bio: "Colaboradores de confianza que entran al squad según el proyecto. Misma voz, mismo nivel.",
+    adds: "Escala sin perder calidad",
   },
 ] as const;
 
