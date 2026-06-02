@@ -142,26 +142,16 @@ export function FooterAssistant() {
                       key={service.id}
                       type="button"
                       onClick={() => pickService(service.id)}
-                      className="rounded-box-lg p-px text-left transition-transform duration-base hover:scale-[1.01]"
-                      style={{ background: service.theme.border }}
+                      className="rounded-box-lg border border-line text-left transition-all duration-base hover:border-accent/40 hover:scale-[1.01]"
                     >
                       <span className="flex h-full flex-col rounded-box-lg bg-ink/80 p-4">
                         <span className="flex items-center gap-3">
                           {Icon ? (
-                            <span
-                              className="flex h-9 w-9 items-center justify-center rounded-xl"
-                              style={{
-                                background: service.theme.soft,
-                                color: service.theme.accent,
-                              }}
-                            >
+                            <span className="flex h-9 w-9 items-center justify-center rounded-xl border border-line-dark bg-bone/10 text-sky">
                               <Icon size={18} />
                             </span>
                           ) : null}
-                          <span
-                            className="font-mono text-[0.62rem] uppercase tracking-[0.12em]"
-                            style={{ color: service.theme.accent }}
-                          >
+                          <span className="font-mono text-[0.62rem] uppercase tracking-[0.12em] text-sky">
                             {service.pillar}
                           </span>
                         </span>
@@ -207,19 +197,10 @@ export function FooterAssistant() {
                 Paso 3 · Tu recomendación
               </p>
 
-              <div
-                className="mt-4 rounded-box-lg p-px"
-                style={{ background: selected.theme.border }}
-              >
-                <div
-                  className="rounded-box-lg p-5 md:p-6"
-                  style={{ background: selected.theme.fill }}
-                >
+              <div className="mt-4 rounded-box-lg border border-line">
+                <div className="rounded-box-lg bg-bone/5 p-5 md:p-6">
                   <div className="rounded-box-lg bg-ink/75 p-5">
-                    <p
-                      className="font-mono text-kicker uppercase tracking-[0.14em]"
-                      style={{ color: selected.theme.accent }}
-                    >
+                    <p className="font-mono text-kicker uppercase tracking-[0.14em] text-sky">
                       {selected.pillar} · Pilar {selected.number}
                     </p>
                     <p className="mt-2 font-heading text-h3 text-bone">{selected.title}</p>

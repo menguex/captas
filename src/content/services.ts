@@ -1,4 +1,4 @@
-import { pillarThemes, type PillarTheme } from "@/lib/brand-palette";
+import { serviceUiTheme, type PillarTheme } from "@/lib/brand-palette";
 
 export type { PillarTheme };
 
@@ -10,8 +10,14 @@ export type Service = {
   description: string;
   deliverables: string[];
   pillar: string;
+  /** Imagen editorial (Unsplash) */
+  image: string;
+  imageAlt: string;
   theme: PillarTheme;
 };
+
+const img = (id: string, w = 1400) =>
+  `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${w}&q=85`;
 
 export const services: Service[] = [
   {
@@ -28,7 +34,9 @@ export const services: Service[] = [
       "Testing y optimización de conversión",
     ],
     pillar: "Experiencia",
-    theme: pillarThemes["ux-ui"],
+    image: img("photo-1558655146-9f40138edfeb"),
+    imageAlt: "Espacio de trabajo de diseño UX con pantallas y bocetos",
+    theme: serviceUiTheme,
   },
   {
     id: "fotografia",
@@ -44,7 +52,9 @@ export const services: Service[] = [
       "Banco de imágenes para campañas",
     ],
     pillar: "Fotografía",
-    theme: pillarThemes.fotografia,
+    image: img("photo-1542038784456-1daac0d7a901"),
+    imageAlt: "Cámara y equipo de fotografía en estudio",
+    theme: serviceUiTheme,
   },
   {
     id: "diseno-web",
@@ -60,7 +70,9 @@ export const services: Service[] = [
       "Optimización Lighthouse 90+",
     ],
     pillar: "Digital",
-    theme: pillarThemes["diseno-web"],
+    image: img("photo-1460925895917-afdab827c52f"),
+    imageAlt: "Pantalla con interfaz web y métricas en escritorio minimal",
+    theme: serviceUiTheme,
   },
   {
     id: "video-cinematografico",
@@ -76,7 +88,9 @@ export const services: Service[] = [
       "Adaptaciones para social y web",
     ],
     pillar: "Cine",
-    theme: pillarThemes["video-cinematografico"],
+    image: img("photo-1478720568477-152d9b164e26"),
+    imageAlt: "Proyección cinematográfica con luz dramática",
+    theme: serviceUiTheme,
   },
   {
     id: "branding",
@@ -92,7 +106,9 @@ export const services: Service[] = [
       "Aplicaciones y lanzamiento",
     ],
     pillar: "Marca",
-    theme: pillarThemes.branding,
+    image: img("photo-1561070791-2526d30994b5"),
+    imageAlt: "Materiales de marca y papelería premium sobre mesa",
+    theme: serviceUiTheme,
   },
 ];
 

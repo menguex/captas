@@ -102,7 +102,6 @@ export function PillarCard({
           <div className="relative z-10 flex items-start justify-between gap-4">
             <PillarIconBadge
               serviceId={service.id}
-              theme={theme}
               size={isFeatured ? "lg" : "md"}
               featured={isFeatured}
             />

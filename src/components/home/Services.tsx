@@ -41,11 +41,7 @@ export function Services() {
             <span key={s.id} className="flex items-center gap-2">
               <Link
                 href={`/servicios#${s.id}`}
-                className="rounded-full px-3 py-1.5 font-mono text-[0.62rem] uppercase tracking-[0.18em] transition-opacity hover:opacity-80"
-                style={{
-                  backgroundColor: s.theme.soft,
-                  color: s.theme.accentInk,
-                }}
+                className="rounded-full border border-line-dark bg-white/80 px-3 py-1.5 font-mono text-[0.62rem] uppercase tracking-[0.18em] text-clay transition-colors hover:border-accent/30 hover:bg-accent/5 hover:text-accent"
               >
                 {s.pillar}
               </Link>

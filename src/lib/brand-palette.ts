@@ -30,7 +30,17 @@ export const captasBrand = {
   indigo: "#5c5478",
 } as const;
 
-/** 5 pilares — matices distintos, saturación contenida */
+/** UI de servicios — un solo acento, sin arcoíris por pilar */
+export const serviceUiTheme: PillarTheme = {
+  border: "linear-gradient(135deg, #8fa3b8 0%, #3d556c 52%, #283d4f 100%)",
+  fill: "#ffffff",
+  glow: "rgba(61, 85, 108, 0.14)",
+  accent: "#3d556c",
+  accentInk: "#283d4f",
+  soft: "rgba(61, 85, 108, 0.08)",
+};
+
+/** 5 pilares — matices distintos (portfolio / casos) */
 export const pillarThemes: Record<string, PillarTheme> = {
   "ux-ui": {
     border: "linear-gradient(135deg, #8fa3b8 0%, #3d556c 52%, #283d4f 100%)",
