@@ -62,7 +62,7 @@ export function ProcessJourney({ className = "", embedded = false }: ProcessJour
                 Cómo trabajamos contigo
               </h2>
             </div>
-            <p className="max-w-xs font-mono text-[0.62rem] uppercase tracking-[0.18em] text-clay">
+            <p className="max-w-xs font-mono text-[0.62rem] uppercase tracking-[0.18em] text-on-light-muted">
               {paused ? "Pausado" : "Auto"} · Toca una etapa
             </p>
           </div>
@@ -79,7 +79,7 @@ export function ProcessJourney({ className = "", embedded = false }: ProcessJour
       ) : (
         <div className="border-b border-line-dark bg-white/50 px-6 py-4 md:px-8">
           <div className="flex flex-wrap items-center justify-between gap-3">
-            <p className="font-mono text-[0.62rem] uppercase tracking-[0.18em] text-clay">
+            <p className="font-mono text-[0.62rem] uppercase tracking-[0.18em] text-on-light-muted">
               {paused ? "Exploración pausada" : "Recorre las 4 etapas"} · Clic para cambiar
             </p>
             <div className="relative h-1 min-w-[8rem] flex-1 overflow-hidden rounded-full bg-line-dark/80 md:max-w-xs">
@@ -170,7 +170,7 @@ export function ProcessJourney({ className = "", embedded = false }: ProcessJour
               <h3 className="mt-3 font-heading text-h1 leading-[1.05] tracking-tight text-ink">
                 {step.title}
               </h3>
-              <p className="mt-5 max-w-2xl text-lead leading-relaxed text-clay">
+              <p className="mt-5 max-w-2xl text-lead leading-relaxed text-on-light-muted">
                 {step.text}
               </p>
 
@@ -221,7 +221,7 @@ function ProcessStepTab({
         compact ? "min-w-[11.5rem] px-4 py-3.5" : "px-4 py-4"
       } ${
         active
-          ? "border-accent bg-white shadow-[0_10px_36px_rgba(61,85,108,0.12)]"
+          ? "border-accent bg-white shadow-[0_10px_36px_rgba(var(--c-accent-rgb),0.14)]"
           : "border-line-dark/80 bg-white/60 hover:border-accent/25 hover:bg-white"
       }`}
     >
@@ -235,21 +235,21 @@ function ProcessStepTab({
       <span className="relative flex items-baseline gap-2">
         <span
           className={`font-mono text-kicker tabular-nums uppercase tracking-[0.2em] ${
-            active ? "text-accent" : "text-clay"
+            active ? "text-accent-deep" : "text-on-light-muted"
           }`}
         >
           {step.number}
         </span>
         <span
           className={`font-heading tracking-tight ${compact ? "text-body" : "text-h3"} ${
-            active ? "text-ink" : "text-clay"
+            active ? "text-ink" : "text-on-light-muted"
           }`}
         >
           {step.title}
         </span>
       </span>
       {!compact ? (
-        <span className="relative mt-1.5 block font-mono text-[0.62rem] uppercase tracking-[0.14em] text-clay">
+        <span className="relative mt-1.5 block font-mono text-[0.62rem] uppercase tracking-[0.14em] text-on-light-subtle">
           {step.subtitle}
         </span>
       ) : null}

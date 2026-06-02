@@ -108,7 +108,7 @@ export function PillarExplorer({
             />
           ))}
 
-          <p className="mt-4 px-2 font-mono text-[0.62rem] uppercase tracking-[0.22em] text-clay">
+          <p className="mt-4 px-2 font-mono text-[0.62rem] uppercase tracking-[0.22em] text-on-light-muted">
             ↑ ↓ para navegar
           </p>
         </nav>
@@ -172,7 +172,7 @@ function PillarTab({
         className={`shrink-0 rounded-full border px-3.5 py-2 font-mono text-[0.62rem] uppercase tracking-[0.16em] transition-colors duration-base focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent ${
           active
             ? "border-accent bg-accent text-bone shadow-[0_4px_20px_rgba(61,85,108,0.25)]"
-            : "border-line-dark bg-white text-clay hover:border-accent/30"
+            : "border-line-dark bg-white text-on-light-muted hover:border-accent/30"
         }`}
       >
         <span className="flex items-center gap-2">
@@ -208,11 +208,11 @@ function PillarTab({
             <span className="font-mono text-[0.62rem] tabular-nums uppercase tracking-[0.2em] text-accent">
               {service.number}
             </span>
-            <span className={`truncate font-heading text-body tracking-tight ${active ? "text-ink" : "text-clay"}`}>
+            <span className={`truncate font-heading text-body tracking-tight ${active ? "text-ink" : "text-on-light-muted"}`}>
               {service.pillar}
             </span>
           </span>
-          <span className="mt-0.5 block truncate text-small leading-snug text-clay">{service.short}</span>
+          <span className="mt-0.5 block truncate text-small leading-snug text-on-light-muted">{service.short}</span>
         </span>
         {progress !== undefined && (
           <span className="absolute inset-x-0 bottom-0 h-0.5 bg-ink/8">

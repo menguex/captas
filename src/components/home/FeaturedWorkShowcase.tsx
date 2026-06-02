@@ -116,7 +116,7 @@ export function FeaturedWorkShowcase({ projects, onOpenCase }: FeaturedWorkShowc
                     variants={reduced ? undefined : serviceOverlayItem}
                     className="flex flex-wrap items-center gap-2"
                   >
-                    <span className="rounded-full border border-bone/20 bg-ink/50 px-3 py-1 font-mono text-kicker uppercase tracking-[0.18em] text-sky-soft">
+                    <span className="rounded-full border border-bone/20 bg-ink/50 px-3 py-1 font-mono text-kicker uppercase tracking-[0.18em] text-sky">
                       {current.category}
                     </span>
                     <span className="font-mono text-kicker uppercase tracking-[0.18em] text-on-ink-muted">
@@ -161,7 +161,7 @@ export function FeaturedWorkShowcase({ projects, onOpenCase }: FeaturedWorkShowc
 
                   <motion.p
                     variants={reduced ? undefined : serviceOverlayItem}
-                    className="mt-5 font-mono text-small uppercase tracking-[0.16em] text-sky-soft"
+                    className="mt-5 font-mono text-small uppercase tracking-[0.16em] text-sky"
                   >
                     {current.result}
                   </motion.p>

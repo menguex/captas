@@ -738,6 +738,13 @@
   animation-play-state: paused;
 }
 
+/* — Listas y enumeraciones editoriales — */
+@layer components {
+  .text-prose {
+    text-wrap: pretty;
+  }
+}
+
 @media (prefers-contrast: more) {
   :root,
   [data-theme="dark"],

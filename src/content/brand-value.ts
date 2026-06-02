@@ -26,8 +26,8 @@ export const brandValueIntro = {
   poster: unsplash("photo-1506905925346-21bda4d32df4"),
   highlights: [
     { value: "+65%", label: "Conversión UX medida" },
-    { value: "+2.4×", label: "Valor percibido de marca" },
-    { value: "5", label: "Pilares en un solo equipo" },
+    { value: "+2.4×", label: "Valor percibido" },
+    { value: "5", label: "Pilares · 1 equipo" },
   ] as const,
   lead:
     "No se trata de verse bien: se trata de que cada interacción —web, foto, motion o video— empuje a tu audiencia hacia una decisión clara.",

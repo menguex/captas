@@ -6,9 +6,9 @@ export const ecosystemIntro = {
   description:
     "Un solo equipo orquesta experiencia, imagen, web, cine y marca — con el azul Captas como hilo conductor y estándar de craft en cada entrega.",
   highlights: [
-    { value: "5", label: "Disciplinas" },
-    { value: "1", label: "Dirección" },
-    { value: "360°", label: "Marca" },
+    { value: "5", label: "Disciplinas integradas" },
+    { value: "1", label: "Equipo directo" },
+    { value: "360°", label: "Visión de marca" },
   ] as const,
 };
 

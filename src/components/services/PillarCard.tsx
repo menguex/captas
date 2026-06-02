@@ -4,6 +4,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import type { PillarTheme, Service } from "@/content/services";
 import { fadeUp } from "@/lib/motion";
+import { ProList } from "@/components/ui/ProList";
 import { PillarIconBadge } from "./PillarIconBadge";
 
 const bentoSpans: Record<Service["id"], string> = {
@@ -106,7 +107,7 @@ export function PillarCard({
               featured={isFeatured}
             />
             <span
-              className="rounded-full border bg-white/80 px-2.5 py-1 font-mono text-kicker tabular-nums text-clay"
+              className="rounded-full border bg-white/80 px-2.5 py-1 font-mono text-kicker tabular-nums text-on-light-muted"
               style={{ borderColor: `${theme.accent}33` }}
             >
               {service.number}
@@ -141,7 +142,7 @@ export function PillarCard({
           </p>
 
           <p
-            className={`relative z-10 mt-3 text-body leading-relaxed text-clay ${
+            className={`relative z-10 mt-3 text-body leading-relaxed text-on-light-muted ${
               isFeatured || variant === "detail"
                 ? "block"
                 : "line-clamp-3 md:line-clamp-4"
@@ -150,16 +151,13 @@ export function PillarCard({
             {service.description}
           </p>
 
-          <div className="relative z-10 mt-auto flex flex-wrap gap-2 pt-6">
-            {service.deliverables.map((d) => (
-              <span
-                key={d}
-                className="inline-flex items-center rounded-xl border bg-white/90 px-3 py-1.5 font-sans text-small text-clay"
-                style={{ borderColor: `${theme.accent}22` }}
-              >
-                {d}
-              </span>
-            ))}
+          <div className="relative z-10 mt-auto pt-6">
+            <ProList
+              tone="light"
+              variant="inline"
+              items={service.deliverables}
+              className="[&_li]:border-accent/15 [&_li]:text-on-light-muted"
+            />
           </div>
 
           <Link

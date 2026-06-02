@@ -6,6 +6,7 @@ import Link from "next/link";
 import { motion, AnimatePresence, useInView } from "framer-motion";
 import { CaptasLockup } from "@/components/brand/CaptasLogo";
 import { ServicesIntegralCta } from "@/components/home/ServicesIntegralCta";
+import { ProList, StatGroup } from "@/components/ui/ProList";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { getPillarIcon } from "@/components/icons";
 import { services } from "@/content/services";
@@ -23,24 +24,6 @@ const ROTATE_MS = 6000;
 type ServicesEcosystemIntroProps = {
   showHeader?: boolean;
 };
-
-function EcosystemHighlights() {
-  return (
-    <ul className="flex flex-wrap items-center justify-center gap-3 sm:gap-4">
-      {ecosystemIntro.highlights.map((h) => (
-        <li
-          key={h.label}
-          className="min-w-[5.5rem] rounded-box-lg border border-line-dark/80 bg-white/90 px-4 py-2.5 text-center shadow-[0_8px_24px_rgba(15,18,24,0.06)] backdrop-blur-sm"
-        >
-          <p className="font-heading text-h3 tabular-nums leading-none text-accent">{h.value}</p>
-          <p className="mt-1 font-mono text-[0.6rem] uppercase tracking-[0.14em] text-on-light-muted">
-            {h.label}
-          </p>
-        </li>
-      ))}
-    </ul>
-  );
-}
 
 type PillarNavProps = {
   active: number;
@@ -216,7 +199,7 @@ export function ServicesEcosystemIntro({ showHeader = true }: ServicesEcosystemI
           }
           description={ecosystemIntro.description}
         >
-          <EcosystemHighlights />
+          <StatGroup stats={ecosystemIntro.highlights} />
           <Link
             href="/servicios"
             className="mt-2 inline-flex items-center gap-1.5 font-mono text-kicker uppercase tracking-[0.16em] text-accent transition-opacity hover:opacity-80"
@@ -348,24 +331,15 @@ export function ServicesEcosystemIntro({ showHeader = true }: ServicesEcosystemI
                       </p>
                     </motion.div>
 
-                    <motion.ul
-                      variants={reduced ? undefined : serviceOverlayItem}
-                      className="relative mt-5 flex flex-wrap gap-2"
-                    >
-                      {current.deliverables.slice(0, 3).map((d) => (
-                        <li
-                          key={d}
-                          className="rounded-full border border-bone/15 bg-ink/55 px-3 py-1.5 text-[0.72rem] leading-snug text-on-ink-muted md:text-small"
-                        >
-                          {d}
-                        </li>
-                      ))}
-                      {current.deliverables.length > 3 ? (
-                        <li className="rounded-full border border-bone/20 px-3 py-1.5 font-mono text-[0.62rem] uppercase tracking-[0.12em] text-sky">
-                          +{current.deliverables.length - 3} entregables
-                        </li>
-                      ) : null}
-                    </motion.ul>
+                    <motion.div variants={reduced ? undefined : serviceOverlayItem} className="relative mt-5">
+                      <ProList
+                        tone="dark"
+                        variant="inline"
+                        items={current.deliverables}
+                        limit={3}
+                        moreLabel={`+${current.deliverables.length - 3} entregables`}
+                      />
+                    </motion.div>
                   </div>
 
                   <motion.div

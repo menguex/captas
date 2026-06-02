@@ -29,8 +29,8 @@ export const services: Service[] = [
       "Diseñamos experiencias digitales centradas en el usuario: research, arquitectura, prototipos y UI systems que guían, retienen y promueven el valor de tu negocio en cada interacción.",
     deliverables: [
       "Research y arquitectura de información",
-      "Wireframes y prototipos interactivos",
-      "Design systems y UI kits",
+      "Wireframes y prototipos validados",
+      "Design system y UI kit",
       "Testing y optimización de conversión",
     ],
     pillar: "Experiencia",
@@ -46,8 +46,8 @@ export const services: Service[] = [
     description:
       "Retratos de marca, producto y territorio con look cinematográfico. Cada frame cuenta una historia y eleva la percepción de valor de tu negocio.",
     deliverables: [
-      "Sesiones de marca y producto",
-      "Fotografía editorial y lifestyle",
+      "Dirección y sesiones de marca",
+      "Fotografía editorial y producto",
       "Retoque y color grading",
       "Banco de imágenes para campañas",
     ],
@@ -66,8 +66,8 @@ export const services: Service[] = [
     deliverables: [
       "Diseño y desarrollo Next.js",
       "Motion y microinteracciones",
-      "E-commerce y CMS",
-      "Optimización Lighthouse 90+",
+      "E-commerce y CMS a medida",
+      "Performance y SEO técnico",
     ],
     pillar: "Digital",
     image: img("photo-1460925895917-afdab827c52f"),
@@ -83,9 +83,9 @@ export const services: Service[] = [
       "Producción audiovisual con sensibilidad de cine. Spots, documentales de marca, contenido para redes y piezas institucionales filmadas en el Limarí y más allá.",
     deliverables: [
       "Concepto y guion creativo",
-      "Rodaje con equipo FX30/RED",
+      "Rodaje cinematográfico en set",
       "Edición, color y sound design",
-      "Adaptaciones para social y web",
+      "Adaptaciones social y web",
     ],
     pillar: "Cine",
     image: img("photo-1478720568477-152d9b164e26"),
@@ -101,8 +101,8 @@ export const services: Service[] = [
       "Estrategia de marca, naming, identidad visual y voz. Construimos sistemas completos que funcionan en papelería, packaging, digital y entorno físico.",
     deliverables: [
       "Estrategia y posicionamiento",
-      "Identidad visual y manual de marca",
-      "Tipografía, color y sistema gráfico",
+      "Identidad visual y manual",
+      "Sistema tipográfico y color",
       "Aplicaciones y lanzamiento",
     ],
     pillar: "Marca",

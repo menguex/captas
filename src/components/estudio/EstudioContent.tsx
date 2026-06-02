@@ -122,10 +122,10 @@ export function EstudioContent() {
                 {step.number}
               </span>
               <h3 className="mt-4 font-heading text-h3 text-bone">{step.title}</h3>
-              <p className="mt-2 font-mono text-[0.65rem] uppercase tracking-[0.14em] text-fog">
+              <p className="mt-2 font-mono text-[0.65rem] uppercase tracking-[0.14em] text-on-ink-muted">
                 {step.subtitle}
               </p>
-              <p className="mt-4 text-body leading-relaxed text-bone/65">
+              <p className="mt-4 text-body leading-relaxed text-on-ink-muted">
                 {step.text}
               </p>
             </motion.li>

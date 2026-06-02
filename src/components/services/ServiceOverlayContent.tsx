@@ -6,6 +6,7 @@ import type { Service } from "@/content/services";
 import { PillarIconBadge } from "@/components/services/PillarIconBadge";
 import { getPillarIcon } from "@/components/icons";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
+import { ProEnumTitle, ProList } from "@/components/ui/ProList";
 import {
   easeOut,
   serviceOverlayItem,
@@ -90,7 +91,7 @@ export function ServiceOverlayContent({
       >
         <div>
           {!isPanel ? (
-            <span className="font-mono text-kicker tabular-nums uppercase tracking-[0.22em] text-sky-soft">
+            <span className="font-mono text-kicker tabular-nums uppercase tracking-[0.22em] text-sky">
               / {service.number}
             </span>
           ) : null}
@@ -117,25 +118,26 @@ export function ServiceOverlayContent({
             </p>
           )}
 
-          <ul
-            className={`grid gap-2 ${isPanel ? "mt-8 sm:grid-cols-2" : `mt-5 space-y-2 border-t border-bone/20 pt-4 ${featured ? "sm:grid-cols-2 sm:gap-x-4" : ""}`}`}
+          <motion.div
+            variants={reduced ? undefined : serviceOverlayItem}
+            className={`${isPanel ? "mt-8" : "mt-5 border-t border-bone/20 pt-5"}`}
           >
-            {service.deliverables.slice(0, deliverableCount).map((d) => (
-              <motion.li
-                key={d}
-                variants={reduced ? undefined : serviceOverlayItem}
-                className="flex items-start gap-2.5 rounded-xl border border-bone/15 bg-ink/55 px-3 py-2.5 text-small leading-relaxed text-on-ink-muted backdrop-blur-sm"
-              >
-                <span
-                  className="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-bone text-[0.6rem] font-bold text-accent-deep"
-                  aria-hidden
-                >
-                  ✓
-                </span>
-                {d}
-              </motion.li>
-            ))}
-          </ul>
+            <ProEnumTitle tone="dark" className="mb-3">
+              Entregables clave
+            </ProEnumTitle>
+            <ProList
+              tone="dark"
+              variant="check"
+              columns={isPanel || featured ? 2 : 1}
+              items={service.deliverables}
+              limit={deliverableCount < service.deliverables.length ? deliverableCount : undefined}
+              moreLabel={
+                deliverableCount < service.deliverables.length
+                  ? `+${service.deliverables.length - deliverableCount} más`
+                  : undefined
+              }
+            />
+          </motion.div>
         </div>
 
         {isPanel ? (
@@ -163,7 +165,7 @@ export function ServiceOverlayContent({
                 →
               </motion.span>
             </Link>
-            <p className="font-mono text-[0.62rem] uppercase tracking-[0.22em] text-on-ink-subtle">
+            <p className="font-mono text-[0.62rem] uppercase tracking-[0.22em] text-on-ink-muted">
               Integrable con otros pilares
             </p>
           </motion.div>
@@ -172,7 +174,7 @@ export function ServiceOverlayContent({
             variants={reduced ? undefined : serviceOverlayItem}
             className="mt-6 flex items-center justify-between gap-4 border-t border-bone/20 pt-5"
           >
-            <span className="font-mono text-kicker font-medium uppercase tracking-[0.18em] text-sky-soft">
+            <span className="font-mono text-kicker font-medium uppercase tracking-[0.18em] text-sky">
               Explorar pilar
             </span>
             <motion.span

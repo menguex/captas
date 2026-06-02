@@ -57,7 +57,7 @@ export function BrandValue() {
 
         <motion.p
           id="filosofia-principios"
-          className="mx-auto mt-14 max-w-2xl text-center font-mono text-kicker uppercase tracking-[0.22em] text-clay md:mt-20"
+          className="mx-auto mt-14 max-w-2xl text-center font-mono text-kicker uppercase tracking-[0.22em] text-on-light-muted md:mt-20"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={viewportOnce}
@@ -108,7 +108,7 @@ export function BrandValue() {
               <p className="mt-3 font-heading text-h2 leading-tight tracking-tight text-ink">
                 ¿Listo para elevar cómo se siente tu marca?
               </p>
-              <p className="mt-3 max-w-xl text-body leading-relaxed text-clay">
+              <p className="mt-3 max-w-xl text-body leading-relaxed text-on-light-muted">
                 Cuéntanos tu objetivo — rebranding, web, video o proyecto integral — y armamos una
                 propuesta con alcance, plazos y el pilar creativo que más impacte ahora.
               </p>

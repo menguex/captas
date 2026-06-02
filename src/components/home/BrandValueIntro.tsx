@@ -6,6 +6,7 @@ import Image from "next/image";
 import { motion, useInView } from "framer-motion";
 import { brandValueIntro } from "@/content/brand-value";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
+import { StatGroup } from "@/components/ui/ProList";
 import { easeOut, viewportOnce } from "@/lib/motion";
 
 export function BrandValueIntro() {
@@ -55,21 +56,9 @@ export function BrandValueIntro() {
 
       <div className="flex flex-col justify-center">
         <p className="text-lead font-medium leading-relaxed text-ink">{brandValueIntro.lead}</p>
-        <p className="mt-4 text-body leading-relaxed text-clay">{brandValueIntro.body}</p>
+        <p className="mt-4 text-body leading-relaxed text-on-light-muted">{brandValueIntro.body}</p>
 
-        <ul className="mt-8 grid gap-3 sm:grid-cols-3">
-          {brandValueIntro.highlights.map((h) => (
-            <li
-              key={h.label}
-              className="rounded-box-lg border border-line-dark bg-white/80 px-4 py-3 text-center backdrop-blur-sm"
-            >
-              <p className="font-heading text-h2 tabular-nums text-accent">{h.value}</p>
-              <p className="mt-1 font-mono text-[0.62rem] uppercase tracking-[0.14em] text-clay">
-                {h.label}
-              </p>
-            </li>
-          ))}
-        </ul>
+        <StatGroup stats={brandValueIntro.highlights} className="mt-8 !justify-start" />
 
         <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
           <Link href="/trabajo" className="gloss-button inline-flex items-center justify-center gap-2">

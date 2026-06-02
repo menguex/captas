@@ -47,7 +47,7 @@ export function Recognition() {
               className="group relative grid grid-cols-[72px_1fr] items-start gap-4 bg-bone px-5 py-4 transition-colors duration-base hover:bg-bone-dim md:grid-cols-[88px_1fr_auto] md:items-center md:gap-8 md:px-8 md:py-5"
             >
               {/* Year */}
-              <span className="pt-0.5 font-mono text-[0.62rem] tabular-nums uppercase tracking-[0.22em] text-clay md:pt-0 md:text-kicker">
+              <span className="pt-0.5 font-mono text-[0.62rem] tabular-nums uppercase tracking-[0.22em] text-on-light-subtle md:pt-0 md:text-kicker">
                 {item.year}
               </span>
 
@@ -56,7 +56,7 @@ export function Recognition() {
                 <h3 className="font-heading text-[1.05rem] leading-snug tracking-tight text-ink transition-colors group-hover:text-accent md:text-h3 md:leading-tight">
                   {item.title}
                 </h3>
-                <p className="mt-1 font-body text-[0.9rem] leading-snug text-clay md:mt-2 md:text-small md:leading-relaxed">
+                <p className="mt-1 font-body text-[0.9rem] leading-snug text-on-light-muted md:mt-2 md:text-small md:leading-relaxed">
                   {item.context}
                 </p>
               </div>

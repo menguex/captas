@@ -4,6 +4,8 @@ import { Suspense } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { site } from "@/content/site";
+import { contactFlowSteps } from "@/content/contact-flow";
+import { ProStepList } from "@/components/ui/ProList";
 import { ContactForm } from "./ContactForm";
 
 const channels = [
@@ -27,24 +29,6 @@ const channels = [
   },
 ] as const;
 
-const steps = [
-  {
-    number: "01",
-    title: "Cuéntanos",
-    text: "Comparte objetivo, plazos y referencias. Cuanto más claro, mejor la propuesta.",
-  },
-  {
-    number: "02",
-    title: "Propuesta",
-    text: "Agendamos una llamada breve y te enviamos alcance, tiempos y inversión.",
-  },
-  {
-    number: "03",
-    title: "Arranque",
-    text: "Definimos equipo, calendario y primer entregable. Tu marca empieza a elevarse.",
-  },
-] as const;
-
 export function ContactPageContent() {
   return (
     <>
@@ -63,7 +47,7 @@ export function ContactPageContent() {
             style={{ transformOrigin: "center" }}
             aria-hidden
           />
-          <p className="font-mono text-kicker uppercase tracking-[0.22em] text-sky/85">
+          <p className="font-mono text-kicker uppercase tracking-[0.22em] text-sky">
             Conversemos
           </p>
         </div>
@@ -91,13 +75,13 @@ export function ContactPageContent() {
             rel={channel.href.startsWith("http") ? "noopener noreferrer" : undefined}
             className="group rounded-box-lg border border-line bg-ink/40 p-5 text-center transition-colors hover:border-accent/40 hover:bg-ink/60 md:p-6"
           >
-            <p className="font-mono text-[0.62rem] uppercase tracking-[0.16em] text-fog">
+            <p className="font-mono text-[0.62rem] uppercase tracking-[0.16em] text-on-ink-muted">
               {channel.label}
             </p>
             <p className="mt-2 font-heading text-body text-bone transition-colors group-hover:text-sky">
               {channel.value}
             </p>
-            <p className="mt-2 font-mono text-[0.6rem] uppercase tracking-[0.12em] text-sky/60">
+            <p className="mt-2 font-mono text-[0.6rem] uppercase tracking-[0.12em] text-on-ink-subtle">
               {channel.hint}
             </p>
           </a>
@@ -112,7 +96,7 @@ export function ContactPageContent() {
         >
           <div className="glass-panel relative overflow-hidden rounded-box-lg border border-white/10 p-6 md:p-8 lg:p-10">
             <div className="relative mb-8 border-b border-line pb-6">
-              <p className="font-mono text-kicker uppercase tracking-[0.16em] text-sky/80">
+              <p className="font-mono text-kicker uppercase tracking-[0.16em] text-sky">
                 Brief de proyecto
               </p>
               <p className="mt-2 text-small text-on-ink-muted">
@@ -121,7 +105,7 @@ export function ContactPageContent() {
             </div>
             <Suspense
               fallback={
-                <p className="relative text-small text-on-ink-subtle">Cargando formulario…</p>
+                <p className="relative text-small text-on-ink-muted">Cargando formulario…</p>
               }
             >
               <ContactForm />
@@ -136,24 +120,11 @@ export function ContactPageContent() {
           transition={{ duration: 0.7, delay: 0.32 }}
         >
           <div className="rounded-box-lg border border-line bg-ink/30 p-6 md:p-8">
-            <p className="font-mono text-kicker uppercase tracking-[0.16em] text-fog">
-              Qué pasa después
-            </p>
-            <ol className="mt-6 space-y-6">
-              {steps.map((step) => (
-                <li key={step.number} className="flex gap-4">
-                  <span className="font-mono text-kicker tabular-nums text-accent">
-                    {step.number}
-                  </span>
-                  <div>
-                    <p className="font-heading text-body text-bone">{step.title}</p>
-                    <p className="mt-1.5 text-small leading-relaxed text-on-ink-muted">
-                      {step.text}
-                    </p>
-                  </div>
-                </li>
-              ))}
-            </ol>
+            <ProStepList
+              steps={contactFlowSteps}
+              tone="dark"
+              title="Qué pasa después"
+            />
           </div>
 
           <div className="rounded-box-lg border border-line bg-ink/30 p-6 md:p-8">

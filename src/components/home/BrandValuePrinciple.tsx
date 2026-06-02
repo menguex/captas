@@ -6,6 +6,7 @@ import Link from "next/link";
 import { motion, useInView } from "framer-motion";
 import type { BrandPrinciple } from "@/content/brand-value";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
+import { ProEnumTitle, ProList } from "@/components/ui/ProList";
 import { easeOut } from "@/lib/motion";
 
 type BrandValuePrincipleProps = {
@@ -33,7 +34,7 @@ export function BrandValuePrinciple({ principle: p, index, isEven }: BrandValueP
         aria-hidden
       >
         <motion.span
-          className="block h-3.5 w-3.5 rounded-full border-2 border-white bg-accent shadow-[0_0_0_4px_rgba(61,85,108,0.15)]"
+          className="block h-3.5 w-3.5 rounded-full border-2 border-white bg-accent shadow-[0_0_0_4px_rgba(var(--c-accent-rgb),0.2)]"
           initial={{ scale: 0.4, opacity: 0 }}
           whileInView={{ scale: 1, opacity: 1 }}
           viewport={{ once: true }}
@@ -98,24 +99,25 @@ export function BrandValuePrinciple({ principle: p, index, isEven }: BrandValueP
             <h3 className="mt-4 font-heading text-h2 leading-[1.05] tracking-tight text-ink">
               {p.title}
             </h3>
-            <p className="mt-3 text-body leading-relaxed text-clay">{p.body}</p>
-            <p className="mt-3 text-small leading-relaxed text-on-light-muted">{p.detail}</p>
+            <p className="mt-3 text-body leading-relaxed text-on-light-muted">{p.body}</p>
+            <p className="mt-3 text-small leading-relaxed text-on-light-subtle">{p.detail}</p>
 
             <div className="mt-5 inline-flex items-baseline gap-2.5 rounded-full border border-line-dark bg-bone/60 px-4 py-2">
               <span className="font-heading text-h3 tabular-nums text-accent">{p.outcome.value}</span>
-              <span className="font-mono text-kicker uppercase tracking-[0.16em] text-clay">
+              <span className="font-mono text-kicker uppercase tracking-[0.16em] text-on-light-muted">
                 {p.outcome.label}
               </span>
             </div>
 
-            <ul className="mt-6 space-y-2 border-t border-line-dark pt-5">
-              {p.deliverables.map((d) => (
-                <li key={d} className="flex items-start gap-2 text-small text-clay">
-                  <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-accent" aria-hidden />
-                  {d}
-                </li>
-              ))}
-            </ul>
+            <div className="mt-6 border-t border-line-dark pt-5">
+              <ProEnumTitle tone="light">Qué entregamos</ProEnumTitle>
+              <ProList
+                tone="light"
+                variant="dot"
+                items={p.deliverables}
+                className="mt-3"
+              />
+            </div>
 
             <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
               <Link

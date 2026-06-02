@@ -68,7 +68,7 @@ export function Footer() {
 
         <div className="grid gap-12 py-14 md:grid-cols-2 lg:grid-cols-4 lg:gap-10">
           <div>
-            <p className="font-mono text-kicker uppercase tracking-[0.22em] text-fog">
+            <p className="font-mono text-kicker uppercase tracking-[0.22em] text-on-ink-muted">
               Navegación
             </p>
             <ul className="mt-6 space-y-3">
@@ -76,7 +76,7 @@ export function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="footer-link text-body text-bone/85 transition-colors hover:text-sky"
+                    className="footer-link text-body text-on-ink-muted transition-colors hover:text-sky"
                   >
                     {link.label}
                   </Link>
@@ -86,7 +86,7 @@ export function Footer() {
           </div>
 
           <div>
-            <p className="font-mono text-kicker uppercase tracking-[0.22em] text-fog">
+            <p className="font-mono text-kicker uppercase tracking-[0.22em] text-on-ink-muted">
               Servicios
             </p>
             <ul className="mt-6 space-y-3">
@@ -94,7 +94,7 @@ export function Footer() {
                 <li key={service.id}>
                   <Link
                     href={`/contacto?servicio=${service.id}`}
-                    className="footer-link text-body text-bone/80 transition-colors hover:text-sky"
+                    className="footer-link text-body text-on-ink-muted transition-colors hover:text-sky"
                   >
                     {service.title}
                   </Link>
@@ -104,10 +104,10 @@ export function Footer() {
           </div>
 
           <div>
-            <p className="font-mono text-kicker uppercase tracking-[0.22em] text-fog">
+            <p className="font-mono text-kicker uppercase tracking-[0.22em] text-on-ink-muted">
               Contacto
             </p>
-            <ul className="mt-6 space-y-3 text-body text-bone/85">
+            <ul className="mt-6 space-y-3 text-body text-on-ink-muted">
               <li>
                 <a
                   href={`mailto:${site.email}`}
@@ -132,7 +132,7 @@ export function Footer() {
           </div>
 
           <div>
-            <p className="font-mono text-kicker uppercase tracking-[0.22em] text-fog">
+            <p className="font-mono text-kicker uppercase tracking-[0.22em] text-on-ink-muted">
               Redes
             </p>
             <ul className="mt-6 space-y-3">
@@ -141,7 +141,7 @@ export function Footer() {
                   <li key={link.href}>
                     <Link
                       href={link.href}
-                      className="footer-link text-body text-bone/85 transition-colors hover:text-sky"
+                      className="footer-link text-body text-on-ink-muted transition-colors hover:text-sky"
                     >
                       {link.label}
                     </Link>
@@ -156,7 +156,7 @@ export function Footer() {
                           ? "noopener noreferrer"
                           : undefined
                       }
-                      className="footer-link text-body text-bone/85 transition-colors hover:text-sky"
+                      className="footer-link text-body text-on-ink-muted transition-colors hover:text-sky"
                     >
                       {link.label}
                     </a>
@@ -178,7 +178,7 @@ export function Footer() {
           ))}
         </div>
 
-        <div className="flex flex-col gap-4 border-t border-line/80 py-6 font-mono text-small tracking-[0.04em] text-fog md:flex-row md:items-center md:justify-between">
+        <div className="flex flex-col gap-4 border-t border-line/80 py-6 font-mono text-small tracking-[0.04em] text-on-ink-muted md:flex-row md:items-center md:justify-between">
           <p>© {year} Captas. Todos los derechos reservados.</p>
           <p className="text-on-ink-muted">
             <LocalTime />

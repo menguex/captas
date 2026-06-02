@@ -32,7 +32,7 @@ export function ServiciosList() {
               {stat.value}
               {stat.suffix}
             </p>
-            <p className="mt-1 font-mono text-[0.65rem] uppercase tracking-[0.14em] text-clay">
+            <p className="mt-1 font-mono text-[0.65rem] uppercase tracking-[0.14em] text-on-light-muted">
               {stat.label}
             </p>
           </motion.div>
@@ -48,7 +48,7 @@ export function ServiciosList() {
         whileInView="visible"
         viewport={viewportOnce}
       >
-        <p className="font-mono text-kicker uppercase tracking-[0.18em] text-clay">
+        <p className="font-mono text-kicker uppercase tracking-[0.18em] text-on-light-muted">
           Lo que dicen las marcas
         </p>
         <p className="mt-5 font-heading text-h3 leading-snug text-ink">
@@ -56,7 +56,7 @@ export function ServiciosList() {
         </p>
         <footer className="mt-6 flex flex-wrap items-baseline gap-x-3 gap-y-1">
           <span className="font-heading text-body text-ink">{featuredQuote.author}</span>
-          <span className="font-mono text-[0.65rem] uppercase tracking-[0.12em] text-clay">
+          <span className="font-mono text-[0.65rem] uppercase tracking-[0.12em] text-on-light-muted">
             {featuredQuote.role} · {featuredQuote.company}
           </span>
         </footer>
@@ -83,7 +83,7 @@ export function ServiciosList() {
           </Link>
           <Link
             href="/trabajo"
-            className="inline-flex items-center justify-center rounded-full border border-line-dark bg-white/90 px-6 py-3 font-sans text-body font-medium text-clay transition-colors hover:border-accent/30 hover:text-accent"
+            className="inline-flex items-center justify-center rounded-full border border-line-dark bg-white/90 px-6 py-3 font-sans text-body font-medium text-on-light-muted transition-colors hover:border-accent/30 hover:text-accent"
           >
             Ver casos →
           </Link>
