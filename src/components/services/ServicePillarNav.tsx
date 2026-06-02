@@ -6,8 +6,8 @@ import { getPillarIcon } from "@/components/icons";
 export function ServicePillarNav() {
   return (
     <nav
-      className="mt-8 flex gap-2 overflow-x-auto pb-1 scrollbar-hide md:mt-10 md:flex-wrap md:justify-center"
-      aria-label="Ir a un pilar"
+      className="mt-6 flex gap-2 overflow-x-auto pb-1 scrollbar-hide md:mt-8 md:flex-wrap md:justify-center"
+      aria-label="Ir al detalle de un pilar"
     >
       {services.map((s) => {
         const Icon = getPillarIcon(s.id);

@@ -4,7 +4,6 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { testimonials } from "@/content/process";
 import { stats } from "@/content/site";
-import { PillarExplorer } from "./PillarExplorer";
 import { ProcessJourney } from "./ProcessJourney";
 import { fadeUp, staggerContainer, viewportOnce } from "@/lib/motion";
 
@@ -13,10 +12,8 @@ export function ServiciosList() {
 
   return (
     <>
-      <PillarExplorer className="mt-12" autoPlay={false} variant="page" />
-
       <motion.div
-        className="mt-14 grid gap-px overflow-hidden rounded-box-lg border border-line-dark bg-line-dark sm:grid-cols-2 lg:grid-cols-4"
+        className="mt-16 grid gap-px overflow-hidden rounded-box-lg border border-line-dark bg-line-dark sm:grid-cols-2 lg:grid-cols-4 md:mt-20"
         variants={staggerContainer}
         initial="hidden"
         whileInView="visible"

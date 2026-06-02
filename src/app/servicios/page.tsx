@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import { ServiciosList } from "@/components/services/ServiciosList";
 import { ServicePillarNav } from "@/components/services/ServicePillarNav";
+import { ServicesPillarGrid } from "@/components/services/ServicesPillarGrid";
 import { ServicesEcosystemIntro } from "@/components/home/ServicesEcosystemIntro";
 import { SectionHeader } from "@/components/ui/SectionHeader";
+import { ecosystemIntro } from "@/content/ecosystem";
 
 export const metadata: Metadata = {
   title: "Servicios — Captas",
@@ -26,20 +28,21 @@ export default function ServiciosPage() {
         <SectionHeader
           as="h1"
           theme="light"
-          kicker="Servicios"
+          kicker={ecosystemIntro.kicker}
           title={
             <>
-              Un ecosistema creativo para{" "}
+              {ecosystemIntro.titleLead}{" "}
               <span className="bg-gradient-to-r from-[#5b61ff] via-accent to-[#0ea5e9] bg-clip-text text-transparent">
-                elevar tu marca.
+                {ecosystemIntro.titleAccent}
               </span>
             </>
           }
-          description="Desde la primera conversación estratégica hasta el último frame editado — un solo equipo, un solo estándar de craft en cada pilar."
+          description={ecosystemIntro.description}
         />
 
         <ServicesEcosystemIntro showHeader={false} />
         <ServicePillarNav />
+        <ServicesPillarGrid />
         <ServiciosList />
       </div>
     </div>
