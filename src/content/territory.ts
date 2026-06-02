@@ -1,10 +1,10 @@
-/** Territorio — Alameda · Plaza Ovalle (fotografía aérea Captas) */
+/** Territorio — Alameda · Plaza Ovalle (FOTO REPORTAJE · Captas) */
 
 export const territoryContent = {
   image: "/images/territory/alameda-plaza-hero.jpg",
   imageAlt:
-    "Vista aérea de la Alameda y plaza de Ovalle — espejo de agua, palmeras y centro urbano del Limarí",
-  imagePosition: "52% 42%",
+    "Reportaje fotográfico — Alameda y plaza de Ovalle, espejo de agua y centro del Limarí",
+  imagePosition: "50% 40%",
   kicker: "Territorio",
   subkicker: "Procedencia como ventaja — no como excusa",
   location: "Alameda · Plaza Ovalle",
