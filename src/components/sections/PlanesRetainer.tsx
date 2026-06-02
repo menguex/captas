@@ -162,7 +162,8 @@ function PlanCard({ plan }: { plan: PlanRetainer }) {
           featured ? "text-on-ink-muted" : "text-on-light-subtle"
         }`}
       >
-        + {formatPrecioCLP(plan.activacion)} activación · 6 meses {formatPrecioCLP(plan.total6m)}
+        + {formatPrecioCLP(plan.activacion)} activación · contrato 6 meses · total{" "}
+        {formatPrecioCLP(plan.total6m)}
       </p>
 
       <div className={`my-5 h-px ${featured ? "bg-line" : "bg-line-dark/50"}`} aria-hidden />
