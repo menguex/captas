@@ -216,7 +216,9 @@ export function EstudioScrollJourney() {
 
             <div className="site-container shrink-0 px-gutter pb-8">
               <p className="text-center font-mono text-[0.55rem] uppercase tracking-[0.2em] text-on-ink-subtle">
-                {active < STEP_COUNT - 1 ? "Sigue deslizando" : estudioFinale.line}
+                {active < STEP_COUNT - 1
+                  ? "Sigue deslizando · el video avanza contigo"
+                  : estudioFinale.line}
               </p>
               <motion.div
                 className="mx-auto mt-3 h-1 max-w-xs overflow-hidden rounded-full bg-white/[0.08]"

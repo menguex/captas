@@ -1,42 +1,68 @@
-/** Medios del recorrido Estudio — fondos por paso */
+/**
+ * Medios — recorrido Estudio (scroll + video scrub)
+ *
+ * AUDITORÍA (criterio narrativo + técnico)
+ * ───────────────────────────────────────
+ * Paso 1 · Brief
+ *   Antes: tráfico nocturno (no conectaba con “un solo brief”).
+ *   Ahora: poster UX/research + video aéreo lento = visión del reto completo.
+ *   Ideal Captas: reunión director + cliente, wireframes en mesa.
+ *
+ * Paso 2 · Squad
+ *   Antes: fuego de chef desconectado del campo Limarí.
+ *   Ahora: foto cooperativa + video producto en manos = foto y producción en terreno.
+ *   Alternativa stock: chef-preparing-a-dish-with-fire (cine). Ideal: BTS FX30 en set.
+ *
+ * Paso 3 · Entrega
+ *   Antes: mismo aéreo que paso 1, poco contraste narrativo.
+ *   Ahora: plaza Ovalle fija + aéreo valle en scrub = territorio y lanzamiento.
+ *   Ideal Captas: pieza final exportada + drone Limarí propio.
+ */
+
+const unsplash = (id: string, w = 1600) =>
+  `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${w}&q=85`;
+
+const mixkit = (slug: string) =>
+  `https://assets.mixkit.co/videos/preview/mixkit-${slug}-large.mp4`;
 
 export type EstudioJourneyMedia = {
   id: string;
   image: string;
   imageAlt: string;
-  video?: string;
+  /** Video scrubbeado con el scroll (sin loop) */
+  video: string;
   objectPosition?: string;
   credit?: string;
+  /** Segundos opcionales del clip a usar (recorte suave) */
+  trim?: { start: number; end?: number };
 };
 
 export const estudioJourneyMedia: readonly EstudioJourneyMedia[] = [
   {
     id: "brief",
-    image:
-      "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1600&q=85",
-    imageAlt: "Equipo revisando un brief creativo en mesa de trabajo",
-    video:
-      "https://assets.mixkit.co/videos/preview/mixkit-city-traffic-at-night-4242-large.mp4",
-    objectPosition: "50% 35%",
-    credit: "Dirección · brief y estrategia",
+    image: unsplash("photo-1460925895917-afdab827c52f"),
+    imageAlt: "Mesa de trabajo con métricas y UX — definición de objetivo y alcance",
+    video: mixkit("aerial-view-of-a-sunny-landscape-4246"),
+    objectPosition: "50% 40%",
+    credit: "Visión · brief y dirección",
+    trim: { start: 0 },
   },
   {
     id: "squad",
-    image:
-      "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=1600&q=85",
-    imageAlt: "Producción en terreno — craft visual Captas",
-    video:
-      "https://assets.mixkit.co/videos/preview/mixkit-chef-preparing-a-dish-with-fire-4370-large.mp4",
-    objectPosition: "50% 45%",
-    credit: "Producción · foto, cine y motion",
+    image: unsplash("photo-1625246333195-78d9c38ad449"),
+    imageAlt: "Campo y producción en el Limarí — squad creativo en terreno",
+    video: mixkit("hands-holding-a-basket-full-of-vegetables-4076"),
+    objectPosition: "50% 42%",
+    credit: "Craft · foto, cine y motion",
+    trim: { start: 0 },
   },
   {
     id: "entrega",
     image: "/images/territory/alameda-plaza-hero.jpg",
-    imageAlt: "Alameda y plaza de Ovalle — territorio Captas",
-    video:
-      "https://assets.mixkit.co/videos/preview/mixkit-aerial-view-of-a-sunny-landscape-4246-large.mp4",
+    imageAlt: "Alameda y plaza de Ovalle — entrega con raíz territorial",
+    video: mixkit("aerial-view-of-a-sunny-landscape-4246"),
     objectPosition: "52% 38%",
     credit: "Reportaje · Alameda y Plaza Ovalle",
+    trim: { start: 0 },
   },
 ] as const;

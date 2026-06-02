@@ -4,51 +4,38 @@ import { useEffect, useRef } from "react";
 import Image from "next/image";
 import { AnimatePresence, motion, useTransform, type MotionValue } from "framer-motion";
 import { estudioJourneyMedia } from "@/content/estudio-media";
+import { useScrollScrubVideo } from "@/hooks/useScrollScrubVideo";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
+import { layerKenBurns, layerOpacity } from "@/lib/estudio-scroll";
 
 const STEP_COUNT = estudioJourneyMedia.length;
-
-function layerOpacity(progress: number, index: number) {
-  const t = progress * STEP_COUNT;
-  const dist = Math.abs(t - index - 0.5) * 2;
-  return Math.max(0, Math.min(1, 1 - dist));
-}
-
-function layerKenBurns(progress: number, index: number) {
-  const t = progress * STEP_COUNT - index;
-  const scale = 1.06 + Math.min(1, Math.max(0, t + 0.15)) * 0.1;
-  const y = `${-2 + t * -5}%`;
-  return { scale, y };
-}
 
 type MediaLayerProps = {
   index: number;
   scrollProgress: MotionValue<number>;
-  active: number;
   media: (typeof estudioJourneyMedia)[number];
 };
 
-function MediaLayer({ index, scrollProgress, active, media }: MediaLayerProps) {
+function MediaLayer({ index, scrollProgress, media }: MediaLayerProps) {
   const reduced = useReducedMotion();
   const videoRef = useRef<HTMLVideoElement>(null);
-
-  const opacity = useTransform(scrollProgress, (v) => layerOpacity(v, index));
-  const scale = useTransform(scrollProgress, (v) => layerKenBurns(v, index).scale);
-  const y = useTransform(scrollProgress, (v) => layerKenBurns(v, index).y);
-
-  const showVideo = !reduced && media.video && active === index;
-
-  useEffect(() => {
-    const el = videoRef.current;
-    if (!el) return;
-    if (showVideo) {
-      el.play().catch(() => {});
-    } else {
-      el.pause();
-    }
-  }, [showVideo]);
-
   const isLocal = media.image.startsWith("/");
+
+  const opacity = useTransform(scrollProgress, (v) => layerOpacity(v, index, STEP_COUNT));
+  const scale = useTransform(scrollProgress, (v) => layerKenBurns(v, index, STEP_COUNT).scale);
+  const y = useTransform(scrollProgress, (v) => layerKenBurns(v, index, STEP_COUNT).y);
+  const videoOpacity = useTransform(scrollProgress, (v) => {
+    const o = layerOpacity(v, index, STEP_COUNT);
+    return reduced ? 0 : Math.min(1, o * 1.12);
+  });
+
+  useScrollScrubVideo(videoRef, {
+    scrollProgress,
+    stepIndex: index,
+    stepCount: STEP_COUNT,
+    enabled: !reduced,
+    trim: media.trim,
+  });
 
   return (
     <motion.div className="absolute inset-0 will-change-transform" style={{ opacity, scale, y }}>
@@ -62,23 +49,24 @@ function MediaLayer({ index, scrollProgress, active, media }: MediaLayerProps) {
         priority={index === 0}
         unoptimized={isLocal}
       />
-      {media.video ? (
-        <video
-          ref={videoRef}
-          src={media.video}
-          muted
-          loop
-          playsInline
-          preload="metadata"
-          className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ${
-            showVideo ? "opacity-100" : "opacity-0"
-          }`}
-          style={{ objectPosition: media.objectPosition ?? "50% 50%" }}
-          aria-hidden
-        />
-      ) : null}
-      <div className="absolute inset-0 bg-ink/70" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_35%,rgba(15,18,24,0.15),rgba(15,18,24,0.88)_72%)]" />
+
+      <motion.video
+        ref={videoRef}
+        src={media.video}
+        poster={media.image}
+        muted
+        playsInline
+        preload={index <= 1 ? "auto" : "metadata"}
+        className="absolute inset-0 h-full w-full object-cover"
+        style={{
+          objectPosition: media.objectPosition ?? "50% 50%",
+          opacity: videoOpacity,
+        }}
+        aria-hidden
+      />
+
+      <div className="absolute inset-0 bg-ink/65" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_32%,rgba(15,18,24,0.1),rgba(15,18,24,0.9)_74%)]" />
     </motion.div>
   );
 }
@@ -89,31 +77,41 @@ type JourneyBackdropProps = {
 };
 
 export function JourneyBackdrop({ scrollProgress, active }: JourneyBackdropProps) {
+  const reduced = useReducedMotion();
   const media = estudioJourneyMedia[active];
+
+  useEffect(() => {
+    if (reduced) return;
+    const links: HTMLLinkElement[] = [];
+    estudioJourneyMedia.forEach((item, i) => {
+      if (i === 0) return;
+      const link = document.createElement("link");
+      link.rel = "preload";
+      link.as = "video";
+      link.href = item.video;
+      document.head.appendChild(link);
+      links.push(link);
+    });
+    return () => links.forEach((l) => l.remove());
+  }, [reduced]);
 
   return (
     <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
       {estudioJourneyMedia.map((item, i) => (
-        <MediaLayer
-          key={item.id}
-          index={i}
-          scrollProgress={scrollProgress}
-          active={active}
-          media={item}
-        />
+        <MediaLayer key={item.id} index={i} scrollProgress={scrollProgress} media={item} />
       ))}
 
-      <div className="absolute inset-0 bg-gradient-to-b from-ink/55 via-ink/25 to-ink/92" />
+      <div className="absolute inset-0 bg-gradient-to-b from-ink/50 via-ink/20 to-ink/90" />
 
       <AnimatePresence mode="wait">
         {media.credit ? (
           <motion.p
             key={active}
             initial={{ opacity: 0, y: 6 }}
-            animate={{ opacity: 0.85, y: 0 }}
+            animate={{ opacity: 0.88, y: 0 }}
             exit={{ opacity: 0, y: -4 }}
             transition={{ duration: 0.45 }}
-            className="absolute bottom-24 right-gutter z-[1] max-w-[14rem] text-right font-mono text-[0.52rem] uppercase tracking-[0.14em] text-bone/45 md:bottom-28"
+            className="absolute bottom-24 right-gutter z-[1] max-w-[14rem] text-right font-mono text-[0.52rem] uppercase tracking-[0.14em] text-bone/50 md:bottom-28"
           >
             {media.credit}
           </motion.p>
@@ -123,7 +121,7 @@ export function JourneyBackdrop({ scrollProgress, active }: JourneyBackdropProps
   );
 }
 
-/** Imagen estática para modo reducido / artículos apilados */
+/** Imagen estática para modo reducido */
 export function JourneyStepMedia({
   stepIndex,
   className = "",
