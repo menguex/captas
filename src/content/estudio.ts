@@ -1,39 +1,72 @@
-export const positioningTechniques = [
+/** Estudio — red creativa online, no espacio físico */
+
+export const estudioHero = {
+  kicker: "Estudio",
+  titleLead: "No es un lugar.",
+  titleAccent: "Es la unión correcta de talento.",
+  body: "Armamos equipos a medida — UX, motion, foto, cine, web y marca — con un solo director de proyecto y un estándar de craft. Online, sin fricción entre proveedores.",
+  onlineTag: "100% remoto · Chile → mundo",
+} as const;
+
+export const estudioOrbitNodes = [
+  { id: "ux", label: "UX/UI", angle: 0 },
+  { id: "motion", label: "Motion", angle: 60 },
+  { id: "foto", label: "Foto", angle: 120 },
+  { id: "cine", label: "Cine", angle: 180 },
+  { id: "web", label: "Web", angle: 240 },
+  { id: "marca", label: "Marca", angle: 300 },
+] as const;
+
+export const estudioModel = [
   {
-    id: "research",
-    title: "Investigación de marca y audiencia",
-    text: "Mapeamos competencia, percepción y motivaciones reales. Sin suposiciones: decisiones basadas en lo que tu público necesita escuchar y sentir.",
+    id: "escucha",
+    title: "Escuchamos el reto",
+    hook: "Brief claro, sin humo",
+    text: "Entendemos negocio, audiencia y plazos. Definimos qué tiene que resolver la experiencia — no solo cómo se ve.",
   },
   {
-    id: "narrativa",
-    title: "Narrativa y posicionamiento verbal",
-    text: "Definimos promesa, tono y mensajes clave que diferencian tu marca. Cada pieza — web, video o redes — habla con una sola voz convincente.",
+    id: "equipo",
+    title: "Armamos el equipo",
+    hook: "Las piezas justas",
+    text: "Activamos solo los craft que tu proyecto necesita. Un hilo director, varios especialistas, cero silos.",
   },
   {
-    id: "sistema-visual",
-    title: "Sistema visual coherente",
-    text: "Color, tipografía, iconografía y reglas de uso que escalan. Tu marca se reconoce al instante, en digital y en físico.",
+    id: "craft",
+    title: "Producimos con craft",
+    hook: "Un solo estándar",
+    text: "Diseño, rodaje, motion y desarrollo avanzan en paralelo con revisiones cortas y decisiones alineadas.",
   },
   {
-    id: "touchpoints",
-    title: "Touchpoints alineados",
-    text: "Web, packaging, redes, presentaciones y entorno. Cada contacto refuerza el mismo valor percibido — sin fisuras entre canales.",
-  },
-  {
-    id: "motion",
-    title: "Motion con propósito",
-    text: "Animación que guía, no decora. Microinteracciones y reveals que comunican jerarquía, confianza y premium sin distraer del mensaje.",
-  },
-  {
-    id: "territorio",
-    title: "Storytelling de territorio",
-    text: "El Limarí como ventaja auténtica: luz de valle, craft local y estándar global. Marcas que se sienten reales, memorables y exportables.",
+    id: "lanzamiento",
+    title: "Lanzamos contigo",
+    hook: "Listo para el mundo",
+    text: "Entregamos, medimos y afinamos. Tu marca sale coherente en cada canal — digital primero.",
   },
 ] as const;
 
-export const estudioNarrative = {
-  who:
-    "Captas es un estudio creativo full-service en Ovalle: UX/UI, motion, foto, video y branding bajo un mismo estándar de craft. No fragmentamos tu marca en proveedores — la elevamos de punta a punta.",
-  limari:
-    "El valle de Limarí nos enseña ritmo, luz y autenticidad. Esa sensibilidad, sumada a procesos de nivel internacional, es lo que hace que las marcas que acompañamos compitan con claridad en Chile y fuera.",
+export const estudioCollective = [
+  {
+    id: "director",
+    name: "Dirección Captas",
+    role: "UX · Motion · Estrategia",
+    bio: "Orquesta el proyecto, define la experiencia y cuida que cada entrega empuje el mismo objetivo.",
+  },
+  {
+    id: "produccion",
+    name: "Producción",
+    role: "Foto · Video · Post",
+    bio: "Rodaje, luz y post con look cinematográfico — en terreno cuando hace falta, siempre con visión de marca.",
+  },
+  {
+    id: "red",
+    name: "Red senior",
+    role: "Branding · Dev · Estrategia",
+    bio: "Colaboradores de confianza que se suman al squad según el alcance. Misma voz, mismo nivel.",
+  },
+] as const;
+
+export const estudioTerritory = {
+  kicker: "Origen · sensibilidad",
+  line: "Raíz en el Limarí. Alcance sin fronteras.",
+  text: "La luz del valle y el criterio global no se excluyen: trabajamos remoto con marcas en Chile y exportación.",
 } as const;

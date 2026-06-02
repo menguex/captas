@@ -1,195 +1,112 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { site } from "@/content/site";
-import { processSteps, team } from "@/content/process";
-import { estudioNarrative, positioningTechniques } from "@/content/estudio";
+import { SplitText } from "@/components/motion/SplitText";
 import { MagneticButton } from "@/components/motion/MagneticButton";
-import { SectionHeader } from "@/components/ui/SectionHeader";
-import { fadeUp, staggerContainer, viewportOnce } from "@/lib/motion";
+import { EstudioOrbit } from "@/components/estudio/EstudioOrbit";
+import { EstudioHowItWorks } from "@/components/estudio/EstudioHowItWorks";
+import { EstudioCollective } from "@/components/estudio/EstudioCollective";
+import { estudioHero, estudioTerritory } from "@/content/estudio";
+import { easeOut, viewportOnce } from "@/lib/motion";
 
 export function EstudioContent() {
   return (
     <>
       <div className="site-container relative">
-        <SectionHeader
-          as="h1"
-          theme="dark"
-          kicker="Estudio"
-          title={site.tagline}
-          description="Nacimos en Ovalle con una convicción: las marcas del Limarí merecen craft de nivel global. Hoy diseñamos experiencias, producimos contenido visual y movemos marcas que compiten en Chile y más allá."
-        />
-      </div>
+        <div className="mx-auto max-w-3xl text-center">
+          <motion.div
+            className="flex items-center justify-center gap-4"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={viewportOnce}
+            transition={{ duration: 0.6 }}
+          >
+            <span className="h-px w-10 bg-gradient-to-r from-transparent to-accent/50" aria-hidden />
+            <p className="font-mono text-kicker uppercase tracking-[0.24em] text-sky">
+              {estudioHero.kicker}
+            </p>
+            <span className="h-px w-10 bg-gradient-to-l from-transparent to-accent/50" aria-hidden />
+          </motion.div>
 
-      <div className="site-container relative mt-16 aspect-[21/9]">
-        <div className="relative h-full w-full overflow-hidden rounded-box-lg">
-          <Image
-            src="https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=1600&q=85"
-            alt="Producción audiovisual Captas en el valle de Limarí"
-            fill
-            className="object-cover"
-            sizes="100vw"
-            priority
+          <SplitText
+            as="h1"
+            text={estudioHero.titleLead}
+            className="mt-8 font-heading text-[clamp(2.25rem,6vw,4.25rem)] font-semibold leading-[1.05] tracking-[-0.04em] text-bone"
+            delay={0.05}
           />
-          <div className="absolute inset-0 bg-ink/35" />
+
+          <motion.p
+            className="mt-3 font-heading text-[clamp(2rem,5.5vw,3.75rem)] font-semibold leading-[1.06] tracking-[-0.038em]"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={viewportOnce}
+            transition={{ delay: 0.35, duration: 0.85, ease: easeOut }}
+          >
+            <span className="text-shimmer-dark">{estudioHero.titleAccent}</span>
+          </motion.p>
+
+          <motion.p
+            className="mx-auto mt-6 max-w-lg text-lead leading-relaxed text-on-ink-muted"
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={viewportOnce}
+            transition={{ delay: 0.5, duration: 0.7, ease: easeOut }}
+          >
+            {estudioHero.body}
+          </motion.p>
+
+          <motion.span
+            className="mt-5 inline-flex rounded-full border border-bone/15 bg-white/[0.06] px-4 py-1.5 font-mono text-[0.62rem] uppercase tracking-[0.16em] text-sky"
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={viewportOnce}
+            transition={{ delay: 0.6, duration: 0.5, ease: easeOut }}
+          >
+            {estudioHero.onlineTag}
+          </motion.span>
+        </div>
+
+        <div className="mt-14 md:mt-20">
+          <EstudioOrbit />
         </div>
       </div>
 
-      <div className="site-container relative mt-20">
-        <motion.div
-          className="mx-auto max-w-3xl text-center"
-          initial={{ opacity: 0, y: 20 }}
+      <div className="site-container relative">
+        <EstudioHowItWorks />
+        <EstudioCollective />
+
+        <motion.section
+          className="mt-20 overflow-hidden rounded-box-lg border border-line bg-gradient-to-br from-ink-soft via-ink-soft to-accent/[0.08] p-6 md:mt-28 md:p-10"
+          initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={viewportOnce}
-          transition={{ duration: 0.7 }}
+          transition={{ duration: 0.8, ease: easeOut }}
         >
-          <p className="font-mono text-kicker uppercase tracking-[0.18em] text-sky/85">
-            Quiénes somos
+          <p className="font-mono text-kicker uppercase tracking-[0.18em] text-terra">
+            {estudioTerritory.kicker}
           </p>
-          <p className="mt-5 text-lead leading-relaxed text-bone/75">
-            {estudioNarrative.who}
+          <p className="mt-3 font-heading text-h2 text-bone md:text-h1">{estudioTerritory.line}</p>
+          <p className="mt-4 max-w-2xl text-body leading-relaxed text-on-ink-muted">
+            {estudioTerritory.text}
           </p>
-          <p className="mt-5 text-body leading-relaxed text-bone/60">
-            {estudioNarrative.limari}
-          </p>
-        </motion.div>
-      </div>
-
-      <section className="site-container relative mt-24">
-        <SectionHeader
-          theme="dark"
-          kicker="Técnicas que funcionan"
-          title="Posicionamiento probado, explicado sin jerga"
-          description="Combinamos research, narrativa, sistema visual y producción para que tu marca se sienta clara, premium y memorable en cada canal."
-        />
+        </motion.section>
 
         <motion.div
-          className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3"
-          variants={staggerContainer}
-          initial="hidden"
-          whileInView="visible"
+          className="mt-14 flex flex-col items-center justify-center gap-5 sm:flex-row md:mt-16"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
           viewport={viewportOnce}
+          transition={{ delay: 0.2 }}
         >
-          {positioningTechniques.map((technique) => (
-            <motion.article
-              key={technique.id}
-              variants={fadeUp}
-              className="rounded-box-lg border border-line bg-ink-soft p-7 transition-colors hover:border-accent/30 md:p-8"
-            >
-              <h3 className="font-heading text-h3 text-bone">{technique.title}</h3>
-              <p className="mt-3 text-body leading-relaxed text-on-ink-muted">
-                {technique.text}
-              </p>
-            </motion.article>
-          ))}
-        </motion.div>
-      </section>
-
-      <section className="site-container relative mt-24">
-        <SectionHeader
-          theme="dark"
-          kicker="Método"
-          title="De la estrategia al lanzamiento, en cuatro fases"
-        />
-
-        <motion.ol
-          className="relative mt-14 space-y-0 md:grid md:grid-cols-4 md:gap-0"
-          variants={staggerContainer}
-          initial="hidden"
-          whileInView="visible"
-          viewport={viewportOnce}
-        >
-          {processSteps.map((step, index) => (
-            <motion.li
-              key={step.id}
-              variants={fadeUp}
-              className="relative border-t border-line py-8 md:border-t-0 md:border-l md:px-6 md:py-0 md:first:border-l-0 md:first:pl-0"
-            >
-              {index < processSteps.length - 1 ? (
-                <span
-                  className="absolute right-0 top-1/2 hidden h-px w-8 -translate-y-1/2 bg-accent/30 md:block"
-                  aria-hidden
-                />
-              ) : null}
-              <p className="font-mono text-kicker uppercase tracking-[0.18em] text-terra">
-                {step.subtitle}
-              </p>
-              <h3 className="mt-3 font-heading text-h3 text-bone">{step.title}</h3>
-              <p className="mt-4 text-body leading-relaxed text-on-ink-muted">
-                {step.text}
-              </p>
-            </motion.li>
-          ))}
-        </motion.ol>
-      </section>
-
-      <section className="site-container relative mt-24">
-        <SectionHeader
-          theme="dark"
-          kicker="Equipo"
-          title="Craft multidisciplinario, una sola voz"
-          description="Director creativo, producción in-house y red senior de estrategia y desarrollo — alineados en el mismo objetivo: elevar tu marca."
-        />
-
-        <motion.div
-          className="mt-12 grid gap-6 md:grid-cols-3"
-          variants={staggerContainer}
-          initial="hidden"
-          whileInView="visible"
-          viewport={viewportOnce}
-        >
-          {team.map((member) => (
-            <motion.article
-              key={member.name}
-              variants={fadeUp}
-              className="flex flex-col rounded-box-lg border border-line bg-ink-soft p-8 transition-colors hover:border-terra/30"
-            >
-              <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-full border border-accent/30 bg-accent/10 font-mono text-kicker text-accent">
-                {member.name.charAt(0)}
-              </div>
-              <h3 className="font-heading text-h3 text-bone">{member.name}</h3>
-              <p className="mt-2 font-mono text-[0.65rem] uppercase tracking-[0.14em] text-terra">
-                {member.role}
-              </p>
-              <p className="mt-4 flex-1 text-body leading-relaxed text-bone/65">
-                {member.bio}
-              </p>
-            </motion.article>
-          ))}
-        </motion.div>
-      </section>
-
-      <div className="site-container relative mt-20">
-        <div className="rounded-box-lg border border-line bg-ink-soft p-8 md:p-12">
-          <p className="font-mono text-kicker uppercase tracking-[0.18em] text-fog">
-            Territorio
-          </p>
-          <p className="mt-4 max-w-2xl text-lead text-bone/75">
-            Desde el Limarí para el mundo. Filmamos con luz de valle, diseñamos
-            con sensibilidad local y ejecutamos con estándar internacional. Esa
-            combinación es nuestra ventaja — y la de las marcas que acompañamos.
-          </p>
-        </div>
-
-        <div className="mt-16 flex flex-col items-center justify-center gap-6 sm:flex-row">
-          <MagneticButton href="/contacto">Trabajemos juntos</MagneticButton>
+          <MagneticButton href="/contacto">Armar mi proyecto</MagneticButton>
           <Link
             href="/servicios"
-            className="font-sans text-body font-medium text-bone/70 transition-colors hover:text-sky"
+            className="font-mono text-kicker uppercase tracking-[0.18em] text-on-ink-muted transition-colors hover:text-sky"
           >
             Ver servicios →
           </Link>
-          <Link
-            href={site.instagram}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="font-mono text-kicker uppercase tracking-[0.16em] text-bone/70 hover:text-terra"
-          >
-            @captas.cl →
-          </Link>
-        </div>
+        </motion.div>
       </div>
     </>
   );
