@@ -53,3 +53,48 @@ export const lineDraw = {
 };
 
 export const viewportOnce = { once: true, margin: "-10% 0px" as const };
+
+/** Servicios — contenido sobre foto */
+export const serviceOverlayStagger = {
+  hidden: {},
+  visible: {
+    transition: { staggerChildren: 0.065, delayChildren: 0.1 },
+  },
+};
+
+export const serviceOverlayItem = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.55, ease: easeOut },
+  },
+};
+
+export const serviceImageReveal = {
+  hidden: { opacity: 0, scale: 1.05 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: { duration: 0.75, ease: easeOut },
+  },
+  exit: {
+    opacity: 0,
+    scale: 1.03,
+    transition: { duration: 0.35, ease: easeOut },
+  },
+};
+
+export const servicePanelReveal = {
+  hidden: { opacity: 0, y: 24 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: easeOut },
+  },
+  exit: {
+    opacity: 0,
+    y: -16,
+    transition: { duration: 0.28, ease: easeOut },
+  },
+};
