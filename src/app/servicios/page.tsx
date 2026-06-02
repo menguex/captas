@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { ServiciosList } from "@/components/services/ServiciosList";
+import { ServicePillarNav } from "@/components/services/ServicePillarNav";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 
 export const metadata: Metadata = {
@@ -29,6 +30,7 @@ export default function ServiciosPage() {
           description="Desde la primera conversación estratégica hasta el último frame editado — un solo equipo, un solo estándar de craft en cada pilar."
         />
 
+        <ServicePillarNav />
         <ServiciosList />
       </div>
     </div>

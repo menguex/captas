@@ -13,9 +13,15 @@ const ease = [0.16, 1, 0.3, 1] as const;
 type PillarExplorerProps = {
   className?: string;
   autoPlay?: boolean;
+  /** En la página /servicios: CTAs y enlaces adaptados */
+  variant?: "page" | "embed";
 };
 
-export function PillarExplorer({ className = "", autoPlay = true }: PillarExplorerProps) {
+export function PillarExplorer({
+  className = "",
+  autoPlay = true,
+  variant = "embed",
+}: PillarExplorerProps) {
   const reduced = useReducedMotion();
   const [active, setActive] = useState(0);
   const [progress, setProgress] = useState(0);
@@ -118,7 +124,7 @@ export function PillarExplorer({ className = "", autoPlay = true }: PillarExplor
         {/* Featured panel */}
         <div className="relative min-h-[min(420px,70vh)]">
           <AnimatePresence mode="wait">
-            <PillarPanel key={service.id} service={service} />
+            <PillarPanel key={service.id} service={service} variant={variant} />
           </AnimatePresence>
         </div>
       </div>
@@ -244,19 +250,26 @@ function PillarTab({
   );
 }
 
-function PillarPanel({ service }: { service: Service }) {
+function PillarPanel({
+  service,
+  variant,
+}: {
+  service: Service;
+  variant: "page" | "embed";
+}) {
   const Icon = getPillarIcon(service.id);
   const { theme } = service;
+  const onPage = variant === "page";
 
   return (
     <motion.article
       id={service.id}
       role="tabpanel"
-      initial={{ opacity: 0, y: 16, filter: "blur(6px)" }}
-      animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-      exit={{ opacity: 0, y: -12, filter: "blur(4px)" }}
-      transition={{ duration: 0.45, ease }}
-      className="scroll-mt-28 rounded-box-lg p-px shadow-[0_20px_60px_rgba(0,122,255,0.1)]"
+      initial={{ opacity: 0, y: 14 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -10 }}
+      transition={{ duration: 0.38, ease }}
+      className="scroll-mt-28 rounded-box-lg p-px shadow-[0_20px_60px_rgba(0,122,255,0.12)]"
       style={{ background: theme.border }}
     >
       <div
@@ -298,7 +311,7 @@ function PillarPanel({ service }: { service: Service }) {
             <h3 className="mt-6 font-heading text-h1 leading-[1.06] tracking-tight text-balance text-ink">
               {service.title}
             </h3>
-            <p className="mt-5 max-w-xl text-lead font-medium leading-relaxed text-ink/85">
+            <p className="mt-5 max-w-xl text-lead font-medium leading-relaxed text-ink">
               {service.short}
             </p>
             <p className="mt-4 max-w-2xl text-body leading-relaxed text-clay">
@@ -325,18 +338,19 @@ function PillarPanel({ service }: { service: Service }) {
             </ul>
           </div>
 
-          <div className="flex flex-col justify-end gap-3 lg:min-w-[200px]">
+          <div className="flex flex-col justify-end gap-3 lg:min-w-[210px]">
             <Link
               href={`/contacto?servicio=${service.id}`}
               className="gloss-button inline-flex items-center justify-center px-6 py-3.5 text-center"
             >
-              Consultar
+              Solicitar propuesta
             </Link>
             <Link
-              href="/servicios"
-              className="inline-flex items-center justify-center rounded-full border border-line-dark bg-white/90 px-6 py-3 font-sans text-body font-medium text-clay transition-colors duration-base hover:border-accent/35 hover:text-accent"
+              href={onPage ? "/trabajo" : "/servicios"}
+              className="inline-flex items-center justify-center gap-2 rounded-full border border-line-dark bg-white/90 px-6 py-3 font-sans text-body font-medium text-clay transition-colors duration-base hover:border-accent/35 hover:text-accent"
             >
-              Todos los servicios
+              {onPage ? "Ver casos de estudio" : "Todos los servicios"}
+              <span aria-hidden>→</span>
             </Link>
             <p className="text-center font-mono text-[0.62rem] uppercase tracking-[0.22em] text-clay lg:text-left">
               Integrable con otros pilares

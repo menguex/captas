@@ -12,8 +12,10 @@ export function ServiciosList() {
 
   return (
     <>
+      <PillarExplorer className="mt-12" autoPlay={false} variant="page" />
+
       <motion.div
-        className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4"
+        className="mt-14 grid gap-px overflow-hidden rounded-box-lg border border-line-dark bg-line-dark sm:grid-cols-2 lg:grid-cols-4"
         variants={staggerContainer}
         initial="hidden"
         whileInView="visible"
@@ -23,18 +25,18 @@ export function ServiciosList() {
           <motion.div
             key={stat.label}
             variants={fadeUp}
-            className="rounded-box-lg border border-line-dark bg-white/70 px-5 py-4 backdrop-blur-sm"
+            className="bg-white px-5 py-5 text-center sm:text-left"
           >
-            <p className="font-heading text-h3 text-accent">
+            <p className="font-heading text-h2 tabular-nums text-accent">
               {stat.value}
               {stat.suffix}
             </p>
-            <p className="mt-1 text-small text-clay">{stat.label}</p>
+            <p className="mt-1 font-mono text-[0.65rem] uppercase tracking-[0.14em] text-clay">
+              {stat.label}
+            </p>
           </motion.div>
         ))}
       </motion.div>
-
-      <PillarExplorer className="mt-14" autoPlay={false} />
 
       <motion.div
         className="mt-16 overflow-hidden rounded-box-lg border border-line-dark bg-white/60"

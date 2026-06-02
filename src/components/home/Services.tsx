@@ -3,16 +3,14 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { SectionHeader } from "@/components/ui/SectionHeader";
+import { ServiceCard } from "@/components/services/ServiceCard";
 import { services } from "@/content/services";
 import { easeOut, viewportOnce } from "@/lib/motion";
 
 export function Services() {
   return (
     <section className="relative overflow-hidden bg-bone py-section text-ink">
-      <div
-        className="pointer-events-none absolute inset-0 mesh-grid opacity-40"
-        aria-hidden
-      />
+      <div className="pointer-events-none absolute inset-0 mesh-grid opacity-40" aria-hidden />
       <div
         className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,rgba(0,122,255,0.08),transparent_55%)]"
         aria-hidden
@@ -28,147 +26,74 @@ export function Services() {
               <span className="text-accent">elevar tu marca.</span>
             </>
           }
-          description="Cinco pilares integrados — explora cada uno, descubre qué entregamos y elige cómo avanzar."
+          description="Cinco disciplinas, un solo equipo — integradas para que cada touchpoint se sienta coherente y premium."
         />
 
+        {/* Ecosystem strip */}
         <motion.div
-          className="mt-14 grid gap-4 md:mt-16 md:grid-cols-2 md:gap-5 lg:grid-cols-3"
-          initial="hidden"
-          whileInView="visible"
+          className="mx-auto mt-10 flex max-w-3xl flex-wrap items-center justify-center gap-2 md:mt-12"
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={viewportOnce}
-          variants={{
-            hidden: {},
-            visible: { transition: { staggerChildren: 0.08, delayChildren: 0.1 } },
-          }}
+          transition={{ duration: 0.7, ease: easeOut }}
         >
-          {services.map((service, i) => {
-            const isFeatured = i === 0;
-            const span = isFeatured ? "lg:col-span-2" : "";
-
-            return (
-              <motion.article
-                key={service.id}
-                variants={{
-                  hidden: { opacity: 0, y: 24 },
-                  visible: {
-                    opacity: 1,
-                    y: 0,
-                    transition: { duration: 0.75, ease: easeOut },
-                  },
+          {services.map((s, i) => (
+            <span key={s.id} className="flex items-center gap-2">
+              <Link
+                href={`/servicios#${s.id}`}
+                className="rounded-full px-3 py-1.5 font-mono text-[0.62rem] uppercase tracking-[0.18em] transition-opacity hover:opacity-80"
+                style={{
+                  backgroundColor: s.theme.soft,
+                  color: s.theme.accentInk,
                 }}
-                className={`group relative overflow-hidden rounded-box-lg p-px transition-shadow duration-base hover:shadow-[0_24px_60px_rgba(0,82,204,0.12)] ${span}`}
-                style={{ background: service.theme.border }}
               >
-                <Link
-                  href={`/servicios#${service.id}`}
-                  className="relative block h-full rounded-box-lg bg-white p-7 md:p-8"
-                >
-                  <div
-                    className="pointer-events-none absolute -right-6 -top-8 font-heading text-[clamp(5rem,12vw,8rem)] leading-none opacity-[0.08]"
-                    style={{ color: service.theme.accent }}
-                    aria-hidden
-                  >
-                    {service.number}
-                  </div>
-                  <div
-                    className="pointer-events-none absolute -left-12 top-1/2 h-44 w-44 -translate-y-1/2 rounded-full blur-3xl opacity-0 transition-opacity duration-slow group-hover:opacity-100"
-                    style={{ backgroundColor: service.theme.soft }}
-                    aria-hidden
-                  />
-
-                  <div className="relative flex h-full flex-col">
-                    <div className="flex items-center justify-between gap-3">
-                      <span
-                        className="font-mono text-kicker tabular-nums uppercase tracking-[0.22em]"
-                        style={{ color: service.theme.accentInk }}
-                      >
-                        / {service.number}
-                      </span>
-                      <span
-                        className="rounded-full px-2.5 py-1 font-mono text-[0.6rem] font-medium uppercase tracking-[0.16em]"
-                        style={{
-                          backgroundColor: service.theme.soft,
-                          color: service.theme.accentInk,
-                        }}
-                      >
-                        {service.pillar}
-                      </span>
-                    </div>
-
-                    <h3 className="mt-7 font-heading text-h3 leading-tight tracking-tight text-ink md:text-h2">
-                      {service.title}
-                    </h3>
-
-                    <p className="mt-3 text-lead leading-relaxed text-clay">
-                      {service.short}
-                    </p>
-
-                    {isFeatured ? (
-                      <p className="mt-4 max-w-xl text-body leading-relaxed text-clay">
-                        {service.description}
-                      </p>
-                    ) : null}
-
-                    <ul className="mt-7 space-y-2 border-t border-line-dark pt-5">
-                      {service.deliverables.slice(0, isFeatured ? 4 : 3).map((d) => (
-                        <li
-                          key={d}
-                          className="flex items-start gap-2.5 text-small text-clay"
-                        >
-                          <span
-                            className="mt-1.5 h-1 w-1 shrink-0 rounded-full"
-                            style={{ background: service.theme.accent }}
-                            aria-hidden
-                          />
-                          <span className="leading-snug">{d}</span>
-                        </li>
-                      ))}
-                    </ul>
-
-                    <div className="mt-auto flex items-center justify-between pt-7">
-                      <span
-                        className="font-mono text-kicker uppercase tracking-[0.18em] transition-colors duration-base"
-                        style={{ color: service.theme.accentInk }}
-                      >
-                        Ver pilar
-                      </span>
-                      <span
-                        className="font-mono text-h3 transition-transform duration-base group-hover:translate-x-1"
-                        style={{ color: service.theme.accentInk }}
-                        aria-hidden
-                      >
-                        →
-                      </span>
-                    </div>
-                  </div>
-                </Link>
-              </motion.article>
-            );
-          })}
+                {s.pillar}
+              </Link>
+              {i < services.length - 1 ? (
+                <span className="hidden text-clay/50 sm:inline" aria-hidden>
+                  ·
+                </span>
+              ) : null}
+            </span>
+          ))}
         </motion.div>
 
+        <div className="mt-12 grid gap-4 md:mt-14 md:grid-cols-2 md:gap-5 lg:grid-cols-3">
+          {services.map((service, i) => (
+            <ServiceCard
+              key={service.id}
+              service={service}
+              featured={i === 0}
+              index={i}
+            />
+          ))}
+        </div>
+
         <motion.div
-          className="mt-12 flex flex-col items-center justify-center gap-5 md:mt-14 md:flex-row md:gap-7"
+          className="mt-14 overflow-hidden rounded-box-lg border border-line-dark bg-gradient-to-br from-white via-white to-accent/[0.05] p-6 text-center md:mt-16 md:p-8"
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={viewportOnce}
           transition={{ duration: 0.8, ease: easeOut }}
         >
-          <Link
-            href="/servicios"
-            className="inline-flex items-center gap-2.5 rounded-full border border-accent/30 bg-white/95 px-6 py-3.5 font-sans text-body font-medium text-ink shadow-[0_8px_24px_rgba(0,122,255,0.08)] transition-[border-color,box-shadow,color] duration-base hover:border-accent hover:text-accent hover:shadow-[0_12px_32px_rgba(0,122,255,0.14)]"
-          >
-            Ver servicios completos
-            <span className="text-accent" aria-hidden>
-              →
-            </span>
-          </Link>
-          <Link
-            href="/contacto"
-            className="font-mono text-small font-medium uppercase tracking-[0.18em] text-ink transition-colors duration-base hover:text-accent"
-          >
-            ¿Proyecto integral? Conversemos →
-          </Link>
+          <p className="font-mono text-kicker uppercase tracking-[0.2em] text-accent">
+            Proyecto integral
+          </p>
+          <p className="mx-auto mt-3 max-w-lg font-heading text-h3 leading-snug text-ink">
+            ¿Necesitas varios pilares? Los combinamos en un solo roadmap, equipo y estándar de craft.
+          </p>
+          <div className="mt-6 flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-5">
+            <Link href="/servicios" className="gloss-button inline-flex items-center gap-2">
+              Ver servicios completos
+              <span aria-hidden>→</span>
+            </Link>
+            <Link
+              href="/contacto"
+              className="font-mono text-small font-medium uppercase tracking-[0.18em] text-ink transition-colors hover:text-accent"
+            >
+              Conversemos →
+            </Link>
+          </div>
         </motion.div>
       </div>
     </section>
