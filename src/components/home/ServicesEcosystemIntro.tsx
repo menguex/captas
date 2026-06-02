@@ -8,12 +8,16 @@ import { SectionHeader } from "@/components/ui/SectionHeader";
 import { getPillarIcon } from "@/components/icons";
 import { services } from "@/content/services";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
-import { easeOut, serviceOverlayStagger, serviceOverlayItem, viewportOnce } from "@/lib/motion";
+import {
+  easeOut,
+  serviceOverlayItem,
+  serviceOverlayStagger,
+  viewportOnce,
+} from "@/lib/motion";
 
-const ROTATE_MS = 5000;
+const ROTATE_MS = 6000;
 
 type ServicesEcosystemIntroProps = {
-  /** En /servicios el título va en la página */
   showHeader?: boolean;
 };
 
@@ -52,11 +56,10 @@ export function ServicesEcosystemIntro({ showHeader = true }: ServicesEcosystemI
               </span>
             </>
           }
-          description="Cinco disciplinas, un solo equipo — integradas para que cada touchpoint se sienta coherente, premium y listo para convertir."
+          description="Explora cada disciplina — foto, UX, web, cine y marca — en un solo equipo con estándar de craft."
         />
       ) : null}
 
-      {/* Vista principal — foto activa + panel */}
       <motion.div
         className={`relative overflow-hidden rounded-box-lg border border-line-dark/70 shadow-[0_20px_64px_rgba(15,18,24,0.12)] ${showHeader ? "mt-12 md:mt-16" : "mt-10"}`}
         initial={reduced ? false : { opacity: 0, y: 28 }}
@@ -64,7 +67,7 @@ export function ServicesEcosystemIntro({ showHeader = true }: ServicesEcosystemI
         viewport={viewportOnce}
         transition={{ duration: 0.85, ease: easeOut }}
       >
-        <div className="relative min-h-[min(340px,52vh)] md:min-h-[min(420px,58vh)]">
+        <div className="relative min-h-[min(480px,70vh)] md:min-h-[min(520px,72vh)]">
           <AnimatePresence mode="wait">
             <motion.div
               key={current.id}
@@ -86,69 +89,104 @@ export function ServicesEcosystemIntro({ showHeader = true }: ServicesEcosystemI
           </AnimatePresence>
 
           <div
-            className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/95 via-ink/50 to-ink/20"
-            aria-hidden
-          />
-          <div
-            className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_80%_20%,transparent_0%,rgba(15,18,24,0.4)_100%)]"
+            className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/95 via-ink/55 to-ink/15"
             aria-hidden
           />
 
-          <motion.div
-            className="relative flex h-full min-h-[inherit] flex-col justify-end p-6 md:p-10"
-            variants={reduced ? undefined : serviceOverlayStagger}
-            initial={reduced ? false : "hidden"}
-            animate={reduced ? undefined : "visible"}
-            key={`panel-${current.id}`}
-          >
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={current.id}
-                initial={reduced ? false : { opacity: 0, y: 14 }}
-                animate={reduced ? undefined : { opacity: 1, y: 0 }}
-                exit={reduced ? undefined : { opacity: 0, y: -10 }}
-                transition={{ duration: 0.35, ease: easeOut }}
-                className="max-w-2xl"
-              >
-                <div className="flex flex-wrap items-center gap-3">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={`detail-${current.id}`}
+              className="relative flex min-h-[inherit] flex-col justify-end"
+              variants={reduced ? undefined : serviceOverlayStagger}
+              initial={reduced ? false : "hidden"}
+              animate={reduced ? undefined : "visible"}
+            >
+              <div className="border-t border-bone/15 bg-ink/90 p-6 backdrop-blur-2xl supports-[backdrop-filter]:bg-ink/82 md:p-8 lg:p-10">
+                <span
+                  className="pointer-events-none absolute right-4 top-2 font-heading text-[clamp(4rem,12vw,7rem)] leading-none text-bone/[0.06] md:right-8"
+                  aria-hidden
+                >
+                  {current.number}
+                </span>
+
+                <motion.div
+                  variants={reduced ? undefined : serviceOverlayItem}
+                  className="relative flex flex-wrap items-center gap-3"
+                >
                   {(() => {
                     const Icon = getPillarIcon(current.id);
                     return Icon ? (
-                      <span className="flex h-11 w-11 items-center justify-center rounded-2xl border border-bone/25 bg-bone/10 text-bone backdrop-blur-md">
+                      <span className="flex h-11 w-11 items-center justify-center rounded-2xl border border-bone/25 bg-bone/10 text-bone">
                         <Icon size={22} />
                       </span>
                     ) : null;
                   })()}
-                  <span className="rounded-full border border-bone/25 bg-ink/45 px-3 py-1 font-mono text-kicker uppercase tracking-[0.2em] text-bone backdrop-blur-md">
+                  <span className="rounded-full border border-bone/25 bg-ink/50 px-3 py-1 font-mono text-kicker uppercase tracking-[0.2em] text-bone">
                     Pilar {current.number} · {current.pillar}
                   </span>
-                </div>
-                <h3 className="mt-5 font-heading text-h2 leading-tight tracking-tight text-bone md:text-h1">
-                  {current.title}
-                </h3>
-                <p className="mt-3 text-lead font-medium leading-relaxed text-bone/90">
-                  {current.short}
-                </p>
-                <Link
-                  href={`/servicios#${current.id}`}
-                  className="mt-6 inline-flex items-center gap-2 font-mono text-kicker uppercase tracking-[0.18em] text-sky-soft transition-colors hover:text-bone"
+                </motion.div>
+
+                <motion.div variants={reduced ? undefined : serviceOverlayItem} className="relative mt-5">
+                  <h3 className="font-heading text-h2 leading-tight tracking-tight text-bone md:text-h1">
+                    {current.title}
+                  </h3>
+                  <p className="mt-3 max-w-2xl text-lead font-medium leading-relaxed text-bone">
+                    {current.short}
+                  </p>
+                  <p className="mt-3 max-w-2xl text-body leading-relaxed text-on-ink-muted">
+                    {current.description}
+                  </p>
+                </motion.div>
+
+                <motion.ul
+                  variants={reduced ? undefined : serviceOverlayItem}
+                  className="relative mt-6 grid gap-2 sm:grid-cols-2"
                 >
-                  Explorar {current.pillar}
-                  <span aria-hidden>→</span>
-                </Link>
-              </motion.div>
-            </AnimatePresence>
-          </motion.div>
+                  {current.deliverables.map((d) => (
+                    <li
+                      key={d}
+                      className="flex items-start gap-2 rounded-xl border border-bone/15 bg-ink/55 px-3 py-2 text-small leading-snug text-on-ink-muted"
+                    >
+                      <span
+                        className="mt-1 flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-bone text-[0.55rem] font-bold text-accent-deep"
+                        aria-hidden
+                      >
+                        ✓
+                      </span>
+                      {d}
+                    </li>
+                  ))}
+                </motion.ul>
+
+                <motion.div
+                  variants={reduced ? undefined : serviceOverlayItem}
+                  className="relative mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap"
+                >
+                  <Link
+                    href={`/servicios#${current.id}`}
+                    className="gloss-button inline-flex items-center justify-center gap-2"
+                  >
+                    Ver pilar completo
+                    <span aria-hidden>→</span>
+                  </Link>
+                  <Link
+                    href={`/contacto?servicio=${current.id}`}
+                    className="inline-flex items-center justify-center gap-2 rounded-full border border-bone/30 bg-bone/10 px-6 py-3 font-mono text-kicker uppercase tracking-[0.14em] text-bone transition-colors hover:border-bone/50 hover:bg-bone/20"
+                  >
+                    Solicitar propuesta
+                  </Link>
+                </motion.div>
+              </div>
+            </motion.div>
+          </AnimatePresence>
         </div>
 
-        {/* Miniaturas — los 5 pilares con imagen */}
         <div
           className="grid grid-cols-5 gap-px border-t border-line-dark/50 bg-line-dark/30"
           role="tablist"
           aria-label="Pilares del ecosistema creativo"
         >
           {services.map((s, i) => {
-            const Icon = getPillarIcon(s.id);
             const isActive = active === i;
             return (
               <button
@@ -159,7 +197,7 @@ export function ServicesEcosystemIntro({ showHeader = true }: ServicesEcosystemI
                 aria-label={`${s.pillar}: ${s.title}`}
                 onClick={() => goTo(i)}
                 className={`group relative aspect-[5/4] overflow-hidden outline-none transition-opacity duration-base focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-accent sm:aspect-[4/3] ${
-                  isActive ? "opacity-100" : "opacity-70 hover:opacity-95"
+                  isActive ? "opacity-100" : "opacity-65 hover:opacity-90"
                 }`}
               >
                 <Image
@@ -175,22 +213,15 @@ export function ServicesEcosystemIntro({ showHeader = true }: ServicesEcosystemI
                   className={`absolute inset-0 transition-colors duration-base ${
                     isActive
                       ? "bg-accent/25 ring-2 ring-inset ring-bone/40"
-                      : "bg-ink/30 group-hover:bg-ink/15"
+                      : "bg-ink/35 group-hover:bg-ink/20"
                   }`}
                 />
-                <span className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink/90 to-transparent px-1.5 py-2 text-center sm:px-2">
-                  <span className="flex flex-col items-center gap-0.5">
-                    {Icon ? (
-                      <span className="hidden text-bone sm:inline">
-                        <Icon size={14} />
-                      </span>
-                    ) : null}
-                    <span className="font-mono text-[0.5rem] uppercase tracking-[0.12em] text-bone/80 sm:text-[0.55rem]">
-                      {s.number}
-                    </span>
-                    <span className="truncate font-heading text-[0.62rem] leading-tight text-bone sm:text-small">
-                      {s.pillar}
-                    </span>
+                <span className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink/90 to-transparent px-1 py-2 text-center">
+                  <span className="font-mono text-[0.5rem] uppercase tracking-[0.12em] text-bone/80 sm:text-[0.55rem]">
+                    {s.number}
+                  </span>
+                  <span className="mt-0.5 block truncate px-1 font-heading text-[0.62rem] leading-tight text-bone sm:text-small">
+                    {s.pillar}
                   </span>
                 </span>
               </button>
@@ -199,33 +230,9 @@ export function ServicesEcosystemIntro({ showHeader = true }: ServicesEcosystemI
         </div>
       </motion.div>
 
-      {/* Pills — acceso rápido */}
-      <motion.div
-        className="mx-auto mt-8 flex max-w-4xl flex-wrap items-center justify-center gap-2"
-        variants={reduced ? undefined : serviceOverlayStagger}
-        initial={reduced ? false : "hidden"}
-        whileInView={reduced ? undefined : "visible"}
-        viewport={viewportOnce}
-      >
-        {services.map((s, i) => (
-          <motion.div key={s.id} variants={reduced ? undefined : serviceOverlayItem}>
-            <Link
-              href={`/servicios#${s.id}`}
-              onMouseEnter={() => goTo(i)}
-              className={`inline-flex items-center gap-2 rounded-full border px-3.5 py-2 font-mono text-[0.62rem] uppercase tracking-[0.16em] transition-all duration-base focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent ${
-                active === i
-                  ? "border-accent bg-accent text-bone shadow-[0_4px_20px_rgba(61,85,108,0.22)]"
-                  : "border-line-dark bg-white/90 text-clay hover:border-accent/30 hover:text-accent"
-              }`}
-            >
-              <span className="relative h-5 w-5 overflow-hidden rounded-full">
-                <Image src={s.image} alt="" fill sizes="24px" className="object-cover" />
-              </span>
-              {s.pillar}
-            </Link>
-          </motion.div>
-        ))}
-      </motion.div>
+      <p className="mx-auto mt-6 max-w-lg text-center font-mono text-[0.62rem] uppercase tracking-[0.18em] text-clay">
+        {paused ? "Exploración pausada" : "Cambia de pilar"} · Clic en una miniatura o espera el recorrido automático
+      </p>
     </div>
   );
 }
