@@ -1,9 +1,8 @@
 "use client";
 
-import { useCallback, useMemo } from "react";
+import { useCallback, useMemo, type RefObject } from "react";
 import { motion } from "framer-motion";
 import { CurvedLoop } from "@/components/motion/CurvedLoop";
-import { heroCurveCut } from "@/content/hero-curve";
 import { heroMarqueeSegments } from "@/content/hero-marquee";
 import { captasBrand } from "@/lib/brand-palette";
 
@@ -18,11 +17,11 @@ const HERO_MARQUEE_TONES = {
 
 type HeroOpticMarqueeProps = {
   active: boolean;
+  scrollScrubRef: RefObject<HTMLElement | null>;
 };
 
-export function HeroOpticMarquee({ active }: HeroOpticMarqueeProps) {
+export function HeroOpticMarquee({ active, scrollScrubRef }: HeroOpticMarqueeProps) {
   const tones = useMemo(() => HERO_MARQUEE_TONES, []);
-  const cut = heroCurveCut;
 
   const segmentColor = useCallback(
     (seg: (typeof heroMarqueeSegments)[number]) =>
@@ -32,7 +31,7 @@ export function HeroOpticMarquee({ active }: HeroOpticMarqueeProps) {
 
   return (
     <motion.div
-      className="hero-optic-marquee relative z-20 w-full"
+      className="relative z-20 w-full"
       initial={{ opacity: 0, y: 20 }}
       animate={active ? { opacity: 1, y: 0 } : {}}
       transition={{ delay: 0.82, duration: 0.8, ease }}
@@ -42,18 +41,14 @@ export function HeroOpticMarquee({ active }: HeroOpticMarqueeProps) {
         segments={heroMarqueeSegments}
         segmentColor={segmentColor}
         separatorColor={tones.separator}
-        speed={3.1}
-        curveAmount={cut.curveAmount}
-        curveTextBaseY={cut.textBaseY}
-        curveStroke
-        curveStrokeOffset={cut.strokeOffset}
-        curveTextOnCut
-        curveShelfFill={cut.fill}
-        curveStrokeColor={cut.edge}
-        viewBoxHeight={cut.viewBoxHeight}
+        curveAmount={400}
         direction="left"
-        interactive
-        containerClassName="min-h-[clamp(11rem,26vw,17rem)]"
+        scrollDriven
+        scrollScrubRef={scrollScrubRef}
+        scrubLoops={2.25}
+        scrubSmoothing={1.15}
+        interactive={false}
+        containerClassName="min-h-[clamp(7.5rem,18vw,12rem)]"
         svgClassName="text-[clamp(2.75rem,7.5vw,6rem)] font-heading tracking-[0.04em]"
         className="font-heading"
       />

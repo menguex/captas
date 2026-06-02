@@ -1,5 +1,6 @@
 "use client";
 
+import { useRef } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { MagneticButton } from "@/components/motion/MagneticButton";
@@ -76,6 +77,7 @@ function AccentWord({
 }
 
 export function Hero() {
+  const heroRef = useRef<HTMLElement>(null);
   const reduced = useReducedMotion();
   const introReady = useIntroReady();
   const lenis = useLenis();
@@ -87,8 +89,9 @@ export function Hero() {
 
   return (
     <section
+      ref={heroRef}
       data-hero
-      className="relative z-[1] flex min-h-[100dvh] flex-col items-center justify-center overflow-x-hidden pb-0 pt-[clamp(5.5rem,12vh,7.5rem)] text-center"
+      className="relative z-[1] flex min-h-[100dvh] flex-col items-center justify-center overflow-x-hidden pb-20 pt-[clamp(5.5rem,12vh,7.5rem)] text-center md:pb-24"
     >
       <div className="pointer-events-none absolute inset-0 mesh-grid opacity-[0.45]" aria-hidden />
 
@@ -202,31 +205,27 @@ export function Hero() {
         </motion.div>
       </div>
 
-      <div className="hero-shelf relative z-20 mt-auto w-full overflow-hidden">
-        <HeroOpticMarquee active={active} />
+      <HeroOpticMarquee active={active} scrollScrubRef={heroRef} />
 
-        <div className="hero-shelf-dock relative -mt-px bg-ink">
-          <motion.button
-            type="button"
-            className="relative z-10 mx-auto flex flex-col items-center gap-2 pb-10 pt-4 md:pb-12 md:pt-5"
-            initial={{ opacity: 0 }}
-            animate={active ? { opacity: 1 } : { opacity: 0 }}
-            transition={{ delay: 1.1, duration: 0.5 }}
-            onClick={scrollToManifesto}
-            aria-label="Ir al manifiesto"
-          >
-            <motion.span
-              className="block h-8 w-px bg-gradient-to-b from-bone/50 to-transparent"
-              animate={active && !reduced ? { scaleY: [0.6, 1, 0.6] } : {}}
-              transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
-              aria-hidden
-            />
-            <span className="font-mono text-[0.62rem] uppercase tracking-[0.24em] text-on-ink-muted transition-colors hover:text-sky">
-              Explorar
-            </span>
-          </motion.button>
-        </div>
-      </div>
+      <motion.button
+        type="button"
+        className="relative z-10 mt-14 flex flex-col items-center gap-2 md:mt-16"
+        initial={{ opacity: 0 }}
+        animate={active ? { opacity: 1 } : { opacity: 0 }}
+        transition={{ delay: 1.1, duration: 0.5 }}
+        onClick={scrollToManifesto}
+        aria-label="Ir al manifiesto"
+      >
+        <motion.span
+          className="block h-8 w-px bg-gradient-to-b from-accent/60 to-transparent"
+          animate={active && !reduced ? { scaleY: [0.6, 1, 0.6] } : {}}
+          transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
+          aria-hidden
+        />
+        <span className="hero-text-subtle font-mono text-[0.62rem] uppercase tracking-[0.24em] transition-colors hover:text-accent">
+          Explorar
+        </span>
+      </motion.button>
 
     </section>
   );

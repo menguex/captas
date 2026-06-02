@@ -543,7 +543,6 @@
 [data-hero] {
   --c-hero-bg: #f0eeea;
   --c-hero-bg-soft: #e8e5e0;
-  --c-hero-cut-edge: rgba(234, 232, 228, 0.2);
   --c-hero-text: #14181e;
   --c-hero-text-muted: #38342c;
   --c-hero-kicker: #0056d6;
@@ -570,21 +569,6 @@
 
 [data-hero] .mesh-grid {
   --c-mesh: var(--c-hero-mesh);
-  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 58%, transparent 78%);
-  mask-image: linear-gradient(to bottom, #000 0%, #000 58%, transparent 78%);
-}
-
-/* Corte curvo hero → manifiesto */
-[data-hero] .hero-shelf {
-  isolation: isolate;
-}
-
-[data-hero] .hero-optic-marquee {
-  margin-bottom: -2px;
-}
-
-[data-hero] .hero-shelf-dock {
-  background-color: var(--c-ink);
 }
 
 /* Header over light hero — dark links on translucent bone */

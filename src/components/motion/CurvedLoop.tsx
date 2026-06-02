@@ -33,6 +33,8 @@ export type CurvedLoopProps = {
   scrollMultiplier?: number;
   scrollScrubRef?: RefObject<HTMLElement | null>;
   scrubLoops?: number;
+  /** Suavizado GSAP ScrollTrigger scrub (más alto = más inercia) */
+  scrubSmoothing?: number | boolean;
   /** Borde del shelf curvo (tono más oscuro bajo el marquee) */
   curveStroke?: boolean;
   /** Desplazamiento Y en viewBox hacia abajo respecto al texto */
@@ -80,6 +82,7 @@ export function CurvedLoop({
   scrollMultiplier = 2.5,
   scrollScrubRef,
   scrubLoops = 3,
+  scrubSmoothing = 0.45,
   curveStroke = false,
   curveStrokeOffset = 12,
   curveShelfFill,
@@ -182,7 +185,7 @@ export function CurvedLoop({
         trigger: scrollScrubRef.current,
         start: "top top",
         end: "bottom top",
-        scrub: 0.45,
+        scrub: scrubSmoothing,
         onUpdate: (self) => {
           if (dragRef.current) return;
           applyOffset(scrubBaseRef.current - self.progress * travel);
@@ -205,6 +208,7 @@ export function CurvedLoop({
     ready,
     reduced,
     scrubLoops,
+    scrubSmoothing,
     applyOffset,
   ]);
 
