@@ -64,7 +64,7 @@ export function SectionHeader({
       {description ? (
         <p
           className={`mx-auto mt-5 max-w-2xl text-lead leading-relaxed text-pretty ${
-            isDark ? "text-on-ink-muted" : "text-clay"
+            isDark ? "text-on-ink-muted" : "text-on-light-muted"
           }`}
         >
           {description}

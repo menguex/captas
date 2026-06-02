@@ -8,6 +8,7 @@ type SplitTextProps = {
   className?: string;
   as?: "h1" | "h2" | "p" | "span";
   delay?: number;
+  align?: "center" | "start";
   /** Play on mount instead of waiting for scroll into view */
   playOnMount?: boolean;
   /** When false, animation stays hidden until playOnMount triggers */
@@ -19,6 +20,7 @@ export function SplitText({
   className = "",
   as: Tag = "span",
   delay = 0,
+  align = "center",
   playOnMount = false,
   active = true,
 }: SplitTextProps) {
@@ -36,7 +38,7 @@ export function SplitText({
   return (
     <Tag className={className}>
       <motion.span
-        className="inline-flex flex-wrap justify-center"
+        className={`inline-flex flex-wrap ${align === "start" ? "justify-start" : "justify-center"}`}
         variants={staggerContainer}
         initial="hidden"
         {...motionProps}

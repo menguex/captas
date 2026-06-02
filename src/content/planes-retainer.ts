@@ -18,8 +18,14 @@ export type PlanRetainer = {
 
 export const planesRetainerHeader = {
   kicker: "Retainer mensual · Compromiso 6 meses",
-  title: "Tu marca, en manos de un equipo completo.",
-  body: "Un valor fijo mensual que incluye todo lo que necesitas para construir presencia real: identidad, contenido, web y video.",
+  titleLine1: "Tu marca,",
+  titleLine2: "en manos de un equipo completo.",
+  body: "Un valor fijo mensual con identidad, contenido, web y video — el squad que necesitas, sin armar proveedores uno a uno.",
+  highlights: [
+    { value: "6", label: "Meses mín." },
+    { value: "4", label: "Planes" },
+    { value: "1", label: "Equipo · 1 factura" },
+  ],
 } as const;
 
 export const planesRetainer: PlanRetainer[] = [
