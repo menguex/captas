@@ -7,7 +7,7 @@ export function Manifesto() {
   return (
     <section
       id="manifiesto"
-      className="manifesto-section home-section-manifesto relative z-[2] overflow-hidden py-[clamp(5rem,12vh,8.5rem)] text-bone"
+      className="manifesto-section home-section-manifesto relative z-[2] -mt-[clamp(4rem,10vh,6.5rem)] overflow-hidden py-[clamp(4rem,9vh,7rem)] text-bone"
       aria-labelledby="manifesto-section-title"
     >
       <ManifestoSectionBackground />

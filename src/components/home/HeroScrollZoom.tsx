@@ -34,7 +34,7 @@ export function HeroScrollZoom({
   const scrimBoost = useTransform(progress, [0, 1], [1, 1.15]);
   const contentY = useTransform(progress, [0, 1], ["0%", "-18%"]);
   const contentScale = useTransform(progress, [0, 1], [1, 0.92]);
-  const contentOpacity = useTransform(progress, [0, 0.78, 1], [1, 1, 0]);
+  const contentOpacity = useTransform(progress, [0, 0.52, 0.78], [1, 1, 0]);
   const meshOpacity = useTransform(progress, [0, 0.9, 1], [0.65, 0.35, 0]);
 
   if (reduced) {
@@ -71,7 +71,7 @@ export function HeroScrollZoom({
       ref={containerRef}
       id="hero"
       data-hero
-      className="hero-scroll-zoom hero-editorial hero-with-spotlight relative z-[1] h-[min(240vh,2100px)]"
+      className="hero-scroll-zoom hero-editorial hero-with-spotlight relative z-[1] h-[min(155vh,1320px)]"
       onMouseMove={onMouseMove}
       onMouseLeave={onMouseLeave}
     >
@@ -136,7 +136,7 @@ export function HeroScrollZoom({
       </div>
 
       <div
-        className="pointer-events-none absolute inset-x-0 bottom-0 z-[5] h-48 bg-gradient-to-t from-ink via-ink/90 to-transparent"
+        className="pointer-events-none absolute inset-x-0 bottom-0 z-[5] h-28 bg-gradient-to-t from-ink via-ink/85 to-transparent md:h-32"
         aria-hidden
       />
     </section>
