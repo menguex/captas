@@ -8,11 +8,12 @@ import { captasBrand } from "@/lib/brand-palette";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
-/** Marquee tones locked to light hero */
 const HERO_MARQUEE_TONES = {
   primary: captasBrand.accentDeep,
-  secondary: "rgba(69, 64, 56, 0.72)",
-  separator: "rgba(0, 122, 255, 0.32)",
+  secondary: "rgba(69, 64, 56, 0.68)",
+  separator: "rgba(0, 122, 255, 0.38)",
+  shelf: "#f0eeea",
+  stroke: "rgba(0, 122, 255, 0.22)",
 } as const;
 
 type HeroOpticMarqueeProps = {
@@ -31,25 +32,33 @@ export function HeroOpticMarquee({ active, scrollScrubRef }: HeroOpticMarqueePro
 
   return (
     <motion.div
-      className="relative z-20 w-full"
-      initial={{ opacity: 0, y: 20 }}
+      className="relative w-full"
+      initial={{ opacity: 0, y: 24 }}
       animate={active ? { opacity: 1, y: 0 } : {}}
-      transition={{ delay: 0.82, duration: 0.8, ease }}
+      transition={{ delay: 0.88, duration: 0.9, ease }}
       aria-label="Servicios: UX/UI, Motion, Branding, Foto, Cine, Web"
     >
+      <div
+        className="pointer-events-none absolute inset-x-0 -top-16 h-24 bg-gradient-to-b from-transparent to-[var(--c-hero-bg)]"
+        aria-hidden
+      />
       <CurvedLoop
         segments={heroMarqueeSegments}
         segmentColor={segmentColor}
         separatorColor={tones.separator}
-        curveAmount={400}
+        curveAmount={380}
         direction="left"
         scrollDriven
         scrollScrubRef={scrollScrubRef}
-        scrubLoops={2.25}
-        scrubSmoothing={1.15}
+        scrubLoops={2.6}
+        scrubSmoothing={1.2}
         interactive={false}
-        containerClassName="min-h-[clamp(7.5rem,18vw,12rem)]"
-        svgClassName="text-[clamp(2.75rem,7.5vw,6rem)] font-heading tracking-[0.04em]"
+        curveStroke
+        curveStrokeColor={tones.stroke}
+        curveShelfFill={tones.shelf}
+        curveTextOnCut
+        containerClassName="min-h-[clamp(8rem,20vw,13rem)]"
+        svgClassName="text-[clamp(2.85rem,7.8vw,6.25rem)] font-heading font-semibold tracking-[0.02em]"
         className="font-heading"
       />
     </motion.div>

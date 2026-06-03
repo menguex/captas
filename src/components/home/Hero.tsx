@@ -1,28 +1,28 @@
 "use client";
 
+import type { ReactNode } from "react";
 import { useRef } from "react";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import Link from "next/link";
 import { MagneticButton } from "@/components/motion/MagneticButton";
+import { HeroBackdrop } from "@/components/home/HeroBackdrop";
 import { HeroOpticMarquee } from "@/components/home/HeroOpticMarquee";
+import { HeroSignalBand } from "@/components/home/HeroSignalBand";
+import { heroContent } from "@/content/hero";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
+import { useSpotlight } from "@/hooks/useSpotlight";
 import { useIntroReady } from "@/hooks/useIntroReady";
 import { useLenis } from "@/providers/LenisProvider";
 import { scrollToId } from "@/lib/scroll";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
-const headline = [
-  { lead: "Marcas que se ", accent: "elevan.", hue: "from-sky-soft via-accent to-accent-deep" },
-  { lead: "Experiencias que ", accent: "perduran.", hue: "from-[#8b85a6] via-terra to-accent-deep" },
-] as const;
-
 function HeroLine({
   children,
   delay,
   active,
 }: {
-  children: React.ReactNode;
+  children: ReactNode;
   delay: number;
   active: boolean;
 }) {
@@ -31,7 +31,7 @@ function HeroLine({
       <motion.div
         initial={active ? { y: "108%", opacity: 0 } : false}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.9, delay, ease }}
+        transition={{ duration: 0.95, delay, ease }}
       >
         {children}
       </motion.div>
@@ -52,36 +52,43 @@ function AccentWord({
 }) {
   return (
     <span className="relative inline-block">
-      <span
-        className={`bg-gradient-to-r bg-clip-text font-extrabold text-transparent ${gradient}`}
-      >
+      <span className={`hero-accent-word bg-gradient-to-r bg-clip-text text-transparent ${gradient}`}>
         {text}
       </span>
       <motion.span
-        className={`absolute -bottom-1 left-0 h-1 rounded-full bg-gradient-to-r ${gradient} blur-[0.2px]`}
-        initial={{ width: 0, opacity: 0 }}
-        animate={active ? { width: "100%", opacity: 1 } : { width: 0, opacity: 0 }}
-        transition={{ duration: 0.7, delay: delay + 0.4, ease }}
+        className={`absolute -bottom-1 left-0 h-[3px] rounded-full bg-gradient-to-r ${gradient} opacity-80`}
+        initial={{ width: 0, scaleX: 0 }}
+        animate={active ? { width: "100%", scaleX: 1 } : { width: 0, scaleX: 0 }}
+        transition={{ duration: 0.75, delay: delay + 0.35, ease }}
+        style={{ transformOrigin: "left center" }}
         aria-hidden
       />
       <motion.span
-        className={`pointer-events-none absolute inset-0 bg-gradient-to-r bg-clip-text text-transparent opacity-0 ${gradient}`}
-        animate={active ? { opacity: [0, 0.5, 0] } : {}}
-        transition={{ duration: 2.4, delay: delay + 0.8, repeat: Infinity, repeatDelay: 4 }}
+        className="hero-accent-flare pointer-events-none absolute -inset-x-2 -inset-y-1 rounded-lg opacity-0"
+        animate={active ? { opacity: [0, 0.35, 0] } : {}}
+        transition={{ duration: 2.2, delay: delay + 0.6, repeat: Infinity, repeatDelay: 3.5 }}
         aria-hidden
-      >
-        {text}
-      </motion.span>
+      />
     </span>
   );
 }
 
 export function Hero() {
   const heroRef = useRef<HTMLElement>(null);
+  const { onMove, onLeave } = useSpotlight();
   const reduced = useReducedMotion();
   const introReady = useIntroReady();
   const lenis = useLenis();
   const active = reduced || introReady;
+
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"],
+  });
+
+  const contentY = useTransform(scrollYProgress, [0, 1], [0, reduced ? 0 : 72]);
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.72], [1, reduced ? 1 : 0.15]);
+  const marqueeY = useTransform(scrollYProgress, [0, 1], [0, reduced ? 0 : 28]);
 
   const scrollToManifesto = () => {
     scrollToId("manifiesto", lenis);
@@ -91,142 +98,176 @@ export function Hero() {
     <section
       ref={heroRef}
       data-hero
-      className="relative z-[1] flex min-h-[100dvh] flex-col items-center justify-center overflow-x-hidden pb-20 pt-[clamp(5.5rem,12vh,7.5rem)] text-center md:pb-24"
+      className="hero-with-spotlight relative z-[1] flex min-h-[100dvh] flex-col overflow-x-hidden text-center"
+      onMouseMove={onMove}
+      onMouseLeave={onLeave}
     >
-      <div className="pointer-events-none absolute inset-0 mesh-grid opacity-[0.45]" aria-hidden />
+      <HeroBackdrop active={active} />
 
-      {/* Ambient orbs — tonos de los 5 pilares, tuned for light surface */}
-      <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
-        <motion.div
-          className="absolute left-1/2 top-[8%] h-[min(420px,55vw)] w-[min(420px,55vw)] -translate-x-1/2 rounded-full"
-          style={{
-            background:
-              "radial-gradient(circle, rgba(61,85,108,0.14) 0%, rgba(125,146,168,0.06) 40%, transparent 70%)",
-          }}
-          animate={active ? { scale: [1, 1.06, 1] } : {}}
-          transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
-        />
-        <motion.div
-          className="absolute -left-[12%] top-[32%] h-[min(240px,32vw)] w-[min(240px,32vw)] rounded-full blur-3xl"
-          style={{ backgroundColor: "rgba(154,123,82,0.1)" }}
-          animate={active ? { x: [0, 28, 0], y: [0, -18, 0] } : {}}
-          transition={{ duration: 13, repeat: Infinity, ease: "easeInOut" }}
-        />
-        <motion.div
-          className="absolute -right-[10%] bottom-[18%] h-[min(200px,28vw)] w-[min(200px,28vw)] rounded-full blur-3xl"
-          style={{ backgroundColor: "rgba(77,114,100,0.1)" }}
-          animate={active ? { x: [0, -24, 0], y: [0, 14, 0] } : {}}
-          transition={{ duration: 11, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-        />
-        <motion.div
-          className="absolute right-[15%] top-[22%] h-[min(160px,22vw)] w-[min(160px,22vw)] rounded-full blur-3xl"
-          style={{ backgroundColor: "rgba(107,68,68,0.08)" }}
-          animate={active ? { scale: [1, 1.12, 1] } : {}}
-          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-        />
-        <div
-          className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent/35 to-transparent"
-          aria-hidden
-        />
-      </div>
-
-      <div className="relative z-10 site-container flex w-full max-w-5xl flex-col items-center">
-        <motion.div
-          className="flex items-center gap-3"
-          initial={active ? { opacity: 0, y: 12 } : false}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease }}
-        >
-          <motion.span
-            className="h-px bg-gradient-to-r from-transparent to-accent"
-            initial={{ width: 0 }}
-            animate={active ? { width: 48 } : { width: 0 }}
-            transition={{ duration: 0.8, delay: 0.1, ease }}
-            aria-hidden
-          />
-          <p className="hero-kicker font-mono text-kicker uppercase tracking-[0.24em]">
-            Agencia creativa · Limarí, Chile
-          </p>
-          <motion.span
-            className="h-px bg-gradient-to-l from-transparent to-accent"
-            initial={{ width: 0 }}
-            animate={active ? { width: 48 } : { width: 0 }}
-            transition={{ duration: 0.8, delay: 0.1, ease }}
-            aria-hidden
-          />
-        </motion.div>
-
-        <h1 className="hero-headline mt-8 w-full font-heading text-hero font-extrabold leading-[0.92] tracking-[-0.05em] text-balance [text-wrap:balance] [filter:drop-shadow(0_18px_36px_rgba(0,0,0,0.10))] md:mt-10">
-          {headline.map((line, i) => (
-            <HeroLine key={line.accent} delay={0.2 + i * 0.16} active={active}>
-              <span className="block">
-                {line.lead}
-                <AccentWord
-                  text={line.accent}
-                  active={active}
-                  delay={0.2 + i * 0.16}
-                  gradient={line.hue}
-                />
-              </span>
-            </HeroLine>
-          ))}
-        </h1>
-
-        <motion.p
-          className="hero-text-muted mt-8 max-w-2xl text-lead font-semibold leading-relaxed text-pretty"
-          initial={active ? { opacity: 0, y: 16 } : false}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: active ? 0.55 : 0, duration: 0.85, ease }}
-        >
-          UX/UI, motion, fotografía, video cinematográfico y branding — integrados
-          para que tu marca se sienta premium y convierta.
-        </motion.p>
-
-        <motion.div
-          className="mt-10 flex flex-wrap items-center justify-center gap-5"
-          initial={active ? { opacity: 0, y: 16 } : false}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: active ? 0.68 : 0, duration: 0.8, ease }}
-        >
-          <MagneticButton href="/contacto">Iniciar proyecto</MagneticButton>
-          <Link
-            href="/trabajo"
-            className="hero-text-subtle inline-flex items-center gap-2 font-mono text-kicker uppercase tracking-[0.22em] transition-colors hover:text-accent"
+      <motion.div
+        className="relative z-10 flex flex-1 flex-col items-center justify-center px-gutter pb-6 pt-[clamp(5.5rem,12vh,7.5rem)] md:pb-8"
+        style={{ y: contentY, opacity: contentOpacity }}
+      >
+        <div className="site-container flex w-full max-w-5xl flex-col items-center">
+          <motion.div
+            className="hero-glass-chip flex flex-wrap items-center justify-center gap-2"
+            initial={active ? { opacity: 0, y: 10 } : false}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.55, ease }}
           >
-            Ver trabajo
-            <motion.span
-              animate={active ? { x: [0, 4, 0] } : {}}
-              transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
-              aria-hidden
-            >
-              →
-            </motion.span>
-          </Link>
-        </motion.div>
-      </div>
+            <span className="relative flex h-2 w-2">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent/40 opacity-75" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
+            </span>
+            <span className="font-mono text-[0.58rem] uppercase tracking-[0.2em] text-accent">
+              {heroContent.status}
+            </span>
+          </motion.div>
 
-      <HeroOpticMarquee active={active} scrollScrubRef={heroRef} />
+          <motion.div
+            className="mt-5 flex items-center gap-3 md:mt-6"
+            initial={active ? { opacity: 0, y: 12 } : false}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.06, ease }}
+          >
+            <motion.span
+              className="h-px bg-gradient-to-r from-transparent to-accent"
+              initial={{ width: 0 }}
+              animate={active ? { width: 56 } : { width: 0 }}
+              transition={{ duration: 0.85, delay: 0.12, ease }}
+              aria-hidden
+            />
+            <p className="hero-kicker font-mono text-kicker uppercase tracking-[0.24em]">
+              {heroContent.kicker}
+            </p>
+            <motion.span
+              className="h-px bg-gradient-to-l from-transparent to-accent"
+              initial={{ width: 0 }}
+              animate={active ? { width: 56 } : { width: 0 }}
+              transition={{ duration: 0.85, delay: 0.12, ease }}
+              aria-hidden
+            />
+          </motion.div>
+
+          <div className="hero-headline-frame relative mt-7 w-full md:mt-9">
+            <div className="hero-headline-glow pointer-events-none absolute inset-0" aria-hidden />
+            <h1 className="hero-headline relative font-heading text-hero font-extrabold leading-[0.9] tracking-[-0.05em] text-balance [text-wrap:balance] md:leading-[0.88]">
+              {heroContent.lines.map((line, i) => (
+                <HeroLine key={line.id} delay={0.18 + i * 0.14} active={active}>
+                  <span className="block">
+                    {line.lead}
+                    <AccentWord
+                      text={line.accent}
+                      active={active}
+                      delay={0.18 + i * 0.14}
+                      gradient={line.gradient}
+                    />
+                  </span>
+                </HeroLine>
+              ))}
+            </h1>
+          </div>
+
+          <motion.p
+            className="hero-text-muted mt-7 max-w-2xl text-lead font-medium leading-relaxed text-pretty md:mt-8"
+            initial={active ? { opacity: 0, y: 16 } : false}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.52, duration: 0.85, ease }}
+          >
+            {heroContent.subline}
+          </motion.p>
+
+          <motion.ul
+            className="mt-6 flex flex-wrap justify-center gap-2"
+            role="list"
+            initial={active ? { opacity: 0, y: 12 } : false}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.58, duration: 0.7, ease }}
+          >
+            {heroContent.crafts.map((craft, i) => (
+              <motion.li
+                key={craft}
+                initial={active ? { opacity: 0, scale: 0.92 } : false}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.62 + i * 0.04, duration: 0.4, ease }}
+              >
+                <span className="hero-craft-pill inline-flex rounded-full border border-accent/15 bg-white/50 px-3 py-1.5 font-mono text-[0.58rem] uppercase tracking-[0.14em] text-[var(--c-hero-text-muted)] backdrop-blur-sm">
+                  {craft}
+                </span>
+              </motion.li>
+            ))}
+          </motion.ul>
+
+          <motion.div
+            className="mt-9 flex flex-wrap items-center justify-center gap-4 md:mt-10 md:gap-5"
+            initial={active ? { opacity: 0, y: 16 } : false}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.68, duration: 0.8, ease }}
+          >
+            <MagneticButton href="/contacto">{heroContent.ctaPrimary}</MagneticButton>
+            <Link
+              href="/trabajo"
+              className="hero-text-subtle inline-flex items-center gap-2 rounded-full border border-[rgba(20,24,30,0.12)] bg-white/40 px-5 py-3 font-mono text-kicker uppercase tracking-[0.2em] backdrop-blur-sm transition-colors hover:border-accent/35 hover:text-accent"
+            >
+              {heroContent.ctaSecondary}
+              <motion.span
+                animate={active && !reduced ? { x: [0, 4, 0] } : {}}
+                transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
+                aria-hidden
+              >
+                →
+              </motion.span>
+            </Link>
+          </motion.div>
+
+          <motion.dl
+            className="mt-10 grid w-full max-w-lg grid-cols-3 gap-3 border-t border-accent/10 pt-8 md:mt-12"
+            initial={active ? { opacity: 0, y: 14 } : false}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.78, duration: 0.75, ease }}
+          >
+            {heroContent.metrics.map((m) => (
+              <div key={m.label} className="text-center">
+                <dt className="sr-only">{m.label}</dt>
+                <dd className="font-heading text-h3 font-semibold tracking-tight text-[var(--c-hero-text)]">
+                  {m.value}
+                </dd>
+                <dd className="mt-1 font-mono text-[0.55rem] uppercase tracking-[0.14em] text-[var(--c-on-light-subtle)]">
+                  {m.label}
+                </dd>
+              </div>
+            ))}
+          </motion.dl>
+        </div>
+      </motion.div>
+
+      <HeroSignalBand active={active} />
+
+      <motion.div className="relative z-20 w-full" style={{ y: marqueeY }}>
+        <HeroOpticMarquee active={active} scrollScrubRef={heroRef} />
+      </motion.div>
 
       <motion.button
         type="button"
-        className="relative z-10 mt-14 flex flex-col items-center gap-2 md:mt-16"
+        className="relative z-10 mx-auto mb-8 mt-6 flex flex-col items-center gap-2 md:mb-10 md:mt-8"
         initial={{ opacity: 0 }}
         animate={active ? { opacity: 1 } : { opacity: 0 }}
-        transition={{ delay: 1.1, duration: 0.5 }}
+        transition={{ delay: 1.05, duration: 0.5 }}
         onClick={scrollToManifesto}
         aria-label="Ir al manifiesto"
       >
-        <motion.span
-          className="block h-8 w-px bg-gradient-to-b from-accent/60 to-transparent"
-          animate={active && !reduced ? { scaleY: [0.6, 1, 0.6] } : {}}
-          transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
-          aria-hidden
-        />
+        <span className="hero-scroll-ring flex h-11 w-7 items-start justify-center rounded-full border border-accent/25 p-1.5">
+          <motion.span
+            className="block h-2 w-1 rounded-full bg-accent"
+            animate={active && !reduced ? { y: [0, 10, 0], opacity: [1, 0.35, 1] } : {}}
+            transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
+            aria-hidden
+          />
+        </span>
         <span className="hero-text-subtle font-mono text-[0.62rem] uppercase tracking-[0.24em] transition-colors hover:text-accent">
-          Explorar
+          {heroContent.scrollLabel}
         </span>
       </motion.button>
-
     </section>
   );
 }

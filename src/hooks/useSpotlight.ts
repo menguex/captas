@@ -4,30 +4,35 @@ import { useCallback, useRef } from "react";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 
 /**
- * Spotlight hook — agrega un efecto sutil de luz que sigue el cursor.
- * Setea CSS vars --mx y --my (en %) sobre el elemento.
- * Úsalo con: background: radial-gradient(circle at var(--mx) var(--my), ...)
+ * Spotlight — luz sutil que sigue el cursor.
+ * Setea CSS vars --mx y --my (en %) sobre el elemento que recibe el evento.
  */
 export function useSpotlight() {
-  const ref = useRef<HTMLDivElement>(null);
+  const ref = useRef<HTMLElement>(null);
   const reduced = useReducedMotion();
 
-  const onMove = useCallback(
-    (e: React.MouseEvent<HTMLElement>) => {
-      if (reduced || !ref.current) return;
-      const rect = ref.current.getBoundingClientRect();
-      const x = ((e.clientX - rect.left) / rect.width) * 100;
-      const y = ((e.clientY - rect.top) / rect.height) * 100;
-      ref.current.style.setProperty("--mx", `${x}%`);
-      ref.current.style.setProperty("--my", `${y}%`);
+  const apply = useCallback(
+    (el: HTMLElement, clientX: number, clientY: number) => {
+      if (reduced) return;
+      const rect = el.getBoundingClientRect();
+      const x = ((clientX - rect.left) / rect.width) * 100;
+      const y = ((clientY - rect.top) / rect.height) * 100;
+      el.style.setProperty("--mx", `${x}%`);
+      el.style.setProperty("--my", `${y}%`);
     },
     [reduced]
   );
 
-  const onLeave = useCallback(() => {
-    if (!ref.current) return;
-    ref.current.style.setProperty("--mx", `50%`);
-    ref.current.style.setProperty("--my", `50%`);
+  const onMove = useCallback(
+    (e: React.MouseEvent<HTMLElement>) => {
+      apply(e.currentTarget, e.clientX, e.clientY);
+    },
+    [apply]
+  );
+
+  const onLeave = useCallback((e: React.MouseEvent<HTMLElement>) => {
+    e.currentTarget.style.setProperty("--mx", "50%");
+    e.currentTarget.style.setProperty("--my", "42%");
   }, []);
 
   return { ref, onMove, onLeave };
