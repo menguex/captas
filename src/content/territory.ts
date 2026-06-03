@@ -1,4 +1,7 @@
-/** Imagen territorial — footer global (Alameda · Plaza Ovalle) */
+/**
+ * Imagen territorial — ventana en el footer (no full-bleed).
+ * Cambia `src` por otra en /public/images/territory/ si actualizas el reportaje.
+ */
 
 export const footerTerritoryImage = {
   src: "/images/territory/alameda-plaza-hero.jpg",
