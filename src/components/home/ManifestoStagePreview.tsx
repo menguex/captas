@@ -14,7 +14,7 @@ export function ManifestoStagePreview({ stage }: ManifestoStagePreviewProps) {
       id={`manifesto-stage-${stage.id}`}
       role="tabpanel"
       aria-labelledby={`manifesto-tab-${stage.id}`}
-      className="manifesto-stage-preview"
+      className="manifesto-stage-preview manifesto-stage-preview--open"
       initial={{ opacity: 0, y: 10, scale: 0.98 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
       exit={{ opacity: 0, y: -8, scale: 0.98 }}
@@ -22,9 +22,12 @@ export function ManifestoStagePreview({ stage }: ManifestoStagePreviewProps) {
       aria-hidden
     >
       <div className="manifesto-stage-preview-chrome">
-        <span className="manifesto-stage-dot manifesto-stage-dot--r" />
-        <span className="manifesto-stage-dot manifesto-stage-dot--y" />
-        <span className="manifesto-stage-dot manifesto-stage-dot--g" />
+        <svg className="manifesto-stage-corner manifesto-stage-corner--tl" viewBox="0 0 16 16" aria-hidden>
+          <path d="M2 14V2h12" stroke="currentColor" strokeWidth="1.25" fill="none" />
+        </svg>
+        <svg className="manifesto-stage-corner manifesto-stage-corner--tr" viewBox="0 0 16 16" aria-hidden>
+          <path d="M14 14V2H2" stroke="currentColor" strokeWidth="1.25" fill="none" />
+        </svg>
         <span className="manifesto-stage-pillar">{stage.pillar}</span>
       </div>
 

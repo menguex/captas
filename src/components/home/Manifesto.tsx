@@ -1,19 +1,22 @@
 "use client";
 
+import { ManifestoDesignField } from "@/components/home/ManifestoDesignField";
 import { ManifestoStatement } from "@/components/home/ManifestoStatement";
 
 export function Manifesto() {
   return (
     <section
       id="manifiesto"
-      className="home-section-manifesto relative z-[2] overflow-hidden bg-ink py-[clamp(4.5rem,11vh,7.5rem)] text-bone"
+      className="manifesto-section home-section-manifesto relative z-[2] overflow-hidden bg-ink py-[clamp(5rem,12vh,8.5rem)] text-bone"
       aria-labelledby="manifesto-section-title"
     >
       <div className="pointer-events-none absolute inset-0" aria-hidden>
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,rgba(91,97,255,0.2),transparent_58%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_100%,rgba(0,122,255,0.1),transparent_50%)]" />
-        <div className="absolute inset-0 mesh-grid opacity-[0.06]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_30%_0%,rgba(91,97,255,0.22),transparent_55%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_80%_100%,rgba(0,122,255,0.12),transparent_50%)]" />
+        <div className="absolute inset-0 mesh-grid opacity-[0.05]" />
       </div>
+
+      <ManifestoDesignField />
 
       <div className="site-container relative z-[1]">
         <ManifestoStatement />

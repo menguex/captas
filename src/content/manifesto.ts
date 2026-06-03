@@ -43,6 +43,7 @@ export const manifestoStages: readonly ManifestoStage[] = [
 export const manifestoContent = {
   kicker: "Manifiesto",
   issue: "001",
+  headerTag: "Dirección creativa",
   prelude:
     "No hacemos publicidad. Unimos estrategia, diseño, interfaz, motion e inteligencia — con un solo director creativo y un solo criterio.",
   lines: ["Construimos cómo", "una marca"],
