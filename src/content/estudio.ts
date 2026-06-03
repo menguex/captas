@@ -2,10 +2,20 @@
 
 export const estudioHero = {
   kicker: "Estudio",
-  title: "Tu squad creativo, en 3 pasos.",
-  body: "Sin agencias sueltas ni briefs repetidos. Desliza y te mostramos cómo trabajamos contigo.",
+  index: "002",
+  label: "Red creativa",
+  titleLead: "Tu squad creativo,",
+  titleAccent: "en 3 pasos.",
+  bodyLead: "Sin agencias sueltas ni briefs repetidos.",
+  body: "Un recorrido claro — desliza y descubre cómo armamos tu proyecto.",
   scrollHint: "Desliza para empezar",
-  onlineTag: "100% remoto · Chile → mundo",
+  onlineTag: "100% remoto",
+  onlineTagDetail: "Chile → mundo",
+  stepsPreview: [
+    { num: "01", label: "Brief" },
+    { num: "02", label: "Squad" },
+    { num: "03", label: "Entrega" },
+  ],
 } as const;
 
 export type EstudioJourneyStep = {
@@ -15,7 +25,6 @@ export type EstudioJourneyStep = {
   title: string;
   titleAccent: string;
   body: string;
-  /** Chips opcionales (paso 2) */
   chips?: readonly string[];
 };
 
