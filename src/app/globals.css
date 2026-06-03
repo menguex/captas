@@ -665,22 +665,27 @@
 .hero-optic-ring--outer {
   width: min(92vw, 720px);
   height: min(92vw, 720px);
+  margin: calc(min(92vw, 720px) / -2);
   animation: hero-ring-spin 48s linear infinite;
 }
 
 .hero-optic-ring--inner {
+  position: absolute;
+  left: 50%;
+  top: 50%;
   width: min(62vw, 480px);
   height: min(62vw, 480px);
+  margin: calc(min(62vw, 480px) / -2);
   border-color: rgba(91, 97, 255, 0.16);
   animation: hero-ring-spin 32s linear infinite reverse;
 }
 
 @keyframes hero-ring-spin {
   from {
-    transform: translate(-50%, -50%) rotate(0deg);
+    transform: rotate(0deg);
   }
   to {
-    transform: translate(-50%, -50%) rotate(360deg);
+    transform: rotate(360deg);
   }
 }
 
@@ -730,23 +735,48 @@
 
 /* Hero — scroll runway + rail horizontal (estilo portfolio agencia) */
 .hero-scroll-stage {
-  min-height: 220dvh;
+  min-height: 250dvh;
+}
+
+.hero-grain {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+  mix-blend-mode: multiply;
+  opacity: 0.06;
+}
+
+.hero-scroll-card-shine {
+  background: linear-gradient(
+    125deg,
+    transparent 40%,
+    rgba(255, 255, 255, 0.22) 50%,
+    transparent 60%
+  );
 }
 
 .hero-scroll-rail-viewport {
   -webkit-mask-image: linear-gradient(
     90deg,
     transparent 0%,
-    black 6%,
-    black 94%,
+    black 4%,
+    black 96%,
     transparent 100%
   );
-  mask-image: linear-gradient(90deg, transparent 0%, black 6%, black 94%, transparent 100%);
+  mask-image: linear-gradient(90deg, transparent 0%, black 4%, black 96%, transparent 100%);
+}
+
+.hero-edge-progress {
+  box-shadow: 0 0 20px rgba(0, 122, 255, 0.12);
 }
 
 @media (max-width: 767px) {
   .hero-scroll-stage {
-    min-height: 200dvh;
+    min-height: 215dvh;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero-scroll-stage {
+    min-height: 265dvh;
   }
 }
 

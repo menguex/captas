@@ -2,7 +2,8 @@
 
 export const heroContent = {
   kicker: "Agencia creativa · Limarí, Chile",
-  status: "Disponible · proyectos Q2",
+  status: "Disponible · proyectos 2026",
+  statement: "Full-service · un director · un hilo",
   lines: [
     {
       id: "line-1",
@@ -18,19 +19,20 @@ export const heroContent = {
     },
   ],
   subline:
-    "UX/UI, motion, fotografía, cine y branding en un solo hilo — craft premium para Chile y exportación.",
+    "UX/UI, motion, foto y cine en una sola dirección creativa — para competir en Chile y en exportación.",
   ctaPrimary: "Iniciar proyecto",
-  ctaSecondary: "Ver trabajo",
-  scrollLabel: "Scroll para explorar",
+  ctaSecondary: "Ver portafolio",
+  scrollLabel: "Scroll · explora casos",
   crafts: ["UX/UI", "Motion", "Branding", "Foto", "Cine", "Web"] as const,
   metrics: [
-    { value: "120+", label: "Experiencias" },
-    { value: "8", label: "Años de craft" },
+    { value: "120+", label: "Proyectos" },
+    { value: "8", label: "Años" },
     { value: "92%", label: "Recomiendan" },
   ],
   scrollRail: {
-    kicker: "Trabajo seleccionado",
-    hint: "Arrastra con el scroll",
-    cta: "Ver portafolio",
+    kicker: "Selected work",
+    hint: "El scroll mueve el carril",
+    cta: "Todo el trabajo",
+    counterLabel: "Caso",
   },
 } as const;

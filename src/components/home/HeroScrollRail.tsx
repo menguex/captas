@@ -1,33 +1,131 @@
 "use client";
 
-import { useLayoutEffect, useRef, useState, type RefObject } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion, useScroll, useTransform } from "framer-motion";
+import {
+  motion,
+  useMotionValueEvent,
+  useTransform,
+  type MotionValue,
+} from "framer-motion";
 import { heroContent } from "@/content/hero";
 import { projects } from "@/content/projects";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 
 const featured = projects.filter((p) => p.featured);
+const SCRUB_START = 0.08;
+const SCRUB_END = 0.94;
 
 type HeroScrollRailProps = {
-  sectionRef: RefObject<HTMLElement | null>;
+  scrollYProgress: MotionValue<number>;
   active: boolean;
 };
 
-export function HeroScrollRail({ sectionRef, active }: HeroScrollRailProps) {
+function HeroScrollCard({
+  project,
+  index,
+  total,
+  scrollYProgress,
+  reduced,
+}: {
+  project: (typeof featured)[number];
+  index: number;
+  total: number;
+  scrollYProgress: MotionValue<number>;
+  reduced: boolean;
+}) {
+  const span = (SCRUB_END - SCRUB_START) / Math.max(total - 1, 1);
+  const center = SCRUB_START + span * index;
+  const scale = useTransform(
+    scrollYProgress,
+    [center - span * 0.55, center, center + span * 0.55],
+    reduced ? [1, 1, 1] : [0.94, 1.05, 0.94]
+  );
+  const opacity = useTransform(
+    scrollYProgress,
+    [center - span * 0.6, center, center + span * 0.6],
+    reduced ? [1, 1, 1] : [0.72, 1, 0.72]
+  );
+  const y = useTransform(
+    scrollYProgress,
+    [center - span * 0.5, center, center + span * 0.5],
+    reduced ? [0, 0, 0] : [8, 0, 8]
+  );
+
+  return (
+    <motion.div style={{ scale, opacity, y }} className="shrink-0">
+      <Link
+        href={`/trabajo/${project.slug}`}
+        className="hero-scroll-card group relative block w-[min(78vw,300px)] overflow-hidden rounded-box-lg border border-[rgba(20,24,30,0.12)] bg-white/70 shadow-[0_16px_48px_rgba(0,122,255,0.1)] transition-[border-color,box-shadow] duration-500 hover:border-accent/35 hover:shadow-[0_24px_56px_rgba(0,122,255,0.18)] md:w-[340px]"
+      >
+        <div className="relative aspect-[4/5] overflow-hidden">
+          <Image
+            src={project.image}
+            alt={project.title}
+            fill
+            className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.05]"
+            sizes="(max-width: 768px) 78vw, 340px"
+            priority={index < 2}
+          />
+          {project.video && !reduced ? (
+            <video
+              src={project.video}
+              muted
+              loop
+              playsInline
+              className="absolute inset-0 h-full w-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100 group-focus-visible:opacity-100"
+              aria-hidden
+            />
+          ) : null}
+          <div className="absolute inset-0 bg-gradient-to-t from-[rgba(15,18,24,0.9)] via-[rgba(15,18,24,0.25)] to-[rgba(15,18,24,0.05)]" />
+          <div className="hero-scroll-card-shine pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+          <span className="absolute left-4 top-4 rounded-full border border-white/20 bg-black/25 px-2.5 py-1 font-mono text-[0.58rem] tabular-nums uppercase tracking-[0.12em] text-white/85 backdrop-blur-sm">
+            {String(index + 1).padStart(2, "0")}
+          </span>
+          {project.result ? (
+            <span className="absolute right-4 top-4 max-w-[10rem] text-right font-mono text-[0.5rem] uppercase leading-snug tracking-[0.1em] text-white/60">
+              {project.result.split("·")[0]?.trim()}
+            </span>
+          ) : null}
+        </div>
+        <div className="absolute inset-x-0 bottom-0 p-4 md:p-5">
+          <p className="font-mono text-[0.58rem] uppercase tracking-[0.14em] text-sky-soft">
+            {project.category}
+          </p>
+          <p className="mt-1.5 font-heading text-[clamp(1.15rem,2.2vw,1.5rem)] font-semibold leading-tight tracking-tight text-white">
+            {project.title}
+          </p>
+          <p className="mt-2 line-clamp-2 text-small leading-snug text-white/78">
+            {project.excerpt}
+          </p>
+          <span className="mt-3 inline-flex items-center gap-1.5 font-mono text-[0.58rem] uppercase tracking-[0.14em] text-white/55 transition-colors group-hover:text-sky-soft">
+            Ver caso
+            <span className="transition-transform group-hover:translate-x-0.5" aria-hidden>
+              →
+            </span>
+          </span>
+        </div>
+      </Link>
+    </motion.div>
+  );
+}
+
+export function HeroScrollRail({ scrollYProgress, active }: HeroScrollRailProps) {
   const reduced = useReducedMotion();
   const trackRef = useRef<HTMLDivElement>(null);
   const viewportRef = useRef<HTMLDivElement>(null);
   const [maxShift, setMaxShift] = useState(0);
+  const [activeIndex, setActiveIndex] = useState(0);
 
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start start", "end end"],
+  const x = useTransform(scrollYProgress, [SCRUB_START, SCRUB_END], [0, -maxShift]);
+  const progressWidth = useTransform(scrollYProgress, [SCRUB_START, SCRUB_END], ["0%", "100%"]);
+  const activeCounter = useTransform(scrollYProgress, [SCRUB_START, SCRUB_END], [1, featured.length]);
+
+  useMotionValueEvent(activeCounter, "change", (v) => {
+    const idx = Math.min(featured.length - 1, Math.max(0, Math.round(v) - 1));
+    setActiveIndex(idx);
   });
-
-  const x = useTransform(scrollYProgress, [0.12, 0.92], [0, -maxShift]);
-  const progressWidth = useTransform(scrollYProgress, [0.12, 0.92], ["0%", "100%"]);
 
   useLayoutEffect(() => {
     const measure = () => {
@@ -35,24 +133,32 @@ export function HeroScrollRail({ sectionRef, active }: HeroScrollRailProps) {
       const viewport = viewportRef.current;
       if (!track || !viewport) return;
       const overflow = track.scrollWidth - viewport.clientWidth;
-      setMaxShift(Math.max(0, overflow));
+      setMaxShift(Math.max(0, overflow + 24));
     };
 
     measure();
+    const ro = new ResizeObserver(measure);
+    if (trackRef.current) ro.observe(trackRef.current);
+    if (viewportRef.current) ro.observe(viewportRef.current);
     window.addEventListener("resize", measure);
-    return () => window.removeEventListener("resize", measure);
+    return () => {
+      ro.disconnect();
+      window.removeEventListener("resize", measure);
+    };
   }, [active]);
+
+  const activeProject = featured[activeIndex];
 
   return (
     <motion.div
-      className="hero-scroll-rail relative z-20 w-full shrink-0 border-t border-accent/12 bg-white/25 backdrop-blur-xl"
-      initial={{ opacity: 0, y: 28 }}
+      className="hero-scroll-rail relative z-20 w-full shrink-0"
+      initial={{ opacity: 0, y: 32 }}
       animate={active ? { opacity: 1, y: 0 } : {}}
-      transition={{ delay: 0.75, duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
+      transition={{ delay: 0.7, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
       aria-label="Portafolio destacado — desplazamiento horizontal con scroll"
     >
-      <div className="flex flex-wrap items-end justify-between gap-3 px-gutter py-4 md:px-[var(--s-gutter)]">
-        <div>
+      <div className="hero-scroll-rail-header flex flex-wrap items-end justify-between gap-4 border-t border-accent/15 bg-white/30 px-gutter py-4 backdrop-blur-xl md:px-[var(--s-gutter)]">
+        <div className="text-left">
           <p className="font-mono text-kicker uppercase tracking-[0.22em] text-accent">
             {heroContent.scrollRail.kicker}
           </p>
@@ -60,68 +166,65 @@ export function HeroScrollRail({ sectionRef, active }: HeroScrollRailProps) {
             {heroContent.scrollRail.hint}
           </p>
         </div>
-        <Link
-          href="/trabajo"
-          className="font-mono text-kicker uppercase tracking-[0.18em] text-[var(--c-hero-text-muted)] transition-colors hover:text-accent"
-        >
-          {heroContent.scrollRail.cta} →
-        </Link>
+
+        <div className="flex items-center gap-4">
+          {activeProject ? (
+            <p className="hidden text-right font-mono text-[0.58rem] uppercase tracking-[0.12em] text-[var(--c-hero-text-muted)] sm:block">
+              <span className="text-[var(--c-on-light-subtle)]">{heroContent.scrollRail.counterLabel} </span>
+              <span className="tabular-nums text-accent">
+                {String(activeIndex + 1).padStart(2, "0")}
+              </span>
+              <span className="text-[var(--c-on-light-subtle)]"> / {String(featured.length).padStart(2, "0")}</span>
+              <span className="mt-0.5 block font-heading text-small normal-case tracking-normal text-[var(--c-hero-text)]">
+                {activeProject.title}
+              </span>
+            </p>
+          ) : null}
+          <Link
+            href="/trabajo"
+            className="hero-rail-cta rounded-full border border-accent/20 bg-white/50 px-4 py-2 font-mono text-kicker uppercase tracking-[0.16em] text-[var(--c-hero-text-muted)] backdrop-blur-sm transition-colors hover:border-accent/40 hover:text-accent"
+          >
+            {heroContent.scrollRail.cta} →
+          </Link>
+        </div>
       </div>
 
-      <div ref={viewportRef} className="hero-scroll-rail-viewport overflow-hidden">
+      <div ref={viewportRef} className="hero-scroll-rail-viewport overflow-hidden bg-white/15">
         <motion.div
           ref={trackRef}
-          className="hero-scroll-rail-track flex w-max gap-4 px-gutter pb-5 will-change-transform md:gap-5 md:px-[var(--s-gutter)] md:pb-6"
+          className="hero-scroll-rail-track flex w-max items-end gap-4 px-gutter py-5 will-change-transform md:gap-6 md:px-[var(--s-gutter)] md:py-6"
           style={reduced ? undefined : { x }}
         >
           {featured.map((project, i) => (
-            <Link
+            <HeroScrollCard
               key={project.slug}
-              href={`/trabajo/${project.slug}`}
-              className="hero-scroll-card group relative w-[min(72vw,280px)] shrink-0 overflow-hidden rounded-box-lg border border-[rgba(20,24,30,0.1)] bg-white/60 shadow-[0_12px_40px_rgba(0,122,255,0.08)] transition-[border-color,box-shadow] duration-500 hover:border-accent/30 hover:shadow-[0_20px_50px_rgba(0,122,255,0.14)] md:w-[320px]"
-            >
-              <div className="relative aspect-[4/5] overflow-hidden">
-                <Image
-                  src={project.image}
-                  alt={project.title}
-                  fill
-                  className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
-                  sizes="(max-width: 768px) 72vw, 320px"
-                  priority={i < 2}
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[rgba(20,24,30,0.82)] via-[rgba(20,24,30,0.2)] to-transparent" />
-                <span className="absolute left-4 top-4 font-mono text-[0.58rem] tabular-nums uppercase tracking-[0.14em] text-white/70">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-              </div>
-              <div className="absolute inset-x-0 bottom-0 p-4 md:p-5">
-                <p className="font-mono text-[0.58rem] uppercase tracking-[0.14em] text-sky-soft">
-                  {project.category}
-                </p>
-                <p className="mt-1.5 font-heading text-h3 font-semibold leading-tight tracking-tight text-white">
-                  {project.title}
-                </p>
-                <p className="mt-2 line-clamp-2 text-small leading-snug text-white/75">
-                  {project.excerpt}
-                </p>
-              </div>
-            </Link>
+              project={project}
+              index={i}
+              total={featured.length}
+              scrollYProgress={scrollYProgress}
+              reduced={reduced}
+            />
           ))}
         </motion.div>
       </div>
 
-      <div className="px-gutter pb-4 md:px-[var(--s-gutter)] md:pb-5">
-        <div className="h-px overflow-hidden rounded-full bg-accent/10">
-          <motion.div
-            className="h-full origin-left rounded-full bg-gradient-to-r from-[#5b61ff] via-accent to-[#0ea5e9]"
-            style={{ width: reduced ? "100%" : progressWidth }}
-            aria-hidden
-          />
+      <div className="hero-scroll-rail-footer border-t border-accent/10 bg-white/25 px-gutter py-4 backdrop-blur-md md:px-[var(--s-gutter)]">
+        <div className="flex items-center gap-4">
+          <div className="h-1 flex-1 overflow-hidden rounded-full bg-accent/10">
+            <motion.div
+              className="h-full origin-left rounded-full bg-gradient-to-r from-[#5b61ff] via-accent to-[#0ea5e9]"
+              style={{ width: reduced ? "100%" : progressWidth }}
+              aria-hidden
+            />
+          </div>
+          <span className="font-mono text-[0.58rem] tabular-nums uppercase tracking-[0.14em] text-accent">
+            {String(activeIndex + 1).padStart(2, "0")}/{String(featured.length).padStart(2, "0")}
+          </span>
         </div>
-        <ul className="mt-3 flex flex-wrap gap-2" role="list" aria-hidden>
+        <ul className="mt-3 flex flex-wrap justify-center gap-x-4 gap-y-1 md:justify-start" role="list">
           {heroContent.crafts.map((craft) => (
             <li key={craft}>
-              <span className="font-mono text-[0.52rem] uppercase tracking-[0.14em] text-[var(--c-on-light-subtle)]">
+              <span className="font-mono text-[0.52rem] uppercase tracking-[0.16em] text-[var(--c-on-light-subtle)]">
                 {craft}
               </span>
             </li>
