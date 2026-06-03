@@ -81,7 +81,7 @@ export function Hero() {
 
   const contentY = useTransform(scrollYProgress, [0, 0.42], [0, reduced ? 0 : -56]);
   const contentOpacity = useTransform(scrollYProgress, [0, 0.35], [1, reduced ? 1 : 0.12]);
-  const edgeProgress = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+  const edgeProgress = scrollYProgress;
 
   const scrollToManifesto = () => {
     scrollToId("manifiesto", lenis);
@@ -103,8 +103,8 @@ export function Hero() {
           aria-hidden
         >
           <motion.div
-            className="w-full rounded-full bg-gradient-to-b from-[#5b61ff] via-accent to-[#0ea5e9]"
-            style={{ height: edgeProgress }}
+            className="h-full w-full origin-top rounded-full bg-gradient-to-b from-[#5b61ff] via-accent to-[#0ea5e9]"
+            style={{ scaleY: edgeProgress }}
           />
         </motion.div>
 

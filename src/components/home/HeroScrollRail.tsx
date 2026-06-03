@@ -25,36 +25,28 @@ type HeroScrollRailProps = {
 function HeroScrollCard({
   project,
   index,
-  total,
-  scrollYProgress,
+  isActive,
   reduced,
 }: {
   project: (typeof featured)[number];
   index: number;
-  total: number;
-  scrollYProgress: MotionValue<number>;
+  isActive: boolean;
   reduced: boolean;
 }) {
-  const span = (SCRUB_END - SCRUB_START) / Math.max(total - 1, 1);
-  const center = SCRUB_START + span * index;
-  const scale = useTransform(
-    scrollYProgress,
-    [center - span * 0.55, center, center + span * 0.55],
-    reduced ? [1, 1, 1] : [0.94, 1.05, 0.94]
-  );
-  const opacity = useTransform(
-    scrollYProgress,
-    [center - span * 0.6, center, center + span * 0.6],
-    reduced ? [1, 1, 1] : [0.72, 1, 0.72]
-  );
-  const y = useTransform(
-    scrollYProgress,
-    [center - span * 0.5, center, center + span * 0.5],
-    reduced ? [0, 0, 0] : [8, 0, 8]
-  );
-
   return (
-    <motion.div style={{ scale, opacity, y }} className="shrink-0">
+    <motion.div
+      className="shrink-0"
+      animate={
+        reduced
+          ? { scale: 1, opacity: 1, y: 0 }
+          : {
+              scale: isActive ? 1.05 : 0.94,
+              opacity: isActive ? 1 : 0.72,
+              y: isActive ? 0 : 8,
+            }
+      }
+      transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+    >
       <Link
         href={`/trabajo/${project.slug}`}
         className="hero-scroll-card group relative block w-[min(78vw,300px)] overflow-hidden rounded-box-lg border border-[rgba(20,24,30,0.12)] bg-white/70 shadow-[0_16px_48px_rgba(0,122,255,0.1)] transition-[border-color,box-shadow] duration-500 hover:border-accent/35 hover:shadow-[0_24px_56px_rgba(0,122,255,0.18)] md:w-[340px]"
@@ -120,10 +112,14 @@ export function HeroScrollRail({ scrollYProgress, active }: HeroScrollRailProps)
 
   const x = useTransform(scrollYProgress, [SCRUB_START, SCRUB_END], [0, -maxShift]);
   const progressWidth = useTransform(scrollYProgress, [SCRUB_START, SCRUB_END], ["0%", "100%"]);
-  const activeCounter = useTransform(scrollYProgress, [SCRUB_START, SCRUB_END], [1, featured.length]);
 
-  useMotionValueEvent(activeCounter, "change", (v) => {
-    const idx = Math.min(featured.length - 1, Math.max(0, Math.round(v) - 1));
+  useMotionValueEvent(scrollYProgress, "change", (v) => {
+    if (featured.length <= 1) {
+      setActiveIndex(0);
+      return;
+    }
+    const t = Math.max(0, Math.min(1, (v - SCRUB_START) / (SCRUB_END - SCRUB_START)));
+    const idx = Math.round(t * (featured.length - 1));
     setActiveIndex(idx);
   });
 
@@ -200,8 +196,7 @@ export function HeroScrollRail({ scrollYProgress, active }: HeroScrollRailProps)
               key={project.slug}
               project={project}
               index={i}
-              total={featured.length}
-              scrollYProgress={scrollYProgress}
+              isActive={activeIndex === i}
               reduced={reduced}
             />
           ))}
