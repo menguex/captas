@@ -173,6 +173,7 @@ export function ServicesEcosystemIntro({ showHeader = true }: ServicesEcosystemI
   }, [reduced, paused, active]);
 
   const pathname = usePathname();
+  const onServiciosPage = pathname === "/servicios";
   const goTo = useCallback((index: number) => setActive(index), []);
 
   const syncHashToPillar = useCallback(() => {
@@ -196,7 +197,13 @@ export function ServicesEcosystemIntro({ showHeader = true }: ServicesEcosystemI
   };
 
   return (
-    <div {...pauseProps}>
+    <div {...pauseProps} className="relative">
+      <div className="pointer-events-none absolute left-0 top-0 scroll-mt-32" aria-hidden>
+        {services.map((s) => (
+          <span key={s.id} id={s.id} className="absolute h-px w-px overflow-hidden opacity-0" />
+        ))}
+      </div>
+
       {showHeader ? (
         <SectionHeader
           theme="light"
@@ -352,16 +359,22 @@ export function ServicesEcosystemIntro({ showHeader = true }: ServicesEcosystemI
                     variants={reduced ? undefined : serviceOverlayItem}
                     className="mt-6 flex flex-col gap-3 lg:mt-0 lg:min-w-[210px]"
                   >
-                    <Link
-                      href={`/servicios#${current.id}`}
-                      className="gloss-button inline-flex w-full items-center justify-center gap-2"
-                    >
-                      Ver pilar completo
-                      <span aria-hidden>→</span>
-                    </Link>
+                    {onServiciosPage ? null : (
+                      <Link
+                        href={`/servicios#${current.id}`}
+                        className="gloss-button inline-flex w-full items-center justify-center gap-2"
+                      >
+                        Ver pilar completo
+                        <span aria-hidden>→</span>
+                      </Link>
+                    )}
                     <Link
                       href={`/contacto?servicio=${current.id}`}
-                      className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-bone/30 bg-bone/10 px-6 py-3 font-mono text-kicker uppercase tracking-[0.14em] text-bone transition-colors hover:border-bone/50 hover:bg-bone/20"
+                      className={
+                        onServiciosPage
+                          ? "gloss-button inline-flex w-full items-center justify-center gap-2"
+                          : "inline-flex w-full items-center justify-center gap-2 rounded-full border border-bone/30 bg-bone/10 px-6 py-3 font-mono text-kicker uppercase tracking-[0.14em] text-bone transition-colors hover:border-bone/50 hover:bg-bone/20"
+                      }
                     >
                       Solicitar propuesta
                     </Link>

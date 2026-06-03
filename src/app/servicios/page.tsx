@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { PlanesRetainer } from "@/components/sections/PlanesRetainer";
 import { ServicesBelowEcosystem } from "@/components/services/ServicesBelowEcosystem";
-import { ServicesPillarGrid } from "@/components/services/ServicesPillarGrid";
 import { ServicesEcosystemIntro } from "@/components/home/ServicesEcosystemIntro";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { ecosystemIntro } from "@/content/ecosystem";
@@ -49,7 +48,6 @@ export default function ServiciosPage() {
           />
 
           <ServicesEcosystemIntro showHeader={false} />
-          <ServicesPillarGrid />
           <ServicesBelowEcosystem />
         </div>
       </div>
