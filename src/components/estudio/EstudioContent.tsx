@@ -1,13 +1,15 @@
 "use client";
 
+import { EstudioFinale } from "@/components/estudio/EstudioFinale";
 import { EstudioHero } from "@/components/estudio/EstudioHero";
-import { EstudioScrollJourney } from "@/components/estudio/EstudioScrollJourney";
+import { EstudioJourney } from "@/components/estudio/EstudioJourney";
 
 export function EstudioContent() {
   return (
     <>
       <EstudioHero />
-      <EstudioScrollJourney />
+      <EstudioJourney />
+      <EstudioFinale />
     </>
   );
 }
