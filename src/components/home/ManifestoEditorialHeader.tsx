@@ -12,7 +12,7 @@ type ManifestoEditorialHeaderProps = {
 export function ManifestoEditorialHeader({ kicker, issue }: ManifestoEditorialHeaderProps) {
   return (
     <motion.header
-      className="manifesto-editorial-header relative mx-auto max-w-4xl"
+      className="manifesto-editorial-header manifesto-editorial-header--horizontal relative mx-auto w-full max-w-6xl"
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={viewportOnce}
@@ -20,71 +20,74 @@ export function ManifestoEditorialHeader({ kicker, issue }: ManifestoEditorialHe
     >
       <div className="manifesto-editorial-header-ornament pointer-events-none absolute inset-0" aria-hidden>
         <svg
-          className="absolute left-0 top-1/2 h-px w-[min(28vw,10rem)] -translate-y-1/2"
-          viewBox="0 0 160 2"
+          className="manifesto-header-rail absolute left-0 right-0 top-1/2 h-px -translate-y-1/2"
+          viewBox="0 0 1200 2"
           preserveAspectRatio="none"
         >
-          <line x1="0" y1="1" x2="160" y2="1" stroke="url(#manifesto-header-line-l)" strokeWidth="1" />
+          <line x1="0" y1="1" x2="1200" y2="1" stroke="url(#manifesto-header-rail)" strokeWidth="1" />
           <defs>
-            <linearGradient id="manifesto-header-line-l" x1="0" y1="0" x2="1" y2="0">
+            <linearGradient id="manifesto-header-rail" x1="0" y1="0" x2="1" y2="0">
               <stop offset="0%" stopColor="rgba(91,97,255,0)" />
-              <stop offset="100%" stopColor="rgba(91,97,255,0.55)" />
-            </linearGradient>
-          </defs>
-        </svg>
-        <svg
-          className="absolute right-0 top-1/2 h-px w-[min(28vw,10rem)] -translate-y-1/2"
-          viewBox="0 0 160 2"
-          preserveAspectRatio="none"
-        >
-          <line x1="0" y1="1" x2="160" y2="1" stroke="url(#manifesto-header-line-r)" strokeWidth="1" />
-          <defs>
-            <linearGradient id="manifesto-header-line-r" x1="0" y1="0" x2="1" y2="0">
-              <stop offset="0%" stopColor="rgba(14,165,233,0.55)" />
+              <stop offset="18%" stopColor="rgba(91,97,255,0.35)" />
+              <stop offset="50%" stopColor="rgba(14,165,233,0.2)" />
+              <stop offset="82%" stopColor="rgba(91,97,255,0.35)" />
               <stop offset="100%" stopColor="rgba(14,165,233,0)" />
             </linearGradient>
           </defs>
         </svg>
 
-        <span className="manifesto-header-cross absolute left-[12%] top-1/2 hidden h-3 w-3 -translate-y-1/2 md:block">
+        <span className="manifesto-header-cross absolute left-[4%] top-1/2 hidden h-3 w-3 -translate-y-1/2 lg:block">
           <svg viewBox="0 0 12 12" className="h-full w-full text-white/25">
             <path d="M6 0v12M0 6h12" stroke="currentColor" strokeWidth="1" />
           </svg>
         </span>
-        <span className="manifesto-header-cross absolute right-[12%] top-1/2 hidden h-3 w-3 -translate-y-1/2 md:block">
+        <span className="manifesto-header-cross absolute right-[4%] top-1/2 hidden h-3 w-3 -translate-y-1/2 lg:block">
           <svg viewBox="0 0 12 12" className="h-full w-full text-white/25">
             <path d="M6 0v12M0 6h12" stroke="currentColor" strokeWidth="1" />
           </svg>
         </span>
       </div>
 
-      <div className="relative flex flex-col items-center gap-4 sm:flex-row sm:justify-center sm:gap-6">
-        <div className="manifesto-issue-badge relative flex items-center gap-3">
+      <div className="manifesto-editorial-header-row relative flex flex-wrap items-center justify-center gap-x-3 gap-y-3 px-2 py-2 sm:gap-x-5 sm:px-4 md:flex-nowrap md:justify-between md:gap-x-6 lg:gap-x-8">
+        <div className="manifesto-issue-badge relative flex shrink-0 items-center">
           <svg
-            className="manifesto-issue-frame absolute -inset-3 h-[calc(100%+1.5rem)] w-[calc(100%+1.5rem)] text-white/15"
-            viewBox="0 0 80 48"
+            className="manifesto-issue-frame manifesto-issue-frame--wide absolute -inset-x-4 -inset-y-2 h-[calc(100%+1rem)] w-[calc(100%+2rem)] text-white/15"
+            viewBox="0 0 96 40"
             fill="none"
+            preserveAspectRatio="none"
             aria-hidden
           >
-            <path d="M4 12V4h8M76 12V4h-8M76 36v8h-8M4 36v8h8" stroke="currentColor" strokeWidth="1" />
+            <path d="M4 10V4h10M92 10V4H82M92 30v6H82M4 30v6h10" stroke="currentColor" strokeWidth="1" />
           </svg>
-          <span className="relative font-mono text-[clamp(2.5rem,6vw,3.75rem)] font-medium tabular-nums leading-none tracking-[-0.04em] text-bone/90">
+          <span className="relative font-mono text-[clamp(1.75rem,4vw,2.75rem)] font-medium tabular-nums leading-none tracking-[-0.04em] text-bone/90">
             {issue}
           </span>
         </div>
 
-        <div className="relative flex flex-col items-center sm:items-start">
-          <span className="font-heading text-[clamp(1.5rem,4vw,2.25rem)] font-semibold uppercase tracking-[0.12em] text-bone">
+        <span
+          className="hidden font-mono text-[0.7rem] text-bone/35 sm:inline"
+          aria-hidden
+        >
+          ·
+        </span>
+
+        <div className="flex min-w-0 flex-1 flex-wrap items-center justify-center gap-x-3 gap-y-1 md:justify-center md:gap-x-5">
+          <span className="whitespace-nowrap font-heading text-[clamp(1.25rem,3.2vw,2rem)] font-semibold uppercase tracking-[0.14em] text-bone md:tracking-[0.16em]">
             {kicker}
           </span>
-          <span className="mt-1 flex items-center gap-2 font-mono text-[0.62rem] uppercase tracking-[0.2em] text-sky-soft/80">
-            <span className="inline-block h-1.5 w-1.5 rounded-full bg-accent shadow-[0_0_10px_rgba(0,122,255,0.6)]" />
+
+          <span className="font-mono text-[0.65rem] text-bone/30" aria-hidden>
+            ·
+          </span>
+
+          <span className="flex items-center gap-2 whitespace-nowrap font-mono text-[0.62rem] uppercase tracking-[0.18em] text-sky-soft/85 md:text-[0.65rem]">
+            <span className="inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-accent shadow-[0_0_10px_rgba(0,122,255,0.6)]" />
             {manifestoContent.headerTag}
           </span>
         </div>
 
         <svg
-          className="manifesto-header-mark hidden h-10 w-10 shrink-0 text-white/20 sm:block"
+          className="manifesto-header-mark hidden h-9 w-9 shrink-0 text-white/20 md:block lg:h-10 lg:w-10"
           viewBox="0 0 40 40"
           fill="none"
           aria-hidden
