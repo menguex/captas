@@ -5,6 +5,7 @@ import { MagneticButton } from "@/components/motion/MagneticButton";
 import { SplitText } from "@/components/motion/SplitText";
 import { HeroDesignMesh } from "@/components/home/HeroDesignMesh";
 import { HeroScrollZoom } from "@/components/home/HeroScrollZoom";
+import { CraftChips } from "@/components/ui/CraftChips";
 import { heroContent } from "@/content/hero";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { useSpotlight } from "@/hooks/useSpotlight";
@@ -115,21 +116,14 @@ export function Hero() {
             {heroContent.statement}
           </motion.p>
 
-          <motion.ul
-            className="mt-8 flex flex-wrap justify-center gap-2"
-            role="list"
-            initial={active ? { opacity: 0 } : false}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.65, duration: 0.7, ease }}
-          >
-            {heroContent.disciplines.map((d) => (
-              <li key={d}>
-                <span className="hero-discipline-pill font-mono text-[0.55rem] uppercase tracking-[0.14em] text-bone/55">
-                  {d}
-                </span>
-              </li>
-            ))}
-          </motion.ul>
+            <motion.div
+              className="mt-8"
+              initial={active ? { opacity: 0 } : false}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.65, duration: 0.7, ease }}
+            >
+              <CraftChips items={heroContent.disciplines} theme="dark" />
+            </motion.div>
 
           <motion.div
             className="mt-10 flex flex-wrap items-center justify-center gap-4"

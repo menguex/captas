@@ -3,7 +3,6 @@
 export const manifestoContent = {
   kicker: "Manifiesto",
   issue: "001",
-  label: "Cómo pensamos",
   prelude: "No solo diseñamos interfaces —",
   lines: ["Construimos la forma", "en que una marca"],
   closing: "se siente, se mueve y se recuerda.",
@@ -11,4 +10,6 @@ export const manifestoContent = {
   signoff: "Captas · Limarí, Chile",
   footnote: "Dirección creativa única · del concepto al detalle",
   disciplines: ["UX/UI", "Motion", "Branding", "Territorio"] as const,
+  backgroundImage: "/images/hero/dji-0068.jpg",
+  backgroundPosition: "center 35%",
 } as const;

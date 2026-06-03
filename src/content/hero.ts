@@ -23,6 +23,5 @@ export const heroContent = {
     { value: "1", label: "Director creativo" },
     { value: "Limarí", label: "Territorio" },
   ],
-  backgroundImage:
-    "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&q=85",
+  backgroundImage: "/images/hero/dji-0068.jpg",
 } as const;

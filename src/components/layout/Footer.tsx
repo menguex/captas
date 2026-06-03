@@ -3,6 +3,7 @@ import Link from "next/link";
 import { LocalTime } from "@/components/ui/LocalTime";
 import { CaptasLogo } from "@/components/brand/CaptasLogo";
 import { FooterAssistant } from "@/components/footer/FooterAssistant";
+import { CraftChips } from "@/components/ui/CraftChips";
 import { FooterCtaBlock } from "@/components/footer/FooterCtaBlock";
 import { footerContent } from "@/content/footer";
 import { site, socialLinks } from "@/content/site";
@@ -154,18 +155,12 @@ export function Footer() {
           </div>
 
           <div className="border-b border-line/40 py-8">
-            <p className="font-mono text-kicker uppercase tracking-[0.2em] text-on-ink-subtle">
+            <p className="font-heading text-body font-medium text-on-ink-muted">
               {footerContent.craftsLabel}
             </p>
-            <ul className="mt-4 flex flex-wrap gap-2" role="list">
-              {craftTags.map((tag) => (
-                <li key={tag}>
-                  <span className="inline-flex rounded-full border border-line/70 bg-white/[0.04] px-3 py-1.5 font-mono text-small uppercase tracking-[0.16em] text-on-ink-muted backdrop-blur-sm">
-                    {tag}
-                  </span>
-                </li>
-              ))}
-            </ul>
+            <div className="mt-5">
+              <CraftChips items={craftTags} theme="dark" className="!justify-start" />
+            </div>
           </div>
 
           <div className="flex flex-col gap-3 py-6 font-mono text-small tracking-[0.04em] text-on-ink-subtle md:flex-row md:items-center md:justify-between md:gap-6">
