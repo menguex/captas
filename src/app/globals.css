@@ -689,6 +689,7 @@
 
 .home-section-manifesto {
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  background-color: #0a0d14;
 }
 
 .hero-with-spotlight {
@@ -761,7 +762,7 @@
   text-wrap: balance;
 }
 
-/* Manifiesto — layout editorial abierto (sin caja cerrada) */
+/* Manifiesto — layout editorial + fondo coherente con hero */
 .manifesto-section {
   isolation: isolate;
 }
@@ -771,56 +772,115 @@
   z-index: 1;
 }
 
-.manifesto-design-field-svg {
-  opacity: 0.88;
-}
-
-.manifesto-design-orbit-slot {
-  pointer-events: none;
-}
-
-.manifesto-design-orbit-3d,
-.manifesto-design-orbit-fallback {
-  position: relative;
-  width: 100%;
-  height: 100%;
-}
-
-.manifesto-design-orbit-canvas {
-  width: 100% !important;
-  height: 100% !important;
-}
-
-.manifesto-design-orbit-glow {
-  position: absolute;
-  inset: 8%;
-  border-radius: 50%;
-  background: radial-gradient(
-    circle at 45% 40%,
-    rgba(91, 97, 255, 0.28) 0%,
-    rgba(14, 165, 233, 0.12) 42%,
-    transparent 72%
-  );
-  filter: blur(12px);
+.manifesto-section-bg {
   z-index: 0;
 }
 
-.manifesto-design-orbit-canvas {
-  position: relative;
-  z-index: 1;
+.manifesto-section-bg-base {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, #080a0f 0%, #0a0d14 18%, #0f1218 50%, #0a0d14 82%, #080a0f 100%),
+    radial-gradient(ellipse 90% 70% at 50% 45%, rgba(23, 28, 36, 0.9) 0%, transparent 70%);
 }
 
-.manifesto-design-glyph {
-  filter: drop-shadow(0 8px 28px rgba(91, 97, 255, 0.25));
+.manifesto-section-bg-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.028) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.028) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: radial-gradient(ellipse 88% 75% at 50% 42%, black 10%, transparent 78%);
+  opacity: 0.9;
 }
 
-.manifesto-design-watermark {
-  font-size: clamp(6rem, 18vw, 12rem);
-  user-select: none;
+.manifesto-section-bg-mesh {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--c-mesh) 1px, transparent 1px),
+    linear-gradient(90deg, var(--c-mesh) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse 95% 80% at 50% 50%, black 5%, transparent 72%);
+  opacity: 0.55;
 }
 
-.manifesto-design-watermark--left {
-  font-size: clamp(5rem, 14vw, 9rem);
+.manifesto-section-bg-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  will-change: transform;
+}
+
+.manifesto-section-bg-orb--indigo {
+  left: -8%;
+  top: 8%;
+  width: min(52vw, 520px);
+  height: min(52vw, 520px);
+  background: radial-gradient(circle, rgba(91, 97, 255, 0.2) 0%, transparent 68%);
+}
+
+.manifesto-section-bg-orb--cyan {
+  right: -10%;
+  bottom: 6%;
+  width: min(48vw, 480px);
+  height: min(48vw, 480px);
+  background: radial-gradient(circle, rgba(14, 165, 233, 0.16) 0%, transparent 68%);
+}
+
+.manifesto-section-bg-orb--accent {
+  left: 50%;
+  top: 42%;
+  width: min(60vw, 640px);
+  height: min(38vw, 380px);
+  transform: translate(-50%, -50%);
+  background: radial-gradient(
+    ellipse 100% 100% at 50% 50%,
+    rgba(0, 122, 255, 0.1) 0%,
+    transparent 70%
+  );
+}
+
+.manifesto-section-bg-spotlight {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 65% 55% at 50% 40%,
+    rgba(91, 97, 255, 0.12) 0%,
+    rgba(0, 122, 255, 0.05) 35%,
+    transparent 72%
+  );
+}
+
+.manifesto-section-bg-vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 92% 85% at 50% 48%, transparent 35%, #080a0f 88%);
+  box-shadow: inset 0 0 120px rgba(0, 0, 0, 0.45);
+}
+
+.manifesto-section-bg-fade {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: clamp(4rem, 12vh, 7rem);
+  pointer-events: none;
+}
+
+.manifesto-section-bg-fade--top {
+  top: 0;
+  background: linear-gradient(180deg, #080a0f 0%, transparent 100%);
+}
+
+.manifesto-section-bg-fade--bottom {
+  bottom: 0;
+  background: linear-gradient(0deg, #080a0f 0%, transparent 100%);
+}
+
+.manifesto-section-bg-blueprint {
+  opacity: 0.75;
+  mask-image: radial-gradient(ellipse 80% 70% at 50% 45%, black 20%, transparent 85%);
 }
 
 .manifesto-design-icon {
