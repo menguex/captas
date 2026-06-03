@@ -126,7 +126,10 @@ export function PortfolioCard({
 }: PortfolioCardProps) {
   const number = String(index + 1).padStart(2, "0");
   const isFeatured = variant === "featured";
-  const { ref, onMove, onLeave } = useTilt({ max: isFeatured ? 4 : 7, scale: 1.015 });
+  const { ref, onMove, onLeave } = useTilt<HTMLDivElement>({
+    max: isFeatured ? 4 : 7,
+    scale: 1.015,
+  });
 
   const featuredClass =
     "group grid w-full overflow-hidden rounded-box-lg border border-line bg-ink/30 text-left transition-colors hover:border-accent/35 md:grid-cols-[1.05fr_0.95fr]";
@@ -141,7 +144,7 @@ export function PortfolioCard({
   };
 
   const tiltProps = {
-    ref: ref as React.RefObject<HTMLDivElement>,
+    ref,
     onMouseMove: onMove,
     onMouseLeave: onLeave,
     style: { transition: "transform 0.35s ease-out" } as const,

@@ -8,9 +8,12 @@ type TiltOptions = {
   scale?: number;
 };
 
-export function useTilt({ max = 6, scale = 1.02 }: TiltOptions = {}) {
+export function useTilt<T extends HTMLElement = HTMLElement>({
+  max = 6,
+  scale = 1.02,
+}: TiltOptions = {}) {
   const reduced = useReducedMotion();
-  const ref = useRef<HTMLElement>(null);
+  const ref = useRef<T | null>(null);
 
   const onMove = useCallback(
     (e: React.MouseEvent) => {
