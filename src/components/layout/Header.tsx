@@ -88,7 +88,7 @@ export function Header() {
   const pathname = usePathname();
   const scrollY = useScrollPosition();
   const scrolled = scrollY > 32;
-  const overHero = pathname === "/" && scrollY < 520;
+  const overHero = pathname === "/" && scrollY < 120;
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
@@ -122,7 +122,7 @@ export function Header() {
     <>
       <header
         className={`site-header fixed inset-x-0 top-0 z-50 transition-[background-color,backdrop-filter,box-shadow,border-color] duration-base ease-out ${
-          overHero && !scrolled ? "site-header--hero-light" : ""
+          overHero && !scrolled ? "site-header--hero-cinematic" : ""
         } ${
           scrolled
             ? "site-header--scrolled border-b border-accent/20 shadow-[0_8px_32px_rgba(var(--c-accent-rgb),0.12)] backdrop-blur-2xl"
