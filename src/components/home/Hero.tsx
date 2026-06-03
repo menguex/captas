@@ -1,12 +1,11 @@
 "use client";
 
-import { useRef } from "react";
-import Image from "next/image";
 import { motion } from "framer-motion";
 import { MagneticButton } from "@/components/motion/MagneticButton";
 import { SplitText } from "@/components/motion/SplitText";
 import { HeroDesignMesh } from "@/components/home/HeroDesignMesh";
 import { HeroAgencySignal } from "@/components/home/HeroAgencySignal";
+import { HeroScrollZoom } from "@/components/home/HeroScrollZoom";
 import { heroContent } from "@/content/hero";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { useSpotlight } from "@/hooks/useSpotlight";
@@ -17,7 +16,6 @@ import { scrollToId } from "@/lib/scroll";
 const ease = [0.16, 1, 0.3, 1] as const;
 
 export function Hero() {
-  const sectionRef = useRef<HTMLElement>(null);
   const { onMove, onLeave } = useSpotlight();
   const reduced = useReducedMotion();
   const introReady = useIntroReady();
@@ -29,29 +27,39 @@ export function Hero() {
   };
 
   return (
-    <section
-      ref={sectionRef}
-      id="hero"
-      data-hero
-      className="hero-editorial hero-with-spotlight relative z-[1] flex min-h-[100dvh] items-center overflow-hidden"
+    <HeroScrollZoom
       onMouseMove={onMove}
       onMouseLeave={onLeave}
-    >
-      <div className="pointer-events-none absolute inset-0 z-0" aria-hidden>
-        <Image
-          src={heroContent.backgroundImage}
-          alt=""
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover opacity-28"
+      mesh={<HeroDesignMesh active={active} />}
+      spotlight={
+        <div
+          className="hero-editorial-spotlight pointer-events-none absolute inset-0 z-[3]"
+          aria-hidden
         />
-      </div>
-
-      <HeroDesignMesh active={active} />
-      <div className="hero-editorial-spotlight pointer-events-none absolute inset-0 z-[1]" aria-hidden />
-
-      <div className="site-container relative z-10 flex w-full flex-col px-gutter py-[clamp(6rem,14vh,8rem)] lg:py-[clamp(5.5rem,12vh,7rem)]">
+      }
+      chrome={
+        <motion.button
+          type="button"
+          className="hero-editorial-scroll absolute bottom-6 right-[var(--s-gutter)] flex items-center gap-3 font-mono text-[0.58rem] uppercase tracking-[0.2em] text-bone/45 transition-colors hover:text-sky-soft lg:bottom-8"
+          initial={{ opacity: 0 }}
+          animate={active ? { opacity: 1 } : { opacity: 0 }}
+          transition={{ delay: 1, duration: 0.5 }}
+          onClick={scrollToManifesto}
+          aria-label="Ir al manifiesto"
+        >
+          <span className="hidden sm:inline">{heroContent.scrollLabel}</span>
+          <span className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15">
+            <motion.span
+              className="block h-2 w-2 rounded-full bg-accent"
+              animate={active && !reduced ? { y: [0, 6, 0] } : {}}
+              transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+              aria-hidden
+            />
+          </span>
+        </motion.button>
+      }
+    >
+      <div className="site-container flex w-full flex-col px-gutter py-[clamp(6rem,14vh,8rem)] lg:py-[clamp(5.5rem,12vh,7rem)]">
         <div className="grid items-center gap-14 lg:grid-cols-12 lg:gap-12 xl:gap-16">
           <div className="lg:col-span-7 xl:col-span-6">
             <motion.div
@@ -158,26 +166,6 @@ export function Hero() {
           </div>
         </div>
       </div>
-
-      <motion.button
-        type="button"
-        className="hero-editorial-scroll absolute bottom-6 right-[var(--s-gutter)] z-10 flex items-center gap-3 font-mono text-[0.58rem] uppercase tracking-[0.2em] text-bone/45 transition-colors hover:text-sky-soft lg:bottom-8"
-        initial={{ opacity: 0 }}
-        animate={active ? { opacity: 1 } : { opacity: 0 }}
-        transition={{ delay: 1, duration: 0.5 }}
-        onClick={scrollToManifesto}
-        aria-label="Ir al manifiesto"
-      >
-        <span className="hidden sm:inline">{heroContent.scrollLabel}</span>
-        <span className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15">
-          <motion.span
-            className="block h-2 w-2 rounded-full bg-accent"
-            animate={active && !reduced ? { y: [0, 6, 0] } : {}}
-            transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-            aria-hidden
-          />
-        </span>
-      </motion.button>
-    </section>
+    </HeroScrollZoom>
   );
 }

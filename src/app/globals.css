@@ -590,6 +590,10 @@
   color: var(--c-bone);
 }
 
+.hero-scroll-zoom {
+  background-color: #080a0f;
+}
+
 .hero-with-spotlight {
   --mx: 50%;
   --my: 45%;
