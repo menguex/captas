@@ -4,7 +4,6 @@ import { LocalTime } from "@/components/ui/LocalTime";
 import { CaptasLogo } from "@/components/brand/CaptasLogo";
 import { FooterAssistant } from "@/components/footer/FooterAssistant";
 import { FooterCtaBlock } from "@/components/footer/FooterCtaBlock";
-import { FooterTerritoryCard } from "@/components/footer/FooterTerritoryCard";
 import { footerContent } from "@/content/footer";
 import { site, socialLinks } from "@/content/site";
 import { services } from "@/content/services";
@@ -66,8 +65,8 @@ export function Footer() {
             </p>
           </div>
 
-          <div className="grid gap-10 border-b border-line/40 py-12 md:grid-cols-2 md:gap-8 lg:grid-cols-12 lg:gap-10 lg:py-14">
-            <div className="lg:col-span-2">
+          <div className="grid gap-10 border-b border-line/40 py-12 md:grid-cols-2 md:gap-8 lg:grid-cols-3 lg:gap-12 lg:py-14">
+            <div>
               <FooterColumn title="Navegación">
                 <ul className="space-y-2.5">
                   {navLinks.map((link) => (
@@ -81,7 +80,7 @@ export function Footer() {
               </FooterColumn>
             </div>
 
-            <div className="lg:col-span-3">
+            <div>
               <FooterColumn title="Servicios">
                 <ul className="space-y-2.5">
                   {services.map((service) => (
@@ -98,7 +97,7 @@ export function Footer() {
               </FooterColumn>
             </div>
 
-            <div className="lg:col-span-3">
+            <div>
               <FooterColumn title="Contacto">
                 <ul className="space-y-2.5 text-body text-on-ink-muted">
                   <li>
@@ -147,10 +146,6 @@ export function Footer() {
                   )}
                 </ul>
               </FooterColumn>
-            </div>
-
-            <div className="md:col-span-2 lg:col-span-4">
-              <FooterTerritoryCard />
             </div>
           </div>
 

@@ -7,10 +7,6 @@ export const footerContent = {
   ctaPrimary: "Iniciar proyecto",
   ctaWhatsApp: "WhatsApp directo",
   ctaContact: "Conversemos",
-  territoryEyebrow: "Territorio",
-  territoryTitle: "Raíz en el valle",
-  territoryBody:
-    "Ovalle y el Limarí son nuestra referencia de luz y ritmo. Trabajamos remoto; la marca viaja contigo.",
   craftsLabel: "Crafts activos",
   legalCraft: "Craft desde el valle · Chile",
 } as const;
