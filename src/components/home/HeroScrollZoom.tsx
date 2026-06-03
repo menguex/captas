@@ -28,14 +28,15 @@ export function HeroScrollZoom({
   const containerRef = useRef<HTMLElement>(null);
   const progress = useElementScrollProgress(containerRef, !reduced);
 
-  const imageScale = useTransform(progress, [0, 1], [1, 1.55]);
-  const imageOpacity = useTransform(progress, [0, 0.4, 1], [0.72, 0.4, 0.08]);
-  const imageBlur = useTransform(progress, [0, 1], ["blur(0px)", "blur(22px)"]);
-  const overlayOpacity = useTransform(progress, [0, 1], [0.15, 0.88]);
+  const imageScale = useTransform(progress, [0, 1], [1, 1.5]);
+  const imageOpacity = useTransform(progress, [0, 0.5, 1], [0.42, 0.28, 0.06]);
+  const imageBlur = useTransform(progress, [0, 1], ["blur(0px)", "blur(20px)"]);
+  const scrimBoost = useTransform(progress, [0, 1], [1, 1.15]);
   const contentY = useTransform(progress, [0, 1], ["0%", "-18%"]);
   const contentScale = useTransform(progress, [0, 1], [1, 0.92]);
   const contentOpacity = useTransform(progress, [0, 0.78, 1], [1, 1, 0]);
-  const meshOpacity = useTransform(progress, [0, 0.9, 1], [1, 0.5, 0]);
+  const meshOpacity = useTransform(progress, [0, 0.9, 1], [0.65, 0.35, 0]);
+
   if (reduced) {
     return (
       <section
@@ -53,8 +54,10 @@ export function HeroScrollZoom({
             fill
             priority
             sizes="100vw"
-            className="object-cover opacity-40"
+            className="object-cover"
+            style={{ objectPosition: heroContent.backgroundPosition }}
           />
+          <div className="hero-scrim absolute inset-0" />
         </div>
         {mesh}
         {spotlight}
@@ -74,7 +77,7 @@ export function HeroScrollZoom({
     >
       <div className="sticky top-0 h-[100dvh] min-h-[28rem] overflow-hidden">
         <motion.div
-          className="pointer-events-none absolute -inset-[22%] z-0 origin-center will-change-transform"
+          className="pointer-events-none absolute -inset-[28%] z-0 origin-center will-change-transform"
           style={{ scale: imageScale, opacity: imageOpacity, filter: imageBlur }}
           aria-hidden
         >
@@ -84,39 +87,39 @@ export function HeroScrollZoom({
             fill
             priority
             sizes="100vw"
-            className="object-cover"
+            className="object-cover saturate-[0.85] contrast-[1.05]"
             style={{ objectPosition: heroContent.backgroundPosition }}
           />
         </motion.div>
 
         <motion.div
-          className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-b from-ink/10 via-ink/45 to-ink"
-          style={{ opacity: overlayOpacity }}
+          className="hero-scrim pointer-events-none absolute inset-0 z-[1]"
+          style={{ opacity: scrimBoost }}
           aria-hidden
         />
 
-        <motion.div className="absolute inset-0 z-[2]" style={{ opacity: meshOpacity }}>
+        <motion.div className="absolute inset-0 z-[2] opacity-80" style={{ opacity: meshOpacity }}>
           {mesh}
         </motion.div>
 
         {spotlight}
 
         <motion.div
-          className="relative z-10 flex h-full w-full items-center justify-center"
+          className="relative z-10 flex h-full w-full items-center justify-center px-gutter"
           style={{ y: contentY, scale: contentScale, opacity: contentOpacity }}
         >
           {children}
         </motion.div>
 
         <motion.div
-          className="pointer-events-none absolute inset-x-0 bottom-28 z-[15] flex justify-center px-gutter md:bottom-32"
+          className="pointer-events-none absolute inset-x-0 bottom-28 z-[15] flex justify-center md:bottom-32"
           aria-hidden
         >
           <div className="hero-scroll-progress flex w-full max-w-xs flex-col items-center gap-2">
-            <span className="font-mono text-[0.52rem] uppercase tracking-[0.24em] text-bone/40">
+            <span className="font-heading text-[0.75rem] font-medium tracking-[-0.02em] text-bone/50">
               Scroll
             </span>
-            <div className="h-[2px] w-full overflow-hidden rounded-full bg-white/10">
+            <div className="h-[2px] w-full overflow-hidden rounded-full bg-white/15">
               <motion.span
                 className="hero-scroll-progress-fill block h-full w-full origin-left rounded-full bg-gradient-to-r from-[#5b61ff] via-accent to-sky"
                 style={{ scaleX: progress }}
@@ -133,7 +136,7 @@ export function HeroScrollZoom({
       </div>
 
       <div
-        className="pointer-events-none absolute inset-x-0 bottom-0 z-[5] h-40 bg-gradient-to-t from-ink via-ink/80 to-transparent md:h-48"
+        className="pointer-events-none absolute inset-x-0 bottom-0 z-[5] h-48 bg-gradient-to-t from-ink via-ink/90 to-transparent"
         aria-hidden
       />
     </section>

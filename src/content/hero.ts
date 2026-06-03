@@ -4,16 +4,10 @@ export const heroContent = {
   index: "001",
   kicker: "Estudio de diseño · Limarí, Chile",
   headline: "Captamos lo esencial.",
-  headlineAccent: "Lo convertimos en experiencia.",
+  headlineLine2: "Lo convertimos en",
+  headlineAccentWord: "experiencia.",
   tagline:
-    "Agencia de diseño y experiencia con dirección creativa única — del concepto al pixel, del frame al sistema.",
-  statement:
-    "Diseñamos marcas que se sienten claras, se mueven con propósito y se recuerdan sin insistir.",
-  pillars: [
-    { label: "01", title: "Estrategia visual", text: "Concepto antes del primer pixel." },
-    { label: "02", title: "Craft", text: "Sistemas coherentes en cada touchpoint." },
-    { label: "03", title: "Emoción", text: "Motion y narrativa que comunican valor." },
-  ],
+    "Dirección creativa única — del concepto al pixel, al frame y al sistema. Marcas claras, con propósito y craft de estudio.",
   ctaPrimary: "Iniciar proyecto",
   ctaSecondary: "Nuestra forma de pensar",
   scrollLabel: "Scroll",
@@ -24,5 +18,5 @@ export const heroContent = {
     { value: "Limarí", label: "Territorio" },
   ],
   backgroundImage: "/images/hero/dji-0068.jpg",
-  backgroundPosition: "center center",
+  backgroundPosition: "center 42%",
 } as const;

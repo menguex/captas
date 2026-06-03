@@ -14,7 +14,7 @@ export function HeroDesignMesh({ active }: HeroDesignMeshProps) {
   return (
     <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
       <div className="hero-editorial-vignette absolute inset-0" />
-      <div className="hero-editorial-grid absolute inset-0 opacity-60" />
+      <div className="hero-editorial-grid absolute inset-0 opacity-35" />
 
       <motion.div
         className="hero-editorial-orb hero-editorial-orb--a absolute -left-[10%] top-[5%] h-[55vh] w-[55vh]"
