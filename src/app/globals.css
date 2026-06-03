@@ -705,14 +705,8 @@
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* Manifiesto — tipografía ligada al scroll */
-.manifesto-scroll-track {
-  height: min(280vh, 2200px);
-}
-
-.manifesto-scroll-row--outline {
-  -webkit-text-stroke: 1px rgba(245, 245, 247, 0.22);
-  color: transparent;
+.manifesto-statement {
+  text-wrap: balance;
 }
 
 /* Footer + CTA unificado */
@@ -728,12 +722,6 @@
   box-shadow:
     0 32px 100px rgba(0, 0, 0, 0.45),
     inset 0 1px 0 rgba(255, 255, 255, 0.06);
-}
-
-@media (min-width: 768px) {
-  .manifesto-scroll-row--outline {
-    -webkit-text-stroke-width: 1.5px;
-  }
 }
 
 .hero-editorial-scroll {
