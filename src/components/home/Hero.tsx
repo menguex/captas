@@ -15,9 +15,6 @@ import { scrollToId } from "@/lib/scroll";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
-const accentClass =
-  "bg-gradient-to-r from-[#7dd3fc] via-[#5b61ff] to-[#38bdf8] bg-clip-text text-transparent";
-
 export function Hero() {
   const { onMove, onLeave } = useSpotlight();
   const reduced = useReducedMotion();
@@ -97,7 +94,7 @@ export function Hero() {
                 transition={{ delay: 0.45, duration: 0.9, ease }}
               >
                 {heroContent.headlineLine2}{" "}
-                <span className={`${accentClass} hero-title-accent`}>
+                <span className="hero-title-accent-word">
                   {heroContent.headlineAccentWord}
                 </span>
               </motion.span>

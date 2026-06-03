@@ -10,9 +10,13 @@ import { FloatingCta } from "@/components/ui/FloatingCta";
 
 export function AppProviders({ children }: { children: React.ReactNode }) {
   useEffect(() => {
-    const visited = sessionStorage.getItem("captas-visited");
-    if (visited) {
-      document.body.classList.add("captas-ready");
+    try {
+      if (sessionStorage.getItem("captas-visited")) {
+        document.body.classList.add("captas-ready");
+        document.body.classList.remove("captas-loading");
+      }
+    } catch {
+      /* ignore */
     }
   }, []);
 

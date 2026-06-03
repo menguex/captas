@@ -2,12 +2,12 @@
 
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useLayoutEffect, useRef, useState } from "react";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { dispatchIntroComplete } from "@/hooks/useIntroReady";
+import { runAppPreload } from "@/lib/preload";
 
 const VISITED_KEY = "captas-visited";
-const LOAD_MS = 1600;
 const RING_R = 52;
 const RING_C = 2 * Math.PI * RING_R;
 
@@ -21,6 +21,7 @@ function resetScroll() {
 }
 
 function markAppReady() {
+  document.body.classList.remove("captas-loading");
   document.body.classList.add("captas-ready");
   dispatchIntroComplete();
 }
@@ -31,56 +32,64 @@ export function IntroLoader() {
   const [visible, setVisible] = useState(false);
   const [progress, setProgress] = useState(0);
   const finishedRef = useRef(false);
-  const rafRef = useRef<number>(0);
+  const preloadStartedRef = useRef(false);
 
-  const finish = () => {
+  const finish = useCallback(() => {
     if (finishedRef.current) return;
     finishedRef.current = true;
-    sessionStorage.setItem(VISITED_KEY, "1");
+    try {
+      sessionStorage.setItem(VISITED_KEY, "1");
+    } catch {
+      /* sessionStorage blocked */
+    }
     markAppReady();
     setVisible(false);
-  };
+    document.body.style.overflow = "";
+  }, []);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     setMounted(true);
     resetScroll();
 
-    const visited = sessionStorage.getItem(VISITED_KEY);
+    let visited = false;
+    try {
+      visited = !!sessionStorage.getItem(VISITED_KEY);
+    } catch {
+      visited = false;
+    }
+
     if (visited || reduced) {
       markAppReady();
       return;
     }
 
     setVisible(true);
+    document.body.classList.add("captas-loading");
     document.body.style.overflow = "hidden";
 
-    const start = performance.now();
+    if (preloadStartedRef.current) return;
+    preloadStartedRef.current = true;
 
-    const tick = (now: number) => {
-      const t = Math.min(1, (now - start) / LOAD_MS);
-      const eased = 1 - (1 - t) ** 3;
-      setProgress(Math.round(eased * 100));
-      if (t < 1) {
-        rafRef.current = requestAnimationFrame(tick);
-      }
-    };
+    let cancelled = false;
 
-    rafRef.current = requestAnimationFrame(tick);
+    runAppPreload((pct) => {
+      if (!cancelled) setProgress(pct);
+    })
+      .then(() => {
+        if (!cancelled) finish();
+      })
+      .catch(() => {
+        if (!cancelled) finish();
+      });
 
-    const safety = setTimeout(finish, LOAD_MS + 900);
+    const safety = window.setTimeout(finish, 8000);
 
     return () => {
-      cancelAnimationFrame(rafRef.current);
-      clearTimeout(safety);
+      cancelled = true;
+      window.clearTimeout(safety);
       document.body.style.overflow = "";
     };
-  }, [reduced]);
-
-  useEffect(() => {
-    if (!visible || progress < 100) return;
-    const timer = setTimeout(finish, 420);
-    return () => clearTimeout(timer);
-  }, [progress, visible]);
+  }, [reduced, finish]);
 
   if (!mounted) return null;
 
@@ -121,7 +130,6 @@ export function IntroLoader() {
             exit={{ opacity: 0, scale: 1.03, filter: "blur(6px)" }}
             transition={{ duration: 0.75, ease: easeOut }}
           >
-            {/* Icono + anillo de progreso */}
             <div className="relative flex h-[8.75rem] w-[8.75rem] items-center justify-center">
               <svg
                 className="absolute inset-0 h-full w-full -rotate-90"
@@ -180,7 +188,6 @@ export function IntroLoader() {
               </motion.div>
             </div>
 
-            {/* Wordmark */}
             <motion.div
               className="mt-8 text-center"
               initial={{ opacity: 0, y: 14 }}
@@ -189,16 +196,13 @@ export function IntroLoader() {
             >
               <p className="font-heading text-[clamp(2.35rem,9vw,3.75rem)] font-semibold leading-none tracking-[-0.04em] text-bone">
                 CAPTAS
-                <span className="bg-gradient-to-r from-[#5b61ff] via-accent to-[#0ea5e9] bg-clip-text text-transparent">
-                  .
-                </span>
+                <span className="intro-loader-dot">.</span>
               </p>
               <p className="mt-3 font-mono text-[0.62rem] uppercase tracking-[0.22em] text-on-ink-muted">
                 Agencia creativa · Limarí
               </p>
             </motion.div>
 
-            {/* Barra + contador */}
             <motion.div
               className="mt-9 w-[min(11rem,70vw)]"
               initial={{ opacity: 0, y: 8 }}

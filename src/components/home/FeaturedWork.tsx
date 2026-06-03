@@ -35,6 +35,10 @@ export function FeaturedWork() {
         className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-sky/30 to-transparent"
         aria-hidden
       />
+      <div
+        className="pointer-events-none absolute inset-x-0 bottom-0 z-[1] h-[clamp(5rem,14vh,9rem)] bg-gradient-to-b from-transparent via-ink/25 to-bone"
+        aria-hidden
+      />
 
       <div className="site-container relative">
         <SectionHeader

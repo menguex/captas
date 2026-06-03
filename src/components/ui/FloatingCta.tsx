@@ -66,7 +66,7 @@ export function FloatingCta() {
     <AnimatePresence>
       {visible && !nearFooter && (
         <motion.div
-          className="fixed bottom-6 right-6 z-[100] flex items-end gap-3 md:bottom-8 md:right-8"
+          className="captas-chrome fixed bottom-6 right-6 z-[100] flex items-end gap-3 md:bottom-8 md:right-8"
           initial={reduced ? false : { opacity: 0, y: 20, scale: 0.85 }}
           animate={reduced ? undefined : { opacity: 1, y: 0, scale: 1 }}
           exit={reduced ? undefined : { opacity: 0, y: 20, scale: 0.85 }}

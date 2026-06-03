@@ -77,16 +77,18 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <head>
+        <link rel="preload" href="/brand/captas-icon.png" as="image" type="image/png" />
+        <link rel="preload" href="/images/hero/dji-0068.jpg" as="image" type="image/jpeg" />
         <script
           dangerouslySetInnerHTML={{
             __html: `(function(){try{document.documentElement.setAttribute("data-theme","dark");var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute("content","#007aff");}catch(e){document.documentElement.setAttribute("data-theme","dark");}})();`,
           }}
         />
       </head>
-      <body className="font-body antialiased">
+      <body className="font-body antialiased captas-loading">
         <script
           dangerouslySetInnerHTML={{
-            __html: `try{if(sessionStorage.getItem("captas-visited"))document.body.classList.add("captas-ready");}catch(e){}`,
+            __html: `try{if(sessionStorage.getItem("captas-visited")){document.body.classList.add("captas-ready");document.body.classList.remove("captas-loading");}}catch(e){}`,
           }}
         />
         <div id="captas-preload" aria-hidden>

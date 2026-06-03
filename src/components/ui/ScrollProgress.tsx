@@ -19,7 +19,7 @@ export function ScrollProgress() {
 
   return (
     <motion.div
-      className="fixed left-0 top-0 z-[60] h-[2px] w-full origin-left bg-gradient-to-r from-accent-deep via-accent to-sky shadow-[0_0_10px_var(--c-accent-glow)]"
+      className="captas-chrome fixed left-0 top-0 z-[60] h-[2px] w-full origin-left bg-gradient-to-r from-accent-deep via-accent to-sky shadow-[0_0_10px_var(--c-accent-glow)]"
       style={{ scaleX }}
       role="progressbar"
       aria-valuemin={0}
