@@ -1,22 +1,28 @@
-/** Copy del hero — editorial · estudio de diseño */
+/** Copy del hero — mensaje de agencia de diseño (sin portfolio) */
 
 export const heroContent = {
   index: "001",
-  kicker: "Agencia creativa · Limarí",
-  headline: "Diseño que eleva.",
-  headlineAccent: "Experiencias que perduran.",
+  kicker: "Estudio de diseño · Limarí, Chile",
+  headline: "Captamos lo esencial.",
+  headlineAccent: "Lo convertimos en experiencia.",
   tagline:
-    "UX/UI, identidad, foto, cine y web — un director creativo, un hilo, craft de nivel global.",
-  ctaPrimary: "Iniciar proyecto",
-  ctaSecondary: "Ver trabajo",
-  scrollLabel: "Scroll",
-  disciplines: ["UX/UI", "Branding", "Foto", "Cine", "Web", "Motion"] as const,
-  metrics: [
-    { value: "120+", label: "Proyectos" },
-    { value: "8", label: "Años" },
-    { value: "92%", label: "Recomiendan" },
+    "Identidad, UX/UI, foto, cine y web bajo una sola dirección creativa. Trabajamos con intención, ritmo pausado y craft de estudio — no volumen.",
+  statement:
+    "Diseñamos marcas que se sienten claras, se mueven con propósito y se recuerdan sin insistir.",
+  pillars: [
+    { label: "01", title: "Estrategia visual", text: "Concepto antes del primer pixel." },
+    { label: "02", title: "Craft", text: "Sistemas coherentes en cada touchpoint." },
+    { label: "03", title: "Emoción", text: "Motion y narrativa que comunican valor." },
   ],
-  visualLabel: "Trabajo reciente",
+  ctaPrimary: "Iniciar proyecto",
+  ctaSecondary: "Nuestra forma de pensar",
+  scrollLabel: "Scroll",
+  disciplines: ["Branding", "UX/UI", "Foto", "Cine", "Web", "Motion"] as const,
+  metrics: [
+    { value: "8+", label: "Años de estudio" },
+    { value: "1", label: "Director creativo" },
+    { value: "Limarí", label: "Territorio" },
+  ],
   backgroundImage:
     "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&q=85",
 } as const;

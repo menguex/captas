@@ -2,12 +2,11 @@
 
 import { useRef } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import { motion } from "framer-motion";
 import { MagneticButton } from "@/components/motion/MagneticButton";
 import { SplitText } from "@/components/motion/SplitText";
 import { HeroDesignMesh } from "@/components/home/HeroDesignMesh";
-import { HeroVisualStack } from "@/components/home/HeroVisualStack";
+import { HeroAgencySignal } from "@/components/home/HeroAgencySignal";
 import { heroContent } from "@/content/hero";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { useSpotlight } from "@/hooks/useSpotlight";
@@ -45,7 +44,7 @@ export function Hero() {
           fill
           priority
           sizes="100vw"
-          className="object-cover opacity-35"
+          className="object-cover opacity-28"
         />
       </div>
 
@@ -53,8 +52,8 @@ export function Hero() {
       <div className="hero-editorial-spotlight pointer-events-none absolute inset-0 z-[1]" aria-hidden />
 
       <div className="site-container relative z-10 flex w-full flex-col px-gutter py-[clamp(6rem,14vh,8rem)] lg:py-[clamp(5.5rem,12vh,7rem)]">
-        <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-10 xl:gap-14">
-          <div className="lg:col-span-6 xl:col-span-5">
+        <div className="grid items-center gap-14 lg:grid-cols-12 lg:gap-12 xl:gap-16">
+          <div className="lg:col-span-7 xl:col-span-6">
             <motion.div
               className="flex items-center gap-3"
               initial={active ? { opacity: 0 } : false}
@@ -70,11 +69,11 @@ export function Hero() {
               </span>
             </motion.div>
 
-            <h1 className="mt-6 font-heading font-extrabold leading-[0.92] tracking-[-0.045em] text-bone">
+            <h1 className="mt-6 font-heading font-extrabold leading-[0.9] tracking-[-0.045em] text-bone">
               <SplitText
                 as="span"
                 text={heroContent.headline}
-                className="block text-[clamp(2.35rem,5.5vw,4.25rem)]"
+                className="block text-[clamp(2.5rem,6.2vw,4.75rem)]"
                 align="start"
                 playOnMount
                 active={active}
@@ -82,7 +81,7 @@ export function Hero() {
               />
               <span className="mt-1 block overflow-hidden">
                 <motion.span
-                  className="hero-editorial-accent block text-[clamp(2.35rem,5.5vw,4.25rem)]"
+                  className="hero-editorial-accent block text-[clamp(2.5rem,6.2vw,4.75rem)]"
                   initial={active ? { y: "100%" } : false}
                   animate={{ y: 0 }}
                   transition={{ delay: 0.45, duration: 0.9, ease }}
@@ -93,7 +92,7 @@ export function Hero() {
             </h1>
 
             <motion.p
-              className="mt-6 max-w-md text-lead font-light leading-relaxed text-bone/78"
+              className="mt-7 max-w-xl text-lead font-light leading-relaxed text-bone/80"
               initial={active ? { opacity: 0, y: 16 } : false}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.55, duration: 0.85, ease }}
@@ -102,7 +101,7 @@ export function Hero() {
             </motion.p>
 
             <motion.ul
-              className="mt-6 flex flex-wrap gap-2"
+              className="mt-7 flex flex-wrap gap-2"
               role="list"
               initial={active ? { opacity: 0 } : false}
               animate={{ opacity: 1 }}
@@ -118,23 +117,24 @@ export function Hero() {
             </motion.ul>
 
             <motion.div
-              className="mt-8 flex flex-wrap items-center gap-4"
+              className="mt-9 flex flex-wrap items-center gap-4"
               initial={active ? { opacity: 0, y: 14 } : false}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.7, duration: 0.8, ease }}
             >
               <MagneticButton href="/contacto">{heroContent.ctaPrimary}</MagneticButton>
-              <Link
-                href="/trabajo"
+              <button
+                type="button"
+                onClick={scrollToManifesto}
                 className="inline-flex items-center gap-2 font-mono text-kicker uppercase tracking-[0.18em] text-bone/70 transition-colors hover:text-sky-soft"
               >
                 {heroContent.ctaSecondary}
-                <span aria-hidden>→</span>
-              </Link>
+                <span aria-hidden>↓</span>
+              </button>
             </motion.div>
 
             <motion.dl
-              className="mt-10 grid max-w-sm grid-cols-3 gap-4 border-t border-white/10 pt-8"
+              className="mt-11 grid max-w-lg grid-cols-3 gap-6 border-t border-white/10 pt-8"
               initial={active ? { opacity: 0 } : false}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.78, duration: 0.75, ease }}
@@ -142,7 +142,7 @@ export function Hero() {
               {heroContent.metrics.map((m) => (
                 <div key={m.label}>
                   <dt className="sr-only">{m.label}</dt>
-                  <dd className="font-heading text-h3 font-semibold tabular-nums text-bone">
+                  <dd className="font-heading text-h3 font-semibold tracking-tight text-bone">
                     {m.value}
                   </dd>
                   <dd className="mt-0.5 font-mono text-[0.52rem] uppercase tracking-[0.12em] text-bone/45">
@@ -153,8 +153,8 @@ export function Hero() {
             </motion.dl>
           </div>
 
-          <div className="lg:col-span-6 xl:col-span-7">
-            <HeroVisualStack active={active} />
+          <div className="lg:col-span-5 xl:col-span-6">
+            <HeroAgencySignal active={active} />
           </div>
         </div>
       </div>
