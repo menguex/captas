@@ -74,7 +74,7 @@ export function HeroScrollZoom({
     >
       <div className="sticky top-0 h-[100dvh] min-h-[28rem] overflow-hidden">
         <motion.div
-          className="pointer-events-none absolute inset-0 z-0 origin-center will-change-transform"
+          className="pointer-events-none absolute -inset-[22%] z-0 origin-center will-change-transform"
           style={{ scale: imageScale, opacity: imageOpacity, filter: imageBlur }}
           aria-hidden
         >
@@ -85,6 +85,7 @@ export function HeroScrollZoom({
             priority
             sizes="100vw"
             className="object-cover"
+            style={{ objectPosition: heroContent.backgroundPosition }}
           />
         </motion.div>
 
@@ -132,7 +133,7 @@ export function HeroScrollZoom({
       </div>
 
       <div
-        className="pointer-events-none absolute inset-x-0 bottom-0 z-[5] h-32 bg-gradient-to-t from-ink to-transparent"
+        className="pointer-events-none absolute inset-x-0 bottom-0 z-[5] h-40 bg-gradient-to-t from-ink via-ink/80 to-transparent md:h-48"
         aria-hidden
       />
     </section>

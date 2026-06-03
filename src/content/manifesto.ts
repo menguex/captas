@@ -10,6 +10,4 @@ export const manifestoContent = {
   signoff: "Captas · Limarí, Chile",
   footnote: "Dirección creativa única · del concepto al detalle",
   disciplines: ["UX/UI", "Motion", "Branding", "Territorio"] as const,
-  backgroundImage: "/images/hero/dji-0068.jpg",
-  backgroundPosition: "center 35%",
 } as const;

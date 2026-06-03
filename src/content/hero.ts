@@ -24,4 +24,5 @@ export const heroContent = {
     { value: "Limarí", label: "Territorio" },
   ],
   backgroundImage: "/images/hero/dji-0068.jpg",
+  backgroundPosition: "center center",
 } as const;
