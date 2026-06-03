@@ -21,12 +21,16 @@ export const heroContent = {
     "UX/UI, motion, fotografía, cine y branding en un solo hilo — craft premium para Chile y exportación.",
   ctaPrimary: "Iniciar proyecto",
   ctaSecondary: "Ver trabajo",
-  scrollLabel: "Explorar",
+  scrollLabel: "Scroll para explorar",
   crafts: ["UX/UI", "Motion", "Branding", "Foto", "Cine", "Web"] as const,
   metrics: [
     { value: "120+", label: "Experiencias" },
     { value: "8", label: "Años de craft" },
     { value: "92%", label: "Recomiendan" },
   ],
-  signalPrefix: "Captas",
+  scrollRail: {
+    kicker: "Trabajo seleccionado",
+    hint: "Arrastra con el scroll",
+    cta: "Ver portafolio",
+  },
 } as const;
