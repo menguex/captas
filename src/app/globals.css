@@ -678,8 +678,8 @@
 .hero-title-accent-word.text-captas-brand-gradient {
   background-size: 200% auto;
   animation: gradient-shift 6s ease-in-out infinite;
-  filter: drop-shadow(0 0 14px rgba(91, 97, 255, 0.55))
-    drop-shadow(0 0 28px rgba(0, 122, 255, 0.38));
+  text-shadow: none;
+  filter: none;
 }
 
 .hero-editorial-accent {

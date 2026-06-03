@@ -88,12 +88,14 @@ export function Hero() {
             />
             <span className="mt-2 block overflow-hidden">
               <motion.span
-                className="hero-title-line block text-[clamp(2.75rem,8vw,5.25rem)] text-bone"
+                className="block text-[clamp(2.75rem,8vw,5.25rem)]"
                 initial={active ? { y: "100%" } : false}
                 animate={{ y: 0 }}
                 transition={{ delay: 0.45, duration: 0.9, ease }}
               >
-                {heroContent.headlineLine2}{" "}
+                <span className="hero-title-line text-bone">
+                  {heroContent.headlineLine2}{" "}
+                </span>
                 <span className="hero-title-accent-word text-captas-brand-gradient">
                   {heroContent.headlineAccentWord}
                 </span>
