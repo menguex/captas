@@ -21,25 +21,23 @@ const fadeUp = {
   }),
 };
 
-export function CtaSection() {
+export function FooterCtaBlock() {
   const reduced = useReducedMotion();
   const mediaRef = useRef<HTMLDivElement>(null);
   const inView = useInView(mediaRef, { once: true, margin: "-12% 0px" });
 
   return (
-    <section
-      className="relative overflow-hidden bg-ink py-section"
-      aria-labelledby="cta-closing-heading"
+    <div
+      className="footer-cta-block relative"
+      aria-labelledby="footer-cta-heading"
     >
-      {/* Cinematic backdrop */}
       <div ref={mediaRef} className="pointer-events-none absolute inset-0" aria-hidden>
         <Image
           src={ctaClosing.poster}
           alt=""
           fill
           sizes="100vw"
-          className="object-cover opacity-35"
-          priority={false}
+          className="object-cover opacity-32"
         />
         {ctaClosing.video && inView && !reduced ? (
           <video
@@ -48,17 +46,13 @@ export function CtaSection() {
             muted
             loop
             playsInline
-            className="absolute inset-0 h-full w-full object-cover opacity-30"
+            className="absolute inset-0 h-full w-full object-cover opacity-28"
           />
         ) : null}
-        <div className="absolute inset-0 bg-gradient-to-b from-ink via-ink/88 to-ink" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_30%_20%,rgba(91,97,255,0.22),transparent_50%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_75%_60%,rgba(0,122,255,0.18),transparent_45%)]" />
-        <div className="absolute inset-0 mesh-grid opacity-[0.14]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-ink/20 via-transparent to-ink" />
       </div>
 
-      <div className="site-container relative">
-        {/* Kicker */}
+      <div className="site-container relative px-gutter pb-10 pt-section md:pb-12">
         <motion.div
           className="flex items-center justify-center gap-4"
           initial={{ opacity: 0 }}
@@ -87,7 +81,6 @@ export function CtaSection() {
           />
         </motion.div>
 
-        {/* Headline — editorial stack */}
         <div className="mx-auto mt-10 max-w-5xl text-center md:mt-14">
           <SplitText
             as="p"
@@ -97,7 +90,7 @@ export function CtaSection() {
           />
 
           <motion.h2
-            id="cta-closing-heading"
+            id="footer-cta-heading"
             className="relative mt-2 md:mt-3"
             initial={{ opacity: 0, y: 32, filter: reduced ? "none" : "blur(10px)" }}
             whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
@@ -130,9 +123,8 @@ export function CtaSection() {
           {ctaClosing.body}
         </motion.p>
 
-        {/* Conversion panel */}
         <motion.div
-          className="relative mx-auto mt-12 max-w-3xl overflow-hidden rounded-box-lg border border-white/10 bg-ink/55 shadow-[0_32px_100px_rgba(0,0,0,0.45)] backdrop-blur-2xl supports-[backdrop-filter]:bg-ink/45 md:mt-16"
+          className="footer-cta-panel relative mx-auto mt-12 max-w-3xl overflow-hidden rounded-box-lg border border-white/10 bg-ink/55 shadow-[0_32px_100px_rgba(0,0,0,0.45)] backdrop-blur-2xl supports-[backdrop-filter]:bg-ink/45 md:mt-14"
           custom={1}
           variants={fadeUp}
           initial="hidden"
@@ -203,9 +195,8 @@ export function CtaSection() {
           </div>
         </motion.div>
 
-        {/* Footer meta */}
         <motion.div
-          className="mt-14 grid grid-cols-1 gap-y-2 border-t border-line/80 pt-8 text-center font-mono text-[0.65rem] uppercase tracking-[0.2em] text-on-ink-muted sm:grid-cols-3 sm:gap-y-0"
+          className="mx-auto mt-10 grid max-w-3xl grid-cols-1 gap-y-2 border-t border-white/10 pt-8 text-center font-mono text-[0.65rem] uppercase tracking-[0.2em] text-on-ink-muted sm:grid-cols-3 sm:gap-y-0"
           custom={2}
           variants={fadeUp}
           initial="hidden"
@@ -217,6 +208,6 @@ export function CtaSection() {
           <p>Remoto · presencial</p>
         </motion.div>
       </div>
-    </section>
+    </div>
   );
 }

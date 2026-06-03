@@ -6,7 +6,6 @@ import { FeaturedWork } from "@/components/home/FeaturedWork";
 import { Process } from "@/components/home/Process";
 import { Services } from "@/components/home/Services";
 import { PlanesRetainer } from "@/components/sections/PlanesRetainer";
-import { CtaSection } from "@/components/home/CtaSection";
 import { pageOpenGraph } from "@/lib/seo";
 
 export const metadata: Metadata = {
@@ -32,7 +31,6 @@ export default function Home() {
       <PlanesRetainer />
       <FeaturedWork />
       <Process />
-      <CtaSection />
     </>
   );
 }
