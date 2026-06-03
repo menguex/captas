@@ -94,7 +94,7 @@ export function Hero() {
                 transition={{ delay: 0.45, duration: 0.9, ease }}
               >
                 {heroContent.headlineLine2}{" "}
-                <span className="hero-title-accent-word">
+                <span className="hero-title-accent-word text-captas-brand-gradient">
                   {heroContent.headlineAccentWord}
                 </span>
               </motion.span>

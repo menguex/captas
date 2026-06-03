@@ -34,10 +34,7 @@ export function CaptasLogo({
   const wordmark = (
     <>
       CAPTAS
-      <span
-        className="bg-gradient-to-r from-[#5b61ff] via-accent to-[#0ea5e9] bg-clip-text text-transparent"
-        aria-hidden
-      >
+      <span className="text-captas-brand-gradient" aria-hidden>
         .
       </span>
     </>

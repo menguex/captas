@@ -659,25 +659,27 @@
     0 4px 28px rgba(0, 0, 0, 0.65);
 }
 
-/* Acento hero — gradiente luminoso (legible sobre foto oscura) */
-.hero-title-accent-word {
+/* Gradiente de marca — mismo efecto que el punto del logo Captas */
+.text-captas-brand-gradient {
   display: inline;
   background-image: linear-gradient(
-    102deg,
-    #f0f9ff 0%,
-    #bae6fd 18%,
-    #7dd3fc 42%,
-    #38bdf8 68%,
-    #a5f3fc 100%
+    90deg,
+    #5b61ff 0%,
+    var(--c-accent) 48%,
+    #0ea5e9 100%
   );
   background-size: 100% auto;
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
   -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 0 18px rgba(186, 230, 253, 0.55))
-    drop-shadow(0 0 36px rgba(56, 189, 248, 0.4));
-  paint-order: stroke fill;
+}
+
+.hero-title-accent-word.text-captas-brand-gradient {
+  background-size: 200% auto;
+  animation: gradient-shift 6s ease-in-out infinite;
+  filter: drop-shadow(0 0 14px rgba(91, 97, 255, 0.55))
+    drop-shadow(0 0 28px rgba(0, 122, 255, 0.38));
 }
 
 .hero-editorial-accent {
@@ -1803,6 +1805,11 @@
   }
 
   .hero-editorial-accent {
+    animation: none !important;
+    background-position: 50% 50%;
+  }
+
+  .hero-title-accent-word.text-captas-brand-gradient {
     animation: none !important;
     background-position: 50% 50%;
   }
