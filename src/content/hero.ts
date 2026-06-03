@@ -6,7 +6,7 @@ export const heroContent = {
   headline: "Captamos lo esencial.",
   headlineAccent: "Lo convertimos en experiencia.",
   tagline:
-    "Identidad, UX/UI, foto, cine y web bajo una sola dirección creativa. Trabajamos con intención, ritmo pausado y craft de estudio — no volumen.",
+    "Agencia de diseño y experiencia con dirección creativa única — del concepto al pixel, del frame al sistema.",
   statement:
     "Diseñamos marcas que se sienten claras, se mueven con propósito y se recuerdan sin insistir.",
   pillars: [

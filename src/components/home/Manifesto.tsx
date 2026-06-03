@@ -1,9 +1,9 @@
 "use client";
 
-import Image from "next/image";
 import { motion } from "framer-motion";
 import { CaptasLockup } from "@/components/brand/CaptasLogo";
 import { ManifestoScrollStage } from "@/components/home/ManifestoScrollStage";
+import { SectionBridge } from "@/components/ui/SectionBridge";
 import { manifestoContent } from "@/content/manifesto";
 import { easeOut, viewportOnce } from "@/lib/motion";
 
@@ -11,23 +11,17 @@ export function Manifesto() {
   return (
     <section
       id="manifiesto"
-      className="relative overflow-hidden bg-ink text-bone"
+      className="home-section-manifesto relative -mt-px overflow-hidden bg-ink text-bone"
       aria-labelledby="manifesto-heading"
     >
+      <SectionBridge variant="dark-continue" />
+
       <div className="pointer-events-none absolute inset-0" aria-hidden>
-        <Image
-          src={manifestoContent.poster}
-          alt=""
-          fill
-          sizes="100vw"
-          className="object-cover opacity-25"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-ink via-ink/92 to-ink" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,rgba(91,97,255,0.14),transparent_55%)]" />
-        <div className="absolute inset-0 mesh-grid opacity-[0.1]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,rgba(91,97,255,0.12),transparent_50%)]" />
+        <div className="absolute inset-0 mesh-grid opacity-[0.08]" />
       </div>
 
-      <div className="site-container relative pt-section">
+      <div className="site-container relative pt-12 md:pt-16">
         <motion.header
           className="flex flex-col items-center gap-5 sm:flex-row sm:justify-between"
           initial={{ opacity: 0, y: 16 }}

@@ -594,6 +594,37 @@
   background-color: #080a0f;
 }
 
+.hero-scroll-progress-fill {
+  transform-origin: left center;
+}
+
+.hero-center {
+  text-wrap: balance;
+}
+
+/* Puentes entre secciones del home */
+.home-section-bridge--dark {
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(8, 10, 15, 0.65) 45%,
+    #080a0f 100%
+  );
+}
+
+.home-section-bridge--to-light {
+  background: linear-gradient(
+    180deg,
+    #080a0f 0%,
+    rgba(8, 10, 15, 0.85) 35%,
+    var(--c-bone) 100%
+  );
+}
+
+.home-section-manifesto {
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
 .hero-with-spotlight {
   --mx: 50%;
   --my: 45%;

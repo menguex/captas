@@ -4,6 +4,7 @@ import { useRef } from "react";
 import Link from "next/link";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import { SectionHeader } from "@/components/ui/SectionHeader";
+import { SectionBridge } from "@/components/ui/SectionBridge";
 import { BrandValueIntro } from "@/components/home/BrandValueIntro";
 import { BrandValuePrinciple } from "@/components/home/BrandValuePrinciple";
 import { brandPrinciples } from "@/content/brand-value";
@@ -32,6 +33,7 @@ export function BrandValue() {
       id="filosofia"
       className="relative overflow-hidden border-y border-line-dark bg-bone py-section text-ink"
     >
+      <SectionBridge variant="dark-to-light" />
       <div
         className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_70%_50%_at_50%_0%,rgba(61,85,108,0.07),transparent_60%)]"
         aria-hidden

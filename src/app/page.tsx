@@ -26,11 +26,11 @@ export default function Home() {
     <>
       <Hero />
       <Manifesto />
+      <FeaturedWork />
       <BrandValue />
       <Services />
-      <PlanesRetainer />
-      <FeaturedWork />
       <Process />
+      <PlanesRetainer />
     </>
   );
 }

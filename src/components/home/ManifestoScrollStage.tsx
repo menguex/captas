@@ -1,14 +1,9 @@
 "use client";
 
 import { useRef } from "react";
-import {
-  motion,
-  useScroll,
-  useSpring,
-  useTransform,
-  type MotionValue,
-} from "framer-motion";
+import { motion, useTransform, type MotionValue } from "framer-motion";
 import { manifestoContent } from "@/content/manifesto";
+import { useElementScrollProgress } from "@/hooks/useElementScrollProgress";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { SplitText } from "@/components/motion/SplitText";
 
@@ -112,16 +107,7 @@ export function ManifestoScrollStage() {
   const reduced = useReducedMotion();
   const trackRef = useRef<HTMLDivElement>(null);
 
-  const { scrollYProgress } = useScroll({
-    target: trackRef,
-    offset: ["start start", "end end"],
-  });
-
-  const progress = useSpring(scrollYProgress, {
-    stiffness: 72,
-    damping: 26,
-    mass: 0.55,
-  });
+  const progress = useElementScrollProgress(trackRef, !reduced);
 
   const preludeOpacity = useTransform(progress, [0, 0.12, 0.35], [1, 1, 0]);
   const hintOpacity = useTransform(progress, [0, 0.08, 0.2], [1, 0.6, 0]);

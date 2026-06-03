@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import { MagneticButton } from "@/components/motion/MagneticButton";
 import { SplitText } from "@/components/motion/SplitText";
 import { HeroDesignMesh } from "@/components/home/HeroDesignMesh";
-import { HeroAgencySignal } from "@/components/home/HeroAgencySignal";
 import { HeroScrollZoom } from "@/components/home/HeroScrollZoom";
 import { heroContent } from "@/content/hero";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
@@ -59,111 +58,114 @@ export function Hero() {
         </motion.button>
       }
     >
-      <div className="site-container flex w-full flex-col px-gutter py-[clamp(6rem,14vh,8rem)] lg:py-[clamp(5.5rem,12vh,7rem)]">
-        <div className="grid items-center gap-14 lg:grid-cols-12 lg:gap-12 xl:gap-16">
-          <div className="lg:col-span-7 xl:col-span-6">
-            <motion.div
-              className="flex items-center gap-3"
-              initial={active ? { opacity: 0 } : false}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.6, ease }}
-            >
-              <span className="font-mono text-[0.58rem] tabular-nums uppercase tracking-[0.2em] text-accent">
-                {heroContent.index}
-              </span>
-              <span className="h-px w-8 bg-accent/40" aria-hidden />
-              <span className="font-mono text-kicker uppercase tracking-[0.22em] text-bone/55">
-                {heroContent.kicker}
-              </span>
-            </motion.div>
+      <div className="site-container w-full px-gutter py-[clamp(5.5rem,12vh,7rem)]">
+        <div className="hero-center mx-auto flex max-w-4xl flex-col items-center text-center lg:max-w-5xl">
+          <motion.div
+            className="flex items-center justify-center gap-3"
+            initial={active ? { opacity: 0 } : false}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6, ease }}
+          >
+            <span className="font-mono text-[0.58rem] tabular-nums uppercase tracking-[0.2em] text-accent">
+              {heroContent.index}
+            </span>
+            <span className="h-px w-8 bg-accent/40" aria-hidden />
+            <span className="font-mono text-kicker uppercase tracking-[0.22em] text-bone/55">
+              {heroContent.kicker}
+            </span>
+          </motion.div>
 
-            <h1 className="mt-6 font-heading font-extrabold leading-[0.9] tracking-[-0.045em] text-bone">
-              <SplitText
-                as="span"
-                text={heroContent.headline}
-                className="block text-[clamp(2.5rem,6.2vw,4.75rem)]"
-                align="start"
-                playOnMount
-                active={active}
-                delay={0.12}
-              />
-              <span className="mt-1 block overflow-hidden">
-                <motion.span
-                  className="hero-editorial-accent block text-[clamp(2.5rem,6.2vw,4.75rem)]"
-                  initial={active ? { y: "100%" } : false}
-                  animate={{ y: 0 }}
-                  transition={{ delay: 0.45, duration: 0.9, ease }}
-                >
-                  {heroContent.headlineAccent}
-                </motion.span>
-              </span>
-            </h1>
-
-            <motion.p
-              className="mt-7 max-w-xl text-lead font-light leading-relaxed text-bone/80"
-              initial={active ? { opacity: 0, y: 16 } : false}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.55, duration: 0.85, ease }}
-            >
-              {heroContent.tagline}
-            </motion.p>
-
-            <motion.ul
-              className="mt-7 flex flex-wrap gap-2"
-              role="list"
-              initial={active ? { opacity: 0 } : false}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.62, duration: 0.7, ease }}
-            >
-              {heroContent.disciplines.map((d) => (
-                <li key={d}>
-                  <span className="hero-discipline-pill font-mono text-[0.55rem] uppercase tracking-[0.14em] text-bone/55">
-                    {d}
-                  </span>
-                </li>
-              ))}
-            </motion.ul>
-
-            <motion.div
-              className="mt-9 flex flex-wrap items-center gap-4"
-              initial={active ? { opacity: 0, y: 14 } : false}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.7, duration: 0.8, ease }}
-            >
-              <MagneticButton href="/contacto">{heroContent.ctaPrimary}</MagneticButton>
-              <button
-                type="button"
-                onClick={scrollToManifesto}
-                className="inline-flex items-center gap-2 font-mono text-kicker uppercase tracking-[0.18em] text-bone/70 transition-colors hover:text-sky-soft"
+          <h1 className="mt-8 font-heading font-extrabold leading-[0.88] tracking-[-0.048em] text-bone">
+            <SplitText
+              as="span"
+              text={heroContent.headline}
+              className="block text-[clamp(2.75rem,8vw,5.5rem)]"
+              align="center"
+              playOnMount
+              active={active}
+              delay={0.12}
+            />
+            <span className="mt-2 block overflow-hidden">
+              <motion.span
+                className="hero-editorial-accent block text-[clamp(2.75rem,8vw,5.5rem)]"
+                initial={active ? { y: "100%" } : false}
+                animate={{ y: 0 }}
+                transition={{ delay: 0.45, duration: 0.9, ease }}
               >
-                {heroContent.ctaSecondary}
-                <span aria-hidden>↓</span>
-              </button>
-            </motion.div>
+                {heroContent.headlineAccent}
+              </motion.span>
+            </span>
+          </h1>
 
-            <motion.dl
-              className="mt-11 grid max-w-lg grid-cols-3 gap-6 border-t border-white/10 pt-8"
-              initial={active ? { opacity: 0 } : false}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.78, duration: 0.75, ease }}
+          <motion.p
+            className="mt-8 max-w-2xl text-lead font-light leading-relaxed text-bone/82"
+            initial={active ? { opacity: 0, y: 16 } : false}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.55, duration: 0.85, ease }}
+          >
+            {heroContent.tagline}
+          </motion.p>
+
+          <motion.p
+            className="mt-5 max-w-xl font-heading text-[clamp(1.05rem,2.2vw,1.35rem)] font-medium leading-snug tracking-[-0.02em] text-bone/55"
+            initial={active ? { opacity: 0 } : false}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.6, duration: 0.8, ease }}
+          >
+            {heroContent.statement}
+          </motion.p>
+
+          <motion.ul
+            className="mt-8 flex flex-wrap justify-center gap-2"
+            role="list"
+            initial={active ? { opacity: 0 } : false}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.65, duration: 0.7, ease }}
+          >
+            {heroContent.disciplines.map((d) => (
+              <li key={d}>
+                <span className="hero-discipline-pill font-mono text-[0.55rem] uppercase tracking-[0.14em] text-bone/55">
+                  {d}
+                </span>
+              </li>
+            ))}
+          </motion.ul>
+
+          <motion.div
+            className="mt-10 flex flex-wrap items-center justify-center gap-4"
+            initial={active ? { opacity: 0, y: 14 } : false}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.72, duration: 0.8, ease }}
+          >
+            <MagneticButton href="/contacto">{heroContent.ctaPrimary}</MagneticButton>
+            <button
+              type="button"
+              onClick={scrollToManifesto}
+              className="inline-flex items-center gap-2 font-mono text-kicker uppercase tracking-[0.18em] text-bone/70 transition-colors hover:text-sky-soft"
             >
-              {heroContent.metrics.map((m) => (
-                <div key={m.label}>
-                  <dt className="sr-only">{m.label}</dt>
-                  <dd className="font-heading text-h3 font-semibold tracking-tight text-bone">
-                    {m.value}
-                  </dd>
-                  <dd className="mt-0.5 font-mono text-[0.52rem] uppercase tracking-[0.12em] text-bone/45">
-                    {m.label}
-                  </dd>
-                </div>
-              ))}
-            </motion.dl>
-          </div>
+              {heroContent.ctaSecondary}
+              <span aria-hidden>↓</span>
+            </button>
+          </motion.div>
 
-          <div className="lg:col-span-5 xl:col-span-6">
-            <HeroAgencySignal active={active} />
-          </div>
+          <motion.dl
+            className="mt-12 grid w-full max-w-md grid-cols-3 gap-6 border-t border-white/10 pt-8"
+            initial={active ? { opacity: 0 } : false}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.8, duration: 0.75, ease }}
+          >
+            {heroContent.metrics.map((m) => (
+              <div key={m.label}>
+                <dt className="sr-only">{m.label}</dt>
+                <dd className="font-heading text-h3 font-semibold tracking-tight text-bone">
+                  {m.value}
+                </dd>
+                <dd className="mt-0.5 font-mono text-[0.52rem] uppercase tracking-[0.12em] text-bone/45">
+                  {m.label}
+                </dd>
+              </div>
+            ))}
+          </motion.dl>
         </div>
       </div>
     </HeroScrollZoom>

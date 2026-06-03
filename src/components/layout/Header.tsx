@@ -88,7 +88,7 @@ export function Header() {
   const pathname = usePathname();
   const scrollY = useScrollPosition();
   const scrolled = scrollY > 32;
-  const overHero = pathname === "/" && scrollY < 480;
+  const overHero = pathname === "/" && scrollY < 720;
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const menuButtonRef = useRef<HTMLButtonElement>(null);

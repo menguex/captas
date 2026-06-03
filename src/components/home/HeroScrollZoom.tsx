@@ -2,13 +2,13 @@
 
 import { useRef, type ReactNode } from "react";
 import Image from "next/image";
-import { motion, useScroll, useSpring, useTransform } from "framer-motion";
+import { motion, useTransform } from "framer-motion";
 import { heroContent } from "@/content/hero";
+import { useElementScrollProgress } from "@/hooks/useElementScrollProgress";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 
 type HeroScrollZoomProps = {
   children: ReactNode;
-  /** Elementos fijos en el sticky (p. ej. indicador de scroll) */
   chrome?: ReactNode;
   mesh: ReactNode;
   spotlight: ReactNode;
@@ -26,26 +26,16 @@ export function HeroScrollZoom({
 }: HeroScrollZoomProps) {
   const reduced = useReducedMotion();
   const containerRef = useRef<HTMLElement>(null);
+  const progress = useElementScrollProgress(containerRef, !reduced);
 
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end end"],
-  });
-
-  const progress = useSpring(scrollYProgress, {
-    stiffness: 90,
-    damping: 28,
-    restDelta: 0.001,
-  });
-
-  const imageScale = useTransform(progress, [0, 1], [1, 1.28]);
-  const imageOpacity = useTransform(progress, [0, 0.55, 1], [0.38, 0.22, 0]);
-  const imageBlur = useTransform(progress, [0, 1], ["blur(0px)", "blur(16px)"]);
-  const overlayOpacity = useTransform(progress, [0, 1], [0.45, 0.92]);
-  const contentY = useTransform(progress, [0, 1], ["0%", "-14%"]);
-  const contentOpacity = useTransform(progress, [0, 0.72, 1], [1, 1, 0]);
-  const meshOpacity = useTransform(progress, [0, 0.85, 1], [1, 0.6, 0]);
-
+  const imageScale = useTransform(progress, [0, 1], [1, 1.55]);
+  const imageOpacity = useTransform(progress, [0, 0.4, 1], [0.72, 0.4, 0.08]);
+  const imageBlur = useTransform(progress, [0, 1], ["blur(0px)", "blur(22px)"]);
+  const overlayOpacity = useTransform(progress, [0, 1], [0.15, 0.88]);
+  const contentY = useTransform(progress, [0, 1], ["0%", "-18%"]);
+  const contentScale = useTransform(progress, [0, 1], [1, 0.92]);
+  const contentOpacity = useTransform(progress, [0, 0.78, 1], [1, 1, 0]);
+  const meshOpacity = useTransform(progress, [0, 0.9, 1], [1, 0.5, 0]);
   if (reduced) {
     return (
       <section
@@ -63,7 +53,7 @@ export function HeroScrollZoom({
             fill
             priority
             sizes="100vw"
-            className="object-cover opacity-28"
+            className="object-cover opacity-40"
           />
         </div>
         {mesh}
@@ -78,7 +68,7 @@ export function HeroScrollZoom({
       ref={containerRef}
       id="hero"
       data-hero
-      className="hero-scroll-zoom hero-editorial hero-with-spotlight relative z-[1] h-[min(200vh,1800px)]"
+      className="hero-scroll-zoom hero-editorial hero-with-spotlight relative z-[1] h-[min(240vh,2100px)]"
       onMouseMove={onMouseMove}
       onMouseLeave={onMouseLeave}
     >
@@ -99,7 +89,7 @@ export function HeroScrollZoom({
         </motion.div>
 
         <motion.div
-          className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-b from-ink/30 via-ink/55 to-ink"
+          className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-b from-ink/10 via-ink/45 to-ink"
           style={{ opacity: overlayOpacity }}
           aria-hidden
         />
@@ -111,14 +101,40 @@ export function HeroScrollZoom({
         {spotlight}
 
         <motion.div
-          className="relative z-10 flex h-full w-full items-center"
-          style={{ y: contentY, opacity: contentOpacity }}
+          className="relative z-10 flex h-full w-full items-center justify-center"
+          style={{ y: contentY, scale: contentScale, opacity: contentOpacity }}
         >
           {children}
         </motion.div>
 
-        {chrome ? <div className="pointer-events-none absolute inset-0 z-20 [&_*]:pointer-events-auto">{chrome}</div> : null}
+        <motion.div
+          className="pointer-events-none absolute inset-x-0 bottom-28 z-[15] flex justify-center px-gutter md:bottom-32"
+          aria-hidden
+        >
+          <div className="hero-scroll-progress flex w-full max-w-xs flex-col items-center gap-2">
+            <span className="font-mono text-[0.52rem] uppercase tracking-[0.24em] text-bone/40">
+              Scroll
+            </span>
+            <div className="h-[2px] w-full overflow-hidden rounded-full bg-white/10">
+              <motion.span
+                className="hero-scroll-progress-fill block h-full w-full origin-left rounded-full bg-gradient-to-r from-[#5b61ff] via-accent to-sky"
+                style={{ scaleX: progress }}
+              />
+            </div>
+          </div>
+        </motion.div>
+
+        {chrome ? (
+          <div className="pointer-events-none absolute inset-0 z-20 [&_*]:pointer-events-auto">
+            {chrome}
+          </div>
+        ) : null}
       </div>
+
+      <div
+        className="pointer-events-none absolute inset-x-0 bottom-0 z-[5] h-32 bg-gradient-to-t from-ink to-transparent"
+        aria-hidden
+      />
     </section>
   );
 }
