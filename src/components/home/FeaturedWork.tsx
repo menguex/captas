@@ -8,7 +8,6 @@ import { getFeaturedProjects } from "@/content/projects";
 import { FeaturedWorkShowcase } from "@/components/home/FeaturedWorkShowcase";
 import { ProjectCaseModal } from "@/components/work/ProjectCaseModal";
 import { SectionHeader } from "@/components/ui/SectionHeader";
-import { SectionBridge } from "@/components/ui/SectionBridge";
 import { easeOut, viewportOnce } from "@/lib/motion";
 
 export function FeaturedWork() {
@@ -26,8 +25,11 @@ export function FeaturedWork() {
   }, []);
 
   return (
-    <section id="trabajo-destacado" className="relative overflow-hidden bg-ink py-section">
-      <SectionBridge variant="dark-continue" />
+    <section
+      id="trabajo-destacado"
+      className="relative overflow-hidden bg-ink py-section"
+      aria-labelledby="trabajo-destacado-heading"
+    >
       <div className="pointer-events-none absolute inset-0 mesh-grid opacity-[0.14]" aria-hidden />
       <div
         className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-sky/30 to-transparent"
@@ -37,6 +39,7 @@ export function FeaturedWork() {
       <div className="site-container relative">
         <SectionHeader
           theme="dark"
+          titleId="trabajo-destacado-heading"
           kicker="Trabajo · Destacados"
           title={
             <>

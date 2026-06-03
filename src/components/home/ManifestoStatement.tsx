@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { SplitText } from "@/components/motion/SplitText";
 import { manifestoContent } from "@/content/manifesto";
+import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { easeOut, viewportOnce } from "@/lib/motion";
 
 const accentClass =
@@ -25,12 +26,10 @@ function ClosingLine() {
 }
 
 export function ManifestoStatement() {
+  const reduced = useReducedMotion();
+
   return (
-    <div
-      id="manifesto-heading"
-      className="manifesto-statement relative mx-auto max-w-4xl px-gutter text-center lg:max-w-5xl"
-      aria-labelledby="manifesto-title"
-    >
+    <div className="manifesto-statement relative mx-auto max-w-4xl px-gutter text-center lg:max-w-5xl">
       <motion.p
         className="mx-auto max-w-lg text-body font-medium uppercase tracking-[0.12em] text-sky-soft/90 md:text-[0.8rem]"
         initial={{ opacity: 0, y: 10 }}
@@ -54,9 +53,8 @@ export function ManifestoStatement() {
         ))}
 
         <motion.p
-          id="manifesto-title"
           className="mt-2 font-heading text-[clamp(2.35rem,7vw,4.75rem)] font-semibold leading-[1.02] tracking-[-0.04em] text-balance md:mt-3"
-          initial={{ opacity: 0, y: 24, filter: "blur(8px)" }}
+          initial={{ opacity: 0, y: 24, filter: reduced ? "none" : "blur(8px)" }}
           whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           viewport={viewportOnce}
           transition={{ delay: 0.38, duration: 0.95, ease: easeOut }}

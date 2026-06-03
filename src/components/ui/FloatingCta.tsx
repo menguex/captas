@@ -5,9 +5,11 @@ import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { site } from "@/content/site";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
+import { useLenis } from "@/providers/LenisProvider";
 
 export function FloatingCta() {
   const pathname = usePathname();
+  const lenis = useLenis();
   const reduced = useReducedMotion();
   const [visible, setVisible] = useState(false);
   const [expanded, setExpanded] = useState(false);
@@ -27,14 +29,23 @@ export function FloatingCta() {
 
     const onScroll = () => {
       const docHeight = document.documentElement.scrollHeight;
-      const viewBottom = window.scrollY + window.innerHeight;
+      const scrollY = lenis?.scroll ?? window.scrollY;
+      const viewBottom = scrollY + window.innerHeight;
       setNearFooter(viewBottom >= docHeight - 320);
     };
 
     onScroll();
+
+    if (lenis) {
+      lenis.on("scroll", onScroll);
+      return () => {
+        lenis.off("scroll", onScroll);
+      };
+    }
+
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, [hiddenRoute]);
+  }, [hiddenRoute, lenis]);
 
   // Show tooltip once after visible
   useEffect(() => {

@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 import { projects } from "@/content/projects";
 
-const SITE_UPDATED = new Date("2026-06-02");
+const SITE_UPDATED = new Date("2026-06-03");
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = "https://captas.cl";
