@@ -17,7 +17,8 @@ export const heroContent = {
     { value: "1", label: "Director creativo" },
     { value: "Limarí", label: "Territorio" },
   ],
-  /** Motion design — reel publicitario (Pexels, uso libre) */
+  /** Creativo aplicado — set comercial / foto / branding (Mixkit, uso libre) */
   backgroundVideo: "/videos/hero/design-studio.mp4",
-  backgroundPosition: "center center",
+  backgroundPoster: "/images/hero/design-studio-poster.jpg",
+  backgroundPosition: "center 28%",
 } as const;

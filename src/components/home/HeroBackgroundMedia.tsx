@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useRef } from "react";
 import { heroContent } from "@/content/hero";
 
@@ -40,6 +41,15 @@ export function HeroBackgroundMedia({
         aria-hidden
       >
         <div className="hero-background-canvas" />
+        <Image
+          src={heroContent.backgroundPoster}
+          alt=""
+          fill
+          className="hero-background-poster"
+          style={{ objectPosition: heroContent.backgroundPosition }}
+          sizes="100vw"
+          priority
+        />
       </div>
     );
   }
@@ -51,6 +61,7 @@ export function HeroBackgroundMedia({
         ref={videoRef}
         className="hero-background-video"
         style={{ objectPosition: heroContent.backgroundPosition }}
+        poster={heroContent.backgroundPoster}
         autoPlay
         muted
         loop
