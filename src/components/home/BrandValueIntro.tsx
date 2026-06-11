@@ -12,10 +12,11 @@ export function BrandValueIntro() {
 
   return (
     <motion.div
-      initial={reduced ? false : { opacity: 0, y: 20 }}
+      className="brand-value-intro mx-auto max-w-3xl rounded-box-lg border border-line-dark/70 bg-white/92 p-6 shadow-[0_16px_48px_rgba(15,18,24,0.08)] backdrop-blur-md md:p-10"
+      initial={reduced ? false : { opacity: 0, y: 24 }}
       whileInView={reduced ? undefined : { opacity: 1, y: 0 }}
       viewport={viewportOnce}
-      transition={{ duration: 0.75, ease: easeOut }}
+      transition={{ duration: 0.8, ease: easeOut }}
     >
       <p className="text-lead font-medium leading-relaxed text-ink">{brandValueIntro.lead}</p>
       <p className="mt-4 text-body leading-relaxed text-on-light-muted">{brandValueIntro.body}</p>

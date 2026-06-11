@@ -3,10 +3,9 @@
 import { useRef } from "react";
 import Link from "next/link";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
-import { HomeSectionBackdrop } from "@/components/ui/HomeSectionBackdrop";
 import { SectionHeader } from "@/components/ui/SectionHeader";
+import { BrandValueBackground } from "@/components/home/BrandValueBackground";
 import { BrandValueIntro } from "@/components/home/BrandValueIntro";
-import { BrandValueScrollVideo } from "@/components/home/BrandValueScrollVideo";
 import { BrandValuePrinciple } from "@/components/home/BrandValuePrinciple";
 import { brandPrinciples } from "@/content/brand-value";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
@@ -20,7 +19,7 @@ export function BrandValue() {
 
   const { scrollYProgress } = useScroll({
     target: cinemaRef,
-    offset: ["start 0.78", "end 0.22"],
+    offset: ["start 0.82", "end 0.18"],
   });
 
   const lineProgress = useSpring(scrollYProgress, {
@@ -36,9 +35,9 @@ export function BrandValue() {
   return (
     <section
       id="filosofia"
-      className="home-section-light relative -mt-px overflow-hidden border-b border-line-dark bg-bone py-section text-ink"
+      className="brand-value-section relative -mt-px overflow-hidden border-b border-line-dark py-section text-ink"
     >
-      <HomeSectionBackdrop variant="light" />
+      <BrandValueBackground ref={videoRef} reduced={reduced} />
 
       <div className="site-container relative z-[1]">
         <SectionHeader
@@ -53,75 +52,53 @@ export function BrandValue() {
             </>
           }
           description="Research, craft visual y ejecución en un solo equipo — del primer click al frame final."
+          className="brand-value-section__header"
         />
 
         <div ref={cinemaRef} className="brand-value-cinema mt-12 lg:mt-16">
-          <div className="lg:grid lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] lg:items-start lg:gap-x-10">
-            <motion.div
-              className="brand-value-cinema__media lg:sticky lg:top-[5.5rem] lg:z-[2] lg:self-start"
-              initial={reduced ? false : { opacity: 0, y: 24 }}
-              whileInView={reduced ? undefined : { opacity: 1, y: 0 }}
-              viewport={viewportOnce}
-              transition={{ duration: 0.8, ease: easeOut }}
+          <BrandValueIntro />
+
+          <motion.p
+            id="filosofia-principios"
+            className="mx-auto mt-14 max-w-2xl text-center font-mono text-kicker uppercase tracking-[0.22em] text-on-light-muted md:mt-20"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={viewportOnce}
+            transition={{ duration: 0.6, ease: easeOut }}
+          >
+            Tres principios · Un recorrido con evidencia
+          </motion.p>
+
+          <div className="relative mx-auto mt-10 max-w-5xl md:mt-14">
+            <div
+              className="pointer-events-none absolute top-0 bottom-0 left-[1.125rem] md:left-1/2 md:-translate-x-1/2"
+              aria-hidden
             >
-              <BrandValueScrollVideo
-                ref={videoRef}
-                progress={scrollYProgress}
-                reduced={reduced}
-              />
-            </motion.div>
-
-            <div className="brand-value-cinema__content mt-8 lg:mt-0">
-              <BrandValueIntro />
-
-              <motion.p
-                id="filosofia-principios"
-                className="mt-12 max-w-2xl font-mono text-kicker uppercase tracking-[0.22em] text-on-light-muted md:mt-16 lg:max-w-none"
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={viewportOnce}
-                transition={{ duration: 0.6, ease: easeOut }}
-              >
-                Tres principios · Un recorrido con evidencia
-              </motion.p>
-
-              <div className="relative mt-10 md:mt-14">
-                <div
-                  className="pointer-events-none absolute top-0 bottom-0 left-[1.125rem] md:left-8"
-                  aria-hidden
-                >
-                  <div className="relative h-full w-px overflow-hidden bg-ink/10">
-                    <motion.div
-                      className="absolute inset-x-0 top-0 origin-top bg-accent"
-                      style={{ height: reduced ? "100%" : lineHeight }}
-                    />
-                  </div>
-                  {!reduced && (
-                    <motion.div
-                      className="absolute -left-2.5 h-5 w-5 rounded-full bg-bone shadow-[0_0_0_1px_rgba(61,85,108,0.4),0_0_16px_rgba(61,85,108,0.35)]"
-                      style={{ top: orbY }}
-                      aria-hidden
-                    />
-                  )}
-                </div>
-
-                <ol className="relative space-y-16 md:space-y-24">
-                  {brandPrinciples.map((p, i) => (
-                    <BrandValuePrinciple
-                      key={p.id}
-                      principle={p}
-                      index={i}
-                      isEven={i % 2 === 0}
-                    />
-                  ))}
-                </ol>
+              <div className="relative h-full w-px overflow-hidden bg-ink/12">
+                <motion.div
+                  className="absolute inset-x-0 top-0 origin-top bg-accent"
+                  style={{ height: reduced ? "100%" : lineHeight }}
+                />
               </div>
+              {!reduced && (
+                <motion.div
+                  className="absolute -left-2.5 h-5 w-5 rounded-full bg-white shadow-[0_0_0_1px_rgba(61,85,108,0.35),0_0_16px_rgba(61,85,108,0.28)]"
+                  style={{ top: orbY }}
+                  aria-hidden
+                />
+              )}
             </div>
+
+            <ol className="relative space-y-16 md:space-y-24">
+              {brandPrinciples.map((p, i) => (
+                <BrandValuePrinciple key={p.id} principle={p} index={i} isEven={i % 2 === 0} />
+              ))}
+            </ol>
           </div>
         </div>
 
         <motion.div
-          className="relative mt-16 overflow-hidden rounded-box-lg border border-line-dark md:mt-20"
+          className="relative mt-16 overflow-hidden rounded-box-lg border border-line-dark/80 bg-white/95 shadow-[0_16px_48px_rgba(15,18,24,0.1)] backdrop-blur-sm md:mt-20"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={viewportOnce}
@@ -140,7 +117,7 @@ export function BrandValue() {
                 propuesta con alcance, plazos y el pilar creativo que más impacte ahora.
               </p>
             </div>
-            <div className="flex flex-col justify-center gap-3 bg-bone px-6 py-8 md:min-w-[240px] md:px-8">
+            <div className="flex flex-col justify-center gap-3 bg-bone/90 px-6 py-8 md:min-w-[240px] md:px-8">
               <Link href="/contacto" className="gloss-button text-center">
                 Solicitar propuesta
               </Link>

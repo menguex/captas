@@ -20,11 +20,14 @@ export type BrandPrinciple = {
 const unsplash = (id: string) =>
   `https://images.unsplash.com/${id}?auto=format&fit=crop&w=1400&q=85`;
 
+/** Video de fondo — gente conversando y cerrando negocios (scroll-scrub) */
+export const brandValueBackground = {
+  video: "/videos/philosophy/deals-conversation.mp4",
+  poster: "/images/philosophy/deals-conversation-poster.jpg",
+  videoPosition: "center 42%",
+} as const;
+
 export const brandValueIntro = {
-  video: "/videos/philosophy/craft-reel.mp4",
-  poster: "/images/philosophy/craft-reel-poster.jpg",
-  videoPosition: "center 32%",
-  videoLabel: "BTS · Comercial · Craft",
   highlights: [
     { value: "+65%", label: "Conversión UX medida" },
     { value: "+2.4×", label: "Valor percibido" },

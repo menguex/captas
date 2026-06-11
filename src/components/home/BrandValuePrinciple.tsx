@@ -23,14 +23,14 @@ export function BrandValuePrinciple({ principle: p, index, isEven }: BrandValueP
 
   return (
     <motion.li
-      className="relative pl-14 md:pl-12"
+      className="relative pl-14 md:pl-0"
       initial={reduced ? false : { opacity: 0, y: 36 }}
       whileInView={reduced ? undefined : { opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-12% 0px" }}
       transition={{ duration: 0.85, ease: easeOut, delay: index * 0.06 }}
     >
       <div
-        className="absolute left-[1.125rem] top-8 z-10 -translate-x-1/2 md:left-8"
+        className="absolute left-[1.125rem] top-8 z-10 -translate-x-1/2 md:left-1/2"
         aria-hidden
       >
         <motion.span
