@@ -1,9 +1,8 @@
 "use client";
 
 import { useRef, type ReactNode } from "react";
-import Image from "next/image";
 import { motion, useTransform } from "framer-motion";
-import { heroContent } from "@/content/hero";
+import { HeroBackgroundMedia } from "@/components/home/HeroBackgroundMedia";
 import { useElementScrollProgress } from "@/hooks/useElementScrollProgress";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 
@@ -48,15 +47,7 @@ export function HeroScrollZoom({
         onMouseLeave={onMouseLeave}
       >
         <div className="pointer-events-none absolute inset-0 z-0" aria-hidden>
-          <Image
-            src={heroContent.backgroundImage}
-            alt=""
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover"
-            style={{ objectPosition: heroContent.backgroundPosition }}
-          />
+          <HeroBackgroundMedia reduced className="absolute inset-0" />
           <div className="hero-scrim absolute inset-0" />
         </div>
         {mesh}
@@ -81,15 +72,7 @@ export function HeroScrollZoom({
           style={{ scale: imageScale, opacity: imageOpacity, filter: imageBlur }}
           aria-hidden
         >
-          <Image
-            src={heroContent.backgroundImage}
-            alt=""
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover saturate-[0.85] contrast-[1.05]"
-            style={{ objectPosition: heroContent.backgroundPosition }}
-          />
+          <HeroBackgroundMedia className="absolute inset-0 h-full w-full" />
         </motion.div>
 
         <motion.div

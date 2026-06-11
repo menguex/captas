@@ -610,6 +610,16 @@
   background-color: #080a0f;
 }
 
+.hero-background-media {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.hero-background-video {
+  pointer-events: none;
+}
+
 .hero-scroll-progress-fill {
   transform-origin: left center;
 }

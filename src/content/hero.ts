@@ -17,6 +17,9 @@ export const heroContent = {
     { value: "1", label: "Director creativo" },
     { value: "Limarí", label: "Territorio" },
   ],
+  /** Poster / fallback si el video no carga */
   backgroundImage: "/images/hero/dji-0068.jpg",
-  backgroundPosition: "center 42%",
+  /** Stylus + tablet — diseño digital (Pexels, uso libre) */
+  backgroundVideo: "/videos/hero/design-studio.mp4",
+  backgroundPosition: "center center",
 } as const;
