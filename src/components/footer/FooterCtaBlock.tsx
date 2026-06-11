@@ -1,13 +1,12 @@
 "use client";
 
-import { useRef } from "react";
 import Link from "next/link";
-import Image from "next/image";
-import { motion, useInView } from "framer-motion";
+import { motion } from "framer-motion";
 import { CaptasLockup } from "@/components/brand/CaptasLogo";
 import { MagneticButton } from "@/components/motion/MagneticButton";
 import { SplitText } from "@/components/motion/SplitText";
 import { ctaClosing } from "@/content/cta";
+import { footerMedia } from "@/content/footer";
 import { site } from "@/content/site";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { easeOut, viewportOnce } from "@/lib/motion";
@@ -23,35 +22,12 @@ const fadeUp = {
 
 export function FooterCtaBlock() {
   const reduced = useReducedMotion();
-  const mediaRef = useRef<HTMLDivElement>(null);
-  const inView = useInView(mediaRef, { once: true, margin: "-12% 0px" });
 
   return (
     <div
       className="footer-cta-block relative"
       aria-labelledby="footer-cta-heading"
     >
-      <div ref={mediaRef} className="pointer-events-none absolute inset-0" aria-hidden>
-        <Image
-          src={ctaClosing.poster}
-          alt=""
-          fill
-          sizes="100vw"
-          className="object-cover opacity-32"
-        />
-        {ctaClosing.video && inView && !reduced ? (
-          <video
-            src={ctaClosing.video}
-            autoPlay
-            muted
-            loop
-            playsInline
-            className="absolute inset-0 h-full w-full object-cover opacity-28"
-          />
-        ) : null}
-        <div className="absolute inset-0 bg-gradient-to-b from-ink/20 via-transparent to-ink" />
-      </div>
-
       <div className="site-container relative px-gutter pb-10 pt-section md:pb-12">
         <motion.div
           className="flex items-center justify-center gap-4"
@@ -124,7 +100,7 @@ export function FooterCtaBlock() {
         </motion.p>
 
         <motion.div
-          className="footer-cta-panel relative mx-auto mt-12 max-w-3xl overflow-hidden rounded-box-lg border border-white/10 bg-ink/55 shadow-[0_32px_100px_rgba(0,0,0,0.45)] backdrop-blur-2xl supports-[backdrop-filter]:bg-ink/45 md:mt-14"
+          className="footer-cta-panel relative mx-auto mt-12 max-w-3xl overflow-hidden rounded-box-lg border border-white/12 bg-ink/62 shadow-[0_32px_100px_rgba(0,0,0,0.5)] backdrop-blur-xl supports-[backdrop-filter]:bg-ink/50 md:mt-14"
           custom={1}
           variants={fadeUp}
           initial="hidden"
@@ -207,6 +183,10 @@ export function FooterCtaBlock() {
           <p>Limarí · Chile → mundo</p>
           <p>Remoto · presencial</p>
         </motion.div>
+
+        <p className="mx-auto mt-8 text-center font-mono text-[0.6rem] uppercase tracking-[0.18em] text-on-ink-subtle">
+          {footerMedia.label}
+        </p>
       </div>
     </div>
   );

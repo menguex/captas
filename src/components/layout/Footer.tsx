@@ -3,6 +3,7 @@ import Link from "next/link";
 import { LocalTime } from "@/components/ui/LocalTime";
 import { CaptasLogo } from "@/components/brand/CaptasLogo";
 import { FooterAssistant } from "@/components/footer/FooterAssistant";
+import { FooterBackgroundMedia } from "@/components/footer/FooterBackgroundMedia";
 import { CraftChips } from "@/components/ui/CraftChips";
 import { FooterCtaBlock } from "@/components/footer/FooterCtaBlock";
 import { footerContent } from "@/content/footer";
@@ -43,16 +44,11 @@ export function Footer() {
       id="conversemos"
       className="footer-unified relative overflow-hidden bg-ink text-bone"
     >
-      <div className="pointer-events-none absolute inset-0" aria-hidden>
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_45%_at_50%_0%,rgba(91,97,255,0.18),transparent_58%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_55%_35%_at_100%_70%,rgba(0,122,255,0.12),transparent_52%)]" />
-        <div className="absolute inset-0 bg-gradient-to-b from-ink via-ink to-ink-soft/30" />
-        <div className="absolute inset-0 mesh-grid opacity-[0.06]" />
-      </div>
+      <FooterBackgroundMedia />
 
       <FooterCtaBlock />
 
-      <div className="footer-site relative z-10 border-t border-white/[0.08] bg-ink/40 backdrop-blur-sm">
+      <div className="footer-site relative z-10 border-t border-white/[0.1]">
         <div className="site-container px-gutter">
           <div className="flex flex-col gap-4 border-b border-line/40 py-10 md:flex-row md:items-center md:justify-between md:py-12">
             <Link
