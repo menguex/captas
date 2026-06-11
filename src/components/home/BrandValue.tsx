@@ -6,18 +6,21 @@ import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import { HomeSectionBackdrop } from "@/components/ui/HomeSectionBackdrop";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { BrandValueIntro } from "@/components/home/BrandValueIntro";
+import { BrandValueScrollVideo } from "@/components/home/BrandValueScrollVideo";
 import { BrandValuePrinciple } from "@/components/home/BrandValuePrinciple";
 import { brandPrinciples } from "@/content/brand-value";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
+import { useScrollScrubVideo } from "@/hooks/useScrollScrubVideo";
 import { easeOut, viewportOnce } from "@/lib/motion";
 
 export function BrandValue() {
   const reduced = useReducedMotion();
-  const trackRef = useRef<HTMLDivElement>(null);
+  const cinemaRef = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   const { scrollYProgress } = useScroll({
-    target: trackRef,
-    offset: ["start 75%", "end 85%"],
+    target: cinemaRef,
+    offset: ["start 0.78", "end 0.22"],
   });
 
   const lineProgress = useSpring(scrollYProgress, {
@@ -27,6 +30,8 @@ export function BrandValue() {
   });
   const lineHeight = useTransform(lineProgress, [0, 1], ["0%", "100%"]);
   const orbY = useTransform(lineProgress, [0, 1], ["0%", "100%"]);
+
+  useScrollScrubVideo(videoRef, scrollYProgress, { enabled: !reduced });
 
   return (
     <section
@@ -50,44 +55,69 @@ export function BrandValue() {
           description="Research, craft visual y ejecución en un solo equipo — del primer click al frame final."
         />
 
-        <BrandValueIntro />
-
-        <motion.p
-          id="filosofia-principios"
-          className="mx-auto mt-14 max-w-2xl text-center font-mono text-kicker uppercase tracking-[0.22em] text-on-light-muted md:mt-20"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={viewportOnce}
-          transition={{ duration: 0.6, ease: easeOut }}
-        >
-          Tres principios · Un recorrido con evidencia
-        </motion.p>
-
-        <div ref={trackRef} className="relative mx-auto mt-10 max-w-5xl md:mt-14">
-          <div
-            className="pointer-events-none absolute top-0 bottom-0 left-[1.125rem] md:left-1/2 md:-translate-x-1/2"
-            aria-hidden
-          >
-            <div className="relative h-full w-px overflow-hidden bg-ink/10">
-              <motion.div
-                className="absolute inset-x-0 top-0 origin-top bg-accent"
-                style={{ height: reduced ? "100%" : lineHeight }}
+        <div ref={cinemaRef} className="brand-value-cinema mt-12 lg:mt-16">
+          <div className="lg:grid lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] lg:items-start lg:gap-x-10">
+            <motion.div
+              className="brand-value-cinema__media lg:sticky lg:top-[5.5rem] lg:z-[2] lg:self-start"
+              initial={reduced ? false : { opacity: 0, y: 24 }}
+              whileInView={reduced ? undefined : { opacity: 1, y: 0 }}
+              viewport={viewportOnce}
+              transition={{ duration: 0.8, ease: easeOut }}
+            >
+              <BrandValueScrollVideo
+                ref={videoRef}
+                progress={scrollYProgress}
+                reduced={reduced}
               />
+            </motion.div>
+
+            <div className="brand-value-cinema__content mt-8 lg:mt-0">
+              <BrandValueIntro />
+
+              <motion.p
+                id="filosofia-principios"
+                className="mt-12 max-w-2xl font-mono text-kicker uppercase tracking-[0.22em] text-on-light-muted md:mt-16 lg:max-w-none"
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={viewportOnce}
+                transition={{ duration: 0.6, ease: easeOut }}
+              >
+                Tres principios · Un recorrido con evidencia
+              </motion.p>
+
+              <div className="relative mt-10 md:mt-14">
+                <div
+                  className="pointer-events-none absolute top-0 bottom-0 left-[1.125rem] md:left-8"
+                  aria-hidden
+                >
+                  <div className="relative h-full w-px overflow-hidden bg-ink/10">
+                    <motion.div
+                      className="absolute inset-x-0 top-0 origin-top bg-accent"
+                      style={{ height: reduced ? "100%" : lineHeight }}
+                    />
+                  </div>
+                  {!reduced && (
+                    <motion.div
+                      className="absolute -left-2.5 h-5 w-5 rounded-full bg-bone shadow-[0_0_0_1px_rgba(61,85,108,0.4),0_0_16px_rgba(61,85,108,0.35)]"
+                      style={{ top: orbY }}
+                      aria-hidden
+                    />
+                  )}
+                </div>
+
+                <ol className="relative space-y-16 md:space-y-24">
+                  {brandPrinciples.map((p, i) => (
+                    <BrandValuePrinciple
+                      key={p.id}
+                      principle={p}
+                      index={i}
+                      isEven={i % 2 === 0}
+                    />
+                  ))}
+                </ol>
+              </div>
             </div>
-            {!reduced && (
-              <motion.div
-                className="absolute -left-2.5 h-5 w-5 rounded-full bg-bone shadow-[0_0_0_1px_rgba(61,85,108,0.4),0_0_16px_rgba(61,85,108,0.35)]"
-                style={{ top: orbY }}
-                aria-hidden
-              />
-            )}
           </div>
-
-          <ol className="relative space-y-16 md:space-y-24">
-            {brandPrinciples.map((p, i) => (
-              <BrandValuePrinciple key={p.id} principle={p} index={i} isEven={i % 2 === 0} />
-            ))}
-          </ol>
         </div>
 
         <motion.div

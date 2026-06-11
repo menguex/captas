@@ -21,9 +21,10 @@ const unsplash = (id: string) =>
   `https://images.unsplash.com/${id}?auto=format&fit=crop&w=1400&q=85`;
 
 export const brandValueIntro = {
-  video:
-    "https://assets.mixkit.co/videos/preview/mixkit-aerial-view-of-a-sunny-landscape-4246-large.mp4",
-  poster: unsplash("photo-1506905925346-21bda4d32df4"),
+  video: "/videos/philosophy/craft-reel.mp4",
+  poster: "/images/philosophy/craft-reel-poster.jpg",
+  videoPosition: "center 32%",
+  videoLabel: "BTS · Comercial · Craft",
   highlights: [
     { value: "+65%", label: "Conversión UX medida" },
     { value: "+2.4×", label: "Valor percibido" },
