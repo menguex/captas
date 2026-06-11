@@ -7,7 +7,7 @@ export const heroContent = {
   headlineLine2: "Lo convertimos en",
   headlineAccentWord: "experiencia.",
   tagline:
-    "Dirección creativa única — del concepto al pixel, al frame y al sistema. Marcas claras, con propósito y craft de estudio.",
+    "Dirección creativa que vende: marca, interfaz, motion y contenido con un solo criterio — del brief al resultado.",
   ctaPrimary: "Iniciar proyecto",
   ctaSecondary: "Nuestra forma de pensar",
   scrollLabel: "Scroll",
@@ -17,9 +17,7 @@ export const heroContent = {
     { value: "1", label: "Director creativo" },
     { value: "Limarí", label: "Territorio" },
   ],
-  /** Poster / fallback si el video no carga */
-  backgroundImage: "/images/hero/dji-0068.jpg",
-  /** Stylus + tablet — diseño digital (Pexels, uso libre) */
+  /** Motion design — reel publicitario (Pexels, uso libre) */
   backgroundVideo: "/videos/hero/design-studio.mp4",
   backgroundPosition: "center center",
 } as const;

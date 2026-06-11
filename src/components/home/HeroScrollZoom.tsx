@@ -28,7 +28,7 @@ export function HeroScrollZoom({
   const progress = useElementScrollProgress(containerRef, !reduced);
 
   const imageScale = useTransform(progress, [0, 1], [1, 1.5]);
-  const imageOpacity = useTransform(progress, [0, 0.5, 1], [0.42, 0.28, 0.06]);
+  const imageOpacity = useTransform(progress, [0, 0.5, 1], [0.62, 0.4, 0.08]);
   const imageBlur = useTransform(progress, [0, 1], ["blur(0px)", "blur(20px)"]);
   const scrimBoost = useTransform(progress, [0, 1], [1, 1.15]);
   const contentY = useTransform(progress, [0, 1], ["0%", "-18%"]);

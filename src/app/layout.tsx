@@ -78,8 +78,7 @@ export default function RootLayout({
     >
       <head>
         <link rel="preload" href="/brand/captas-icon.png" as="image" type="image/png" />
-        <link rel="preload" href="/images/hero/dji-0068.jpg" as="image" type="image/jpeg" />
-        <link rel="preload" href="/videos/hero/design-studio.mp4" as="video" type="video/mp4" />
+        <link rel="preload" href="/videos/hero/design-studio.mp4" as="video" type="video/mp4" fetchPriority="high" />
         <script
           dangerouslySetInnerHTML={{
             __html: `(function(){try{document.documentElement.setAttribute("data-theme","dark");var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute("content","#007aff");}catch(e){document.documentElement.setAttribute("data-theme","dark");}})();`,

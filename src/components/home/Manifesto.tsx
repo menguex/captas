@@ -1,16 +1,16 @@
 "use client";
 
-import { ManifestoSectionBackground } from "@/components/home/ManifestoSectionBackground";
+import { HomeSectionBackdrop } from "@/components/ui/HomeSectionBackdrop";
 import { ManifestoStatement } from "@/components/home/ManifestoStatement";
 
 export function Manifesto() {
   return (
     <section
       id="manifiesto"
-      className="manifesto-section home-section-manifesto relative z-[2] -mt-[clamp(4rem,10vh,6.5rem)] overflow-hidden py-[clamp(4rem,9vh,7rem)] text-bone"
+      className="manifesto-section home-section-manifesto relative z-[2] -mt-[clamp(3rem,8vh,5rem)] overflow-hidden py-[clamp(4rem,9vh,7rem)] text-bone"
       aria-labelledby="manifesto-section-title"
     >
-      <ManifestoSectionBackground />
+      <HomeSectionBackdrop variant="manifesto" />
 
       <div className="site-container relative z-[1]">
         <ManifestoStatement />

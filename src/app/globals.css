@@ -616,8 +616,38 @@
   overflow: hidden;
 }
 
+.hero-background-canvas {
+  position: absolute;
+  inset: 0;
+  background-color: #080a0f;
+  background-image:
+    radial-gradient(ellipse 80% 60% at 50% 40%, rgba(91, 97, 255, 0.14) 0%, transparent 55%),
+    radial-gradient(ellipse 60% 50% at 70% 60%, rgba(0, 122, 255, 0.1) 0%, transparent 50%);
+}
+
+.hero-background-media--static .hero-background-canvas {
+  animation: hero-canvas-pulse 8s ease-in-out infinite;
+}
+
+@keyframes hero-canvas-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.88;
+  }
+}
+
 .hero-background-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   pointer-events: none;
+  opacity: 1;
+  filter: saturate(1.05) contrast(1.08);
 }
 
 .hero-scroll-progress-fill {
@@ -628,20 +658,20 @@
   text-wrap: balance;
 }
 
-/* Scrim cinematográfico — legibilidad sobre foto aérea */
+/* Scrim cinematográfico — legibilidad sobre video hero */
 .hero-scrim {
   background:
     linear-gradient(
       180deg,
-      rgba(8, 10, 15, 0.82) 0%,
-      rgba(8, 10, 15, 0.52) 38%,
-      rgba(8, 10, 15, 0.68) 72%,
-      rgba(8, 10, 15, 0.92) 100%
+      rgba(8, 10, 15, 0.72) 0%,
+      rgba(8, 10, 15, 0.38) 40%,
+      rgba(8, 10, 15, 0.55) 72%,
+      rgba(8, 10, 15, 0.88) 100%
     ),
     radial-gradient(
-      ellipse 95% 75% at 50% 42%,
-      rgba(8, 10, 15, 0.25) 0%,
-      rgba(8, 10, 15, 0.78) 100%
+      ellipse 90% 70% at 50% 45%,
+      rgba(8, 10, 15, 0.15) 0%,
+      rgba(8, 10, 15, 0.65) 100%
     );
 }
 
@@ -816,30 +846,38 @@
   z-index: 1;
 }
 
-.manifesto-section-bg {
+/* Fondos unificados — secciones post-hero */
+.home-section-backdrop {
   z-index: 0;
 }
 
-.manifesto-section-bg-base {
+.home-section-backdrop__base {
   position: absolute;
   inset: 0;
-  background:
-    linear-gradient(180deg, #080a0f 0%, #0a0d14 18%, #0f1218 50%, #0a0d14 82%, #080a0f 100%),
-    radial-gradient(ellipse 90% 70% at 50% 45%, rgba(23, 28, 36, 0.9) 0%, transparent 70%);
 }
 
-.manifesto-section-bg-grid {
+.home-section-backdrop--manifesto .home-section-backdrop__base,
+.home-section-backdrop--work .home-section-backdrop__base {
+  background:
+    linear-gradient(180deg, #080a0f 0%, #0a0d14 20%, #0f1218 55%, #0a0d14 100%);
+}
+
+.home-section-backdrop--light .home-section-backdrop__base,
+.home-section-backdrop--light-accent .home-section-backdrop__base {
+  background: linear-gradient(180deg, var(--c-bone) 0%, #f5f3ef 50%, var(--c-bone) 100%);
+}
+
+.home-section-backdrop__grid {
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(rgba(255, 255, 255, 0.028) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.028) 1px, transparent 1px);
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
   background-size: 72px 72px;
   mask-image: radial-gradient(ellipse 88% 75% at 50% 42%, black 10%, transparent 78%);
-  opacity: 0.9;
 }
 
-.manifesto-section-bg-mesh {
+.home-section-backdrop__mesh {
   position: absolute;
   inset: 0;
   background-image:
@@ -847,84 +885,118 @@
     linear-gradient(90deg, var(--c-mesh) 1px, transparent 1px);
   background-size: 48px 48px;
   mask-image: radial-gradient(ellipse 95% 80% at 50% 50%, black 5%, transparent 72%);
-  opacity: 0.55;
+  opacity: 0.5;
 }
 
-.manifesto-section-bg-orb {
+.home-section-backdrop__orb {
   position: absolute;
   border-radius: 50%;
   filter: blur(90px);
   will-change: transform;
 }
 
-.manifesto-section-bg-orb--indigo {
-  left: -8%;
-  top: 8%;
-  width: min(52vw, 520px);
-  height: min(52vw, 520px);
-  background: radial-gradient(circle, rgba(91, 97, 255, 0.2) 0%, transparent 68%);
-}
-
-.manifesto-section-bg-orb--cyan {
-  right: -10%;
-  bottom: 6%;
+.home-section-backdrop__orb--indigo {
+  left: -6%;
+  top: 10%;
   width: min(48vw, 480px);
   height: min(48vw, 480px);
-  background: radial-gradient(circle, rgba(14, 165, 233, 0.16) 0%, transparent 68%);
+  background: radial-gradient(circle, rgba(91, 97, 255, 0.22) 0%, transparent 68%);
 }
 
-.manifesto-section-bg-orb--accent {
-  left: 50%;
-  top: 42%;
-  width: min(60vw, 640px);
-  height: min(38vw, 380px);
-  transform: translate(-50%, -50%);
-  background: radial-gradient(
-    ellipse 100% 100% at 50% 50%,
-    rgba(0, 122, 255, 0.1) 0%,
-    transparent 70%
-  );
+.home-section-backdrop__orb--cyan {
+  right: -8%;
+  bottom: 8%;
+  width: min(44vw, 440px);
+  height: min(44vw, 440px);
+  background: radial-gradient(circle, rgba(14, 165, 233, 0.18) 0%, transparent 68%);
 }
 
-.manifesto-section-bg-spotlight {
+.home-section-backdrop__spotlight {
   position: absolute;
   inset: 0;
   background: radial-gradient(
-    ellipse 65% 55% at 50% 40%,
-    rgba(91, 97, 255, 0.12) 0%,
-    rgba(0, 122, 255, 0.05) 35%,
+    ellipse 70% 58% at 50% 38%,
+    rgba(91, 97, 255, 0.14) 0%,
+    rgba(0, 122, 255, 0.06) 38%,
     transparent 72%
   );
 }
 
-.manifesto-section-bg-vignette {
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(ellipse 92% 85% at 50% 48%, transparent 35%, #080a0f 88%);
-  box-shadow: inset 0 0 120px rgba(0, 0, 0, 0.45);
+.home-section-backdrop__spotlight--work {
+  background: radial-gradient(
+    ellipse 75% 60% at 50% 30%,
+    rgba(0, 122, 255, 0.12) 0%,
+    transparent 65%
+  );
 }
 
-.manifesto-section-bg-fade {
+.home-section-backdrop__vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 92% 85% at 50% 48%, transparent 38%, #080a0f 90%);
+  box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.4);
+}
+
+.home-section-backdrop__blueprint {
+  position: absolute;
+  inset: 0;
+  opacity: 0.7;
+  background-image:
+    linear-gradient(90deg, transparent 49.8%, rgba(100, 210, 255, 0.08) 50%, transparent 50.2%),
+    linear-gradient(0deg, transparent 49.8%, rgba(100, 210, 255, 0.06) 50%, transparent 50.2%);
+  background-size: 120px 120px;
+  mask-image: radial-gradient(ellipse 80% 70% at 50% 45%, black 15%, transparent 85%);
+}
+
+.home-section-backdrop__fade {
   position: absolute;
   left: 0;
   right: 0;
-  height: clamp(4rem, 12vh, 7rem);
   pointer-events: none;
 }
 
-.manifesto-section-bg-fade--top {
+.home-section-backdrop__fade--top {
   top: 0;
+  height: clamp(5rem, 14vh, 8rem);
   background: linear-gradient(180deg, #080a0f 0%, transparent 100%);
 }
 
-.manifesto-section-bg-fade--bottom {
+.home-section-backdrop__fade--to-light {
   bottom: 0;
-  background: linear-gradient(0deg, #080a0f 0%, transparent 100%);
+  height: clamp(6rem, 16vh, 10rem);
+  background: linear-gradient(0deg, var(--c-bone) 0%, rgba(234, 232, 228, 0.45) 45%, transparent 100%);
 }
 
-.manifesto-section-bg-blueprint {
-  opacity: 0.75;
-  mask-image: radial-gradient(ellipse 80% 70% at 50% 45%, black 20%, transparent 85%);
+.home-section-backdrop__fade--from-dark {
+  top: 0;
+  height: clamp(4rem, 10vh, 6rem);
+  background: linear-gradient(180deg, #0f1218 0%, transparent 100%);
+}
+
+.home-section-backdrop__light-wash {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 80% 55% at 50% 0%,
+    rgba(var(--c-accent-rgb), 0.06) 0%,
+    transparent 58%
+  );
+}
+
+.home-section-backdrop__light-accent {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 45% at 85% 20%, rgba(91, 97, 255, 0.07) 0%, transparent 55%),
+    radial-gradient(ellipse 50% 40% at 10% 80%, rgba(14, 165, 233, 0.06) 0%, transparent 50%);
+}
+
+.home-section-stage {
+  isolation: isolate;
+}
+
+.home-section-light {
+  isolation: isolate;
 }
 
 .manifesto-design-icon {

@@ -1,8 +1,7 @@
 /** URLs críticas para la primera pantalla (home + shell) */
-export const PRELOAD_ASSETS = [
-  "/brand/captas-icon.png",
-  "/images/hero/dji-0068.jpg",
-] as const;
+export const PRELOAD_ASSETS = ["/brand/captas-icon.png"] as const;
+
+export const PRELOAD_VIDEO = "/videos/hero/design-studio.mp4";
 
 const MIN_INTRO_MS = 1400;
 
@@ -17,19 +16,31 @@ function loadImage(src: string): Promise<void> {
   });
 }
 
+function loadVideo(src: string): Promise<void> {
+  return new Promise((resolve) => {
+    const video = document.createElement("video");
+    video.muted = true;
+    video.preload = "auto";
+    video.playsInline = true;
+    const done = () => resolve();
+    video.addEventListener("canplaythrough", done, { once: true });
+    video.addEventListener("error", done, { once: true });
+    video.src = src;
+    video.load();
+  });
+}
+
 /**
- * Precarga fuentes, imágenes clave y respeta un mínimo de tiempo de intro.
- * @param onProgress 0–100
+ * Precarga fuentes, video hero e icono; respeta un mínimo de tiempo de intro.
  */
 export async function runAppPreload(onProgress: (pct: number) => void): Promise<void> {
   const start = performance.now();
-  const assets = [...PRELOAD_ASSETS];
-  let loaded = 0;
+  let imageDone = false;
+  let videoDone = false;
 
   const bump = () => {
-    loaded += 1;
-    const assetPct = Math.round((loaded / assets.length) * 72);
-    onProgress(Math.min(72, assetPct));
+    const steps = (imageDone ? 1 : 0) + (videoDone ? 1 : 0);
+    onProgress(Math.min(72, Math.round((steps / 2) * 72)));
   };
 
   onProgress(4);
@@ -39,7 +50,19 @@ export async function runAppPreload(onProgress: (pct: number) => void): Promise<
       ? document.fonts.ready
       : Promise.resolve();
 
-  const imagesReady = Promise.all(assets.map((src) => loadImage(src).then(bump)));
+  const imageReady = Promise.all(
+    PRELOAD_ASSETS.map((src) =>
+      loadImage(src).then(() => {
+        imageDone = true;
+        bump();
+      })
+    )
+  );
+
+  const videoReady = loadVideo(PRELOAD_VIDEO).then(() => {
+    videoDone = true;
+    bump();
+  });
 
   const domReady =
     typeof document !== "undefined" && document.readyState === "complete"
@@ -52,7 +75,7 @@ export async function runAppPreload(onProgress: (pct: number) => void): Promise<
           window.addEventListener("load", () => resolve(), { once: true });
         });
 
-  await Promise.all([imagesReady, fontReady, domReady]);
+  await Promise.all([imageReady, videoReady, fontReady, domReady]);
   onProgress(88);
 
   const elapsed = performance.now() - start;

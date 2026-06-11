@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import Link from "next/link";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
+import { HomeSectionBackdrop } from "@/components/ui/HomeSectionBackdrop";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { BrandValueIntro } from "@/components/home/BrandValueIntro";
 import { BrandValuePrinciple } from "@/components/home/BrandValuePrinciple";
@@ -30,15 +31,11 @@ export function BrandValue() {
   return (
     <section
       id="filosofia"
-      className="relative -mt-px overflow-hidden border-b border-line-dark bg-bone py-section text-ink"
+      className="home-section-light relative -mt-px overflow-hidden border-b border-line-dark bg-bone py-section text-ink"
     >
-      <div
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_70%_50%_at_50%_0%,rgba(61,85,108,0.07),transparent_60%)]"
-        aria-hidden
-      />
-      <div className="pointer-events-none absolute inset-0 mesh-grid opacity-[0.05]" aria-hidden />
+      <HomeSectionBackdrop variant="light" />
 
-      <div className="site-container relative">
+      <div className="site-container relative z-[1]">
         <SectionHeader
           theme="light"
           kicker="Filosofía · Por qué Captas"

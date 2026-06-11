@@ -5,6 +5,7 @@ import { methodValueSection } from "@/content/method-value";
 import { stats } from "@/content/site";
 import { ProcessJourney } from "@/components/services/ProcessJourney";
 import { AnimatedCounter } from "@/components/motion/AnimatedCounter";
+import { HomeSectionBackdrop } from "@/components/ui/HomeSectionBackdrop";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { viewportOnce, easeOut } from "@/lib/motion";
 
@@ -35,16 +36,12 @@ export function Process() {
   return (
     <section
       id="metodo"
-      className="relative overflow-hidden bg-bone py-section text-ink"
+      className="home-section-light relative overflow-hidden bg-bone py-section text-ink"
       aria-labelledby="method-value-heading"
     >
-      <div
-        className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent/20 to-transparent"
-        aria-hidden
-      />
-      <div className="pointer-events-none absolute inset-0 mesh-grid opacity-[0.35]" aria-hidden />
+      <HomeSectionBackdrop variant="light" />
 
-      <div className="site-container relative">
+      <div className="site-container relative z-[1]">
         <SectionHeader
           theme="light"
           kicker={methodValueSection.kicker}
