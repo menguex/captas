@@ -535,10 +535,6 @@
   color: var(--c-bone);
 }
 
-.hero-scroll-zoom {
-  background-color: #080a0f;
-}
-
 .hero-background-media {
   position: absolute;
   inset: 0;
@@ -580,7 +576,7 @@
 
 .hero-background-video {
   opacity: 1;
-  filter: saturate(0.96) contrast(1.05) brightness(0.92);
+  filter: saturate(0.94) contrast(1.06) brightness(0.86);
   transform: translateZ(0);
   backface-visibility: hidden;
 }
@@ -612,21 +608,21 @@
   text-wrap: balance;
 }
 
-/* Scrim — legibilidad del copy sobre colaboración en mesa */
+/* Scrim — legibilidad; desenfatiza rostros de stock si aparecen en el clip */
 .hero-scrim {
   background:
     linear-gradient(
       180deg,
-      rgba(8, 10, 15, 0.72) 0%,
-      rgba(8, 10, 15, 0.42) 22%,
-      rgba(8, 10, 15, 0.38) 48%,
-      rgba(8, 10, 15, 0.48) 74%,
-      rgba(8, 10, 15, 0.82) 100%
+      rgba(8, 10, 15, 0.78) 0%,
+      rgba(8, 10, 15, 0.55) 24%,
+      rgba(8, 10, 15, 0.5) 50%,
+      rgba(8, 10, 15, 0.58) 76%,
+      rgba(8, 10, 15, 0.86) 100%
     ),
     radial-gradient(
-      ellipse 95% 80% at 50% 46%,
-      rgba(8, 10, 15, 0.28) 0%,
-      rgba(8, 10, 15, 0.58) 100%
+      ellipse 100% 85% at 50% 48%,
+      rgba(8, 10, 15, 0.32) 0%,
+      rgba(8, 10, 15, 0.65) 100%
     );
 }
 

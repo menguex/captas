@@ -17,10 +17,14 @@ export const heroContent = {
     { value: "1", label: "Director creativo" },
     { value: "Limarí", label: "Territorio" },
   ],
-  /** Equipo construyendo soluciones en pantalla — 1080p, cámara fija (Pexels, uso libre) */
-  backgroundVideo: "/videos/hero/hero-studio.mp4",
-  backgroundPoster: "/images/hero/hero-studio-poster.jpg",
-  backgroundPosition: "center 48%",
+  /**
+   * Criterio hero: estudio creativo (pantallas, craft, producción).
+   * Evitar: parejas, cafés íntimos, lifestyle, reuniones genéricas de 2 personas.
+   */
+  backgroundVideo: "/videos/hero/hero-creative-desk.mp4",
+  backgroundPoster: "/images/hero/hero-creative-desk-poster.jpg",
+  /** Encuadre en monitor y mesa de trabajo, no rostros */
+  backgroundPosition: "58% 42%",
   /** Rompe caché del navegador cuando cambia el reel */
-  backgroundMediaVersion: "13",
+  backgroundMediaVersion: "14",
 } as const;
