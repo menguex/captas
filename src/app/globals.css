@@ -588,11 +588,11 @@
 
 .hero-background-video {
   opacity: 1;
-  filter: saturate(1.16) contrast(1.1) brightness(1.06);
+  filter: saturate(1.06) contrast(1.08) brightness(1.02);
 }
 
 .hero-background-poster {
-  filter: saturate(1.12) contrast(1.08) brightness(1.04);
+  filter: saturate(1.04) contrast(1.06) brightness(1);
 }
 
 .hero-background-media--live .hero-background-canvas {
