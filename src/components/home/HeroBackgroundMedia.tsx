@@ -5,6 +5,7 @@ import { useEffect, useRef } from "react";
 import { heroContent } from "@/content/hero";
 import { INTRO_EVENT } from "@/hooks/useIntroReady";
 import { heroPosterSrc, heroVideoSrc } from "@/lib/hero-media";
+import { playMutedLoop } from "@/lib/video-playback";
 
 type HeroBackgroundMediaProps = {
   className?: string;
@@ -25,21 +26,9 @@ export function HeroBackgroundMedia({
     const video = videoRef.current;
     if (!video) return;
 
-    video.muted = true;
-    if (video.getAttribute("src") !== videoSrc) {
-      video.setAttribute("src", videoSrc);
-      video.load();
-    }
+    const play = () => playMutedLoop(video);
 
-    const play = () => {
-      video.play().catch(() => {
-        /* autoplay bloqueado — reintenta al terminar intro o al volver a la pestaña */
-      });
-    };
-
-    if (video.readyState >= 2) play();
-    else video.addEventListener("canplay", play, { once: true });
-
+    play();
     window.addEventListener(INTRO_EVENT, play);
     const onVisible = () => {
       if (!document.hidden) play();
@@ -47,7 +36,6 @@ export function HeroBackgroundMedia({
     document.addEventListener("visibilitychange", onVisible);
 
     return () => {
-      video.removeEventListener("canplay", play);
       window.removeEventListener(INTRO_EVENT, play);
       document.removeEventListener("visibilitychange", onVisible);
     };
@@ -90,6 +78,8 @@ export function HeroBackgroundMedia({
           loop
           playsInline
           preload="auto"
+          disablePictureInPicture
+          disableRemotePlayback
         />
         <div className="hero-video-edge-glow" />
       </div>

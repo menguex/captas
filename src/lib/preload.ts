@@ -1,10 +1,7 @@
 import { heroPosterSrc } from "@/lib/hero-media";
 
-/** URLs críticas — primera pantalla (poster + icono; el video carga en el hero) */
-export const PRELOAD_ASSETS = [
-  "/brand/captas-icon.png",
-  heroPosterSrc(),
-] as const;
+/** URLs críticas — primera pantalla (poster liviano + icono; el MP4 lo gestiona el hero) */
+export const PRELOAD_ASSETS = ["/brand/captas-icon.png", heroPosterSrc()] as const;
 
 /** Duración fija del intro — la barra recorre 0→100% en este tiempo */
 export const INTRO_DURATION_MS = 1800;

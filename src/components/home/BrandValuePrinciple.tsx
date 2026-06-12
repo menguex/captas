@@ -63,13 +63,14 @@ export function BrandValuePrinciple({ principle: p, index, isEven }: BrandValueP
               sizes="(max-width: 768px) 100vw, 45vw"
               className={`object-cover transition-opacity duration-slow ${videoOn && p.video ? "opacity-0" : "opacity-100"}`}
             />
-            {p.video && inView && (videoOn || reduced) ? (
+            {p.video && inView && videoOn && !reduced ? (
               <video
                 src={p.video}
-                autoPlay={videoOn}
+                autoPlay
                 muted
                 loop
                 playsInline
+                preload="none"
                 className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-slow ${
                   videoOn ? "opacity-100" : "opacity-0"
                 }`}

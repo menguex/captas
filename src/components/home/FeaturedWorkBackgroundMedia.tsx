@@ -22,20 +22,20 @@ export function FeaturedWorkBackgroundMedia() {
         style={{ objectPosition: featuredWorkMedia.videoPosition }}
         unoptimized
       />
-      {!reduced && (
+      {!reduced && active ? (
         <video
           ref={videoRef}
           className="featured-work-background-media__video"
           style={{ objectPosition: featuredWorkMedia.videoPosition }}
           src={video}
           poster={poster}
-          autoPlay={active}
+          autoPlay
           muted
           loop
           playsInline
-          preload="metadata"
+          preload="none"
         />
-      )}
+      ) : null}
       <div className="featured-work-background-media__scrim" />
     </div>
   );

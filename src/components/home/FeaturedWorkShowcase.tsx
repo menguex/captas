@@ -87,15 +87,17 @@ export function FeaturedWorkShowcase({ projects, onOpenCase }: FeaturedWorkShowc
                 fill
                 sizes="(max-width: 768px) 100vw, 1200px"
                 className="object-cover"
-                priority
+                priority={active === 0}
               />
               {current.video && inView && !reduced ? (
                 <video
+                  key={current.slug}
                   src={current.video}
                   autoPlay
                   muted
                   loop
                   playsInline
+                  preload="none"
                   className="absolute inset-0 h-full w-full object-cover"
                   aria-hidden
                 />

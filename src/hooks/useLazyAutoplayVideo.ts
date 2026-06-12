@@ -1,9 +1,20 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { pauseVideo, playMutedLoop } from "@/lib/video-playback";
 
-/** Carga y reproduce video solo cuando entra al viewport (ahorra ancho de banda y decode). */
-export function useLazyAutoplayVideo(enabled: boolean) {
+type LazyVideoOptions = {
+  /** Margen antes de activar (px) */
+  rootMargin?: string;
+  /** Pausar al salir del viewport */
+  pauseWhenHidden?: boolean;
+};
+
+/** Carga y reproduce video solo cuando entra al viewport. */
+export function useLazyAutoplayVideo(
+  enabled: boolean,
+  { rootMargin = "280px 0px", pauseWhenHidden = true }: LazyVideoOptions = {}
+) {
   const containerRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const [active, setActive] = useState(false);
@@ -17,32 +28,25 @@ export function useLazyAutoplayVideo(enabled: boolean) {
       ([entry]) => {
         if (entry?.isIntersecting) {
           setActive(true);
-          observer.disconnect();
+          const video = videoRef.current;
+          if (video) playMutedLoop(video);
+        } else if (pauseWhenHidden) {
+          setActive(false);
+          pauseVideo(videoRef.current);
         }
       },
-      { rootMargin: "320px 0px", threshold: 0.01 }
+      { rootMargin, threshold: 0.01 }
     );
 
     observer.observe(root);
     return () => observer.disconnect();
-  }, [enabled]);
+  }, [enabled, pauseWhenHidden, rootMargin]);
 
   useEffect(() => {
     if (!enabled || !active) return;
     const video = videoRef.current;
     if (!video) return;
-
-    video.muted = true;
-    const play = () => {
-      video.play().catch(() => {
-        /* autoplay bloqueado */
-      });
-    };
-
-    if (video.readyState >= 2) play();
-    else video.addEventListener("canplay", play, { once: true });
-
-    return () => video.removeEventListener("canplay", play);
+    playMutedLoop(video);
   }, [enabled, active]);
 
   return { containerRef, videoRef, active };
