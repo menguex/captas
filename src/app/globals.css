@@ -580,7 +580,7 @@
 
 .hero-background-video {
   opacity: 1;
-  filter: saturate(0.98) contrast(1.04) brightness(1.03);
+  filter: saturate(0.96) contrast(1.05) brightness(0.92);
   transform: translateZ(0);
   backface-visibility: hidden;
 }
@@ -612,27 +612,21 @@
   text-wrap: balance;
 }
 
-/* Scrim retail — centro vivo (estilo app comercial), anclaje arriba/abajo para UI */
+/* Scrim — legibilidad del copy sobre colaboración en mesa */
 .hero-scrim {
   background:
     linear-gradient(
       180deg,
-      rgba(8, 10, 15, 0.48) 0%,
-      rgba(8, 10, 15, 0.12) 18%,
-      transparent 40%,
-      transparent 54%,
-      rgba(15, 18, 24, 0.32) 76%,
-      rgba(8, 10, 15, 0.78) 100%
+      rgba(8, 10, 15, 0.72) 0%,
+      rgba(8, 10, 15, 0.42) 22%,
+      rgba(8, 10, 15, 0.38) 48%,
+      rgba(8, 10, 15, 0.48) 74%,
+      rgba(8, 10, 15, 0.82) 100%
     ),
     radial-gradient(
-      ellipse 92% 78% at 50% 46%,
-      transparent 42%,
-      rgba(8, 10, 15, 0.22) 100%
-    ),
-    radial-gradient(
-      ellipse 55% 38% at 50% 8%,
-      rgba(91, 97, 255, 0.14) 0%,
-      transparent 72%
+      ellipse 95% 80% at 50% 46%,
+      rgba(8, 10, 15, 0.28) 0%,
+      rgba(8, 10, 15, 0.58) 100%
     );
 }
 

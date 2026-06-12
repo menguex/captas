@@ -7,7 +7,7 @@ export const heroContent = {
   headlineLine2: "Lo convertimos en",
   headlineAccentWord: "experiencia.",
   tagline:
-    "Dirección creativa que vende: marca, interfaz, motion y contenido con un solo criterio — del brief al resultado.",
+    "Soluciones creativas a medida: marca, interfaz, motion y contenido con un solo criterio — del reto al resultado.",
   ctaPrimary: "Iniciar proyecto",
   ctaSecondary: "Nuestra forma de pensar",
   scrollLabel: "Scroll",
@@ -17,10 +17,10 @@ export const heroContent = {
     { value: "1", label: "Director creativo" },
     { value: "Limarí", label: "Territorio" },
   ],
-  /** Negocio premium — quiet luxury, cámara estable (Mixkit 4868, uso libre) */
-  backgroundVideo: "/videos/hero/hero-apple-business.mp4",
-  backgroundPoster: "/images/hero/hero-apple-business-poster.jpg",
-  backgroundPosition: "center 38%",
+  /** Equipo definiendo un proyecto — colaboración y soluciones (Mixkit 3195, uso libre) */
+  backgroundVideo: "/videos/hero/hero-solutions.mp4",
+  backgroundPoster: "/images/hero/hero-solutions-poster.jpg",
+  backgroundPosition: "center 42%",
   /** Rompe caché del navegador cuando cambia el reel */
-  backgroundMediaVersion: "8",
+  backgroundMediaVersion: "12",
 } as const;
