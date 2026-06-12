@@ -17,10 +17,10 @@ export const heroContent = {
     { value: "1", label: "Director creativo" },
     { value: "Limarí", label: "Territorio" },
   ],
-  /** Equipo definiendo un proyecto — colaboración y soluciones (Mixkit 3195, uso libre) */
-  backgroundVideo: "/videos/hero/hero-solutions.mp4",
-  backgroundPoster: "/images/hero/hero-solutions-poster.jpg",
-  backgroundPosition: "center 42%",
+  /** Equipo construyendo soluciones en pantalla — 1080p, cámara fija (Pexels, uso libre) */
+  backgroundVideo: "/videos/hero/hero-studio.mp4",
+  backgroundPoster: "/images/hero/hero-studio-poster.jpg",
+  backgroundPosition: "center 48%",
   /** Rompe caché del navegador cuando cambia el reel */
-  backgroundMediaVersion: "12",
+  backgroundMediaVersion: "13",
 } as const;

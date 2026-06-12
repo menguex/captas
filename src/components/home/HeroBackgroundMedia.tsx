@@ -78,7 +78,7 @@ export function HeroBackgroundMedia({
           muted
           loop
           playsInline
-          preload="metadata"
+          preload="auto"
         />
         <div className="hero-video-edge-glow" />
       </div>

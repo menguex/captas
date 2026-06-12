@@ -77,7 +77,7 @@ export default function RootLayout({
         <link rel="preload" href="/brand/captas-icon.png" as="image" type="image/png" fetchPriority="high" />
         <link
           rel="preload"
-          href="/images/hero/hero-solutions-poster.jpg?v=12"
+          href="/images/hero/hero-studio-poster.jpg?v=13"
           as="image"
           type="image/jpeg"
           fetchPriority="high"
