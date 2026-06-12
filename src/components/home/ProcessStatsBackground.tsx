@@ -1,34 +1,16 @@
 "use client";
 
-import { useEffect, useRef } from "react";
 import Image from "next/image";
 import { methodValueMedia } from "@/content/method-value";
+import { useLazyAutoplayVideo } from "@/hooks/useLazyAutoplayVideo";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 
 export function ProcessStatsBackground() {
   const reduced = useReducedMotion();
-  const videoRef = useRef<HTMLVideoElement>(null);
-
-  useEffect(() => {
-    if (reduced) return;
-    const video = videoRef.current;
-    if (!video) return;
-
-    video.muted = true;
-    const play = () => {
-      video.play().catch(() => {
-        /* autoplay bloqueado */
-      });
-    };
-
-    if (video.readyState >= 2) play();
-    else video.addEventListener("canplay", play, { once: true });
-
-    return () => video.removeEventListener("canplay", play);
-  }, [reduced]);
+  const { containerRef, videoRef, active } = useLazyAutoplayVideo(!reduced);
 
   return (
-    <div className="process-stats-background" aria-hidden>
+    <div ref={containerRef} className="process-stats-background" aria-hidden>
       <Image
         src={methodValueMedia.poster}
         alt=""
@@ -42,13 +24,13 @@ export function ProcessStatsBackground() {
           ref={videoRef}
           className="process-stats-background__video"
           style={{ objectPosition: methodValueMedia.videoPosition }}
-          src={methodValueMedia.video}
+          src={active ? methodValueMedia.video : undefined}
           poster={methodValueMedia.poster}
           autoPlay
           muted
           loop
           playsInline
-          preload="auto"
+          preload="none"
         />
       )}
       <div className="process-stats-background__scrim" />

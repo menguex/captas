@@ -17,10 +17,10 @@ export const heroContent = {
     { value: "1", label: "Director creativo" },
     { value: "Limarí", label: "Territorio" },
   ],
-  /** Equipo revisando proyectos y métricas — 4K, distinto al footer/método (Pexels, uso libre) */
-  backgroundVideo: "/videos/hero/hero-enterprise-projects-4k.mp4",
+  /** Equipo revisando proyectos — 1080p, distinto al footer/método (Pexels, uso libre) */
+  backgroundVideo: "/videos/hero/hero-enterprise-projects.mp4",
   backgroundPoster: "/images/hero/hero-enterprise-projects-poster.jpg",
   backgroundPosition: "center 42%",
   /** Rompe caché del navegador cuando cambia el reel */
-  backgroundMediaVersion: "5",
+  backgroundMediaVersion: "6",
 } as const;

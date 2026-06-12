@@ -1,15 +1,13 @@
-import { heroPosterSrc, heroVideoSrc } from "@/lib/hero-media";
+import { heroPosterSrc } from "@/lib/hero-media";
 
-/** URLs críticas — primera pantalla (home + shell) */
+/** URLs críticas — primera pantalla (poster + icono; el video carga en el hero) */
 export const PRELOAD_ASSETS = [
   "/brand/captas-icon.png",
   heroPosterSrc(),
 ] as const;
 
-export const PRELOAD_VIDEO = heroVideoSrc();
-
 /** Duración fija del intro — la barra recorre 0→100% en este tiempo */
-export const INTRO_DURATION_MS = 3000;
+export const INTRO_DURATION_MS = 1800;
 
 export type PreloadUpdate = {
   progress: number;
@@ -21,7 +19,7 @@ const STAGES: { at: number; label: string }[] = [
   { at: 0.18, label: "Tipografías" },
   { at: 0.38, label: "Identidad visual" },
   { at: 0.58, label: "Primer frame" },
-  { at: 0.78, label: "Reel del estudio" },
+  { at: 0.78, label: "Experiencia visual" },
   { at: 0.94, label: "Listo" },
 ];
 
@@ -51,24 +49,6 @@ function loadImage(src: string): Promise<void> {
   });
 }
 
-function loadVideo(src: string): Promise<void> {
-  return new Promise((resolve) => {
-    const video = document.createElement("video");
-    video.muted = true;
-    video.preload = "auto";
-    video.playsInline = true;
-    const finish = () => {
-      window.clearTimeout(timeout);
-      resolve();
-    };
-    const timeout = window.setTimeout(finish, 8000);
-    video.addEventListener("canplay", finish, { once: true });
-    video.addEventListener("error", finish, { once: true });
-    video.src = src;
-    video.load();
-  });
-}
-
 /** Dispara precarga de assets en segundo plano (no bloquea el tiempo del intro). */
 function warmCriticalAssets(): void {
   const fontReady =
@@ -76,11 +56,7 @@ function warmCriticalAssets(): void {
       ? document.fonts.ready
       : Promise.resolve();
 
-  void Promise.all([
-    fontReady,
-    ...PRELOAD_ASSETS.map(loadImage),
-    loadVideo(PRELOAD_VIDEO),
-  ]);
+  void Promise.all([fontReady, ...PRELOAD_ASSETS.map(loadImage)]);
 }
 
 /**

@@ -1,34 +1,16 @@
 "use client";
 
-import { useEffect, useRef } from "react";
 import Image from "next/image";
 import { footerMedia } from "@/content/footer";
+import { useLazyAutoplayVideo } from "@/hooks/useLazyAutoplayVideo";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 
 export function FooterBackgroundMedia() {
   const reduced = useReducedMotion();
-  const videoRef = useRef<HTMLVideoElement>(null);
-
-  useEffect(() => {
-    if (reduced) return;
-    const video = videoRef.current;
-    if (!video) return;
-
-    video.muted = true;
-    const play = () => {
-      video.play().catch(() => {
-        /* autoplay bloqueado */
-      });
-    };
-
-    if (video.readyState >= 2) play();
-    else video.addEventListener("canplay", play, { once: true });
-
-    return () => video.removeEventListener("canplay", play);
-  }, [reduced]);
+  const { containerRef, videoRef, active } = useLazyAutoplayVideo(!reduced);
 
   return (
-    <div className="footer-background-media" aria-hidden>
+    <div ref={containerRef} className="footer-background-media" aria-hidden>
       <Image
         src={footerMedia.poster}
         alt=""
@@ -43,13 +25,13 @@ export function FooterBackgroundMedia() {
           ref={videoRef}
           className="footer-background-media__video"
           style={{ objectPosition: footerMedia.videoPosition }}
-          src={footerMedia.video}
+          src={active ? footerMedia.video : undefined}
           poster={footerMedia.poster}
           autoPlay
           muted
           loop
           playsInline
-          preload="auto"
+          preload="none"
         />
       )}
       <div className="footer-background-media__scrim" />

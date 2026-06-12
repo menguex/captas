@@ -1,8 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
-import { PageTransition } from "@/components/layout/PageTransition";
-import { GrainOverlay } from "@/components/ui/GrainOverlay";
 import { SkipLink } from "@/components/ui/SkipLink";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { AppProviders } from "@/providers/AppProviders";
@@ -79,16 +77,9 @@ export default function RootLayout({
         <link rel="preload" href="/brand/captas-icon.png" as="image" type="image/png" fetchPriority="high" />
         <link
           rel="preload"
-          href="/images/hero/hero-enterprise-projects-poster.jpg?v=5"
+          href="/images/hero/hero-enterprise-projects-poster.jpg?v=6"
           as="image"
           type="image/jpeg"
-          fetchPriority="high"
-        />
-        <link
-          rel="preload"
-          href="/videos/hero/hero-enterprise-projects-4k.mp4?v=5"
-          as="video"
-          type="video/mp4"
           fetchPriority="high"
         />
         <script
@@ -106,10 +97,9 @@ export default function RootLayout({
         <JsonLd />
         <AppProviders>
           <SkipLink />
-          <GrainOverlay />
           <Header />
           <main id="contenido" tabIndex={-1} className="overflow-x-clip outline-none">
-            <PageTransition>{children}</PageTransition>
+            {children}
           </main>
           <Footer />
         </AppProviders>

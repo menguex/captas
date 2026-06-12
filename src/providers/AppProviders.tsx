@@ -1,12 +1,20 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import { useEffect } from "react";
 import { LenisProvider } from "./LenisProvider";
-import { ThemeProvider } from "./ThemeProvider";
-import { ScrollProgress } from "@/components/ui/ScrollProgress";
-import { ScrollToTop } from "@/components/layout/ScrollToTop";
 import { IntroLoader } from "@/components/home/IntroLoader";
-import { FloatingCta } from "@/components/ui/FloatingCta";
+import { ScrollToTop } from "@/components/layout/ScrollToTop";
+
+const ScrollProgress = dynamic(
+  () => import("@/components/ui/ScrollProgress").then((m) => m.ScrollProgress),
+  { ssr: false }
+);
+
+const FloatingCta = dynamic(
+  () => import("@/components/ui/FloatingCta").then((m) => m.FloatingCta),
+  { ssr: false }
+);
 
 export function AppProviders({ children }: { children: React.ReactNode }) {
   useEffect(() => {
@@ -21,14 +29,12 @@ export function AppProviders({ children }: { children: React.ReactNode }) {
   }, []);
 
   return (
-    <ThemeProvider>
-      <LenisProvider>
-        <ScrollToTop />
-        <IntroLoader />
-        <ScrollProgress />
-        <FloatingCta />
-        {children}
-      </LenisProvider>
-    </ThemeProvider>
+    <LenisProvider>
+      <ScrollToTop />
+      <IntroLoader />
+      <ScrollProgress />
+      <FloatingCta />
+      {children}
+    </LenisProvider>
   );
 }
