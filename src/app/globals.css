@@ -243,6 +243,32 @@
     color: transparent;
   }
 
+  .captas-preload-bar {
+    width: min(11rem, 70vw);
+    height: 1px;
+    overflow: hidden;
+    border-radius: 9999px;
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  .captas-preload-bar__fill {
+    display: block;
+    height: 100%;
+    width: 42%;
+    border-radius: inherit;
+    background: linear-gradient(90deg, #5b61ff, #007aff, #0ea5e9);
+    animation: captas-preload-indeterminate 1.35s ease-in-out infinite;
+  }
+
+  @keyframes captas-preload-indeterminate {
+    0% {
+      transform: translateX(-120%);
+    }
+    100% {
+      transform: translateX(320%);
+    }
+  }
+
   ::selection {
     background-color: rgba(var(--c-accent-rgb), 0.35);
     color: #ffffff;
@@ -1873,6 +1899,11 @@
 
 .intro-loader__ring-glow {
   filter: drop-shadow(0 0 6px rgba(0, 122, 255, 0.55));
+  transition: stroke-dashoffset 0.12s linear;
+}
+
+.intro-loader__bar {
+  will-change: width;
 }
 
 /* — Listas y enumeraciones editoriales — */

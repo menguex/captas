@@ -77,8 +77,21 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <head>
-        <link rel="preload" href="/brand/captas-icon.png" as="image" type="image/png" />
-        <link rel="preload" href="/videos/hero/design-studio.mp4" as="video" type="video/mp4" fetchPriority="high" />
+        <link rel="preload" href="/brand/captas-icon.png" as="image" type="image/png" fetchPriority="high" />
+        <link
+          rel="preload"
+          href="/images/hero/design-studio-poster.jpg"
+          as="image"
+          type="image/jpeg"
+          fetchPriority="high"
+        />
+        <link
+          rel="preload"
+          href="/videos/hero/design-studio.mp4"
+          as="video"
+          type="video/mp4"
+          fetchPriority="high"
+        />
         <script
           dangerouslySetInnerHTML={{
             __html: `(function(){try{document.documentElement.setAttribute("data-theme","dark");var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute("content","#007aff");}catch(e){document.documentElement.setAttribute("data-theme","dark");}})();`,
@@ -104,6 +117,9 @@ export default function RootLayout({
             <span className="captas-preload-logo">
               CAPTAS<span className="captas-preload-dot">.</span>
             </span>
+            <div className="captas-preload-bar" aria-hidden>
+              <span className="captas-preload-bar__fill" />
+            </div>
           </div>
         </div>
         <JsonLd />

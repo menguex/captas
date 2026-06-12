@@ -20,9 +20,15 @@ function resetScroll() {
   document.body.scrollTop = 0;
 }
 
+function hideStaticPreload() {
+  const shell = document.getElementById("captas-preload");
+  if (shell) shell.style.display = "none";
+}
+
 function markAppReady() {
   document.body.classList.remove("captas-loading");
   document.body.classList.add("captas-ready");
+  hideStaticPreload();
   dispatchIntroComplete();
 }
 
@@ -31,6 +37,7 @@ export function IntroLoader() {
   const [mounted, setMounted] = useState(false);
   const [visible, setVisible] = useState(false);
   const [progress, setProgress] = useState(0);
+  const [stageLabel, setStageLabel] = useState("Iniciando estudio");
   const finishedRef = useRef(false);
   const preloadStartedRef = useRef(false);
 
@@ -63,6 +70,7 @@ export function IntroLoader() {
       return;
     }
 
+    hideStaticPreload();
     setVisible(true);
     document.body.classList.add("captas-loading");
     document.body.style.overflow = "hidden";
@@ -72,8 +80,10 @@ export function IntroLoader() {
 
     let cancelled = false;
 
-    runAppPreload((pct) => {
-      if (!cancelled) setProgress(pct);
+    runAppPreload((update) => {
+      if (cancelled) return;
+      setProgress(update.progress);
+      setStageLabel(update.stageLabel);
     })
       .then(() => {
         if (!cancelled) finish();
@@ -82,7 +92,7 @@ export function IntroLoader() {
         if (!cancelled) finish();
       });
 
-    const safety = window.setTimeout(finish, 8000);
+    const safety = window.setTimeout(finish, 10500);
 
     return () => {
       cancelled = true;
@@ -108,10 +118,13 @@ export function IntroLoader() {
           className="intro-loader fixed inset-0 z-[10000] flex flex-col items-center justify-center overflow-hidden bg-ink"
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.65, ease }}
+          transition={{ duration: 0.72, ease }}
           aria-busy="true"
           aria-label="Cargando Captas"
-          role="status"
+          role="progressbar"
+          aria-valuemin={0}
+          aria-valuemax={100}
+          aria-valuenow={progress}
         >
           <button
             type="button"
@@ -120,14 +133,15 @@ export function IntroLoader() {
           >
             Saltar
           </button>
+
           <div className="pointer-events-none absolute inset-0 intro-loader__ambient" aria-hidden />
           <div className="pointer-events-none absolute inset-0 mesh-grid opacity-[0.07]" aria-hidden />
 
           <motion.div
-            className="relative flex flex-col items-center px-6"
+            className="relative z-10 flex flex-col items-center px-6"
             initial={{ opacity: 0, scale: 0.96, filter: "blur(10px)" }}
             animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
-            exit={{ opacity: 0, scale: 1.03, filter: "blur(6px)" }}
+            exit={{ opacity: 0, scale: 0.98, y: -12, filter: "blur(4px)" }}
             transition={{ duration: 0.75, ease: easeOut }}
           >
             <div className="relative flex h-[8.75rem] w-[8.75rem] items-center justify-center">
@@ -204,21 +218,22 @@ export function IntroLoader() {
             </motion.div>
 
             <motion.div
-              className="mt-9 w-[min(11rem,70vw)]"
+              className="mt-9 w-[min(14rem,78vw)]"
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.42, duration: 0.55, ease }}
             >
-              <div className="h-px overflow-hidden rounded-full bg-white/[0.08]">
+              <div className="flex items-center justify-between gap-3 font-mono text-[0.55rem] uppercase tracking-[0.16em] text-on-ink-subtle">
+                <span className="truncate">{stageLabel}</span>
+                <span className="shrink-0 tabular-nums text-sky/90">{progress}%</span>
+              </div>
+              <div className="mt-2.5 h-px overflow-hidden rounded-full bg-white/[0.08]">
                 <motion.div
-                  className="h-full origin-left rounded-full bg-gradient-to-r from-[#5b61ff] via-accent to-[#0ea5e9] shadow-[0_0_14px_rgba(var(--c-accent-rgb),0.45)]"
+                  className="intro-loader__bar h-full origin-left rounded-full bg-gradient-to-r from-[#5b61ff] via-accent to-[#0ea5e9] shadow-[0_0_14px_rgba(var(--c-accent-rgb),0.45)]"
                   style={{ width: `${progress}%` }}
-                  transition={{ duration: 0.12, ease: "linear" }}
+                  transition={{ duration: 0.08, ease: "linear" }}
                 />
               </div>
-              <p className="mt-2.5 text-center font-mono text-[0.58rem] tabular-nums tracking-[0.2em] text-sky/90">
-                {progress.toString().padStart(3, "0")}
-              </p>
             </motion.div>
           </motion.div>
         </motion.div>
