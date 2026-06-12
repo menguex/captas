@@ -79,14 +79,14 @@ export default function RootLayout({
         <link rel="preload" href="/brand/captas-icon.png" as="image" type="image/png" fetchPriority="high" />
         <link
           rel="preload"
-          href="/images/hero/design-studio-poster.jpg"
+          href="/images/hero/commercial-energy-poster.jpg"
           as="image"
           type="image/jpeg"
           fetchPriority="high"
         />
         <link
           rel="preload"
-          href="/videos/hero/design-studio.mp4"
+          href="/videos/hero/commercial-energy.mp4"
           as="video"
           type="video/mp4"
           fetchPriority="high"
