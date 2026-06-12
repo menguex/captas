@@ -18,13 +18,12 @@ export const heroContent = {
     { value: "Limarí", label: "Territorio" },
   ],
   /**
-   * Criterio hero: estudio creativo (pantallas, craft, producción).
-   * Evitar: parejas, cafés íntimos, lifestyle, reuniones genéricas de 2 personas.
+   * Túnel abstracto en loop — motion/design (Pixabay #301542, tunnelmotions).
+   * Licencia: Pixabay Content License.
    */
-  backgroundVideo: "/videos/hero/hero-creative-desk.mp4",
-  backgroundPoster: "/images/hero/hero-creative-desk-poster.jpg",
-  /** Encuadre en monitor y mesa de trabajo, no rostros */
-  backgroundPosition: "58% 42%",
+  backgroundVideo: "/videos/hero/hero-tunnel-loop.mp4",
+  backgroundPoster: "/images/hero/hero-tunnel-loop-poster.jpg",
+  backgroundPosition: "center center",
   /** Rompe caché del navegador cuando cambia el reel */
-  backgroundMediaVersion: "14",
+  backgroundMediaVersion: "15",
 } as const;

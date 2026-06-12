@@ -8,6 +8,7 @@ import { getFeaturedProjects } from "@/content/projects";
 import { FeaturedWorkShowcase } from "@/components/home/FeaturedWorkShowcase";
 import { ProjectCaseModal } from "@/components/work/ProjectCaseModal";
 import { SectionHeader } from "@/components/ui/SectionHeader";
+import { FeaturedWorkBackgroundMedia } from "@/components/home/FeaturedWorkBackgroundMedia";
 import { HomeSectionBackdrop } from "@/components/ui/HomeSectionBackdrop";
 import { easeOut, viewportOnce } from "@/lib/motion";
 
@@ -28,9 +29,10 @@ export function FeaturedWork() {
   return (
     <section
       id="trabajo-destacado"
-      className="home-section-stage relative overflow-hidden bg-ink py-section"
+      className="featured-work-section home-section-stage relative overflow-hidden py-section"
       aria-labelledby="trabajo-destacado-heading"
     >
+      <FeaturedWorkBackgroundMedia />
       <HomeSectionBackdrop variant="work" />
 
       <div className="site-container relative z-[1]">
