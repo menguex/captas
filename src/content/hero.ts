@@ -17,10 +17,10 @@ export const heroContent = {
     { value: "1", label: "Director creativo" },
     { value: "Limarí", label: "Territorio" },
   ],
-  /** Equipo de diseño en proyectos — 1080p, cámara fija (Pexels, uso libre) */
-  backgroundVideo: "/videos/hero/hero-design-reel.mp4",
-  backgroundPoster: "/images/hero/hero-design-reel-poster.jpg",
-  backgroundPosition: "center 45%",
+  /** Negocio premium — quiet luxury, cámara estable (Mixkit 4868, uso libre) */
+  backgroundVideo: "/videos/hero/hero-apple-business.mp4",
+  backgroundPoster: "/images/hero/hero-apple-business-poster.jpg",
+  backgroundPosition: "center 38%",
   /** Rompe caché del navegador cuando cambia el reel */
-  backgroundMediaVersion: "10",
+  backgroundMediaVersion: "8",
 } as const;
