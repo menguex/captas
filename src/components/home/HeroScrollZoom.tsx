@@ -27,9 +27,9 @@ export function HeroScrollZoom({
   const containerRef = useRef<HTMLElement>(null);
   const progress = useElementScrollProgress(containerRef, !reduced);
 
-  const imageScale = useTransform(progress, [0, 1], [1, 1.18]);
-  const imageOpacity = useTransform(progress, [0, 0.55, 1], [1, 0.9, 0.45]);
-  const imageBlur = useTransform(progress, [0, 1], ["blur(0px)", "blur(10px)"]);
+  const imageScale = useTransform(progress, [0, 1], [1, 1.06]);
+  const imageOpacity = useTransform(progress, [0, 0.6, 1], [1, 0.95, 0.5]);
+  const imageBlur = useTransform(progress, [0, 0.35, 1], ["blur(0px)", "blur(0px)", "blur(6px)"]);
   const scrimBoost = useTransform(progress, [0, 1], [0.82, 1.08]);
   const contentY = useTransform(progress, [0, 1], ["0%", "-18%"]);
   const contentScale = useTransform(progress, [0, 1], [1, 0.92]);
@@ -68,7 +68,7 @@ export function HeroScrollZoom({
     >
       <div className="sticky top-0 h-[100dvh] min-h-[28rem] overflow-hidden">
         <motion.div
-          className="pointer-events-none absolute -inset-[18%] z-0 origin-center will-change-transform"
+          className="pointer-events-none absolute inset-0 z-0 origin-center"
           style={{ scale: imageScale, opacity: imageOpacity, filter: imageBlur }}
           aria-hidden
         >

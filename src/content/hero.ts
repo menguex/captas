@@ -17,10 +17,10 @@ export const heroContent = {
     { value: "1", label: "Director creativo" },
     { value: "Limarí", label: "Territorio" },
   ],
-  /** Equipo revisando proyectos — 1080p, distinto al footer/método (Pexels, uso libre) */
-  backgroundVideo: "/videos/hero/hero-enterprise-projects.mp4",
-  backgroundPoster: "/images/hero/hero-enterprise-projects-poster.jpg",
-  backgroundPosition: "center 42%",
+  /** Reunión ejecutiva — cámara fija, gestos y diálogo (Mixkit 4872, uso libre) */
+  backgroundVideo: "/videos/hero/hero-stable-boardroom.mp4",
+  backgroundPoster: "/images/hero/hero-stable-boardroom-poster.jpg",
+  backgroundPosition: "center 36%",
   /** Rompe caché del navegador cuando cambia el reel */
-  backgroundMediaVersion: "6",
+  backgroundMediaVersion: "7",
 } as const;

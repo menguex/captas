@@ -67,23 +67,20 @@ export function HeroBackgroundMedia({
     <div className={`hero-background-media hero-background-media--live ${className}`.trim()} aria-hidden>
       <div className="hero-background-canvas" />
       <div className="hero-video-stage absolute inset-0 overflow-hidden">
-        <div className="hero-video-ken-burns absolute inset-[-4%]">
-          <video
-            key={videoSrc}
-            ref={videoRef}
-            className="hero-background-video"
-            style={{ objectPosition: heroContent.backgroundPosition }}
-            poster={posterSrc}
-            src={videoSrc}
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="metadata"
-          />
-        </div>
+        <video
+          key={videoSrc}
+          ref={videoRef}
+          className="hero-background-video"
+          style={{ objectPosition: heroContent.backgroundPosition }}
+          poster={posterSrc}
+          src={videoSrc}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+        />
         <div className="hero-video-edge-glow" />
-        <div className="hero-video-shine" />
       </div>
     </div>
   );
