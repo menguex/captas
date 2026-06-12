@@ -694,6 +694,59 @@
   border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
+/* Disciplinas hero — marquee premium, todas visibles en fila */
+.hero-disciplines-marquee {
+  overflow: hidden;
+  mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    #000 12%,
+    #000 88%,
+    transparent 100%
+  );
+}
+
+.hero-disciplines-marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee-x 38s linear infinite;
+  will-change: transform;
+}
+
+.hero-disciplines-marquee:hover .hero-disciplines-marquee-track {
+  animation-play-state: paused;
+}
+
+.hero-discipline-chip {
+  position: relative;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02)),
+    rgba(8, 10, 15, 0.42);
+}
+
+.hero-discipline-chip::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    135deg,
+    rgba(100, 210, 255, 0.35) 0%,
+    rgba(91, 97, 255, 0.2) 45%,
+    rgba(255, 255, 255, 0.12) 100%
+  );
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
 /* Puentes entre secciones del home */
 .home-section-bridge--dark {
   background: linear-gradient(

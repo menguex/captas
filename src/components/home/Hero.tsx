@@ -5,7 +5,7 @@ import { MagneticButton } from "@/components/motion/MagneticButton";
 import { SplitText } from "@/components/motion/SplitText";
 import { HeroDesignMesh } from "@/components/home/HeroDesignMesh";
 import { HeroScrollZoom } from "@/components/home/HeroScrollZoom";
-import { CraftChips } from "@/components/ui/CraftChips";
+import { HeroDisciplinesMarquee } from "@/components/home/HeroDisciplinesMarquee";
 import { heroContent } from "@/content/hero";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { useSpotlight } from "@/hooks/useSpotlight";
@@ -113,12 +113,12 @@ export function Hero() {
           </motion.p>
 
           <motion.div
-            className="mt-9"
+            className="mt-9 w-full"
             initial={active ? { opacity: 0 } : false}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.65, duration: 0.7, ease }}
           >
-            <CraftChips items={heroContent.disciplines} theme="dark" variant="hero" />
+            <HeroDisciplinesMarquee items={heroContent.disciplines} />
           </motion.div>
 
           <motion.div
