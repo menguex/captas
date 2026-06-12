@@ -17,10 +17,10 @@ export const heroContent = {
     { value: "1", label: "Director creativo" },
     { value: "Limarí", label: "Territorio" },
   ],
-  /** Diseñador en estación creativa — 1080p, cámara estable (Mixkit 50602, uso libre) */
+  /** Equipo de diseño en proyectos — 1080p, cámara fija (Pexels, uso libre) */
   backgroundVideo: "/videos/hero/hero-design-reel.mp4",
   backgroundPoster: "/images/hero/hero-design-reel-poster.jpg",
-  backgroundPosition: "center 42%",
+  backgroundPosition: "center 45%",
   /** Rompe caché del navegador cuando cambia el reel */
-  backgroundMediaVersion: "11",
+  backgroundMediaVersion: "10",
 } as const;
