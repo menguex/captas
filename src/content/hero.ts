@@ -17,8 +17,10 @@ export const heroContent = {
     { value: "1", label: "Director creativo" },
     { value: "Limarí", label: "Territorio" },
   ],
-  /** Reel comercial — energía retail / lifestyle (Mixkit, uso libre) */
-  backgroundVideo: "/videos/hero/commercial-energy.mp4",
-  backgroundPoster: "/images/hero/commercial-energy-poster.jpg",
-  backgroundPosition: "center 42%",
+  /** Equipo creativo en acción — lifestyle / retail energy (Mixkit, uso libre) */
+  backgroundVideo: "/videos/hero/hero-reel-v3.mp4",
+  backgroundPoster: "/images/hero/hero-reel-v3-poster.jpg",
+  backgroundPosition: "center 38%",
+  /** Rompe caché del navegador cuando cambia el reel */
+  backgroundMediaVersion: "3",
 } as const;

@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useEffect, useRef } from "react";
 import { heroContent } from "@/content/hero";
+import { heroPosterSrc, heroVideoSrc } from "@/lib/hero-media";
 
 type HeroBackgroundMediaProps = {
   className?: string;
@@ -15,6 +16,8 @@ export function HeroBackgroundMedia({
   reduced = false,
 }: HeroBackgroundMediaProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const videoSrc = heroVideoSrc();
+  const posterSrc = heroPosterSrc();
 
   useEffect(() => {
     if (reduced) return;
@@ -22,6 +25,11 @@ export function HeroBackgroundMedia({
     if (!video) return;
 
     video.muted = true;
+    if (video.getAttribute("src") !== videoSrc) {
+      video.setAttribute("src", videoSrc);
+      video.load();
+    }
+
     const play = () => {
       video.play().catch(() => {
         /* autoplay bloqueado — el placeholder oscuro cubre */
@@ -32,7 +40,7 @@ export function HeroBackgroundMedia({
     else video.addEventListener("canplay", play, { once: true });
 
     return () => video.removeEventListener("canplay", play);
-  }, [reduced]);
+  }, [reduced, videoSrc]);
 
   if (reduced) {
     return (
@@ -42,13 +50,14 @@ export function HeroBackgroundMedia({
       >
         <div className="hero-background-canvas" />
         <Image
-          src={heroContent.backgroundPoster}
+          src={posterSrc}
           alt=""
           fill
           className="hero-background-poster"
           style={{ objectPosition: heroContent.backgroundPosition }}
           sizes="100vw"
           priority
+          unoptimized
         />
       </div>
     );
@@ -60,18 +69,18 @@ export function HeroBackgroundMedia({
       <div className="hero-video-stage absolute inset-0 overflow-hidden">
         <div className="hero-video-ken-burns absolute inset-[-4%]">
           <video
+            key={videoSrc}
             ref={videoRef}
             className="hero-background-video"
             style={{ objectPosition: heroContent.backgroundPosition }}
-            poster={heroContent.backgroundPoster}
+            poster={posterSrc}
+            src={videoSrc}
             autoPlay
             muted
             loop
             playsInline
             preload="auto"
-          >
-            <source src={heroContent.backgroundVideo} type="video/mp4" />
-          </video>
+          />
         </div>
         <div className="hero-video-edge-glow" />
         <div className="hero-video-shine" />

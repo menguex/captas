@@ -1,12 +1,12 @@
-import { heroContent } from "@/content/hero";
+import { heroPosterSrc, heroVideoSrc } from "@/lib/hero-media";
 
 /** URLs críticas — primera pantalla (home + shell) */
 export const PRELOAD_ASSETS = [
   "/brand/captas-icon.png",
-  heroContent.backgroundPoster,
+  heroPosterSrc(),
 ] as const;
 
-export const PRELOAD_VIDEO = heroContent.backgroundVideo;
+export const PRELOAD_VIDEO = heroVideoSrc();
 
 /** Duración fija del intro — la barra recorre 0→100% en este tiempo */
 export const INTRO_DURATION_MS = 3000;
