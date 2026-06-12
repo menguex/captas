@@ -8,76 +8,29 @@ export const PRELOAD_ASSETS = [
 
 export const PRELOAD_VIDEO = heroContent.backgroundVideo;
 
-const MIN_INTRO_MS = 1500;
-const MAX_INTRO_MS = 10000;
-const VIDEO_TIMEOUT_MS = 11000;
+/** Duración fija del intro — la barra recorre 0→100% en este tiempo */
+export const INTRO_DURATION_MS = 3000;
 
 export type PreloadUpdate = {
   progress: number;
   stageLabel: string;
 };
 
-type ProgressTracker = {
-  setTarget: (value: number, stageLabel?: string) => void;
-  finish: () => Promise<void>;
-  dispose: () => void;
-};
+const STAGES: { at: number; label: string }[] = [
+  { at: 0, label: "Iniciando estudio" },
+  { at: 0.18, label: "Tipografías" },
+  { at: 0.38, label: "Identidad visual" },
+  { at: 0.58, label: "Primer frame" },
+  { at: 0.78, label: "Reel del estudio" },
+  { at: 0.94, label: "Listo" },
+];
 
-function createProgressTracker(onUpdate: (update: PreloadUpdate) => void): ProgressTracker {
-  let target = 0;
-  let displayed = 0;
-  let stageLabel = "Iniciando estudio";
-  let raf = 0;
-  let disposed = false;
-
-  const emit = () => {
-    onUpdate({
-      progress: Math.min(100, Math.round(displayed)),
-      stageLabel,
-    });
-  };
-
-  const tick = () => {
-    if (disposed) return;
-    const delta = target - displayed;
-    displayed += delta * (delta > 8 ? 0.14 : 0.09);
-    if (Math.abs(delta) < 0.35) displayed = target;
-    emit();
-    if (displayed < 100 || target < 100) {
-      raf = requestAnimationFrame(tick);
-    }
-  };
-
-  const ensureTick = () => {
-    if (!raf && !disposed) raf = requestAnimationFrame(tick);
-  };
-
-  return {
-    setTarget(value, label) {
-      target = Math.min(100, Math.max(target, value));
-      if (label) stageLabel = label;
-      ensureTick();
-    },
-    async finish() {
-      this.setTarget(100, "Listo");
-      await new Promise<void>((resolve) => {
-        const wait = () => {
-          if (displayed >= 99.5) {
-            displayed = 100;
-            emit();
-            resolve();
-            return;
-          }
-          raf = requestAnimationFrame(wait);
-        };
-        wait();
-      });
-    },
-    dispose() {
-      disposed = true;
-      if (raf) cancelAnimationFrame(raf);
-    },
-  };
+function stageForProgress(t: number): string {
+  let label = STAGES[0].label;
+  for (const stage of STAGES) {
+    if (t >= stage.at) label = stage.label;
+  }
+  return label;
 }
 
 function loadImage(src: string): Promise<void> {
@@ -85,7 +38,7 @@ function loadImage(src: string): Promise<void> {
     const img = new Image();
     img.decoding = "async";
     const done = () => resolve();
-    const timeout = window.setTimeout(done, 6000);
+    const timeout = window.setTimeout(done, 8000);
     img.onload = () => {
       window.clearTimeout(timeout);
       done();
@@ -98,120 +51,67 @@ function loadImage(src: string): Promise<void> {
   });
 }
 
-function loadVideo(
-  src: string,
-  onMilestone: (fraction: number) => void
-): Promise<void> {
+function loadVideo(src: string): Promise<void> {
   return new Promise((resolve) => {
     const video = document.createElement("video");
     video.muted = true;
     video.preload = "auto";
     video.playsInline = true;
-
-    let settled = false;
-    const done = () => {
-      if (settled) return;
-      settled = true;
+    const finish = () => {
       window.clearTimeout(timeout);
       resolve();
     };
-
-    const timeout = window.setTimeout(done, VIDEO_TIMEOUT_MS);
-
-    video.addEventListener(
-      "loadedmetadata",
-      () => {
-        onMilestone(0.35);
-      },
-      { once: true }
-    );
-    video.addEventListener(
-      "loadeddata",
-      () => {
-        onMilestone(0.62);
-      },
-      { once: true }
-    );
-    video.addEventListener(
-      "canplay",
-      () => {
-        onMilestone(0.88);
-        done();
-      },
-      { once: true }
-    );
-    video.addEventListener("error", done, { once: true });
-
+    const timeout = window.setTimeout(finish, 8000);
+    video.addEventListener("canplay", finish, { once: true });
+    video.addEventListener("error", finish, { once: true });
     video.src = src;
     video.load();
   });
 }
 
-/**
- * Precarga fuentes, marca, poster y video hero con progreso suave por etapas.
- */
-export async function runAppPreload(onUpdate: (update: PreloadUpdate) => void): Promise<void> {
-  const start = performance.now();
-  const tracker = createProgressTracker(onUpdate);
-
-  tracker.setTarget(6, "Iniciando estudio");
-
+/** Dispara precarga de assets en segundo plano (no bloquea el tiempo del intro). */
+function warmCriticalAssets(): void {
   const fontReady =
     typeof document !== "undefined" && document.fonts?.ready
-      ? document.fonts.ready.then(() => {
-          tracker.setTarget(22, "Tipografías");
-        })
-      : Promise.resolve().then(() => tracker.setTarget(22, "Tipografías"));
+      ? document.fonts.ready
+      : Promise.resolve();
 
-  tracker.setTarget(12, "Marca");
+  void Promise.all([
+    fontReady,
+    ...PRELOAD_ASSETS.map(loadImage),
+    loadVideo(PRELOAD_VIDEO),
+  ]);
+}
 
-  const brandReady = loadImage(PRELOAD_ASSETS[0]).then(() => {
-    tracker.setTarget(28, "Identidad visual");
+/**
+ * Barra horizontal 0→100% en INTRO_DURATION_MS; assets se calientan en paralelo.
+ */
+export function runAppPreload(onUpdate: (update: PreloadUpdate) => void): Promise<void> {
+  warmCriticalAssets();
+
+  const start = performance.now();
+
+  return new Promise((resolve) => {
+    const tick = () => {
+      const elapsed = performance.now() - start;
+      const t = Math.min(1, elapsed / INTRO_DURATION_MS);
+      const progress = Math.round(t * 100);
+
+      onUpdate({
+        progress,
+        stageLabel: stageForProgress(t),
+      });
+
+      if (t >= 1) {
+        onUpdate({ progress: 100, stageLabel: "Listo" });
+        resolve();
+        return;
+      }
+
+      requestAnimationFrame(tick);
+    };
+
+    onUpdate({ progress: 0, stageLabel: STAGES[0].label });
+    requestAnimationFrame(tick);
   });
-
-  const posterReady = loadImage(PRELOAD_ASSETS[1]).then(() => {
-    tracker.setTarget(38, "Primer frame");
-  });
-
-  const videoReady = loadVideo(PRELOAD_VIDEO, (fraction) => {
-    const base = 38;
-    const span = 46;
-    tracker.setTarget(base + span * fraction, "Reel del estudio");
-  }).then(() => {
-    tracker.setTarget(86, "Reel del estudio");
-  });
-
-  const domReady =
-    typeof document !== "undefined" && document.readyState === "complete"
-      ? Promise.resolve()
-      : new Promise<void>((resolve) => {
-          if (typeof window === "undefined") {
-            resolve();
-            return;
-          }
-          window.addEventListener("load", () => resolve(), { once: true });
-        });
-
-  const allReady = Promise.all([fontReady, brandReady, posterReady, videoReady, domReady]);
-
-  const maxWait = new Promise<void>((resolve) => {
-    window.setTimeout(resolve, MAX_INTRO_MS);
-  });
-
-  await Promise.race([allReady, maxWait]);
-  tracker.setTarget(92, "Afinando experiencia");
-
-  const elapsed = performance.now() - start;
-  if (elapsed < MIN_INTRO_MS) {
-    const remaining = MIN_INTRO_MS - elapsed;
-    const steps = 8;
-    const stepMs = remaining / steps;
-    for (let i = 1; i <= steps; i++) {
-      await new Promise((r) => setTimeout(r, stepMs));
-      tracker.setTarget(92 + (6 * i) / steps, "Afinando experiencia");
-    }
-  }
-
-  await tracker.finish();
-  tracker.dispose();
 }

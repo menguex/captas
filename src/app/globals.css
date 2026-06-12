@@ -159,40 +159,16 @@
     line-height: 1.55;
   }
 
-  /* Precarga instantánea — icono + wordmark antes de hidratar React */
-  #captas-preload {
-    position: fixed;
-    inset: 0;
-    z-index: 9998;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  /* Intro único (IntroLoader) — fondo ink mientras carga */
+  body.captas-loading {
+    overflow: hidden;
     background-color: var(--c-ink);
-    pointer-events: none;
-    transition:
-      opacity 0.55s var(--ease-out),
-      visibility 0.55s,
-      transform 0.65s var(--ease-out);
   }
 
-  #captas-preload::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background:
-      radial-gradient(ellipse 70% 55% at 50% 38%, rgba(0, 122, 255, 0.14), transparent 62%),
-      radial-gradient(ellipse 50% 40% at 80% 80%, rgba(91, 97, 255, 0.08), transparent 55%);
-    pointer-events: none;
+  body.captas-ready {
+    overflow: auto;
   }
 
-  body.captas-ready #captas-preload {
-    opacity: 0;
-    visibility: hidden;
-    transform: scale(1.02);
-    pointer-events: none;
-  }
-
-  /* Oculta UI hasta terminar precarga (evita flash bajo el loader) */
   body.captas-loading:not(.captas-ready) .site-header,
   body.captas-loading:not(.captas-ready) main,
   body.captas-loading:not(.captas-ready) .footer-unified,
@@ -200,73 +176,8 @@
     visibility: hidden;
   }
 
-  body.captas-loading {
-    overflow: hidden;
-  }
-
-  body.captas-ready {
-    overflow: auto;
-  }
-
-  .captas-preload-inner {
-    position: relative;
-    z-index: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1.75rem;
-  }
-
-  .captas-preload-icon {
-    display: block;
-    width: 4.5rem;
-    height: 4.5rem;
-    border-radius: 9999px;
-    box-shadow:
-      0 0 40px rgba(0, 122, 255, 0.32),
-      0 0 0 1px rgba(255, 255, 255, 0.12);
-  }
-
-  .captas-preload-logo {
-    font-family: var(--f-sans), system-ui, sans-serif;
-    font-size: clamp(2.35rem, 9vw, 3.75rem);
-    font-weight: 600;
-    letter-spacing: -0.04em;
-    line-height: 1;
-    color: var(--c-bone);
-  }
-
-  .captas-preload-dot {
-    background: linear-gradient(120deg, #5b61ff 0%, #007aff 50%, #0ea5e9 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-  }
-
-  .captas-preload-bar {
-    width: min(11rem, 70vw);
-    height: 1px;
-    overflow: hidden;
-    border-radius: 9999px;
-    background: rgba(255, 255, 255, 0.08);
-  }
-
-  .captas-preload-bar__fill {
-    display: block;
-    height: 100%;
-    width: 42%;
-    border-radius: inherit;
-    background: linear-gradient(90deg, #5b61ff, #007aff, #0ea5e9);
-    animation: captas-preload-indeterminate 1.35s ease-in-out infinite;
-  }
-
-  @keyframes captas-preload-indeterminate {
-    0% {
-      transform: translateX(-120%);
-    }
-    100% {
-      transform: translateX(320%);
-    }
+  .captas-logo__mark {
+    vertical-align: middle;
   }
 
   ::selection {
@@ -1897,12 +1808,23 @@
   color: transparent;
 }
 
-.intro-loader__ring-glow {
-  filter: drop-shadow(0 0 6px rgba(0, 122, 255, 0.55));
-  transition: stroke-dashoffset 0.12s linear;
+.intro-loader__bar-shell {
+  width: 100%;
 }
 
-.intro-loader__bar {
+.intro-loader__bar-track {
+  position: relative;
+  height: 3px;
+  overflow: hidden;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.intro-loader__bar-fill {
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #5b61ff 0%, #007aff 50%, #0ea5e9 100%);
+  box-shadow: 0 0 14px rgba(0, 122, 255, 0.5);
   will-change: width;
 }
 

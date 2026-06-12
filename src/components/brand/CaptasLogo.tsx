@@ -3,38 +3,39 @@ import Image from "next/image";
 type CaptasLogoProps = {
   className?: string;
   shimmer?: boolean;
+  /** Wordmark en gradiente de marca (icono + texto alineados a 1em) */
+  gradient?: boolean;
   as?: "span" | "h1" | "p";
-  size?: "sm" | "md" | "xl";
-  /** Muestra el icono circular de marca junto al wordmark */
+  size?: "sm" | "md" | "loader" | "xl";
+  /** Muestra el icono circular de marca junto al wordmark — altura = cap height del texto */
   withMark?: boolean;
 };
 
 const sizeClasses = {
   sm: "text-lg md:text-xl",
   md: "text-[clamp(2.5rem,8vw,5rem)]",
+  loader: "text-[clamp(2.75rem,11vw,4.75rem)] leading-none tracking-[-0.04em]",
   xl: "text-[clamp(2.5rem,12vw,9rem)] leading-[0.9] tracking-tighter",
 };
-
-const markSizes = {
-  sm: 28,
-  md: 48,
-  xl: 80,
-} as const;
 
 export function CaptasLogo({
   className = "",
   shimmer = false,
+  gradient = false,
   as: Tag = "span",
   size = "sm",
   withMark = false,
 }: CaptasLogoProps) {
-  const gradientClass = shimmer ? "text-shimmer" : "";
-  const markPx = markSizes[size];
+  const wordmarkClass = shimmer
+    ? "text-shimmer"
+    : gradient
+      ? "text-captas-brand-gradient"
+      : "";
 
   const wordmark = (
     <>
       CAPTAS
-      <span className="text-captas-brand-gradient" aria-hidden>
+      <span className={gradient || shimmer ? "" : "text-captas-brand-gradient"} aria-hidden>
         .
       </span>
     </>
@@ -42,29 +43,25 @@ export function CaptasLogo({
 
   return (
     <Tag
-      className={`inline-flex items-center gap-2.5 md:gap-3 ${className}`.trim()}
+      className={`captas-logo inline-flex items-center gap-[0.34em] ${sizeClasses[size]} ${className}`.trim()}
       aria-label="Captas"
     >
       {withMark ? (
         <span
-          className="relative shrink-0 overflow-hidden rounded-full shadow-[0_4px_16px_rgba(var(--c-accent-rgb),0.28)] ring-1 ring-black/5"
+          className="captas-logo__mark relative inline-block h-[1em] w-[1em] shrink-0 overflow-hidden rounded-full shadow-[0_0_28px_rgba(0,122,255,0.32)] ring-1 ring-white/15"
           aria-hidden
         >
           <Image
             src="/brand/captas-icon.png"
             alt=""
-            width={markPx}
-            height={markPx}
-            className="block h-auto w-auto"
-            priority={size !== "xl"}
+            fill
+            sizes="(max-width: 768px) 18vw, 80px"
+            className="object-cover"
+            priority={size === "loader" || size === "md"}
           />
         </span>
       ) : null}
-      <span
-        className={`font-heading font-semibold tracking-tight ${sizeClasses[size]} ${gradientClass}`}
-      >
-        {wordmark}
-      </span>
+      <span className={`font-heading font-semibold tracking-tight ${wordmarkClass}`}>{wordmark}</span>
     </Tag>
   );
 }
@@ -92,13 +89,15 @@ export function CaptasLockup({
           : "border-line-dark/80 bg-white/90 shadow-[0_4px_16px_rgba(15,18,24,0.06)]"
       } ${className}`}
     >
-      <Image
-        src="/brand/captas-icon.png"
-        alt=""
-        width={24}
-        height={24}
-        className="h-6 w-6 shrink-0 rounded-full"
-      />
+      <span className="relative h-6 w-6 shrink-0 overflow-hidden rounded-full">
+        <Image
+          src="/brand/captas-icon.png"
+          alt=""
+          fill
+          sizes="24px"
+          className="object-cover"
+        />
+      </span>
       <span className="flex flex-col leading-none">
         <span
           className={`font-heading text-[0.7rem] font-semibold tracking-tight ${
