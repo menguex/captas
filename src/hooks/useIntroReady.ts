@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 
-const INTRO_EVENT = "captas-intro-complete";
+export const INTRO_EVENT = "captas-intro-complete";
 
 export function useIntroReady() {
   const reduced = useReducedMotion();

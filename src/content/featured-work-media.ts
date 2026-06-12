@@ -4,5 +4,5 @@ export const featuredWorkMedia = {
   video: "/videos/featured-work/calendar-stats.mp4",
   poster: "/images/featured-work/calendar-stats-poster.jpg",
   videoPosition: "center 42%",
-  mediaVersion: "1",
+  mediaVersion: "2",
 } as const;

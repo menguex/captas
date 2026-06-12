@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useEffect, useRef } from "react";
 import { heroContent } from "@/content/hero";
+import { INTRO_EVENT } from "@/hooks/useIntroReady";
 import { heroPosterSrc, heroVideoSrc } from "@/lib/hero-media";
 
 type HeroBackgroundMediaProps = {
@@ -32,14 +33,24 @@ export function HeroBackgroundMedia({
 
     const play = () => {
       video.play().catch(() => {
-        /* autoplay bloqueado — el placeholder oscuro cubre */
+        /* autoplay bloqueado — reintenta al terminar intro o al volver a la pestaña */
       });
     };
 
     if (video.readyState >= 2) play();
     else video.addEventListener("canplay", play, { once: true });
 
-    return () => video.removeEventListener("canplay", play);
+    window.addEventListener(INTRO_EVENT, play);
+    const onVisible = () => {
+      if (!document.hidden) play();
+    };
+    document.addEventListener("visibilitychange", onVisible);
+
+    return () => {
+      video.removeEventListener("canplay", play);
+      window.removeEventListener(INTRO_EVENT, play);
+      document.removeEventListener("visibilitychange", onVisible);
+    };
   }, [reduced, videoSrc]);
 
   if (reduced) {

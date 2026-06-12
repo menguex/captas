@@ -20,7 +20,7 @@ export function useLazyAutoplayVideo(enabled: boolean) {
           observer.disconnect();
         }
       },
-      { rootMargin: "120px 0px", threshold: 0.08 }
+      { rootMargin: "320px 0px", threshold: 0.01 }
     );
 
     observer.observe(root);

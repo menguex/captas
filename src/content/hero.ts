@@ -25,5 +25,5 @@ export const heroContent = {
   backgroundPoster: "/images/hero/hero-tunnel-loop-poster.jpg",
   backgroundPosition: "center center",
   /** Rompe caché del navegador cuando cambia el reel */
-  backgroundMediaVersion: "15",
+  backgroundMediaVersion: "16",
 } as const;

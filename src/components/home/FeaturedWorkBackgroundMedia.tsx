@@ -27,13 +27,13 @@ export function FeaturedWorkBackgroundMedia() {
           ref={videoRef}
           className="featured-work-background-media__video"
           style={{ objectPosition: featuredWorkMedia.videoPosition }}
-          src={active ? video : undefined}
+          src={video}
           poster={poster}
-          autoPlay
+          autoPlay={active}
           muted
           loop
           playsInline
-          preload="none"
+          preload="metadata"
         />
       )}
       <div className="featured-work-background-media__scrim" />
