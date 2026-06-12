@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { methodValueSection } from "@/content/method-value";
 import { stats } from "@/content/site";
+import { ProcessStatsBackground } from "@/components/home/ProcessStatsBackground";
 import { ProcessJourney } from "@/components/services/ProcessJourney";
 import { AnimatedCounter } from "@/components/motion/AnimatedCounter";
 import { HomeSectionBackdrop } from "@/components/ui/HomeSectionBackdrop";
@@ -57,34 +58,28 @@ export function Process() {
         <ProcessJourney embedded className="mt-12 md:mt-14" />
 
         <motion.div
-          className="relative mt-10 overflow-hidden rounded-box-lg border border-line bg-ink-soft p-6 text-bone md:mt-12 md:p-10"
+          className="process-stats-panel relative mt-10 overflow-hidden rounded-box-lg border border-line p-6 text-bone md:mt-12 md:p-10"
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={viewportOnce}
           transition={{ duration: 0.8, ease: easeOut }}
         >
+          <ProcessStatsBackground />
+
           <div
-            className="pointer-events-none absolute inset-0 mesh-grid opacity-[0.1]"
-            aria-hidden
-          />
-          <div
-            className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_70%_50%_at_50%_0%,rgba(91,97,255,0.12),transparent_55%)]"
-            aria-hidden
-          />
-          <div
-            className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-sky/40 to-transparent"
+            className="pointer-events-none absolute inset-x-0 top-0 z-[1] h-px bg-gradient-to-r from-transparent via-sky/40 to-transparent"
             aria-hidden
           />
 
-          <p className="relative text-center font-mono text-kicker uppercase tracking-[0.22em] text-sky">
+          <p className="relative z-[1] text-center font-mono text-kicker uppercase tracking-[0.22em] text-sky">
             Números · Valor entregado
           </p>
-          <p className="relative mx-auto mt-2 max-w-lg text-center font-heading text-h3 tracking-tight text-bone md:text-h2">
+          <p className="relative z-[1] mx-auto mt-2 max-w-lg text-center font-heading text-h3 tracking-tight text-bone md:text-h2">
             Resultados que hablan{" "}
             <span className="text-shimmer-dark">por sí solos.</span>
           </p>
 
-          <div className="relative mt-10 grid grid-cols-2 gap-x-4 gap-y-10 md:grid-cols-4 md:gap-x-6">
+          <div className="relative z-[1] mt-10 grid grid-cols-2 gap-x-4 gap-y-10 md:grid-cols-4 md:gap-x-6">
             {stats.map((stat, i) => {
               const style = statStyles[i];
               return (
@@ -131,7 +126,7 @@ export function Process() {
             })}
           </div>
 
-          <p className="relative mt-10 border-t border-line pt-6 text-center font-mono text-small uppercase tracking-[0.2em] text-on-ink-subtle">
+          <p className="relative z-[1] mt-10 border-t border-white/10 pt-6 text-center font-mono text-small uppercase tracking-[0.2em] text-on-ink-subtle">
             {methodValueSection.statsFootnote}
           </p>
         </motion.div>
