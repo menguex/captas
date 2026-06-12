@@ -94,6 +94,8 @@ export function IntroLoader() {
 
   if (!mounted) return null;
 
+  const barLive = !reduced;
+
   return (
     <AnimatePresence
       onExitComplete={() => {
@@ -104,7 +106,7 @@ export function IntroLoader() {
     >
       {visible && (
         <motion.div
-          className="intro-loader fixed inset-0 z-[10000] flex flex-col overflow-hidden bg-ink"
+          className="intro-loader fixed inset-0 z-[10000] flex items-center justify-center overflow-hidden bg-ink"
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.55, ease }}
@@ -126,38 +128,42 @@ export function IntroLoader() {
           <div className="pointer-events-none absolute inset-0 intro-loader__ambient" aria-hidden />
           <div className="pointer-events-none absolute inset-0 mesh-grid opacity-[0.07]" aria-hidden />
 
-          <div className="relative z-10 flex flex-1 flex-col items-center justify-center px-6">
-            <motion.div
-              className="flex flex-col items-center text-center"
-              initial={{ opacity: 0, scale: 0.97, filter: "blur(8px)" }}
-              animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
-              exit={{ opacity: 0, scale: 0.98, y: -10, filter: "blur(4px)" }}
-              transition={{ duration: 0.65, ease: easeOut }}
-            >
-              <CaptasLogo as="p" size="loader" withMark gradient />
-              <p className="mt-4 font-mono text-[0.62rem] uppercase tracking-[0.22em] text-on-ink-muted">
-                Agencia creativa · Limarí
-              </p>
-            </motion.div>
-          </div>
-
           <motion.div
-            className="intro-loader__bar-shell relative z-10 px-6 pb-10 md:px-10 md:pb-12"
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2, duration: 0.5, ease }}
+            className="intro-loader__stack relative z-10 flex w-full max-w-[min(26rem,90vw)] flex-col items-center px-6 text-center"
+            initial={{ opacity: 0, scale: 0.97, filter: "blur(8px)" }}
+            animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+            exit={{ opacity: 0, scale: 0.98, y: -10, filter: "blur(4px)" }}
+            transition={{ duration: 0.65, ease: easeOut }}
           >
-            <div className="mx-auto w-full max-w-xl">
+            <CaptasLogo as="p" size="loader" withMark gradient />
+
+            <p className="mt-4 font-mono text-[0.62rem] uppercase tracking-[0.22em] text-on-ink-muted">
+              Agencia creativa · Limarí
+            </p>
+
+            <div className="intro-loader__progress mt-10 w-full">
               <div className="flex items-center justify-between gap-4 font-mono text-[0.55rem] uppercase tracking-[0.16em] text-on-ink-subtle">
                 <span className="truncate">{stageLabel}</span>
                 <span className="shrink-0 tabular-nums text-sky/90">{progress}%</span>
               </div>
-              <div className="intro-loader__bar-track mt-3" aria-hidden>
+
+              <div
+                className={`intro-loader__bar-track mt-3 ${barLive ? "intro-loader__bar-track--live" : ""}`}
+                aria-hidden
+              >
                 <motion.div
                   className="intro-loader__bar-fill"
                   style={{ width: `${progress}%` }}
                   transition={{ duration: 0.05, ease: "linear" }}
-                />
+                >
+                  {barLive ? <span className="intro-loader__bar-head" /> : null}
+                </motion.div>
+                {barLive ? (
+                  <span
+                    className="intro-loader__bar-beam"
+                    style={{ left: `${Math.max(progress, 2)}%` }}
+                  />
+                ) : null}
               </div>
             </div>
           </motion.div>
