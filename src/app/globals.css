@@ -580,7 +580,7 @@
 
 .hero-background-video {
   opacity: 1;
-  filter: saturate(1.04) contrast(1.05) brightness(1.01);
+  filter: saturate(0.98) contrast(1.04) brightness(1.03);
   transform: translateZ(0);
   backface-visibility: hidden;
 }

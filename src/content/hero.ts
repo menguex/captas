@@ -17,10 +17,10 @@ export const heroContent = {
     { value: "1", label: "Director creativo" },
     { value: "Limarí", label: "Territorio" },
   ],
-  /** Reunión ejecutiva — cámara fija, gestos y diálogo (Mixkit 4872, uso libre) */
-  backgroundVideo: "/videos/hero/hero-stable-boardroom.mp4",
-  backgroundPoster: "/images/hero/hero-stable-boardroom-poster.jpg",
-  backgroundPosition: "center 36%",
+  /** Negocio premium — quiet luxury, cámara estable (Mixkit 4868, uso libre) */
+  backgroundVideo: "/videos/hero/hero-apple-business.mp4",
+  backgroundPoster: "/images/hero/hero-apple-business-poster.jpg",
+  backgroundPosition: "center 38%",
   /** Rompe caché del navegador cuando cambia el reel */
-  backgroundMediaVersion: "7",
+  backgroundMediaVersion: "8",
 } as const;
